@@ -18,7 +18,7 @@ reset=$(tput sgr0)
 # }}}
 
 # config {{{
-output=$HOME/coding/shell/delmetafile.txt
+output=$HOME/delmetafile.txt
 # }}}
 
 # output info {{{
