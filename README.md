@@ -16,3 +16,4 @@
 |rofiunmount.sh             |use rofi to unmount remote, usb and android locations                                      |
 |screenlayout.sh            |default screen setup                                                                       |
 |suspend.sh                 |system suspend                                                                             |
+|terminal_wrapper.sh        |terminal wrapper for i3 floating windows                                                   |
