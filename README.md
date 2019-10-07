@@ -9,3 +9,4 @@
 |historymaintenance.sh      |remove duplicated entries from bash- and zsh_history                                       |
 |linkhandler.sh             |opens specific program for picture, videos and audio by giving url. mainly for newsboat    |
 |pdfshrink.sh               |shrink pdf file with ghostscript                                                           |
+|polybar.sh                 |start polybar                                                                              |
