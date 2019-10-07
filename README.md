@@ -6,3 +6,4 @@
 |cloudsync.sh               |cloudsync with rclone                                      |
 |delmetafiles.sh            |delete hidden apple metadata files in home folder          |
 |githubmaintenance.sh       |remove history from github repository                      |
+|historymaintenance.sh      |remove duplicated entries from bash- and zsh_history       |
