@@ -20,14 +20,13 @@ polkitservice() {
 }
 # }}}
 
-# VPN styx {{{
-styxvpn() {
-    VPN=styx
-
+# VPN {{{
+VPN=hades
+vpn() {
     if [ "$(nmcli connection show --active $VPN)" ]; then
         nmcli con down id $VPN && notify-send "VPN" "$VPN disconnected!" && exit 0
     else
-        nmcli con up id $VPN passwd-file "$HOME"/bin/vpn/$VPN && notify-send "VPN" "$VPN connected!" && exit 0
+        nmcli con up id $VPN passwd-file "$HOME"/secrets/vpn/$VPN && notify-send "VPN" "$VPN connected!" && exit 0
     fi
 }
 # }}}
@@ -97,7 +96,7 @@ firewallservice() {
 
 # status {{{
 polkitstatus=$(if [ "$(pgrep -f /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1)" ]; then echo "active"; else echo "inactive"; fi)
-styxvpnstatus=$(if [ "$(nmcli connection show --active hades)" ]; then echo "active"; else echo "inactive"; fi)
+vpnstatus=$(if [ "$(nmcli connection show --active $VPN)" ]; then echo "active"; else echo "inactive"; fi)
 nmappletstatus=$(if [ "$(pgrep nm-applet)" ]; then echo "active"; else echo "inactive"; fi)
 printerstatus=$(systemctl is-active org.cups.cupsd.service)
 avahiserstatus=$(systemctl is-active avahi-daemon.service)
@@ -109,9 +108,9 @@ conkystatus=$(if [ "$(pgrep -f "conky -c $HOME/.conky/*")" ]; then echo "active"
 # }}}
 
 # menu {{{
-case $(printf "%s\n" "Authentication Agent ($polkitstatus)" "VPN styx ($styxvpnstatus)" "Netzwerk Manager ($nmappletstatus)" "Printer ($printerstatus)" "Avahi Service/Socket ($avahiserstatus/$avahisocstatus)" "Bluetooth ($bluetoothstatus)" "ModemManager ($modemmanagerstatus)" "Firewall ($firewallstatus)" "Conky ($conkystatus)" | rofi -dmenu -i -p "") in
+case $(printf "%s\n" "Authentication Agent ($polkitstatus)" "VPN $VPN ($vpnstatus)" "Netzwerk Manager ($nmappletstatus)" "Printer ($printerstatus)" "Avahi Service/Socket ($avahiserstatus/$avahisocstatus)" "Bluetooth ($bluetoothstatus)" "ModemManager ($modemmanagerstatus)" "Firewall ($firewallstatus)" "Conky ($conkystatus)" | rofi -dmenu -i -p "") in
 Authentication?Agent*) polkitservice ;;
-VPN?styx*) styxvpn ;;
+VPN*) vpn ;;
 Netzwerk?Manager*) nmappletservice ;;
 Printer*) printerservice ;;
 Avahi?Service/Socket*) avahiservice ;;
