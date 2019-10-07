@@ -18,3 +18,4 @@
 |suspend.sh                 |system suspend                                                                             |
 |terminal_wrapper.sh        |terminal wrapper for tiling window managers floating windows                               |
 |urxvtc.sh                  |start urxvt daemon if not running                                                          |
+|wlan.sh                    |connect to wlan via command line interface                                                 |
