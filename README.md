@@ -15,3 +15,4 @@
 |rofiservice.sh             |use rofi to start/stop some services like bluetooth, printer, firewall etc.                |
 |rofiunmount.sh             |use rofi to unmount remote, usb and android locations                                      |
 |screenlayout.sh            |default screen setup                                                                       |
+|suspend.sh                 |system suspend                                                                             |
