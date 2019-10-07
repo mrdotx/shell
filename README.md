@@ -1,3 +1,7 @@
+|shell script folder        |comment                                                                                    |
+|:--------------------------|:------------------------------------------------------------------------------------------|
+|mount                      |templates to connect to ftp/sftp via curlftpfs/sshfs                                       |
+
 |shell scripts              |comment                                                                                    |
 |:--------------------------|:------------------------------------------------------------------------------------------|
 |backlight.sh               |change intel backlight brightness                                                          |
