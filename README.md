@@ -10,3 +10,7 @@
 |linkhandler.sh             |opens specific program for picture, videos and audio by giving url. mainly for newsboat    |
 |pdfshrink.sh               |shrink pdf file with ghostscript                                                           |
 |polybar.sh                 |start polybar                                                                              |
+|rofidisplay.sh             |use rofi to manage displays with arandr/xrandr                                             |
+|rofimount.sh               |use rofi to mount remote, usb and android locations                                        |
+|rofiservice.sh             |use rofi to start/stop some services like bluetooth, printer, firewall etc.                |
+|rofiunmount.sh             |use rofi to unmount remote, usb and android locations                                      |
