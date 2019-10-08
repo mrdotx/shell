@@ -20,6 +20,7 @@
 |rofiservice.sh             |use rofi to start/stop some services like bluetooth, printer, firewall etc.                |
 |rofiunmount.sh             |use rofi to unmount remote, usb and android locations                                      |
 |screenlayout.sh            |default screen setup                                                                       |
+|servicetoggle.sh           |switch status of service active or inactive                                                |
 |suspend.sh                 |system suspend                                                                             |
 |terminal_wrapper.sh        |terminal wrapper for tiling window managers floating windows                               |
 |urxvtc.sh                  |start urxvt daemon if not running                                                          |
