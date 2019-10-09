@@ -10,6 +10,7 @@ backupname="morpheus"
 mountpoint="/mnt/$backupnname"
 usbdevice="/dev/sdb1"
 localhome="/home/klassiker"
+remotelocation="$mountpoint/backup/$backupname"
 # }}}
 
 # create and mount folder for usb-disk {{{
@@ -18,8 +19,8 @@ sudo mount $usbdevice $mountpoint
 # }}}
 
 # create folder and backup / to USB-Disk (for testing rsync option --dry-run) {{{
-sudo mkdir -p $mountpoint/$backupname
-sudo rsync -aAXv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","$localhome/mount/*","$localhome/vm/*","/mnt/*","/media/*","/lost+found"} / $mountpoint/$backupname
+sudo mkdir -p $remotelocation
+sudo rsync -aAXv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","$localhome/mount/*","$localhome/vm/*","/mnt/*","/media/*","/lost+found"} / $remotelocation
 # }}}
 
 # unmount and delete folder {{{
