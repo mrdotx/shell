@@ -7,6 +7,7 @@
 
 # procedure {{{
 if [ $# -eq 0 ]; then "${SHELL:-bash}"; else "$@"; fi
+echo ""
 echo "The command exited with status $?. Press Enter to close $TERMINAL."
 read line
 # }}}
