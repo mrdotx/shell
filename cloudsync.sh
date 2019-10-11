@@ -17,6 +17,24 @@ magenta=$(tput setaf 5)
 reset=$(tput sgr0)
 # }}}
 
+# config {{{
+    title=("Dropbox")
+    title+=("Google Drive")
+    title+=("web.de")
+    title+=("GMX")
+
+    src=("$HOME/cloud/dropbox/")
+    src+=("$HOME/cloud/googledrive/")
+    src+=("$HOME/cloud/webde/")
+    src+=("$HOME/cloud/gmx/")
+
+    dest=("dropbox:/")
+    dest+=("googledrive:/")
+    dest+=("webde:/")
+    dest+=("gmx:/")
+# }}}    
+
+# procedure {{{
 if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
     echo "Usage:"
     echo "	cloudsync.sh [option]"
@@ -29,60 +47,21 @@ if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
     echo "  -s - sync"
     exit 0
 elif [[ $1 == "-c" ]]; then
-# check dropbox {{{
-    echo "[${magenta}Dropbox${reset}] <- $HOME/cloud/dropbox/"
-    rclone check "$HOME"/cloud/dropbox/ dropbox:/
-# }}}
-# check googledrive {{{
-    echo "[${magenta}Google Drive${reset}] <- $HOME/cloud/googledrive/"
-    rclone check "$HOME"/cloud/googledrive/ googledrive:/
-# }}}
-# check web.de {{{
-    echo "[${magenta}web.de${reset}] <- $HOME/cloud/webde/"
-    rclone check "$HOME"/cloud/webde/ webde:/
-# }}}
-# check gmx {{{
-    echo "[${magenta}GMX${reset}] <- $HOME/cloud/gmx/"
-    rclone check "$HOME"/cloud/gmx/ gmx:/
-# }}}
+    for ((i=0;i<${#title[@]};i++)); do
+        echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
+        rclone check ${src[i]} ${dest[i]}
+    done
     exit 0
 elif [[ $1 == "-s" ]]; then
-# sync dropbox {{{
-    echo "[${magenta}Dropbox${reset}] <- $HOME/cloud/dropbox/"
-    rclone copy -P "$HOME"/cloud/dropbox/ dropbox:/
-    #rclone sync -P "$HOME"/cloud/dropbox/ dropbox:/
-    echo "[${magenta}Dropbox${reset}] -> $HOME/cloud/dropbox/"
-    rclone copy -P dropbox:/ "$HOME"/cloud/dropbox/
-    #rclone sync -P dropbox:/ "$HOME"/cloud/dropbox/
-    notify-send "Sync Dropbox" "completed!"
-# }}}
-# sync googledrive {{{
-    echo "[${magenta}Google Drive${reset}] <- $HOME/cloud/googledrive/"
-    rclone copy -P "$HOME"/cloud/googledrive/ googledrive:/
-    #rclone sync -P "$HOME"/cloud/googledrive/ googledrive:/
-    echo "[${magenta}Google Drive${reset}] -> $HOME/cloud/googledrive/"
-    rclone copy -P googledrive:/ "$HOME"/cloud/googledrive/
-    #rclone sync -P googledrive:/ "$HOME"/cloud/googledrive/
-    notify-send "Sync Google Drive" "completed!"
-# }}}
-# sync web.de {{{
-    echo "[${magenta}web.de${reset}] <- $HOME/cloud/webde/"
-    rclone copy -P "$HOME"/cloud/webde/ webde:/
-    #rclone sync -P "$HOME"/cloud/webde/ webde:/
-    echo "[${magenta}web.de${reset}] -> $HOME/cloud/webde/"
-    rclone copy -P webde:/ "$HOME"/cloud/webde/
-    #rclone sync -P webde:/ "$HOME"/cloud/webde/
-    notify-send "Sync web.de" "completed!"
-# }}}
-# sync gmx {{{
-    echo "[${magenta}GMX${reset}] <- $HOME/cloud/gmx/"
-    rclone copy -P "$HOME"/cloud/gmx/ gmx:/
-    #rclone sync -P "$HOME"/cloud/gmx/ gmx:/
-    echo "[${magenta}GMX${reset}] -> $HOME/cloud/gmx/"
-    rclone copy -P gmx:/ "$HOME"/cloud/gmx/
-    #rclone sync -P gmx:/ "$HOME"/cloud/gmx/
-    notify-send "Sync GMX" "completed!"
-# }}}
+    for ((i=0;i<${#title[@]};i++)); do
+        echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
+        rclone copy -P ${src[i]} ${dest[i]}
+        #rclone sync -P ${src[i]} ${dest[i]}
+        echo "[${magenta}${title[i]}${reset}] -> ${src[i]}"
+        rclone copy -P ${dest[i]} ${src[i]}
+        #rclone sync -P ${dest[i]} ${src[i]}
+        notify-send "Sync ${title[i]}" "completed!"
+    done
     exit 0
 fi
-
+# }}}
