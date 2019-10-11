@@ -49,7 +49,7 @@ if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
 elif [[ $1 == "-c" ]]; then
     for ((i=0;i<${#title[@]};i++)); do
         echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
-        rclone check ${src[i]} ${dest[i]}
+        rclone check -P ${src[i]} ${dest[i]}
     done
     exit 0
 elif [[ $1 == "-s" ]]; then
