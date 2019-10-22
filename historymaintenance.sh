@@ -18,6 +18,12 @@ reset=$(tput sgr0)
 # }}}
 
 # procedure {{{
+echo "[${magenta}python${reset}] remove white space from end of line"
+sed -i "s/ *$//" "$HOME"/.python_history
+
+echo "[${magenta}python${reset}] sort and remove duplicates"
+sort -u "$HOME"/.python_history | sort -o "$HOME"/.python_history
+
 echo "[${magenta}bash${reset}] remove white space from end of line"
 sed -i "s/ *$//" "$HOME"/.bash_history
 
