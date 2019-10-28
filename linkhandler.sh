@@ -19,7 +19,7 @@ MOVIES="mpv --quiet"
 
 case "$1" in
 *mkv | *webm | *mp4 | *youtube.com/watch* | *youtube.com/playlist* | *youtu.be*)
-    setsid $MOVIES --input-ipc-server=/tmp/mpvsoc$(date +%s) "$1" >/dev/null 2>&1 &
+    setsid tsp $MOVIES --input-ipc-server=/tmp/mpvsoc$(date +%s) "$1" >/dev/null 2>&1 &
     ;;
 *png | *jpg | *jpe | *jpeg | *gif)
     curl -sL "$1" > "/tmp/$(echo "$1" | sed "s/.*\///")" && $PICTURES "/tmp/$(echo "$1" | sed "s/.*\///")"  >/dev/null 2>&1 &
