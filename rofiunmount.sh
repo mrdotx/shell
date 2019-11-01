@@ -53,9 +53,9 @@ dvdeject() {
 
 # menu {{{
 case $(printf "Remote Unmount\\nUSB Unmount\\nAndroid Unmount\\nDVD Eject" | rofi -dmenu -i -p "") in
-"Remote Unmount") remoteumt ;;
-"USB Unmount") usbumt ;;
-"Android Unmount") androidumt ;;
-"DVD Eject") dvdeject ;;
+    "Remote Unmount") remoteumt ;;
+    "USB Unmount") usbumt ;;
+    "Android Unmount") androidumt ;;
+    "DVD Eject") dvdeject ;;
 esac
 # }}}

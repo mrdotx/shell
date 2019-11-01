@@ -108,15 +108,23 @@ conkystatus=$(if [ "$(pgrep -f "conky -c $HOME/.conky/*")" ]; then echo "active"
 # }}}
 
 # menu {{{
-case $(printf "%s\n" "Authentication Agent ($polkitstatus)" "VPN $VPN ($vpnstatus)" "Netzwerk Manager ($nmappletstatus)" "Printer ($printerstatus)" "Avahi Service/Socket ($avahiserstatus/$avahisocstatus)" "Bluetooth ($bluetoothstatus)" "ModemManager ($modemmanagerstatus)" "Firewall ($firewallstatus)" "Conky ($conkystatus)" | rofi -dmenu -i -p "") in
-Authentication?Agent*) polkitservice ;;
-VPN*) vpn ;;
-Netzwerk?Manager*) nmappletservice ;;
-Printer*) printerservice ;;
-Avahi?Service/Socket*) avahiservice ;;
-Bluetooth*) bluetoothservice ;;
-ModemManager*) modemmanagerservice ;;
-Firewall*) firewallservice ;;
-Conky*) conky.sh ;;
+case $(printf "%s\n" "Authentication Agent ($polkitstatus)" \
+    "VPN $VPN ($vpnstatus)" \
+    "Netzwerk Manager ($nmappletstatus)" \
+    "Printer ($printerstatus)" \
+    "Avahi Service/Socket ($avahiserstatus/$avahisocstatus)" \
+    "Bluetooth ($bluetoothstatus)" \
+    "ModemManager ($modemmanagerstatus)" \
+    "Firewall ($firewallstatus)" \
+    "Conky ($conkystatus)" | rofi -dmenu -i -p "") in
+    Authentication?Agent*) polkitservice ;;
+    VPN*) vpn ;;
+    Netzwerk?Manager*) nmappletservice ;;
+    Printer*) printerservice ;;
+    Avahi?Service/Socket*) avahiservice ;;
+    Bluetooth*) bluetoothservice ;;
+    ModemManager*) modemmanagerservice ;;
+    Firewall*) firewallservice ;;
+    Conky*) conky.sh ;;
 esac
 # }}}
