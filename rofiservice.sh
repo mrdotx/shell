@@ -26,7 +26,7 @@ vpn() {
     if [ "$(nmcli connection show --active $VPN)" ]; then
         nmcli con down id $VPN && notify-send "VPN" "$VPN disconnected!" && exit 0
     else
-        nmcli con up id $VPN passwd-file "$HOME"/coding/secrets/vpn/$VPN && notify-send "VPN" "$VPN connected!" && exit 0
+        nmcli con up id $VPN passwd-file "$HOME"/coding/hidden/vpn/$VPN && notify-send "VPN" "$VPN connected!" && exit 0
     fi
 }
 # }}}

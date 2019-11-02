@@ -15,10 +15,10 @@ fi
 
 # remote mount {{{
 remotemnt() {
-    chosen=$(find "$HOME"/coding/secrets/mount/*.sh | cut -d / -f 7 | sed "s/.sh//g" | rofi -dmenu -i -p "")
+    chosen=$(find "$HOME"/coding/hidden/mount/*.sh | cut -d / -f 7 | sed "s/.sh//g" | rofi -dmenu -i -p "")
     [ -z "$chosen" ] && exit
     mntpoint="$HOME"/mount/$chosen
-    if [ ! -d "$mntpoint" ]; then mkdir "$mntpoint"; fi && "$HOME/coding/secrets/mount/$chosen.sh" "$mntpoint" && notify-send "Mount Remote" "$chosen mounted to "$mntpoint"."
+    if [ ! -d "$mntpoint" ]; then mkdir "$mntpoint"; fi && "$HOME/coding/hidden/mount/$chosen.sh" "$mntpoint" && notify-send "Mount Remote" "$chosen mounted to "$mntpoint"."
 }
 # }}}
 
