@@ -1,9 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# Path:     ~/coding/shell/mount/ftp.sh
-# User:     klassiker [mrdotx]
-# GitHub:   https://github.com/mrdotx/shell
+# path:       ~/coding/shell/mount/ftp.sh
+# user:       klassiker [mrdotx]
+# github:     https://github.com/mrdotx/shell
+# date:       2019-11-03 17:24:32
 
 # Connect to ftp via curlftpfs
 

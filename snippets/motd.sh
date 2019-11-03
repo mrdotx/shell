@@ -1,9 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# Path:     ~/coding/shell/snippets/motd.sh
-# User:     klassiker [mrdotx]
-# GitHub:   https://github.com/mrdotx/shell
+# path:       ~/coding/shell/snippets/motd.sh
+# user:       klassiker [mrdotx]
+# github:     https://github.com/mrdotx/shell
+# date:       2019-11-03 17:30:10
 
 # functions {{{
 function color() {

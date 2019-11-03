@@ -1,9 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# Path:     ~/coding/shell/backlight.sh
-# User:     klassiker [mrdotx]
-# GitHub:   https://github.com/mrdotx/shell
+# path:       ~/coding/shell/backlight.sh
+# user:       klassiker [mrdotx]
+# github:     https://github.com/mrdotx/shell
+# date:       2019-11-03 17:30:48
 
 # variables {{{
 max=$(cat /sys/class/backlight/intel_backlight/max_brightness)

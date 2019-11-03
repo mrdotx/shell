@@ -1,9 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# Path:     ~/coding/shell/raspberrypi/overclock.sh
-# User:     klassiker [mrdotx]
-# GitHub:   https://github.com/mrdotx/shell
+# path:       ~/coding/shell/raspberrypi/overclock.sh
+# user:       klassiker [mrdotx]
+# github:     https://github.com/mrdotx/shell
+# date:       2019-11-03 17:25:38
 
 # Simple stress test for raspberry pi. If it survives this, it's probably stable.
 

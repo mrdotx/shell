@@ -1,9 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# Path:     ~/coding/shell/terminal_wrapper.sh
-# User:     klassiker [mrdotx]
-# GitHub:   https://github.com/mrdotx/shell
+# path:       ~/coding/shell/terminal_wrapper.sh
+# user:       klassiker [mrdotx]
+# github:     https://github.com/mrdotx/shell
+# date:       2019-11-03 17:34:13
 
 # procedure {{{
 if [ $# -eq 0 ]; then "${SHELL:-bash}"; else "$@"; fi
