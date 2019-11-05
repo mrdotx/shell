@@ -20,6 +20,7 @@
 | rofimount.sh          | use rofi to mount remote, usb and android locations                                     |
 | rofiservice.sh        | use rofi to start/stop some services like bluetooth, printer, firewall etc.             |
 | rofiunmount.sh        | use rofi to unmount remote, usb and android locations                                   |
+| rofivim.sh            | use rofi to start vim with a few shortcuts                                              |   
 | screenlayout.sh       | default screen setup                                                                    |
 | servicetoggle.sh      | switch status of service active or inactive                                             |
 | suspend.sh            | system suspend                                                                          |
