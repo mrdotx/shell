@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/cloudsync.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:32:06
+# date:       2019-11-05 18:42:12
 
 # color variables {{{
 #black=$(tput setaf 0)
@@ -19,20 +19,20 @@ reset=$(tput sgr0)
 # }}}
 
 # config {{{
-    title=("Dropbox")
-    title+=("Google Drive")
-    title+=("web.de")
+    title=("web.de")
     title+=("GMX")
+    title+=("Google Drive")
+    title+=("Dropbox")
 
-    src=("$HOME/cloud/dropbox/")
-    src+=("$HOME/cloud/googledrive/")
-    src+=("$HOME/cloud/webde/")
+    src=("$HOME/cloud/webde/")
     src+=("$HOME/cloud/gmx/")
+    src+=("$HOME/cloud/googledrive/")
+    src+=("$HOME/cloud/dropbox/")
 
-    dest=("dropbox:/")
-    dest+=("googledrive:/")
-    dest+=("webde:/")
+    dest=("webde:/")
     dest+=("gmx:/")
+    dest+=("googledrive:/")
+    dest+=("dropbox:/")
 # }}}    
 
 # procedure {{{
