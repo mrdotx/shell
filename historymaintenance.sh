@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/historymaintenance.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:32:31
+# date:       2019-11-09 21:30:39
 
 # color variables {{{
 #black=$(tput setaf 0)
@@ -18,22 +18,23 @@ magenta=$(tput setaf 5)
 reset=$(tput sgr0)
 # }}}
 
-# procedure {{{
+# python history
 echo "[${magenta}python${reset}] remove white space from end of line"
 sed -i "s/ *$//" "$HOME"/.python_history
 
 echo "[${magenta}python${reset}] sort and remove duplicates"
 sort -u "$HOME"/.python_history | sort -o "$HOME"/.python_history
 
+# bash history
 echo "[${magenta}bash${reset}] remove white space from end of line"
 sed -i "s/ *$//" "$HOME"/.bash_history
 
 echo "[${magenta}bash${reset}] sort and remove duplicates"
 sort -u "$HOME"/.bash_history | sort -o "$HOME"/.bash_history
 
+# zsh history
 echo "[${magenta}zsh${reset}] remove white space from end of line"
 sed -i "s/ *$//" "$HOME"/.zsh_history
 
 echo "[${magenta}zsh${reset}] sort and remove duplicates"
 sort -t ";" -k 2 -u "$HOME"/.zsh_history | sort -o "$HOME"/.zsh_history
-# }}}

@@ -4,9 +4,8 @@
 # path:       ~/coding/shell/snippets/hera.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:29:34
+# date:       2019-11-09 22:16:09
 
-# procedure {{{
 case "$1" in
 wakeup)
     # send magic paket to hera
@@ -29,9 +28,8 @@ status)
     fi
     ;;
 *)
-    # If no parameters are given, print which are avaiable.
+    # if no parameters are given, print which are avaiable.
     echo "Usage: $0 {wakeup|poweroff|status}"
     exit 1
     ;;
 esac
-# }}}

@@ -4,9 +4,9 @@
 # path:       ~/coding/shell/raspberrypi/undervoltage.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:26:03
+# date:       2019-11-09 22:10:40
 
-# info {{{
+# information for results
 # 0: under-voltage
 # 1: arm frequency capped
 # 2: currently throttled
@@ -15,7 +15,7 @@
 # 17: arm frequency capped has occurred
 # 18: throttling has occurred
 
-# Bad values
+# bad values
 #  Temp  CPU fake/real     Health state    Vcore
 # 50.8'C  900/ 900 MHz 1010000000000000000 1.3125V
 # 49.8'C  900/ 900 MHz 1010000000000000000 1.3125V
@@ -26,7 +26,7 @@
 # 48.7'C  900/ 900 MHz 1010000000000000000 1.3125V
 # 46.5'C  900/ 900 MHz 1010000000000000000 1.3125V
 
-# Good values
+# good values
 #  Temp  CPU fake/real     Health state    Vcore
 # 36.9'C  900/ 900 MHz 0000000000000000000 1.3125V
 # 37.9'C  900/ 900 MHz 0000000000000000000 1.3125V
@@ -36,9 +36,7 @@
 # 37.4'C  900/ 600 MHz 0000000000000000000 1.3125V
 # 37.9'C  900/ 900 MHz 0000000000000000000 1.3125V
 # 37.4'C  900/ 900 MHz 0000000000000000000 1.3125V
-# }}}
 
-# procedure {{{
 echo -e "To stop simply press [ctrl]-[c]\n"
 Maxfreq=$(($(awk '{printf ("%0.0f",$1/1000); }' </sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq) - 15))
 Counter=14
@@ -57,4 +55,3 @@ while true; do
 	echo -e "$(date "+%H:%M:%S"): ${Temp}$(printf "%5s" ${SysFSClockspeed})/$(printf "%4s" ${RealClockspeed}) MHz $(printf "%019d" ${Health}) ${CoreVoltage}"
 	sleep 5
 done
-# }}}

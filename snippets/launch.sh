@@ -4,11 +4,11 @@
 # path:       ~/coding/shell/snippets/launch.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:29:58
+# date:       2019-11-09 22:13:11
 
 case "$1" in
 
-# Desktop  1 {{{
+# desktop  1 {{{
 terminal)
     wmctrl -s 0 && kitty >/dev/null 2>&1 &
     ;;
@@ -20,7 +20,7 @@ ranger)
     ;;
 # }}}
 
-# Desktop  2 {{{
+# desktop  2 {{{
 web)
     wmctrl -s 1 && firefox-developer-edition >/dev/null 2>&1 &
     ;;
@@ -29,13 +29,13 @@ ftp)
     ;;
 # }}}
 
-# Desktop  3 {{{
+# desktop  3 {{{
 vsc)
     wmctrl -s 2 && code-oss >/dev/null 2>&1 &
     ;;
 # }}}
 
-# Desktop  4 {{{
+# desktop  4 {{{
 gimp)
     wmctrl -s 3 && gimp >/dev/null 2>&1 &
     ;;
@@ -44,7 +44,7 @@ inkscape)
     ;;
 # }}}
 
-# Desktop  5 {{{
+# desktop  5 {{{
 mail)
     wmctrl -s 4 && thunderbird >/dev/null 2>&1 &
     ;;

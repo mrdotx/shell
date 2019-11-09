@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/githubmaintenance.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:32:22
+# date:       2019-11-09 21:32:23
 
 # color variables {{{
 #black=$(tput setaf 0)
@@ -18,7 +18,6 @@ magenta=$(tput setaf 5)
 reset=$(tput sgr0)
 # }}}
 
-# procedure {{{
 echo "[${magenta}github${reset}] checkout"
 git checkout --orphan latest_branch
 
@@ -39,4 +38,3 @@ git push -f origin master
 
 echo "[${magenta}github${reset}] set upstream"
 git push --set-upstream origin master
-# }}}

@@ -4,15 +4,12 @@
 # path:       ~/coding/shell/linkhandler.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:32:54
+# date:       2019-11-09 22:02:43
 
-# variables {{{
-PICTURES="sxiv -a -s f"
-MOVIES="mpv --quiet"
-# }}}
+pictures="sxiv -a -s f"
+movies="mpv --quiet"
 
-# procedure {{{
-# If no url given open browser
+# if no url given open browser
 [ -z "$1" ] && {
     "$BROWSER"
     exit
@@ -20,10 +17,10 @@ MOVIES="mpv --quiet"
 
 case "$1" in
 *mkv | *webm | *mp4 | *youtube.com/watch* | *youtube.com/playlist* | *youtu.be*)
-    setsid tsp $MOVIES --input-ipc-server=/tmp/mpvsoc$(date +%s) "$1" >/dev/null 2>&1 &
+    setsid tsp $movies --input-ipc-server=/tmp/mpvsoc$(date +%s) "$1" >/dev/null 2>&1 &
     ;;
 *png | *jpg | *jpe | *jpeg | *gif)
-    curl -sL "$1" > "/tmp/$(echo "$1" | sed "s/.*\///")" && $PICTURES "/tmp/$(echo "$1" | sed "s/.*\///")"  >/dev/null 2>&1 &
+    curl -sL "$1" > "/tmp/$(echo "$1" | sed "s/.*\///")" && $pictures "/tmp/$(echo "$1" | sed "s/.*\///")"  >/dev/null 2>&1 &
     ;; 
 *mp3 | *flac | *opus | *mp3?source)
     setsid tsp curl -LO "$1" >/dev/null 2>&1 &
@@ -33,4 +30,3 @@ case "$1" in
     else setsid $BROWSER "$1" >/dev/null 2>&1 & fi
     ;;
 esac
-# }}}

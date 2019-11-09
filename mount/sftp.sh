@@ -4,16 +4,13 @@
 # path:       ~/coding/shell/mount/sftp.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:25:08
+# date:       2019-11-09 22:08:37
 
-# Connect to sftp via sshfs
+# connect to sftp via sshfs
 # host must be in .ssh/known_hosts
+sftpdir=$1
+sftphost=<Hostname>
+sftpuser=<Username>
+sftppass=$(gpg -q --decrypt <passwordfile.gpg>)
 
-# connection data {{{
-DIR=$1
-HOST=<Hostname>
-USER=<Username>
-PASS=<Password>
-# }}}
-
-sshfs -o password_stdin $USER@$HOST:/ "$DIR" <<< "$PASS" && exit 0
+sshfs -o password_stdin $sftpuser@$sftphost:/ "$sftpdir" <<< "$sftppass" && exit 0

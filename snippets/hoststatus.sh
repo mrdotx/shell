@@ -4,9 +4,9 @@
 # path:       ~/coding/shell/snippets/hoststatus.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:29:46
+# date:       2019-11-09 22:14:21
 
-# procedure {{{
+# ping host and echo online or offline
 exec="ping -c 1"
 
 function color() {
@@ -25,4 +25,3 @@ function ping_remote() {
 }
 run_function=$(ping_remote $1)
 echo "$run_function"
-# }}}

@@ -4,16 +4,17 @@
 # path:       ~/coding/shell/rofiunmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:33:44
+# date:       2019-11-08 10:01:57
 
+# exit rofi if it's running
 pgrep -x rofi && exit
 
 # remote unmount {{{
 remoteumt() {
-    if grep -E "$HOME"/mount/.*fuse /etc/mtab; then
+    if grep -E "$HOME/mount/.*fuse" /etc/mtab; then
         chosen=$(awk '/\/mount\/.*fuse/ {print $2}' /etc/mtab | sort | rofi -dmenu -i -p "")
         [ -z "$chosen" ] && exit
-        fusermount -u "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send "Unmount Remote" "$chosen unmounted."
+        fusermount -u "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send "Unmount Remote" "$chosen unmounted"
     else
         exit
     fi
@@ -26,7 +27,7 @@ usbumt() {
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
-    sudo -A umount "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send "Unmount USB" "$chosen unmounted."
+    sudo -A umount "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send "Unmount USB" "$chosen unmounted"
 }
 # }}}
 
@@ -35,7 +36,7 @@ androidumt() {
     if grep simple-mtpfs /etc/mtab; then
         chosen=$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | sort | rofi -dmenu -i -p "")
         [ -z "$chosen" ] && exit
-        fusermount -u "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send "Unmount Android" "$chosen unmounted."
+        fusermount -u "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send "Unmount Android" "$chosen unmounted"
     else
         exit
     fi
@@ -48,15 +49,18 @@ dvdeject() {
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
-    sudo -A eject "$chosen" && notify-send "Eject DVD" "$chosen ejected."
+    sudo -A eject "$chosen" && notify-send "Eject DVD" "$chosen ejected"
 }
 # }}}
 
-# menu {{{
-case $(printf "Remote Unmount\\nUSB Unmount\\nAndroid Unmount\\nDVD Eject" | rofi -dmenu -i -p "") in
-    "Remote Unmount") remoteumt ;;
-    "USB Unmount") usbumt ;;
-    "Android Unmount") androidumt ;;
-    "DVD Eject") dvdeject ;;
+# menu
+case $(printf "%s\n" \
+    "Remote Unmount" \
+    "USB Unmount" \
+    "Android Unmount" \
+    "DVD Eject" | rofi -dmenu -i -p "") in
+"Remote Unmount") remoteumt ;;
+"USB Unmount") usbumt ;;
+"Android Unmount") androidumt ;;
+"DVD Eject") dvdeject ;;
 esac
-# }}}

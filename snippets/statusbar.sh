@@ -4,9 +4,9 @@
 # path:       ~/coding/shell/snippets/statusbar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:30:33
+# date:       2019-11-09 21:59:58
 
-# procedure {{{
+# combining commands for output
 cputemp="$(cat /sys/class/thermal/thermal_zone0/temp | cut -c "1-2")ºC"
 cores="$(grep -c "^processor" /proc/cpuinfo)"
 cpuusage="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum}')"
@@ -43,12 +43,9 @@ name="$(users)@$(hostname)"
 clock="$(date '+%a, %e %B %G, %k:%M')"
 
 uptime="$(uptime -p | sed 's/s//g; s/,//g; s/up //g; s/ week/w/g; s/ day/d/g; s/ hour/h/g; s/ minute/m/g')"
-# }}}
 
-# combination {{{
+# combination
 statusbar="cpu: $cputemp [$cpuusage] | ram: $ram/$ramtotalg [$ramusage] | swap: $swap/$swaptotalg [$swapusage] | hdd: $hdd/$hddtotal [$hddusage] | wlan: $wlan [$wlansignal] | ip: $ip | name: $name | uptime: $uptime | $clock"
-# }}}
 
-# output {{{
+# output
 echo -e "$statusbar"
-# }}}

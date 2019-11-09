@@ -4,31 +4,27 @@
 # path:       ~/coding/shell/pdfshrink.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:33:00
+# date:       2019-11-09 21:43:16
 
-# settings
-#    -dPDFSETTINGS=/screen      (72 dpi images)
-#    -dPDFSETTINGS=/ebook       (150 dpi images)
-#    -dPDFSETTINGS=/printer     (300 dpi images)
-#    -dPDFSETTINGS=/prepress    (300 dpi images, color preserving)
-#    -dPDFSETTINGS=/default
+pdfsetting=$1
+pdffile=$2
+pdf=$(basename "$2" .pdf)
 
-# variables {{{
-PDFSETTING=screen
-PDFFILE=$1
-PDF=$(basename "$1" .pdf)
-# }}}
-
-# procedure {{{
-if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
+# shrink pdf in different dpi
+if [[ $1 == "-h" || $1 == "--help" || -z $2 || $# -eq 0 ]]; then
     echo "Usage:"
-    echo "	pdfshrink.sh [pdf filename]"
+    echo "	pdfshrink.sh [pdf setting] [pdf filename]"
+    echo
+    echo "Setting:"
+    echo "  screen      (72 dpi images)"
+    echo "  ebook       (150 dpi images)"
+    echo "  printer     (300 dpi images)"
+    echo "  prepress    (300 dpi images, color preserving)"
     echo
     echo "Example:"
-    echo "	pdfshrink.sh document.pdf"
+    echo "	pdfshrink.sh screen document.pdf"
     echo
     exit 0
 else
-    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/$PDFSETTING -dNOPAUSE -dBATCH -sOutputFile="$PDF"-compressed.pdf "$PDFFILE"
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/"$pdfsetting" -dNOPAUSE -dBATCH -sOutputFile="$pdf"-compressed.pdf "$pdffile"
 fi
-# }}}

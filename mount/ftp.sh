@@ -4,15 +4,12 @@
 # path:       ~/coding/shell/mount/ftp.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:24:32
+# date:       2019-11-09 22:06:31
 
-# Connect to ftp via curlftpfs
+# connect to ftp via curlftpfs
+ftpdir=$1
+ftphost=<Hostname>
+ftpuser=<Username>
+ftppass=$(gpg -q --decrypt <passwordfile.gpg>)
 
-# connection data {{{
-DIR=$1
-HOST=<Hostname>
-USER=<Username>
-PASS=<Password>
-# }}}
-
-curlftpfs $HOST "$DIR" -o user=$USER:$PASS && exit 0
+curlftpfs $ftphost "$ftpdir" -o user=$ftpuser:$ftppass && exit 0

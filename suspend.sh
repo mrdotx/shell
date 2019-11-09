@@ -4,11 +4,7 @@
 # path:       ~/coding/shell/suspend.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:34:07
+# date:       2019-11-07 22:23:20
 
-# procedure {{{
-# logout
-# blurlock
-# logout and suspend
+# lock the screen and suspend
 i3exit lock && i3exit suspend
-# }}}

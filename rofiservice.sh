@@ -4,8 +4,9 @@
 # path:       ~/coding/shell/rofiservice.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:33:36
+# date:       2019-11-08 00:00:31
 
+# exit rofi if it's running
 pgrep -x rofi && exit
 
 # polkit {{{
@@ -108,8 +109,9 @@ firewallstatus=$(systemctl is-active ufw.service)
 conkystatus=$(if [ "$(pgrep -f "conky -c $HOME/.conky/*")" ]; then echo "active"; else echo "inactive"; fi)
 # }}}
 
-# menu {{{
-case $(printf "%s\n" "Authentication Agent ($polkitstatus)" \
+# menu
+case $(printf "%s\n" \
+    "Authentication Agent ($polkitstatus)" \
     "VPN $VPN ($vpnstatus)" \
     "Netzwerk Manager ($nmappletstatus)" \
     "Printer ($printerstatus)" \
@@ -118,14 +120,13 @@ case $(printf "%s\n" "Authentication Agent ($polkitstatus)" \
     "ModemManager ($modemmanagerstatus)" \
     "Firewall ($firewallstatus)" \
     "Conky ($conkystatus)" | rofi -dmenu -i -p "") in
-    Authentication?Agent*) polkitservice ;;
-    VPN*) vpn ;;
-    Netzwerk?Manager*) nmappletservice ;;
-    Printer*) printerservice ;;
-    Avahi?Service/Socket*) avahiservice ;;
-    Bluetooth*) bluetoothservice ;;
-    ModemManager*) modemmanagerservice ;;
-    Firewall*) firewallservice ;;
-    Conky*) conky.sh ;;
+"Authentication Agent"*) polkitservice ;;
+"VPN"*) vpn ;;
+"Netzwerk Manager"*) nmappletservice ;;
+"Printer"*) printerservice ;;
+"Avahi Service/Socket"*) avahiservice ;;
+"Bluetooth"*) bluetoothservice ;;
+"ModemManager"*) modemmanagerservice ;;
+"Firewall"*) firewallservice ;;
+"Conky"*) conky.sh ;;
 esac
-# }}}

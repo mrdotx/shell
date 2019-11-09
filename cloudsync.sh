@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/cloudsync.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-05 18:42:12
+# date:       2019-11-09 21:44:28
 
 # color variables {{{
 #black=$(tput setaf 0)
@@ -18,34 +18,32 @@ magenta=$(tput setaf 5)
 reset=$(tput sgr0)
 # }}}
 
-# config {{{
-    title=("web.de")
-    title+=("GMX")
-    title+=("Google Drive")
-    title+=("Dropbox")
+title=("web.de")
+title+=("GMX")
+title+=("Google Drive")
+title+=("Dropbox")
 
-    src=("$HOME/cloud/webde/")
-    src+=("$HOME/cloud/gmx/")
-    src+=("$HOME/cloud/googledrive/")
-    src+=("$HOME/cloud/dropbox/")
+src=("$HOME/cloud/webde/")
+src+=("$HOME/cloud/gmx/")
+src+=("$HOME/cloud/googledrive/")
+src+=("$HOME/cloud/dropbox/")
 
-    dest=("webde:/")
-    dest+=("gmx:/")
-    dest+=("googledrive:/")
-    dest+=("dropbox:/")
-# }}}    
+dest=("webde:/")
+dest+=("gmx:/")
+dest+=("googledrive:/")
+dest+=("dropbox:/")
 
-# procedure {{{
+# rclone to copy data from and to cloud
 if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
     echo "Usage:"
     echo "	cloudsync.sh [option]"
     echo
-    echo "Example:"
-    echo "	cloudsync.sh -c"
-    echo
     echo "Options:"
     echo "  -c - check"
     echo "  -s - sync"
+    echo
+    echo "Example:"
+    echo "	cloudsync.sh -c"
     exit 0
 elif [[ $1 == "-c" ]]; then
     for ((i=0;i<${#title[@]};i++)); do
@@ -65,4 +63,3 @@ elif [[ $1 == "-s" ]]; then
     done
     exit 0
 fi
-# }}}

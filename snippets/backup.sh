@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/snippets/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:27:06
+# date:       2019-11-09 22:26:08
 
 # color variables {{{
 #black=$(tput setaf 0)
@@ -18,11 +18,11 @@ cyan=$(tput setaf 6)
 reset=$(tput sgr0)
 # }}}
 
-# source {{{
-DESTROOT="$HOME/Backup/"
-DESTCONF="$HOME/Backup/.config/"
+destroot="$HOME/Backup/"
+destconf="$HOME/Backup/.config/"
+
 # home/folders
-SRC="
+src="
 #$HOME/.conky
 #$HOME/.jameica
 #$HOME/.newsboat
@@ -30,7 +30,7 @@ SRC="
 #$HOME/.weechat
 "
 # home/files
-SRC="$SRC
+src="$src
 #$HOME/.bashrc
 #$HOME/.gitconfig
 #$HOME/.jameica.properties
@@ -41,7 +41,7 @@ SRC="$SRC
 #$HOME/.vimrc
 "
 # home/.config/folders
-SRC="$SRC
+src="$src
 #$HOME/.config/cmus
 #$HOME/.config/filezilla
 #$HOME/.config/htop
@@ -55,34 +55,31 @@ SRC="$SRC
 #$HOME/.config/zathura
 "
 # home/.config/files
-SRC="$SRC
+src="$src
 #$HOME/.config/libinput-gestures.conf
 "
-# }}}
 
-# backup {{{
+# backup
 echo "[${magenta}backup${reset}] folder & files"
-for dir in $SRC; do
+for dir in $src; do
     case "${dir}" in
     $HOME/.newsboat)
-        rsync --delete -acqP --exclude "cache.db" "${dir}" "$DESTROOT"
+        rsync --delete -acqP --exclude "cache.db" "${dir}" "$destroot"
         ;;
     $HOME/.weechat)
-        rsync --delete -acqP --exclude={weechat.log,logs} "${dir}" "$DESTROOT"
+        rsync --delete -acqP --exclude={weechat.log,logs} "${dir}" "$destroot"
         ;;
     $HOME/.config/*)
-        rsync --delete -acqP "${dir}" "$DESTCONF"
+        rsync --delete -acqP "${dir}" "$destconf"
         ;;
     $HOME/*)
-        rsync --delete -acqP "${dir}" "$DESTROOT"
+        rsync --delete -acqP "${dir}" "$destroot"
         ;;
     esac
     echo "[${cyan}source${reset}] ${dir}"
 done
-# }}}
 
-# backup size {{{
+# backup size
 echo "[${blue}backup${reset}] size"
 du -sh "$HOME"/Backup/
 notify-send "Backup complete" "$(du -sh "$HOME"/Backup/)"
-# }}}

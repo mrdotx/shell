@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/snippets/motd.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-03 17:30:10
+# date:       2019-11-09 22:12:33
 
 # functions {{{
 function color() {
@@ -142,7 +142,7 @@ fi
 if [[ $loginDate == *T* ]]; then
     login="$(date -d $loginDate +"%a, %d %B %Y, %T") [$loginIP]"
 else
-    # Not enough logins
+    # not enough logins
     login="None"
 fi
 # }}}
