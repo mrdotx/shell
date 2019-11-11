@@ -4,14 +4,14 @@
 # path:       ~/coding/shell/backlight.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 21:53:55
+# date:       2019-11-11 19:00:35
 
 max=$(cat /sys/class/backlight/intel_backlight/max_brightness)
 val=$(cat /sys/class/backlight/intel_backlight/brightness)
 dir=$1
 
 # change intel backlight
-ten_percent=$(($max / 10))
+ten_percent=$(($max / 20))
 
 unset new_brightness
 if [ "$dir" == "up" ]; then
