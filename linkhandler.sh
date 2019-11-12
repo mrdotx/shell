@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/linkhandler.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 22:02:43
+# date:       2019-11-12 22:13:51
 
 pictures="sxiv -a -s f"
 movies="mpv --quiet"
@@ -21,7 +21,7 @@ case "$1" in
     ;;
 *png | *jpg | *jpe | *jpeg | *gif)
     curl -sL "$1" > "/tmp/$(echo "$1" | sed "s/.*\///")" && $pictures "/tmp/$(echo "$1" | sed "s/.*\///")"  >/dev/null 2>&1 &
-    ;; 
+    ;;
 *mp3 | *flac | *opus | *mp3?source)
     setsid tsp curl -LO "$1" >/dev/null 2>&1 &
     ;;

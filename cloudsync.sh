@@ -4,9 +4,9 @@
 # path:       ~/coding/shell/cloudsync.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 21:44:28
+# date:       2019-11-12 22:11:26
 
-# color variables {{{
+# color variables
 #black=$(tput setaf 0)
 #red=$(tput setaf 1)
 #green=$(tput setaf 2)
@@ -16,7 +16,6 @@ magenta=$(tput setaf 5)
 #cyan=$(tput setaf 6)
 #white=$(tput setaf 7)
 reset=$(tput sgr0)
-# }}}
 
 title=("web.de")
 title+=("GMX")

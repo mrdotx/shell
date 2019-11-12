@@ -4,12 +4,12 @@
 # path:       ~/coding/shell/rofiunmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-08 10:01:57
+# date:       2019-11-12 22:26:18
 
 # exit rofi if it's running
 pgrep -x rofi && exit
 
-# remote unmount {{{
+# remote unmount
 remoteumt() {
     if grep -E "$HOME/mount/.*fuse" /etc/mtab; then
         chosen=$(awk '/\/mount\/.*fuse/ {print $2}' /etc/mtab | sort | rofi -dmenu -i -p "")
@@ -19,9 +19,8 @@ remoteumt() {
         exit
     fi
 }
-# }}}
 
-# usb unmount {{{
+# usb unmount
 usbumt() {
     mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4!~/\/boot|\/home$|SWAP/&&length($4)>1 || $2=="rom"&&length($4)>1 || $3=="1,4M"&&length($4)>1) printf "%s (%s)\n",$4,$3}')
     [ -z "$mounts" ] && exit
@@ -29,9 +28,8 @@ usbumt() {
     [ -z "$chosen" ] && exit
     sudo -A umount "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send "Unmount USB" "$chosen unmounted"
 }
-# }}}
 
-# android unmount {{{
+# android unmount
 androidumt() {
     if grep simple-mtpfs /etc/mtab; then
         chosen=$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | sort | rofi -dmenu -i -p "")
@@ -41,9 +39,8 @@ androidumt() {
         exit
     fi
 }
-# }}}
 
-# dvd eject {{{
+# dvd eject
 dvdeject() {
     mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '$2=="rom"{printf "%s (%s)\n",$1,$3}')
     [ -z "$mounts" ] && exit
@@ -51,7 +48,6 @@ dvdeject() {
     [ -z "$chosen" ] && exit
     sudo -A eject "$chosen" && notify-send "Eject DVD" "$chosen ejected"
 }
-# }}}
 
 # menu
 case $(printf "%s\n" \

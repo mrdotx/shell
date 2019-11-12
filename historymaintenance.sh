@@ -4,9 +4,9 @@
 # path:       ~/coding/shell/historymaintenance.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 21:30:39
+# date:       2019-11-12 22:12:49
 
-# color variables {{{
+# color variables
 #black=$(tput setaf 0)
 #red=$(tput setaf 1)
 #green=$(tput setaf 2)
@@ -16,7 +16,6 @@ magenta=$(tput setaf 5)
 #cyan=$(tput setaf 6)
 #white=$(tput setaf 7)
 reset=$(tput sgr0)
-# }}}
 
 # python history
 echo "[${magenta}python${reset}] remove white space from end of line"

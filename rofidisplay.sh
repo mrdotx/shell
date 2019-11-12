@@ -4,12 +4,12 @@
 # path:       ~/coding/shell/rofidisplay.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-08 10:03:51
+# date:       2019-11-12 22:15:18
 
 # exit rofi if it's running
 pgrep -x rofi && exit
 
-# second display {{{
+# second display
 seconddisplay() {
     mirror=$(printf "no\\nyes" | rofi -dmenu -i -p "Mirror displays?")
     if [ "$mirror" = "yes" ]; then
@@ -35,19 +35,16 @@ seconddisplay() {
         xrandr --output "$primary" --auto --scale 1.0x1.0 --output "$secondary" --"$direction"-of "$primary" --auto --scale 1.0x1.0
     fi
 }
-# }}}
 
-# saved arandr settings {{{
+# saved arandr settings
 savedsettings() {
     chosen=$(find "$HOME"/.screenlayout/*.sh | cut -d / -f 5 | sed "s/.sh//g" | rofi -dmenu -i -p "")
     "$HOME"/.screenlayout/"$chosen".sh
 }
-# }}}
 
-# get displays {{{
+# get displays
 allposs=$(xrandr -q | grep "connected")
 displays=$(echo "$allposs" | grep " connected" | awk '{print $1}')
-# }}}
 
 # menu
 chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection" "$displays" | rofi -dmenu -i -p "") &&
