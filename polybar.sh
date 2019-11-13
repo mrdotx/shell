@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/polybar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-07 22:44:45
+# date:       2019-11-13 12:46:20
 
 # terminate already running bar instances
 killall -q polybar
@@ -25,4 +25,3 @@ done
 #else
 #    polybar --reload i3 &
 #fi
-# }}}
