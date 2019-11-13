@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/rofiservice.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-12 22:21:49
+# date:       2019-11-13 12:20:12
 
 # exit rofi if it's running
 pgrep -x rofi && exit
@@ -110,7 +110,7 @@ case $(printf "%s\n" \
     "Bluetooth ($bluetoothstatus)" \
     "ModemManager ($modemmanagerstatus)" \
     "Firewall ($firewallstatus)" \
-    "Conky ($conkystatus)" | rofi -dmenu -i -p "") in
+    "Conky ($conkystatus)" | rofi -monitor primary -dmenu -i -p "") in
 "Authentication Agent"*) polkitservice ;;
 "VPN"*) vpn ;;
 "Netzwerk Manager"*) nmappletservice ;;

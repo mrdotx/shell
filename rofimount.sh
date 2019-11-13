@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/rofimount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-12 22:16:26
+# date:       2019-11-13 12:29:32
 
 # exit rofi if it's running
 pgrep -x rofi && exit
@@ -16,7 +16,7 @@ fi
 
 # remote mount
 remotemnt() {
-    chosen=$(find "$HOME"/coding/hidden/mount/*.sh | cut -d / -f 7 | sed "s/.sh//g" | rofi -dmenu -i -p "")
+    chosen=$(find "$HOME"/coding/hidden/mount/*.sh | cut -d / -f 7 | sed "s/.sh//g" | rofi -monitor primary -dmenu -i -p "")
     [ -z "$chosen" ] && exit
     mntpoint="$HOME"/mount/$chosen
     if [ ! -d "$mntpoint" ]; then mkdir "$mntpoint"; fi && "$HOME/coding/hidden/mount/$chosen.sh" "$mntpoint" && notify-send "Mount Remote" "$chosen mounted to $mntpoint"
@@ -24,7 +24,7 @@ remotemnt() {
 
 # usb mount
 usbmnt() {
-    chosen="$(lsblk -rpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4=="" || $2=="rom"&&$4=="" || $3=="1,4M"&&$4=="") printf "%s (%s)\n",$1,$3}' | rofi -dmenu -i -p "" | awk '{print $1}')"
+    chosen="$(lsblk -rpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4=="" || $2=="rom"&&$4=="" || $3=="1,4M"&&$4=="") printf "%s (%s)\n",$1,$3}' | rofi -monitor primary -dmenu -i -p "" | awk '{print $1}')"
     [ -z "$chosen" ] && exit
     mntpoint="$HOME"/mount/$(basename "$chosen")
     parttype="$(lsblk -no "fstype" "$chosen")"
@@ -41,7 +41,7 @@ usbmnt() {
 
 # android mount
 androidmnt() {
-    chosen=$(simple-mtpfs -l 2>/dev/null | rofi -dmenu -i -p "" | cut -d : -f 1)
+    chosen=$(simple-mtpfs -l 2>/dev/null | rofi -monitor primary -dmenu -i -p "" | cut -d : -f 1)
     [ -z "$chosen" ] && exit
     mntpoint="$HOME"/mount/$chosen
     if [ ! -d "$mntpoint" ]; then mkdir "$mntpoint"; fi && simple-mtpfs --device "$chosen" "$mntpoint" && notify-send "Mount Android" "$chosen mounted to $mntpoint"
@@ -51,7 +51,7 @@ androidmnt() {
 case $(printf "%s\n" \
     "Remote Mount" \
     "USB Mount" \
-    "Android Mount" | rofi -dmenu -i -p "") in
+    "Android Mount" | rofi -monitor primary -dmenu -i -p "") in
 "Remote Mount") remotemnt ;;
 "USB Mount") usbmnt ;;
 "Android Mount") androidmnt ;;
