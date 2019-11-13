@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/historymaintenance.sh
+# path:       ~/coding/shell/maintenance.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-12 22:12:49
+# date:       2019-11-13 18:28:45
 
 # color variables
 #black=$(tput setaf 0)
@@ -16,6 +16,10 @@ magenta=$(tput setaf 5)
 #cyan=$(tput setaf 6)
 #white=$(tput setaf 7)
 reset=$(tput sgr0)
+
+# purge cache
+echo "[${magenta}.cache${reset}] purge all .cache files that have not been accessed in 100 days"
+find ~/.cache/ -type f -atime +100 -delete
 
 # python history
 echo "[${magenta}python${reset}] remove white space from end of line"
