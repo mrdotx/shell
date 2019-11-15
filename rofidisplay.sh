@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/rofidisplay.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-13 12:31:17
+# date:       2019-11-15 23:34:19
 
 # exit rofi if it's running
 pgrep -x rofi && exit
@@ -59,6 +59,6 @@ chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection" "$disp
     esac
 
 # maintenance after setup displays
-#nitrogen --restore
+nitrogen --restore
 pgrep -x dunst >/dev/null && killall dunst &
 polybar.sh
