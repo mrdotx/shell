@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/servicetoggle.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 21:26:07
+# date:       2019-11-17 11:51:47
 
 service=$1
 
@@ -25,11 +25,11 @@ if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
 elif [ "$(systemctl is-active "$service")" != "active" ]; then
     echo "$service wasn't running so attempting to start"
     sudo systemctl start "$service"
-    notify-send "$service" "started!"
+    notify-send -i "$HOME/coding/shell/icons/service.png" "$service" "started!"
     exit 0
 else
     echo "$service was running so attempting to stop"
     sudo systemctl stop "$service"
-    notify-send "$service" "stopped!"
+    notify-send -i "$HOME/coding/shell/icons/service.png" "$service" "stopped!"
     exit 0
 fi

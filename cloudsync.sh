@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/cloudsync.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-12 22:11:26
+# date:       2019-11-17 11:28:44
 
 # color variables
 #black=$(tput setaf 0)
@@ -32,6 +32,11 @@ dest+=("gmx:/")
 dest+=("googledrive:/")
 dest+=("dropbox:/")
 
+icon=("$HOME/coding/shell/icons/web.de.png")
+icon+=("$HOME/coding/shell/icons/gmx.png")
+icon+=("$HOME/coding/shell/icons/google-drive.png")
+icon+=("$HOME/coding/shell/icons/dropbox.png")
+
 # rclone to copy data from and to cloud
 if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
     echo "Usage:"
@@ -48,6 +53,7 @@ elif [[ $1 == "-c" ]]; then
     for ((i=0;i<${#title[@]};i++)); do
         echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
         rclone check -P ${src[i]} ${dest[i]}
+        notify-send -i ${icon[i]} "Check ${title[i]}" "completed!"
     done
     exit 0
 elif [[ $1 == "-s" ]]; then
@@ -58,7 +64,7 @@ elif [[ $1 == "-s" ]]; then
         echo "[${magenta}${title[i]}${reset}] -> ${src[i]}"
         rclone copy -P ${dest[i]} ${src[i]}
         #rclone sync -P ${dest[i]} ${src[i]}
-        notify-send "Sync ${title[i]}" "completed!"
+        notify-send -i ${icon[i]} "Sync ${title[i]}" "completed!"
     done
     exit 0
 fi
