@@ -4,9 +4,9 @@
 # path:       ~/coding/shell/rofimount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-17 12:41:55
+# date:       2019-11-17 16:20:47
 
-# exit rofi if it's running
+# exit if rofi is running
 pgrep -x rofi && exit
 
 # create mount directory if not created

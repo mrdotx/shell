@@ -4,9 +4,9 @@
 # path:       ~/coding/shell/rofivim.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-13 12:24:20
+# date:       2019-11-17 16:20:03
 
-# exit rofi if it's running
+# exit if rofi is running
 pgrep -x rofi && exit
 
 # menu for vim shortcuts

@@ -4,9 +4,9 @@
 # path:       ~/coding/shell/rofiservice.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-17 13:03:46
+# date:       2019-11-17 16:20:31
 
-# exit rofi if it's running
+# exit if rofi is running
 pgrep -x rofi && exit
 
 # polkit

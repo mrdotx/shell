@@ -4,9 +4,9 @@
 # path:       ~/coding/shell/rofidisplay.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-15 23:34:19
+# date:       2019-11-17 16:21:00
 
-# exit rofi if it's running
+# exit if rofi is running
 pgrep -x rofi && exit
 
 # second display
