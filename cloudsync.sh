@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/cloudsync.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-17 11:28:44
+# date:       2019-11-20 23:04:31
 
 # color variables
 #black=$(tput setaf 0)
@@ -18,24 +18,28 @@ magenta=$(tput setaf 5)
 reset=$(tput sgr0)
 
 title=("web.de")
-title+=("GMX")
-title+=("Google Drive")
-title+=("Dropbox")
-
 src=("$HOME/cloud/webde/")
-src+=("$HOME/cloud/gmx/")
-src+=("$HOME/cloud/googledrive/")
-src+=("$HOME/cloud/dropbox/")
-
 dest=("webde:/")
-dest+=("gmx:/")
-dest+=("googledrive:/")
-dest+=("dropbox:/")
-
 icon=("$HOME/coding/shell/icons/web.de.png")
+exclude=("")
+
+title+=("GMX")
+src+=("$HOME/cloud/gmx/")
+dest+=("gmx:/")
 icon+=("$HOME/coding/shell/icons/gmx.png")
+exclude+=("KeePass/klassiker.kdbx")
+
+title+=("Google Drive")
+src+=("$HOME/cloud/googledrive/")
+dest+=("googledrive:/")
 icon+=("$HOME/coding/shell/icons/google-drive.png")
+exclude+=("")
+
+title+=("Dropbox")
+src+=("$HOME/cloud/dropbox/")
+dest+=("dropbox:/")
 icon+=("$HOME/coding/shell/icons/dropbox.png")
+exclude+=("")
 
 # rclone to copy data from and to cloud
 if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
@@ -52,18 +56,18 @@ if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
 elif [[ $1 == "-c" ]]; then
     for ((i=0;i<${#title[@]};i++)); do
         echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
-        rclone check -P ${src[i]} ${dest[i]}
-        notify-send -i ${icon[i]} "Check ${title[i]}" "completed!"
+        rclone check -P ${src[i]} ${dest[i]} --exclude "${exclude[i]}"
+        notify-send -i ${icon[i]} "Check ${title[i]}" "comleted!"
     done
     exit 0
 elif [[ $1 == "-s" ]]; then
     for ((i=0;i<${#title[@]};i++)); do
         echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
-        rclone copy -P ${src[i]} ${dest[i]}
-        #rclone sync -P ${src[i]} ${dest[i]}
+        rclone copy -P ${src[i]} ${dest[i]} --exclude "${eclude[i]}"
+        #rclone sync -P ${src[i]} ${dest[i]} --exclude "${eclude[i]}"
         echo "[${magenta}${title[i]}${reset}] -> ${src[i]}"
-        rclone copy -P ${dest[i]} ${src[i]}
-        #rclone sync -P ${dest[i]} ${src[i]}
+        rclone copy -P ${dest[i]} ${src[i]} --exclude "${eclude[i]}"
+        #rclone sync -P ${dest[i]} ${src[i]} --exclude "${eclude[i]}"
         notify-send -i ${icon[i]} "Sync ${title[i]}" "completed!"
     done
     exit 0

@@ -13,6 +13,7 @@
 | cmus.sh               | start cmus, if it's not running togle from/to i3 scratchpad                             |
 | delmetafiles.sh       | delete hidden apple metadata files in home folder                                       |
 | githubmaintenance.sh  | remove history from github repository                                                   |
+| keypasssync.sh        | sync keepassfile with rclone based on modification date                                 |
 | linkhandler.sh        | opens specific program for picture, videos and audio by giving url. mainly for newsboat |
 | maintenance.sh        | remove duplicated entries from bash- and zsh_history                                    |
 | newsboat.sh           | reload feeds and compact the cache                                                      |
