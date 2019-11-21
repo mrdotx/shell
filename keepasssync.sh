@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/keepasssync.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-21 00:44:22
+# date:       2019-11-21 01:13:05
 
 drive_name="gmx"
 db_file_name="klassiker.kdbx"
@@ -71,14 +71,14 @@ function sync_passwords ()
 
     # local being newer than remote
     if [ "$local_mtime_in_seconds_since_epoch" -gt "$remote_mtime_in_seconds_since_epoch" ]; then
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Local passwords file found to be newer than remote!\nExporting...!"
+        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Local passwords file is probably newer than remote!\nExporting...!"
         passwords_export
         notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Database synchronized!"
     return 0
 
     # remote being newer than local
     elif [ "$local_mtime_in_seconds_since_epoch" -lt "$remote_mtime_in_seconds_since_epoch" ]; then
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Local passwords file found to be older than remote!\nImporting...!"
+        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Local passwords file is probably older than remote!\nImporting...!"
         passwords_import
         notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Database synchronized!"
     return 0
@@ -91,4 +91,4 @@ function sync_passwords ()
 
 # check internet connection
 ping -c1 -W1 -q google.com &> /dev/null && sync_passwords || \
-    notify-send -i "$HOME/coding/shell/icons/caution.png" "KeePass" "Problem synchronize database!"
+    notify-send -i "$HOME/coding/shell/icons/caution.png" "KeePass" "Problem with database synchronisation!"

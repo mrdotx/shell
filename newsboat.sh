@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/newsboat.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-21 00:48:42
+# date:       2019-11-21 01:15:11
 
 # exit if newsboat is running
 pgrep -x newsboat && exit
@@ -13,4 +13,4 @@ pgrep -x newsboat && exit
 ping -c1 -W1 -q google.com &> /dev/null && \
     newsboat -x reload && newsboat -q -X &> /dev/null && \
     notify-send -i "$HOME/coding/shell/icons/rss.png" "Newsboat" "Updated and compact the cache!" || \
-    notify-send -i "$HOME/coding/shell/icons/caution.png" "Newsboat" "Problem update the feeds!"
+    notify-send -i "$HOME/coding/shell/icons/caution.png" "Newsboat" "Problem with update the feeds!"
