@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/keepasssync.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-21 01:13:05
+# date:       2019-11-21 13:00:10
 
 drive_name="gmx"
 db_file_name="klassiker.kdbx"
@@ -90,5 +90,5 @@ function sync_passwords ()
 }
 
 # check internet connection
-ping -c1 -W1 -q google.com &> /dev/null && sync_passwords || \
+ping -c1 -W1 -q 1.1.1.1 &> /dev/null && sync_passwords || \
     notify-send -i "$HOME/coding/shell/icons/caution.png" "KeePass" "Problem with database synchronisation!"
