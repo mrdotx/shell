@@ -4,10 +4,12 @@
 # path:       ~/coding/shell/polybar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-22 00:26:26
+# date:       2019-11-22 22:06:24
 
 # toggle for polybar bars
-if [ "$(pgrep -xf "polybar i3slim")" ]; then
+if [[ ! -z "$1" ]]; then
+    bar="$1"
+elif [ "$(pgrep -xf "polybar i3slim")" ]; then
     bar="i3"
 elif [ "$(pgrep -xf "polybar i3")" ]; then
     bar="i3slim"
