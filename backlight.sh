@@ -4,26 +4,46 @@
 # path:       ~/coding/shell/backlight.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-11 19:00:35
+# date:       2019-11-23 16:08:00
 
-max=$(cat /sys/class/backlight/intel_backlight/max_brightness)
-val=$(cat /sys/class/backlight/intel_backlight/brightness)
-dir=$1
+direction=$1
+divider=$2
 
 # change intel backlight
-ten_percent=$(($max / 20))
+if [[ $1 == "-h" || $1 == "--help" || -z $2 || $# -eq 0 ]]; then
+    echo "Usage:"
+    echo "	backlight.sh [-inc/-dec] [divider]"
+    echo
+    echo "Setting:"
+    echo "  -inc        increase"
+    echo "  -dec        decrease"
+    echo "  divider     how often divide the maximum brightness value"
+    echo
+    echo "Example:"
+    echo "	backlight.sh -inc 20"
+    echo "	backlight.sh -dec 20"
+    echo
+    exit 0
+else
+    maximal=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+    actual=$(cat /sys/class/backlight/intel_backlight/actual_brightness)
 
-unset new_brightness
-if [ "$dir" == "up" ]; then
-    new_brightness=$(($val + $ten_percent))
-    if [ $new_brightness -gt $max ]; then
-        new_brightness=$max
+    factor=$(($maximal / $divider))
+    maximal=$(($factor * $divider))
+
+    unset new
+    if [ "$direction" == "-inc" ]; then
+        new=$(($actual + $factor))
+        if [ $new -gt $maximal ]; then
+            new=$maximal
+        fi
+    elif [ "$direction" == "-dec" ]; then
+        new=$(($actual - $factor))
+        if [ $new -lt 0 ]; then
+            new=0
+        fi
     fi
-elif [ "$dir" == "down" ]; then
-    new_brightness=$(($val - $ten_percent))
-    if [ $new_brightness -lt 0 ]; then
-        new_brightness=0
-    fi
+
+    # set brighness
+    sudo sh -c "echo $new >/sys/class/backlight/intel_backlight/brightness"
 fi
-
-sudo sh -c "echo $new_brightness >/sys/class/backlight/intel_backlight/brightness"
