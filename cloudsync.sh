@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/cloudsync.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-20 23:04:31
+# date:       2019-11-24 20:34:46
 
 # color variables
 #black=$(tput setaf 0)
@@ -57,7 +57,7 @@ elif [[ $1 == "-c" ]]; then
     for ((i=0;i<${#title[@]};i++)); do
         echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
         rclone check -P ${src[i]} ${dest[i]} --exclude "${exclude[i]}"
-        notify-send -i ${icon[i]} "Check ${title[i]}" "comleted!"
+        notify-send -i ${icon[i]} "Check ${title[i]}" "completed!"
     done
     exit 0
 elif [[ $1 == "-s" ]]; then
