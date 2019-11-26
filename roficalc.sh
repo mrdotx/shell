@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/roficalc.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-26 17:33:00
+# date:       2019-11-26 19:51:32
 
 if [[ $1 == "-h" || $1 == "--help" ]]; then
     echo "Usage:"
@@ -26,7 +26,7 @@ else
     result=$(echo "$@" | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//')
     chosen=$(echo -e "Copy to clipboard\nClear\nClose" | $menu -p "= $result")
     case $chosen in
-        "Copy to clipboard") echo -n "$result" | xclip -selection clipboard ;;
+        "Copy to clipboard") echo -n "$result" | xclip -selection clipboard && notify-send -i "$HOME/coding/shell/icons/clipboard.png" "Clipboard" "Result copied: $result" ;;
         "Clear") $0 ;;
         "Close") ;;
         "") ;;
