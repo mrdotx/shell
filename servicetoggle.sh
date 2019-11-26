@@ -4,22 +4,22 @@
 # path:       ~/coding/shell/servicetoggle.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-17 11:51:47
+# date:       2019-11-26 17:36:58
 
 service=$1
 
 # if service ist not running turn it on and vice versa
 if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
     echo "Usage:"
-    echo "	servicetoggle.sh [servicename]"
+    echo "  servicetoggle.sh [servicename]"
     echo
     echo "Example:"
-    echo "	servicetoggle.sh bluetooth.service"
+    echo "  servicetoggle.sh bluetooth.service"
     echo
     echo "Example Services:"
-    echo "	org.cups.cupsd.service | Print Service"
-    echo "	bluetooth.service      | Bluetooth Service"
-    echo "	ufw.service            | Firewall Service"
+    echo "  org.cups.cupsd.service | Print Service"
+    echo "  bluetooth.service      | Bluetooth Service"
+    echo "  ufw.service            | Firewall Service"
     echo
     exit 0
 elif [ "$(systemctl is-active "$service")" != "active" ]; then

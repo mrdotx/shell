@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/backlight.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-23 16:08:00
+# date:       2019-11-26 17:35:19
 
 direction=$1
 divider=$2
@@ -12,7 +12,7 @@ divider=$2
 # change intel backlight
 if [[ $1 == "-h" || $1 == "--help" || -z $2 || $# -eq 0 ]]; then
     echo "Usage:"
-    echo "	backlight.sh [-inc/-dec] [divider]"
+    echo "  backlight.sh [-inc/-dec] [divider]"
     echo
     echo "Setting:"
     echo "  -inc        increase"
@@ -20,8 +20,8 @@ if [[ $1 == "-h" || $1 == "--help" || -z $2 || $# -eq 0 ]]; then
     echo "  divider     how often divide the maximum brightness value"
     echo
     echo "Example:"
-    echo "	backlight.sh -inc 20"
-    echo "	backlight.sh -dec 20"
+    echo "  backlight.sh -inc 20"
+    echo "  backlight.sh -dec 20"
     echo
     exit 0
 else

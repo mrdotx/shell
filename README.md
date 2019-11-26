@@ -19,6 +19,7 @@
 | newsboat.sh           | reload feeds and compact the cache                                                      |
 | pdfshrink.sh          | shrink pdf file with ghostscript                                                        |
 | polybar.sh            | start polybar                                                                           |
+| roficalc.sh           | use rofi to calculate with bc                                                           |
 | rofidisplay.sh        | use rofi to manage displays with arandr/xrandr                                          |
 | rofimount.sh          | use rofi to mount remote, usb and android locations                                     |
 | rofiservice.sh        | use rofi to start/stop some services like bluetooth, printer, firewall etc.             |
