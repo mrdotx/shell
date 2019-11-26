@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/delmetafile.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-12 22:11:54
+# date:       2019-11-27 00:08:01
 
 # color variables
 #black=$(tput setaf 0)
@@ -28,6 +28,9 @@ sudo su -c "find /home -name ".AppleDB" >> $output"
 sudo su -c "find /home -name ".@__thumb" >> $output"
 sudo su -c "find /home -name ".@__qini" >> $output"
 sudo su -c "find /home -name ":2e*" >> $output"
+
+# set output file permissions
+sudo su -c "chmod 755 $output"
 
 # delete files
 cat $output | while read f; do
