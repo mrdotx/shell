@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/rofivim.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-26 10:52:05
+# date:       2019-11-27 12:58:21
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -22,8 +22,9 @@ case $(printf "%s\n" \
     "firetv" \
     "firetv4k" \
     "p9" \
-    "m3" | rofi -dmenu -i -p "") in
-"nvim") $TERMINAL -e vim -c "Lexplore" ;;
+    "m3" \
+    "explore" | rofi -dmenu -i -p "") in
+"nvim") $TERMINAL -e vim ;;
 "notes") $TERMINAL -e vim "$HOME"/coding/hidden/notes/index.md ;;
 "middlefinger-streetwear.com") $TERMINAL -e vim scp://middlefinger/ -c "Lexplore" ;;
 "prinzipal-kreuzberg.com") $TERMINAL -e vim scp://prinzipal/ -c "Lexplore" ;;
@@ -35,5 +36,5 @@ case $(printf "%s\n" \
 "firetv4k") $TERMINAL -e vim scp://firetv4k/ -c "Lexplore" ;;
 "p9") $TERMINAL -e vim scp://p9/ -c "Lexplore" ;;
 "m3") $TERMINAL -e vim scp://m3/ -c "Lexplore" ;;
-*) $TERMINAL -e vim ;;
+"explore") $TERMINAL -e vim -c "Lexplore" ;;
 esac
