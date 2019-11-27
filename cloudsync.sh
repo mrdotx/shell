@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/cloudsync.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-24 20:34:46
+# date:       2019-11-27 09:37:35
 
 # color variables
 #black=$(tput setaf 0)
@@ -33,6 +33,12 @@ title+=("Google Drive")
 src+=("$HOME/cloud/googledrive/")
 dest+=("googledrive:/")
 icon+=("$HOME/coding/shell/icons/google-drive.png")
+exclude+=("")
+
+title+=("OneDrive")
+src+=("$HOME/cloud/onedrive/")
+dest+=("onedrive:/")
+icon+=("$HOME/coding/shell/icons/onedrive.png")
 exclude+=("")
 
 title+=("Dropbox")
