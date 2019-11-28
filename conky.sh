@@ -4,18 +4,18 @@
 # path:       ~/coding/shell/conky.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 15:30:11
+# date:       2019-11-28 15:49:10
 
 service=conky
-conky1=$HOME/coding/shell/conky/klassiker_horizontal.conf
-conky2=$HOME/coding/shell/conky/klassiker_slim_horizontal.conf
-conky3=$HOME/coding/shell/conky/klassiker_vertical.conf
-conky4=$HOME/coding/shell/conky/shortcuts_foreground_left.conf
-conky5=$HOME/coding/shell/conky/shortcuts_foreground_middle.conf
-conky6=$HOME/coding/shell/conky/shortcuts_foreground_right.conf
-conky7=$HOME/coding/shell/conky/shortcuts_background_left.conf
-conky8=$HOME/coding/shell/conky/shortcuts_background_middle.conf
-conky9=$HOME/coding/shell/conky/shortcuts_background_right.conf
+conky1=$HOME/.conky/klassiker_horizontal.conf
+conky2=$HOME/.conky/klassiker_slim_horizontal.conf
+conky3=$HOME/.conky/klassiker_vertical.conf
+conky4=$HOME/.conky/shortcuts_foreground_left.conf
+conky5=$HOME/.conky/shortcuts_foreground_middle.conf
+conky6=$HOME/.conky/shortcuts_foreground_right.conf
+conky7=$HOME/.conky/shortcuts_background_left.conf
+conky8=$HOME/.conky/shortcuts_background_middle.conf
+conky9=$HOME/.conky/shortcuts_background_right.conf
 
 choice=$1
 
