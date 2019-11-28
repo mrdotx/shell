@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/polybar_vpn_hades.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 15:11:28
+# date:       2019-11-28 22:28:35
 
 vpnname=hades
 
@@ -12,9 +12,9 @@ case "$1" in
     --polybar)
         if [ "$(nmcli connection show --active $vpnname)" ]
         then
-        	echo "%{F#dfdfdf}%{o#00b200}%{o-}%{F-}"
+            echo "%{F#dfdfdf}%{o#00b200}%{o-}%{F-}"
         else
-        	echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
         fi
         ;;
     *)
