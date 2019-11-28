@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/github_maintenance.sh
+# path:       ~/coding/shell/maintenance_github.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 14:11:47
+# date:       2019-11-28 21:56:18
 
 # color variables
 #black=$(tput setaf 0)

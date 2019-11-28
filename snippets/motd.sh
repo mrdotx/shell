@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/snippets/motd.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 22:12:33
+# date:       2019-11-28 22:02:03
 
 # functions {{{
 function color() {
@@ -175,7 +175,7 @@ label7="$borderBar  $(color $statsLabelColor "System:.......:") $label7$borderBa
 #label8="$(extend "$($HOME/coding/shell/snippets/hera.sh status)")"
 #label8="$borderBar  $(color $statsLabelColor "NAS...........:") $label8$borderBar"
 
-#label9="$(extend "$($HOME/coding/shell/snippets/hoststatus.sh elysion) [elysion]                                           ")"
+#label9="$(extend "$($HOME/coding/shell/snippets/host_status.sh elysion) [elysion]                                           ")"
 #label9="$borderBar  $(color $statsLabelColor "BACKUP........:") $label12$borderBar"
 
 stats="$label1\n$label2\n$label3\n$label4\n$label5\n$label6\n$label7"

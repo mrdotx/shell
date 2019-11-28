@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/snippets/hoststatus.sh
+# path:       ~/coding/shell/snippets/host_status.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 22:14:21
+# date:       2019-11-28 22:01:10
 
 # ping host and echo online or offline
 exec="ping -c 1"

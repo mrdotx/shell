@@ -1,20 +1,20 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/servicetoggle.sh
+# path:       ~/coding/shell/service_toggle.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-26 17:36:58
+# date:       2019-11-28 21:58:38
 
 service=$1
 
 # if service ist not running turn it on and vice versa
 if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
     echo "Usage:"
-    echo "  servicetoggle.sh [servicename]"
+    echo "  service_toggle.sh [servicename]"
     echo
     echo "Example:"
-    echo "  servicetoggle.sh bluetooth.service"
+    echo "  service_toggle.sh bluetooth.service"
     echo
     echo "Example Services:"
     echo "  org.cups.cupsd.service | Print Service"

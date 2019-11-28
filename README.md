@@ -13,9 +13,9 @@
 | cmus_notify.sh        | cmus notification with notify-send                                                      |
 | conky.sh              | start conky                                                                             |
 | delete_metafiles.sh   | delete hidden apple metadata files in home folder                                       |
-| github_maintenance.sh | remove history from github repository                                                   |
 | linkhandler.sh        | opens specific program for picture, videos and audio by giving url. mainly for newsboat |
-| maintenance.sh        | purge cache and remove duplicated entries from python_-, bash_- and zsh_history         |
+| maintenance_github.sh | remove history from github repository                                                   |
+| maintenance_system.sh | purge cache and remove duplicated entries from python_-, bash_- and zsh_history         |
 | newsboat.sh           | reload feeds and compact the cache                                                      |
 | pdf_shrink.sh         | shrink pdf file with ghostscript                                                        |
 | polybar.sh            | start polybar                                                                           |

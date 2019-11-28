@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/snippets/dropboxsync.sh
+# path:       ~/coding/shell/snippets/sync_dropbox.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 22:21:36
+# date:       2019-11-28 22:00:06
 
 dbuser=klassiker
 dbstatus=$(sudo -u $dbuser dropbox-cli status)
