@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/backupusb.sh
+# path:       ~/coding/shell/backup_usb.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-21 01:34:44
+# date:       2019-11-28 13:58:47
 
 backupname="morpheus"
 mountpoint="/mnt/$backupname"

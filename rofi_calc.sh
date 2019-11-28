@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/roficalc.sh
+# path:       ~/coding/shell/rofi_calc.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-26 19:51:32
+# date:       2019-11-28 13:56:07
 
 if [[ $1 == "-h" || $1 == "--help" ]]; then
     echo "Usage:"

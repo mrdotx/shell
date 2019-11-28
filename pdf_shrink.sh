@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/pdfshrink.sh
+# path:       ~/coding/shell/pdf_shrink.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-26 17:35:47
+# date:       2019-11-28 14:15:00
 
 pdfsetting=$1
 pdffile=$2

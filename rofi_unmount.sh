@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/rofiunmount.sh
+# path:       ~/coding/shell/rofi_unmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-26 10:51:28
+# date:       2019-11-28 13:56:54
 
 # exit if rofi is running
 pgrep -x rofi && exit

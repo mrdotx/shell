@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/rofivim.sh
+# path:       ~/coding/shell/rofi_vim.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-27 12:58:21
+# date:       2019-11-28 13:57:08
 
 # exit if rofi is running
 pgrep -x rofi && exit

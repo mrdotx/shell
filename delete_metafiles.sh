@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/delmetafile.sh
+# path:       ~/coding/shell/delete_metafiles.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-27 00:08:01
+# date:       2019-11-28 14:12:34
 
 # color variables
 #black=$(tput setaf 0)

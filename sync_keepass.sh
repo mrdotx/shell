@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/keepasssync.sh
+# path:       ~/coding/shell/sync_keepass.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-21 13:00:10
+# date:       2019-11-28 14:11:00
 
 drive_name="gmx"
 db_file_name="klassiker.kdbx"
