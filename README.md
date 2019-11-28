@@ -9,8 +9,9 @@
 | backlight.sh          | change intel backlight brightness                                                       |
 | backup.sh             | rsync backup to remote location (ssh)                                                   |
 | backup_usb.sh         | rsync backup to usb                                                                     |
-| cmus.sh               | start cmus, if it's not running togle from/to i3 scratchpad                             |
+| cmus.sh               | start cmus, if it's not running toogle from/to i3 scratchpad                            |
 | cmus_notify.sh        | cmus notification with notify-send                                                      |
+| conky.sh              | start conky                                                                             |
 | delete_metafiles.sh   | delete hidden apple metadata files in home folder                                       |
 | github_maintenance.sh | remove history from github repository                                                   |
 | linkhandler.sh        | opens specific program for picture, videos and audio by giving url. mainly for newsboat |
