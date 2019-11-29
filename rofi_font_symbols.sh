@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/rofi_font_symbols.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-29 19:40:11
+# date:       2019-11-29 19:45:32
 
 chosen=$(grep -v "#" ~/.local/share/font-symbols | rofi -monitor -2 -theme klassiker-vertical -dmenu -i -l 10)
 
