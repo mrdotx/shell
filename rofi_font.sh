@@ -1,12 +1,12 @@
 #!/bin/bash
 # vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
-# path:       ~/coding/shell/rofi_symbols.sh
+# path:       ~/coding/shell/rofi_font.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-29 19:33:17
+# date:       2019-11-29 19:44:16
 
-chosen=$(grep -v "#" ~/.local/share//font-symbols | rofi -monitor -2 -theme klassiker-vertical -dmenu -i -l 10)
+chosen=$(grep -v "#" ~/.local/share/font-symbols | rofi -monitor -2 -theme klassiker-vertical -dmenu -i -l 10)
 
 [ "$chosen" != "" ] || exit
 
