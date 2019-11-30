@@ -4,7 +4,7 @@
 # path:       ~/coding/shell/polybar_cmus.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 14:58:59
+# date:       2019-11-30 16:28:19
 
 if info=$(cmus-remote -Q 2> /dev/null); then
 
@@ -48,5 +48,5 @@ if info=$(cmus-remote -Q 2> /dev/null); then
     fi
 
 else
-    echo ""
+    echo
 fi
