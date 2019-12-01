@@ -1,10 +1,9 @@
 #!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
 # path:       ~/coding/shell/snippets/hera.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 22:16:09
+# date:       2019-12-01 18:16:23
 
 case "$1" in
 wakeup)
@@ -17,7 +16,7 @@ poweroff)
     ;;
 status)
     # call hoststatus script
-    status="$($HOME/coding/shell/snippets/hoststatus.sh hera)"
+    status="$("$HOME"/coding/shell/snippets/host_status.sh hera)"
 
     if [[ $status == *offline* ]]; then
         echo "$status [sudo $HOME/coding/shell/snippets/hera.sh wakeup]      "

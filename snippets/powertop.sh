@@ -1,10 +1,9 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/snippets/powertop.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 22:02:11
+# date:       2019-12-01 17:14:42
 
 # software settings in need of tuning
 # sets all tunable options to their good setting

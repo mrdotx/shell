@@ -1,10 +1,9 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/rofi_unmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 13:56:54
+# date:       2019-12-01 15:09:35
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -14,7 +13,9 @@ remoteumt() {
     if grep -E "$HOME/mount/.*fuse" /etc/mtab; then
         chosen=$(awk '/\/mount\/.*fuse/ {print $2}' /etc/mtab | sort | rofi -dmenu -i -p "")
         [ -z "$chosen" ] && exit
-        fusermount -u "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send -i "$HOME/coding/shell/icons/usb.png" "Unmount Remote" "$chosen unmounted"
+        fusermount -u "$chosen" && \
+            if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
+                notify-send -i "$HOME/coding/shell/icons/usb.png" "Unmount Remote" "$chosen unmounted"
     else
         exit
     fi
@@ -26,7 +27,9 @@ usbumt() {
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
-    sudo -A umount "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send -i "$HOME/coding/shell/icons/usb.png" "Unmount USB" "$chosen unmounted"
+    sudo -A umount "$chosen" && \
+        if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
+            notify-send -i "$HOME/coding/shell/icons/usb.png" "Unmount USB" "$chosen unmounted"
 }
 
 # android unmount
@@ -34,7 +37,9 @@ androidumt() {
     if grep simple-mtpfs /etc/mtab; then
         chosen=$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | sort | rofi -dmenu -i -p "")
         [ -z "$chosen" ] && exit
-        fusermount -u "$chosen" && if [ -d "$chosen" ]; then rmdir "$chosen"; fi && notify-send -i "$HOME/coding/shell/icons/usb.png" "Unmount Android" "$chosen unmounted"
+        fusermount -u "$chosen" && \
+            if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
+                notify-send -i "$HOME/coding/shell/icons/usb.png" "Unmount Android" "$chosen unmounted"
     else
         exit
     fi
@@ -46,7 +51,8 @@ dvdeject() {
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
-    sudo -A eject "$chosen" && notify-send -i "$HOME/coding/shell/icons/usb.png" "Eject DVD" "$chosen ejected"
+    sudo -A eject "$chosen" && \
+        notify-send -i "$HOME/coding/shell/icons/usb.png" "Eject DVD" "$chosen ejected"
 }
 
 # menu
@@ -55,8 +61,8 @@ case $(printf "%s\n" \
     "USB Unmount" \
     "Android Unmount" \
     "DVD Eject" | rofi -dmenu -i -p "") in
-"Remote Unmount") remoteumt ;;
-"USB Unmount") usbumt ;;
-"Android Unmount") androidumt ;;
-"DVD Eject") dvdeject ;;
+        "Remote Unmount") remoteumt ;;
+        "USB Unmount") usbumt ;;
+        "Android Unmount") androidumt ;;
+        "DVD Eject") dvdeject ;;
 esac

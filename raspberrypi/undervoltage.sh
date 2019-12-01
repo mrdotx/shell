@@ -1,10 +1,9 @@
 #!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
 # path:       ~/coding/shell/raspberrypi/undervoltage.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 22:10:40
+# date:       2019-12-01 17:01:47
 
 # information for results
 # 0: under-voltage
@@ -38,20 +37,20 @@
 # 37.4'C  900/ 900 MHz 0000000000000000000 1.3125V
 
 echo -e "To stop simply press [ctrl]-[c]\n"
-Maxfreq=$(($(awk '{printf ("%0.0f",$1/1000); }' </sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq) - 15))
-Counter=14
-DisplayHeader="Time       Temp  CPU fake/real     Health state    Vcore"
+#Maxfreq=$(($(awk '{printf ("%0.0f",$1/1000); }' </sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq) - 15))
+counter=14
+display_header="Time       Temp  CPU fake/real     Health state    Vcore"
 while true; do
-	let Counter++
-	if [ ${Counter} -eq 15 ]; then
-		echo -e "${DisplayHeader}"
-		Counter=0
-	fi
-	Health=$(perl -e "printf \"%19b\n\", $(/opt/vc/bin/vcgencmd get_throttled | cut -f2 -d=)")
-	Temp=$(/opt/vc/bin/vcgencmd measure_temp | cut -f2 -d=)
-	RealClockspeed=$(/opt/vc/bin/vcgencmd measure_clock arm | awk -F"=" '{printf ("%0.0f",$2/1000000); }')
-	SysFSClockspeed=$(awk '{printf ("%0.0f",$1/1000); }' </sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq)
-	CoreVoltage=$(/opt/vc/bin/vcgencmd measure_volts | cut -f2 -d= | sed 's/000//')
-	echo -e "$(date "+%H:%M:%S"): ${Temp}$(printf "%5s" ${SysFSClockspeed})/$(printf "%4s" ${RealClockspeed}) MHz $(printf "%019d" ${Health}) ${CoreVoltage}"
-	sleep 5
+    (( counter++ ))
+    if [ ${counter} -eq 15 ]; then
+        echo -e "${display_header}"
+        counter=0
+    fi
+    health=$(perl -e "printf \"%19b\n\", $(/opt/vc/bin/vcgencmd get_throttled | cut -f2 -d=)")
+    temp=$(/opt/vc/bin/vcgencmd measure_temp | cut -f2 -d=)
+    real_clockspeed=$(/opt/vc/bin/vcgencmd measure_clock arm | awk -F"=" '{printf ("%0.0f",$2/1000000); }')
+    sys_clockspeed=$(awk '{printf ("%0.0f",$1/1000); }' </sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq)
+    core_voltage=$(/opt/vc/bin/vcgencmd measure_volts | cut -f2 -d= | sed 's/000//')
+    echo -e "$(date "+%H:%M:%S") ${temp}$(printf "%5s" "${sys_clockspeed}")/$(printf "%4s" "${real_clockspeed}") MHz $(printf "%019d" "${health}") ${core_voltage}"
+    sleep 5
 done

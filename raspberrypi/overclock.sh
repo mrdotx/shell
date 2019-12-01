@@ -1,10 +1,9 @@
 #!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
 # path:       ~/coding/shell/raspberrypi/overclock.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 22:10:19
+# date:       2019-12-01 16:43:48
 
 # simple stress test for raspberry pi. if it survives this, it's probably stable.
 echo "Testing overclock stability..."
@@ -16,13 +15,13 @@ done
 
 # read the entire sd card 10x. tests ram and i/o
 for i in $(seq 1 10); do
-    echo reading: $i
+    echo reading: "$i"
     sudo dd if=/dev/mmcblk0 of=/dev/null bs=4M
 done
 
 # writes 512 mb test file, 10x.
 for i in $(seq 1 10); do
-    echo writing: $i
+    echo writing: "$i"
     dd if=/dev/zero of=deleteme.dat bs=1M count=512
     sync
 done

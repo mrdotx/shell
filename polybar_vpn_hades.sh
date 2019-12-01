@@ -1,10 +1,9 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/polybar_vpn_hades.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 22:28:35
+# date:       2019-12-01 13:53:37
 
 vpnname=hades
 

@@ -1,10 +1,9 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/polybar_printer.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 15:04:31
+# date:       2019-12-01 13:53:14
 
 case "$1" in
     --polybar)

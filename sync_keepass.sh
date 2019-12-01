@@ -1,10 +1,9 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/sync_keepass.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 14:11:00
+# date:       2019-12-01 20:19:55
 
 drive_name="gmx"
 db_file_name="klassiker.kdbx"
@@ -15,49 +14,48 @@ remote_location="/Docs/KeePass"
 local_path="$local_location/$db_file_name"
 remote_path="$remote_location/$db_file_name"
 
-# alias import and export commands
-alias passwords_export="rclone copy $local_path $drive_name:$remote_location"
-alias passwords_import="rclone copy $drive_name:$remote_path $local_location"
-shopt -s expand_aliases
+# import and export commands
+passwords_export="rclone copy $local_path $drive_name:$remote_location"
+passwords_import="rclone copy $drive_name:$remote_path $local_location"
 
-function format_datetime_from_string ()
+format_datetime_from_string ()
 {
-    echo `date -d "$1" +"%F %T.%3N"`
+    date -d "$1" +"%F %T.%3N"
 }
 
 # parse local passwords file modification time
-function get_local_passwords_mtime ()
+get_local_passwords_mtime ()
 {
-    local string=`stat -c %y $local_path | cut -d ' ' -f 1,2;`
-    echo `format_datetime_from_string "$string"`
+    string=$(stat -c %y "$local_path" | cut -d ' ' -f 1,2;)
+    format_datetime_from_string "$string"
 }
 
 # parse remote passwords file modification time
-function get_remote_passwords_mtime ()
+get_remote_passwords_mtime ()
 {
-    output=`rclone lsl $drive_name:$remote_path 2>/dev/null`
+    output=$(rclone lsl $drive_name:$remote_path 2>/dev/null)
     if [ $? -eq 3 ]; then
         unset output
         return 1
     else
-        local string=`echo "$output" | tr -s ' ' | cut -d ' ' -f 3,4;`
-        echo `format_datetime_from_string "$string"`
+        string=$(echo "$output" | tr -s ' ' | cut -d ' ' -f 3,4;)
+        format_datetime_from_string "$string"
         unset output
         return 0
     fi
 }
 
-function sync_passwords ()
+sync_passwords ()
 {
     # storing the values
-    local human_readable_local_mtime=`get_local_passwords_mtime`
-    human_readable_remote_mtime=`get_remote_passwords_mtime 2>/dev/null`
+    human_readable_local_mtime=$(get_local_passwords_mtime)
+    human_readable_remote_mtime=$(get_remote_passwords_mtime 2>/dev/null)
 
     # if remote file don't exists
-    if [ $? -ne 0 ]; then
+    if ! get_remote_passwords_mtime > /dev/null 2>&1; then
         notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "No remote passwords file found!\nExporting...!"
-        passwords_export
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Database synchronized!"
+        $passwords_export
+        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Database created!"
         return 0
     fi
 
@@ -67,28 +65,30 @@ function sync_passwords ()
     # conversion required for comparison
     local_mtime_in_seconds_since_epoch=$(date -d "$human_readable_local_mtime" +%s)
     remote_mtime_in_seconds_since_epoch=$(date -d "$human_readable_remote_mtime" +%s)
-    unset human_readable_remote_mtime
 
     # local being newer than remote
     if [ "$local_mtime_in_seconds_since_epoch" -gt "$remote_mtime_in_seconds_since_epoch" ]; then
         notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Local passwords file is probably newer than remote!\nExporting...!"
-        passwords_export
+        $passwords_export
         notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Database synchronized!"
-    return 0
+        return 0
 
     # remote being newer than local
     elif [ "$local_mtime_in_seconds_since_epoch" -lt "$remote_mtime_in_seconds_since_epoch" ]; then
         notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Local passwords file is probably older than remote!\nImporting...!"
-        passwords_import
+        $passwords_import
         notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Database synchronized!"
-    return 0
+        return 0
 
     else
         notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass" "Database allready synchronized!"
-    return 0
+        return 0
     fi
 }
 
 # check internet connection
-ping -c1 -W1 -q 1.1.1.1 &> /dev/null && sync_passwords || \
+if ping -c1 -W1 -q 1.1.1.1 > /dev/null 2>&1; then
+    sync_passwords
+else
     notify-send -i "$HOME/coding/shell/icons/caution.png" "KeePass" "Problem with database synchronisation!"
+fi

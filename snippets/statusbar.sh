@@ -1,13 +1,12 @@
 #!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
 # path:       ~/coding/shell/snippets/statusbar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 21:59:58
+# date:       2019-12-01 17:14:15
 
 # combining commands for output
-cputemp="$(cat /sys/class/thermal/thermal_zone0/temp | cut -c "1-2")ºC"
+cputemp="$(< /sys/class/thermal/thermal_zone0/temp cut -c "1-2")ºC"
 cores="$(grep -c "^processor" /proc/cpuinfo)"
 cpuusage="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum}')"
 cpuusage="$((${cpuusage/\.*/} / ${cores:-1}))%"

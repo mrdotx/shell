@@ -1,10 +1,9 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/polybar_cmus.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-30 16:28:19
+# date:       2019-12-01 13:52:29
 
 if info=$(cmus-remote -Q 2> /dev/null); then
 
@@ -14,11 +13,11 @@ if info=$(cmus-remote -Q 2> /dev/null); then
     position=$(echo "$info" | grep '^position ' | sed 's/^position //')
     file=$(echo "$info" | grep '^file ' | sed 's/^file //')
     artist=$(echo "$info" | grep '^tag artist ' | sed 's/^tag artist //')
-    album=$(echo "$info" | grep '^tag album ' | sed 's/^tag album //')
-    tracknumber=$(echo "$info" | grep '^tag tracknumber ' | sed 's/^tag tracknumber //')
+#    album=$(echo "$info" | grep '^tag album ' | sed 's/^tag album //')
+#    tracknumber=$(echo "$info" | grep '^tag tracknumber ' | sed 's/^tag tracknumber //')
     title=$(echo "$info" | grep '^tag title ' | sed 's/^tag title //')
-    genre=$(echo "$info" | grep '^tag genre ' | sed 's/^tag genre //')
-    comment=$(echo "$info" | grep '^tag comment ' | sed 's/^tag comment //')
+#    genre=$(echo "$info" | grep '^tag genre ' | sed 's/^tag genre //')
+#    comment=$(echo "$info" | grep '^tag comment ' | sed 's/^tag comment //')
 
     if [ "$duration" -ge 0 ]; then
         position_minutes=$(printf "%02d" $((position / 60)))
@@ -35,13 +34,13 @@ if info=$(cmus-remote -Q 2> /dev/null); then
         *) info="" ;;
     esac
 
-    if [[ "$stream" == "" ]]; then
+    if [ "$stream" = "" ]; then
         info_body="$artist - $title"
     else
         info_body="$title - $stream"
     fi
 
-    if [[ "$artist" == "" && "$title" == "" ]]; then
+    if [ "$artist" = "" ] && [ "$title" = "" ]; then
         echo "$info ${file##*/}%{o-}%{F-}"
     else
         echo "$info $info_body%{o-}%{F-}"

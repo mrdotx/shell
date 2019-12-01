@@ -1,16 +1,15 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/backlight.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-26 17:35:19
+# date:       2019-12-01 23:01:21
 
 direction=$1
 divider=$2
 
 # change intel backlight
-if [[ $1 == "-h" || $1 == "--help" || -z $2 || $# -eq 0 ]]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ -z "$2" ] || [ $# -eq 0 ]; then
     echo "Usage:"
     echo "  backlight.sh [-inc/-dec] [divider]"
     echo
@@ -28,17 +27,17 @@ else
     maximal=$(cat /sys/class/backlight/intel_backlight/max_brightness)
     actual=$(cat /sys/class/backlight/intel_backlight/actual_brightness)
 
-    factor=$(($maximal / $divider))
-    maximal=$(($factor * $divider))
+    factor=$((maximal / divider))
+    maximal=$((factor * divider))
 
     unset new
-    if [ "$direction" == "-inc" ]; then
-        new=$(($actual + $factor))
+    if [ "$direction" = "-inc" ]; then
+        new=$((actual + factor))
         if [ $new -gt $maximal ]; then
             new=$maximal
         fi
-    elif [ "$direction" == "-dec" ]; then
-        new=$(($actual - $factor))
+    elif [ "$direction" = "-dec" ]; then
+        new=$((actual - factor))
         if [ $new -lt 0 ]; then
             new=0
         fi

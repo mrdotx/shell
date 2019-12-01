@@ -1,10 +1,9 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/cmus_notify.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 13:53:07
+# date:       2019-12-01 12:37:51
 
 if info=$(cmus-remote -Q 2> /dev/null); then
 
@@ -35,13 +34,13 @@ if info=$(cmus-remote -Q 2> /dev/null); then
         *) info="" ;;
     esac
 
-    if [[ "$stream" == "" ]]; then
+    if [ "$stream" = "" ]; then
         info_body="Artist: $artist\nAlbum : $album\nTrack : $tracknumber\nTitle : <b>$title</b>"
     else
         info_body="$title\n$genre\n$comment\n<b>$stream</b>"
     fi
 
-    if [[ "$artist" == "" && "$title" == "" ]]; then
+    if [ "$artist" = "" ] && [ "$title" = "" ]; then
         notify-send -i "$HOME/coding/shell/icons/cmus.png" "C* Music Player | $info" "${file##*/}"
     else
         notify-send -i "$HOME/coding/shell/icons/cmus.png" "C* Music Player | $info" "$info_body"

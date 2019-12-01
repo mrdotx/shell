@@ -1,10 +1,9 @@
 #!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
 # path:       ~/coding/shell/snippets/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-09 22:26:08
+# date:       2019-12-01 18:16:47
 
 # color variables {{{
 #black=$(tput setaf 0)

@@ -1,13 +1,12 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/polybar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-22 22:06:24
+# date:       2019-12-01 11:47:47
 
 # toggle for polybar bars
-if [[ ! -z "$1" ]]; then
+if [ -n "$1" ]; then
     bar="$1"
 elif [ "$(pgrep -xf "polybar i3slim")" ]; then
     bar="i3"

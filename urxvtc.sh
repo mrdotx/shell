@@ -1,10 +1,9 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/urxvtc.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-07 22:20:06
+# date:       2019-12-01 14:41:49
 
 # start urxvt daemon if not running and open urxvt client
 urxvtc "$@"

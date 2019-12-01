@@ -1,10 +1,9 @@
 #!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
 # path:       ~/coding/shell/snippets/motd.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 22:02:03
+# date:       2019-12-02 00:24:02
 
 # functions {{{
 function color() {
@@ -13,26 +12,26 @@ function color() {
 
 function extend() {
     local str="$1"
-    let spaces=60-${#1}
+    (( spaces=60-${#1} ))
     while [ $spaces -gt 0 ]; do
         str="$str "
-        let spaces=spaces-1
+        (( spaces=spaces-1 ))
     done
     echo "$str"
 }
 
 function center() {
     local str="$1"
-    let spacesLeft=(78 - ${#1})/2
-    let spacesRight=78-spacesLeft-${#1}
+    (( spacesLeft=(78-${#1})/2 ))
+    (( spacesRight=78-spacesLeft-${#1} ))
     while [ $spacesLeft -gt 0 ]; do
         str=" $str"
-        let spacesLeft=spacesLeft-1
+        (( spacesLeft=spacesLeft-1 ))
     done
 
     while [ $spacesRight -gt 0 ]; do
         str="$str "
-        let spacesRight=spacesRight-1
+        (( spacesRight=spacesRight-1 ))
     done
 
     echo "$str"
@@ -40,16 +39,16 @@ function center() {
 
 function logoCenter() {
     local str="$1"
-    let spacesLeft=(60 - ${#1})/2
-    let spacesRight=60-spacesLeft-${#1}
+    (( spacesLeft=(60-${#1})/2 ))
+    (( spacesRight=60-spacesLeft-${#1} ))
     while [ $spacesLeft -gt 0 ]; do
         str=" $str"
-        let spacesLeft=spacesLeft-1
+        (( spacesLeft=spacesLeft-1 ))
     done
 
     while [ $spacesRight -gt 0 ]; do
         str="$str "
-        let spacesRight=spacesRight-1
+        (( spacesRight=spacesRight-1 ))
     done
 
     echo "$str"
@@ -58,14 +57,14 @@ function logoCenter() {
 function sec2time() {
     local input=$1
 
-    if [ $input -lt 60 ]; then
+    if [ "$input" -lt 60 ]; then
         echo "$input seconds"
     else
-        ((days = input / 86400))
-        ((input = input % 86400))
-        ((hours = input / 3600))
-        ((input = input % 3600))
-        ((mins = input / 60))
+        (( days=input/86400 ))
+        (( input=input%86400 ))
+        (( hours=input/3600 ))
+        (( input=input%3600 ))
+        (( mins=input/60 ))
 
         local daysPlural="s"
         local hoursPlural="s"
@@ -129,7 +128,7 @@ header="$header$borderBottomLine"
 # }}}
 
 # system information {{{
-read loginFrom loginIP loginMonth loginDay loginTime loginYear <<<$(last $me -w -F -d | awk 'NR==2 { print $2,$3,$5,$6,$7,$8 }')
+read -r loginFrom loginIP loginMonth loginDay loginTime loginYear <<<"$(last "$me" -w -F -d | awk 'NR==2 { print $2,$3,$5,$6,$7,$8 }')"
 loginDate="$(date -d "$loginMonth $loginDay $loginTime $loginYear" -Ins)"
 # }}}
 
@@ -140,7 +139,7 @@ if [[ $loginDate == - ]]; then
 fi
 
 if [[ $loginDate == *T* ]]; then
-    login="$(date -d $loginDate +"%a, %d %B %Y, %T") [$loginIP]"
+    login="$(date -d "$loginDate" +"%a, %d %B %Y, %T") [$loginIP]"
 else
     # not enough logins
     login="None"
@@ -151,8 +150,8 @@ fi
 label1="$(extend "$login")"
 label1="$borderBar  $(color $statsLabelColor "Last Login....:") $label1$borderBar"
 
-uptime="$(sec2time $(cut -d "." -f 1 /proc/uptime))"
-uptime="$uptime [$(date -d "@"$(grep btime /proc/stat | cut -d " " -f 2) +"%d-%m-%Y %H:%M:%S")]"
+uptime="$(sec2time "$(cut -d "." -f 1 /proc/uptime)")"
+uptime="$uptime [$(date -d "@""$(grep btime /proc/stat | cut -d " " -f 2)" +"%d-%m-%Y %H:%M:%S")]"
 
 label2="$(extend "$uptime")"
 label2="$borderBar  $(color $statsLabelColor "Uptime........:") $label2$borderBar"

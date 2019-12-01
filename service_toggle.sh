@@ -1,15 +1,14 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/service_toggle.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 21:58:38
+# date:       2019-12-01 14:07:59
 
 service=$1
 
 # if service ist not running turn it on and vice versa
-if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
     echo "Usage:"
     echo "  service_toggle.sh [servicename]"
     echo

@@ -1,10 +1,9 @@
 #!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
 # path:       ~/coding/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 13:56:17
+# date:       2019-12-02 00:09:36
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -39,7 +38,7 @@ seconddisplay() {
 # saved arandr settings
 savedsettings() {
     chosen=$(find "$HOME"/.screenlayout/*.sh | cut -d / -f 5 | sed "s/.sh//g" | rofi -dmenu -i -p "")
-    "$HOME"/.screenlayout/"$chosen".sh
+    "$HOME/.screenlayout/$chosen.sh"
 }
 
 # get displays
@@ -47,7 +46,7 @@ allposs=$(xrandr -q | grep "connected")
 displays=$(echo "$allposs" | grep " connected" | awk '{print $1}')
 
 # menu
-chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection" "$displays" | rofi -dmenu -i -p "") &&
+chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection" "$displays" | rofi -dmenu -i -p "") && \
     case "$chosen" in
     "second display") seconddisplay ;;
     "saved settings") savedsettings ;;

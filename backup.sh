@@ -1,10 +1,9 @@
 #!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
 
 # path:       ~/coding/shell/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-21 01:34:15
+# date:       2019-12-01 11:46:00
 
 backupname="morpheus"
 localhome="/home/klassiker"

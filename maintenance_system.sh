@@ -1,10 +1,9 @@
-#!/bin/bash
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker
+#!/bin/sh
 
 # path:       ~/coding/shell/maintenance_system.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-11-28 21:55:17
+# date:       2019-12-01 13:39:57
 
 # color variables
 #black=$(tput setaf 0)
@@ -19,7 +18,7 @@ reset=$(tput sgr0)
 
 # purge cache
 echo "[${magenta}cache${reset}] purge all .cache files that have not been accessed in 100 days"
-find $HOME/.cache/ -type f -atime +100 -delete
+find "$HOME"/.cache/ -type f -atime +100 -delete
 
 # python history
 echo "[${magenta}python${reset}] remove white space from end of line"
