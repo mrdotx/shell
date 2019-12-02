@@ -3,27 +3,36 @@
 # path:       ~/coding/shell/terminal_wrapper.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 11:54:46
+# date:       2019-12-02 23:50:34
 
 # color variables
 #black=$(tput setaf 0)
-red=$(tput setaf 1)
-#green=$(tput setaf 2)
-#yellow=$(tput setaf 3)
-blue=$(tput setaf 4)
+#red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+#blue=$(tput setaf 4)
 #magenta=$(tput setaf 5)
 #cyan=$(tput setaf 6)
 #white=$(tput setaf 7)
 reset=$(tput sgr0)
 
 # execute command in new terminal window
-if [ $# -eq 0 ]; then "${SHELL:-bash}"; else "$@"; fi
-echo; echo "    - The command exited with status ${blue}$?${reset}. -"
+if [ $# -eq 0 ]; then
+    "${SHELL:-zsh}";
+else
+    "$@";
+fi
+echo
+
+cmdstatus="The command exited with ${yellow}status $?${reset}. "
 
 # wait for keypress
 while true; do
-    read -rsn1 -p "Press [${red}q${reset}]uit or [${red}c${reset}]lose to exit this window..." keypress; echo
+    read -rsn1 -p "${cmdstatus}Press [${green}q${reset}]${green}uit${reset} to exit this window or [${green}s${reset}]${green}hell${reset} to run $SHELL..." keypress
+    echo
     case "$keypress" in
-        Q|q|C|c) exit 0
+        q|Q) exit 0 ;;
+        s|S) $SHELL && exit 0;;
+        *) cmdstatus=""
     esac
 done
