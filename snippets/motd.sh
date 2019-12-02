@@ -3,15 +3,15 @@
 # path:       ~/coding/shell/snippets/motd.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-02 00:24:02
+# date:       2019-12-02 19:13:16
 
 # functions {{{
-function color() {
+color() {
     echo "\e[$1m$2\e[0m"
 }
 
-function extend() {
-    local str="$1"
+extend() {
+    str="$1"
     (( spaces=60-${#1} ))
     while [ $spaces -gt 0 ]; do
         str="$str "
@@ -20,8 +20,8 @@ function extend() {
     echo "$str"
 }
 
-function center() {
-    local str="$1"
+center() {
+    str="$1"
     (( spacesLeft=(78-${#1})/2 ))
     (( spacesRight=78-spacesLeft-${#1} ))
     while [ $spacesLeft -gt 0 ]; do
@@ -37,8 +37,8 @@ function center() {
     echo "$str"
 }
 
-function logoCenter() {
-    local str="$1"
+logoCenter() {
+    str="$1"
     (( spacesLeft=(60-${#1})/2 ))
     (( spacesRight=60-spacesLeft-${#1} ))
     while [ $spacesLeft -gt 0 ]; do
@@ -54,8 +54,8 @@ function logoCenter() {
     echo "$str"
 }
 
-function sec2time() {
-    local input=$1
+sec2time() {
+    input=$1
 
     if [ "$input" -lt 60 ]; then
         echo "$input seconds"
@@ -66,9 +66,9 @@ function sec2time() {
         (( input=input%3600 ))
         (( mins=input/60 ))
 
-        local daysPlural="s"
-        local hoursPlural="s"
-        local minsPlural="s"
+        daysPlural="s"
+        hoursPlural="s"
+        minsPlural="s"
 
         if [ $days -eq 1 ]; then
             daysPlural=""
