@@ -1,24 +1,35 @@
-#!/bin/bash
+#!/bin/sh
 
 # path:       ~/coding/shell/backup_usb.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 12:13:39
+# date:       2019-12-03 07:33:22
 
-backupname="morpheus"
-mountpoint="/mnt/$backupname"
-usbdevice="/dev/sdb1"
-localhome="/home/klassiker"
-remotelocation="$mountpoint/backup/$backupname"
+backup_name="morpheus"
+mount_point="/mnt/$backup_name"
+usb_device="/dev/sdb1"
+local_home="/home/klassiker"
+remote_location="$mount_point/backup/$backup_name"
 
 # create and mount folder for usb-disk
-sudo mkdir -p $mountpoint
-sudo mount $usbdevice $mountpoint
+sudo mkdir -p $mount_point
+sudo mount $usb_device $mount_point
 
 # create folder and backup / to USB-Disk (for testing rsync option --dry-run)
-sudo mkdir -p $remotelocation
-sudo rsync -aAXv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","$localhome/mount/*","$localhome/VM/*","/mnt/*","/media/*","/lost+found","/swapfile"} / $remotelocation
+sudo mkdir -p $remote_location
+sudo rsync -aAXv --delete \
+    --exclude="/dev/*" \
+    --exclude="/proc/*" \
+    --exclude="/sys/*" \
+    --exclude="/tmp/*" \
+    --exclude="/run/*" \
+    --exclude="$local_home/mount/*" \
+    --exclude="$local_home/VM/*" \
+    --exclude="/mnt/*" \
+    --exclude="/media/*" \
+    --exclude="/lost+found" \
+    --exclude="/swapfile" / $remote_location
 
 # unmount and delete folder
-sudo umount $mountpoint
-sudo find $mountpoint -mindepth 1 -empty -type d -delete
+sudo umount $mount_point
+sudo find $mount_point -mindepth 1 -empty -type d -delete

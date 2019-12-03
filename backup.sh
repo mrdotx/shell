@@ -1,13 +1,24 @@
-#!/bin/bash
+#!/bin/sh
 
 # path:       ~/coding/shell/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 11:46:00
+# date:       2019-12-03 07:23:43
 
-backupname="morpheus"
-localhome="/home/klassiker"
-remotelocation="alarm@prometheus:/home/alarm/backup/$backupname/"
+backup_name="morpheus"
+local_home="/home/klassiker"
+remote_location="alarm@prometheus:/home/alarm/backup/$backup_name/"
 
 # backup / to remote location (for testing rsync option --dry-run)
-sudo rsync -aAXv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","$localhome/mount/*","$localhome/VM/*","/mnt/*","/media/*","/lost+found","/swapfile"} / $remotelocation
+sudo rsync -aAXv --delete \
+    --exclude="/dev/*" \
+    --exclude="/proc/*" \
+    --exclude="/sys/*" \
+    --exclude="/tmp/*" \
+    --exclude="/run/*" \
+    --exclude="$local_home/mount/*" \
+    --exclude="$local_home/VM/*" \
+    --exclude="/mnt/*" \
+    --exclude="/media/*" \
+    --exclude="/lost+found" \
+    --exclude="/swapfile" / $remote_location

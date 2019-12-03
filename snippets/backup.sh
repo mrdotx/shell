@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
 # path:       ~/coding/shell/snippets/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 05:51:16
+# date:       2019-12-03 07:45:18
 
 # color variables {{{
 #black=$(tput setaf 0)
@@ -63,10 +63,10 @@ echo "[${magenta}backup${reset}] folder & files"
 for dir in $src; do
     case "${dir}" in
     $HOME/.newsboat)
-        rsync --delete -acqP --exclude "cache.db" "${dir}" "$destroot"
+        rsync --delete -acqP --exclude="cache.db" "${dir}" "$destroot"
         ;;
     $HOME/.weechat)
-        rsync --delete -acqP --exclude={weechat.log,logs} "${dir}" "$destroot"
+        rsync --delete -acqP --exclude="weechat.log" --exclude="logs" "${dir}" "$destroot"
         ;;
     $HOME/.config/*)
         rsync --delete -acqP "${dir}" "$destconf"
