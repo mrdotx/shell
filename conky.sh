@@ -3,17 +3,19 @@
 # path:       ~/coding/shell/conky.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 13:04:15
+# date:       2019-12-03 18:01:25
 
-conky1="conky -q -c $HOME/.config/conky/klassiker_horizontal.conf"
-conky2="conky -q -c $HOME/.config/conky/klassiker_slim_horizontal.conf"
-conky3="conky -q -c $HOME/.config/conky/klassiker_vertical.conf"
-conky4="conky -q -c $HOME/.config/conky/shortcuts_foreground_left.conf"
-conky5="conky -q -c $HOME/.config/conky/shortcuts_foreground_middle.conf"
-conky6="conky -q -c $HOME/.config/conky/shortcuts_foreground_right.conf"
-conky7="conky -q -c $HOME/.config/conky/shortcuts_background_left.conf"
-conky8="conky -q -c $HOME/.config/conky/shortcuts_background_middle.conf"
-conky9="conky -q -c $HOME/.config/conky/shortcuts_background_right.conf"
+conky_dir="conky -q -c $HOME/.config/conky"
+
+conky1="$conky_dir/klassiker_horizontal.conf"
+conky2="$conky_dir/klassiker_slim_horizontal.conf"
+conky3="$conky_dir/klassiker_vertical.conf"
+conky4="$conky_dir/shortcuts_foreground_left.conf"
+conky5="$conky_dir/shortcuts_foreground_middle.conf"
+conky6="$conky_dir/shortcuts_foreground_right.conf"
+conky7="$conky_dir/shortcuts_background_left.conf"
+conky8="$conky_dir/shortcuts_background_middle.conf"
+conky9="$conky_dir/shortcuts_background_right.conf"
 
 choice=$1
 
