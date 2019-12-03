@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/snippets/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 18:16:47
+# date:       2019-12-03 05:51:16
 
 # color variables {{{
 #black=$(tput setaf 0)
@@ -80,5 +80,5 @@ done
 
 # backup size
 echo "[${blue}backup${reset}] size"
-du -sh "$HOME"/Backup/
-notify-send "Backup complete" "$(du -sh "$HOME"/Backup/)"
+du -sh "$HOME/Backup/"
+notify-send "Backup complete" "$(du -sh "$HOME/Backup/")"

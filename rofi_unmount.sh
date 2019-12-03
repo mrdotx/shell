@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/rofi_unmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 15:09:35
+# date:       2019-12-03 05:41:34
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -23,7 +23,9 @@ remoteumt() {
 
 # usb unmount
 usbumt() {
-    mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4!~/\/boot|\/home\/klassiker\/mount\/data|\/home$|SWAP/&&length($4)>1 || $2=="rom"&&length($4)>1 || $3=="1,4M"&&length($4)>1) printf "%s (%s)\n",$4,$3}')
+    mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4!~/\/boot|\/home\/klassiker\/mount\/data|\/home$|SWAP/&&length($4)>1 || \
+        $2=="rom"&&length($4)>1 || \
+        $3=="1,4M"&&length($4)>1) printf "%s (%s)\n",$4,$3}')
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit

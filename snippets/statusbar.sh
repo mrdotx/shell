@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/snippets/statusbar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 17:14:15
+# date:       2019-12-03 06:00:34
 
 # combining commands for output
 cputemp="$(< /sys/class/thermal/thermal_zone0/temp cut -c "1-2")ºC"
@@ -26,17 +26,17 @@ swaptotalg="$(bc <<<"scale=3;$swaptotal/1024/1024" | awk '{ printf("%.2f\n",$1) 
 swaptotal="$(bc <<<"scale=3;$swaptotal/1024" | awk '{ printf("%.0f\n",$1) }')M"
 swapusage="$(bc <<<"scale=3;$swap/($swaptotal/100)" | awk '{ printf("%.0f\n",$1) }')%"
 
-hddtotal="$(df /dev/sda2 | awk 'NR==2 { printf "%s",$2; }')"
-hdd="$(df /dev/sda2 | awk 'NR==2 { printf "%s",$3; }')"
+hddtotal="$(df /dev/nvme0n1 | awk 'NR==2 { printf "%s",$2; }')"
+hdd="$(df /dev/nvme0n1 | awk 'NR==2 { printf "%s",$3; }')"
 hdd="$(bc <<<"scale=3;$hdd/1024/1024" | awk '{ printf("%.2f\n",$1) }')G"
 hddtotal="$(bc <<<"scale=3;$hddtotal/1024/1024" | awk '{ printf("%.2f\n",$1) }')G"
-hddusage="$(df /dev/sda2 | awk 'NR==2 { printf "%s",$5; }')"
+hddusage="$(df /dev/nvme0n1 | awk 'NR==2 { printf "%s",$5; }')"
 
 wlan="$(iwgetid -r)"
-wlansignal="$(iwconfig wlp1s0 | grep -i Link | cut -c "24-25")"
+wlansignal="$(iwconfig wlp2s0 | grep -i Link | cut -c "24-25")"
 wlansignal="$(bc <<<"scale=3;$wlansignal/70*100" | awk '{ printf("%.0f\n",$1) }')%"
 
-ip="$(ip -4 addr show wlp1s0 | grep -oP "(?<=inet ).*(?=/)")"
+ip="$(ip -4 addr show wlp2s0 | grep -oP "(?<=inet ).*(?=/)")"
 name="$(users)@$(hostname)"
 
 clock="$(date '+%a, %e %B %G, %k:%M')"

@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/raspberrypi/undervoltage.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 17:01:47
+# date:       2019-12-03 05:50:37
 
 # information for results
 # 0: under-voltage
@@ -37,7 +37,6 @@
 # 37.4'C  900/ 900 MHz 0000000000000000000 1.3125V
 
 echo -e "To stop simply press [ctrl]-[c]\n"
-#Maxfreq=$(($(awk '{printf ("%0.0f",$1/1000); }' </sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq) - 15))
 counter=14
 display_header="Time       Temp  CPU fake/real     Health state    Vcore"
 while true; do

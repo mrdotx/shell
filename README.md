@@ -13,7 +13,7 @@
 | cmus_notify.sh        | cmus notification with notify-send                                                      |
 | conky.sh              | start conky                                                                             |
 | delete_metafiles.sh   | delete hidden apple metadata files in home folder                                       |
-| linkhandler.sh        | opens specific program for picture, videos and audio by giving url. mainly for newsboat |
+| link_handler.sh       | opens specific program for picture, videos and audio by giving url. mainly for newsboat |
 | maintenance_github.sh | remove history from github repository                                                   |
 | maintenance_system.sh | purge cache and remove duplicated entries from python_-, bash_- and zsh_history         |
 | newsboat.sh           | reload feeds and compact the cache                                                      |
@@ -33,7 +33,7 @@
 | rofi_unmount.sh       | use rofi to unmount remote, usb and android locations                                   |
 | rofi_vim.sh           | use rofi to start vim with a few shortcuts                                              |
 | screenlayout.sh       | default screen setup                                                                    |
-| servicetoggle.sh      | switch status of service active or inactive                                             |
+| service_toggle.sh     | switch status of service active or inactive                                             |
 | sync_keepass.sh       | sync keepassfile with rclone based on modification date                                 |
 | sync_rclone.sh        | cloudsync with rclone                                                                   |
 | terminal_wrapper.sh   | terminal wrapper for tiling window managers floating windows                            |

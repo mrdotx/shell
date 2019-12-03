@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-02 00:09:36
+# date:       2019-12-03 05:38:46
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -37,7 +37,7 @@ seconddisplay() {
 
 # saved arandr settings
 savedsettings() {
-    chosen=$(find "$HOME"/.screenlayout/*.sh | cut -d / -f 5 | sed "s/.sh//g" | rofi -dmenu -i -p "")
+    chosen=$(find "$HOME/.screenlayout/" -iname "*.sh" | cut -d / -f 5 | sed "s/.sh//g" | sort | rofi -dmenu -i -p "")
     "$HOME/.screenlayout/$chosen.sh"
 }
 

@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/screenlayout.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 14:05:31
+# date:       2019-12-03 05:43:16
 
 internal=eDP1
 external=HDMI2
@@ -12,7 +12,7 @@ external=HDMI2
 if xrandr | grep "$external disconnected"; then
     xrandr --output "$external" --off --output "$internal" --auto
 else
-    "$HOME"/.screenlayout/default.sh
+    "$HOME/.screenlayout/default.sh"
 fi
 
 # maintenance after setup displays
