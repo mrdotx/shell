@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/backup_usb.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 07:33:22
+# date:       2019-12-03 16:04:14
 
 backup_name="morpheus"
 mount_point="/mnt/$backup_name"
@@ -32,4 +32,4 @@ sudo rsync -aAXv --delete \
 
 # unmount and delete folder
 sudo umount $mount_point
-sudo find $mount_point -mindepth 1 -empty -type d -delete
+sudo find $mount_point -empty -type d -delete
