@@ -1,126 +1,123 @@
-#!/bin/bash
+#!/bin/sh
 
 # path:       ~/coding/shell/conky.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 21:24:03
+# date:       2019-12-03 13:04:15
 
-service=conky
-conky1="$HOME/.config/conky/klassiker_horizontal.conf"
-conky2="$HOME/.config/conky/klassiker_slim_horizontal.conf"
-conky3="$HOME/.config/conky/klassiker_vertical.conf"
-conky4="$HOME/.config/conky/shortcuts_foreground_left.conf"
-conky5="$HOME/.config/conky/shortcuts_foreground_middle.conf"
-conky6="$HOME/.config/conky/shortcuts_foreground_right.conf"
-conky7="$HOME/.config/conky/shortcuts_background_left.conf"
-conky8="$HOME/.config/conky/shortcuts_background_middle.conf"
-conky9="$HOME/.config/conky/shortcuts_background_right.conf"
+conky1="conky -q -c $HOME/.config/conky/klassiker_horizontal.conf"
+conky2="conky -q -c $HOME/.config/conky/klassiker_slim_horizontal.conf"
+conky3="conky -q -c $HOME/.config/conky/klassiker_vertical.conf"
+conky4="conky -q -c $HOME/.config/conky/shortcuts_foreground_left.conf"
+conky5="conky -q -c $HOME/.config/conky/shortcuts_foreground_middle.conf"
+conky6="conky -q -c $HOME/.config/conky/shortcuts_foreground_right.conf"
+conky7="conky -q -c $HOME/.config/conky/shortcuts_background_left.conf"
+conky8="conky -q -c $HOME/.config/conky/shortcuts_background_middle.conf"
+conky9="conky -q -c $HOME/.config/conky/shortcuts_background_right.conf"
 
 choice=$1
 
 # if no config given use vertical
-[ -z "$1" ] && {
-choice=vertical
-}
+[ -z "$1" ] && choice="vertical"
 
 case "$choice" in
 small)
-    if [ "$(pgrep -f "$service -q -c $conky2")" ]; then
+    if [ "$(pgrep -f "$conky2")" ]; then
         # slim horizontal -> horizontal"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky2")" && \
-            $service -q -c "$conky1" &
+        kill "$(pgrep -f "$conky2")" && \
+            $conky1 &
         exit 0
-    elif [ "$(pgrep -f "$service -c $conky1")" ]; then
+    elif [ "$(pgrep -f "$conky1")" ]; then
         # horizontal -> slim horizontal"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky1")" && \
-            $service -q -c "$conky2" &
+        kill "$(pgrep -f "$conky1")" && \
+            $conky2 &
         exit 0
     else
         # start"
-        $service -q -c "$conky1" &
+        $conky1 &
         exit 0
     fi
     ;;
 large)
-    if [ "$(pgrep -f "$service -q -c $conky3")" ]; then
+    if [ "$(pgrep -f "$conky3")" ]; then
         # vertical -> stop"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky3")" && exit 0
-    elif [ "$(pgrep -f "$service -q -c $conky2")" ]; then
+        kill "$(pgrep -f "$conky3")" && exit 0
+    elif [ "$(pgrep -f "$conky2")" ]; then
         # slim horizontal -> vertical"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky2")" && \
-            $service -q -c "$conky3" &
+        kill "$(pgrep -f "$conky2")" && \
+            $conky3 &
         exit 0
-    elif [ "$(pgrep -f "$service -q -c $conky1")" ]; then
+    elif [ "$(pgrep -f "$conky1")" ]; then
         # horizontal -> slim horizontal"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky1")" && \
-            $service -q -c "$conky2" &
+        kill "$(pgrep -f "$conky1")" && \
+            $conky2 &
         exit 0
     else
         # start"
-        $service -q -c "$conky1" &
+        $conky1 &
         exit 0
     fi
     ;;
 horizontal)
-    if [ "$(pgrep -f "$service -q -c $conky1")" ]; then
+    if [ "$(pgrep -f "conky -q -c $conky1")" ]; then
         # stop"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky1")" &
+        kill "$(pgrep -f "conky -q -c $conky1")" &
         exit 0
     else
         # start"
-        $service -q -c "$conky1" &
+        conky -q -c "$conky1" &
         exit 0
     fi
     ;;
 slim-horizontal)
-    if [ "$(pgrep -f "$service -q -c $conky2")" ]; then
+    if [ "$(pgrep -f "conky -q -c $conky2")" ]; then
         # stop"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky2")" &
+        kill "$(pgrep -f "conky -q -c $conky2")" &
         exit 0
     else
         # start"
-        $service -q -c "$conky2" &
+        conky -q -c "$conky2" &
         exit 0
     fi
     ;;
 vertical)
-    if [ "$(pgrep -f "$service -q -c $conky3")" ]; then
+    if [ "$(pgrep -f "$conky3")" ]; then
         # stop"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky3")" &
+        kill "$(pgrep -f "$conky3")" &
         exit 0
     else
         # start"
-        $service -q -c "$conky3" &
+        $conky3 &
         exit 0
     fi
     ;;
 shortcutsforeground)
-    if [ "$(pgrep -f "$service -q -c $conky6")" ]; then
+    if [ "$(pgrep -f "$conky6")" ]; then
         # stop"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky4")" &
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky5")" &
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky6")" &
+        kill "$(pgrep -f "$conky4")" &
+        kill "$(pgrep -f "$conky5")" &
+        kill "$(pgrep -f "$conky6")" &
         exit 0
     else
         # start"
-        $service -q -c "$conky4" &
-        $service -q -c "$conky5" &
-        $service -q -c "$conky6" &
+        $conky4 &
+        $conky5 &
+        $conky6 &
         exit 0
     fi
     ;;
 shortcutsbackground)
-    if [ "$(pgrep -f "$service -q -c $conky9")" ]; then
+    if [ "$(pgrep -f "$conky9")" ]; then
         # stop"
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky7")" &
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky8")" &
-        kill -SIGTERM "$(pgrep -f "$service -q -c $conky9")" &
+        kill "$(pgrep -f "$conky7")" &
+        kill "$(pgrep -f "$conky8")" &
+        kill "$(pgrep -f "$conky9")" &
         exit 0
     else
         # start"
-        $service -q -c "$conky7" &
-        $service -q -c "$conky8" &
-        $service -q -c "$conky9" &
+        $conky7 &
+        $conky8 &
+        $conky9 &
         exit 0
     fi
     ;;
