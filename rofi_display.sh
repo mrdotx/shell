@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 19:10:17
+# date:       2019-12-04 17:01:56
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -54,7 +54,7 @@ chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection" "$disp
         arandr
         exit
         ;;
-    *) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
+    *) eval xrandr --output "$chosen" --auto --scale 1.0x1.0 "$(echo "$allposs" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ')" ;;
     esac
 
 # maintenance after setup displays
