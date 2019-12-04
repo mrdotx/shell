@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/terminal_wrapper.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 16:06:57
+# date:       2019-12-04 17:41:16
 
 # color variables
 #black=$(tput setaf 0)
@@ -24,15 +24,15 @@ else
 fi
 echo
 
-cmdstatus="The command exited with ${yellow}status $?${reset}. "
+cmd_stat="The command exited with ${yellow}status $?${reset}. "
 
 # wait for keypress
 while true; do
-    read -rsn1 -p "${cmdstatus}Press [${green}q${reset}]${green}uit${reset} to exit this window or [${green}s${reset}]${green}hell${reset} to run $SHELL..." keypress
+    read -rsn1 -p "${cmd_stat}Press [${green}q${reset}]${green}uit${reset} to exit this window or [${green}s${reset}]${green}hell${reset} to run $SHELL..." keypress
     echo
     case "$keypress" in
         q|Q) exit 0 ;;
         s|S) $SHELL && exit 0;;
-        *) cmdstatus=""
+        *) cmd_stat=""
     esac
 done

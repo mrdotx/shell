@@ -3,52 +3,52 @@
 # path:       ~/coding/shell/rofi_service.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 15:06:34
+# date:       2019-12-04 17:38:59
 
 # exit if rofi is running
 pgrep -x rofi && exit
 
 # polkit
-polkitservice() {
-    POLKITAPP=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+polkit_ser() {
+    polkit_app=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-    if [ "$(pgrep -f $POLKITAPP)" ]; then
-        killall $POLKITAPP && \
+    if [ "$(pgrep -f $polkit_app)" ]; then
+        killall $polkit_app && \
             notify-send -i "$HOME/coding/shell/icons/service.png" "Polkit" "Gnome Authentication Agent stopped!" && exit 0
     else
-        $POLKITAPP >/dev/null 2>&1 &
+        $polkit_app >/dev/null 2>&1 &
         notify-send -i "$HOME/coding/shell/icons/service.png" "Polkit" "Gnome Authentication Agent started!" && exit 0
     fi
 }
 
 # vpn
-vpnname=hades
+vpn_name=hades
 vpn() {
-    if [ "$(nmcli connection show --active $vpnname)" ]; then
-        nmcli con down id $vpnname && \
-            notify-send -i "$HOME/coding/shell/icons/service.png" "VPN" "$vpnname disconnected!" && exit 0
+    if [ "$(nmcli connection show --active $vpn_name)" ]; then
+        nmcli con down id $vpn_name && \
+            notify-send -i "$HOME/coding/shell/icons/service.png" "VPN" "$vpn_name disconnected!" && exit 0
     else
-        nmcli con up id $vpnname passwd-file "$HOME"/coding/hidden/vpn/$vpnname && \
-            notify-send -i "$HOME/coding/shell/icons/service.png" "VPN" "$vpnname connected!" && exit 0
+        nmcli con up id $vpn_name passwd-file "$HOME"/coding/hidden/vpn/$vpn_name && \
+            notify-send -i "$HOME/coding/shell/icons/service.png" "VPN" "$vpn_name connected!" && exit 0
     fi
 }
 
 # nmapplet
-nmappletservice() {
-    NMAPPLETAPP=nm-applet
+nmapplet_ser() {
+    nmapplet_app=nm-applet
 
-    if [ "$(pgrep $NMAPPLETAPP)" ]; then
-        killall $NMAPPLETAPP && \
+    if [ "$(pgrep $nmapplet_app)" ]; then
+        killall $nmapplet_app && \
             notify-send -i "$HOME/coding/shell/icons/service.png" "Network Manager" "stopped!" && exit 0
     else
-        $NMAPPLETAPP >/dev/null 2>&1 &
+        $nmapplet_app >/dev/null 2>&1 &
         notify-send -i "$HOME/coding/shell/icons/service.png" "Network Manager" "started!" && exit 0
     fi
 }
 
 # printer
-printerservice() {
-    if [ "$printerstatus" != "active" ]; then
+printer_ser() {
+    if [ "$printer_stat" != "active" ]; then
         sudo -A systemctl start org.cups.cupsd.service && \
             notify-send -i "$HOME/coding/shell/icons/service.png" "Service" "Printer started!" && exit 0
     else
@@ -58,8 +58,8 @@ printerservice() {
 }
 
 # avahi
-avahiservice() {
-    if [ "$avahiserstatus" != "active" ]; then
+avahi_ser() {
+    if [ "$avahi_ser_stat" != "active" ]; then
         sudo -A systemctl start avahi-daemon.service && \
             sudo -A systemctl start avahi-daemon.socket && \
             notify-send -i "$HOME/coding/shell/icons/service.png" "Service" "Avahi started!" && exit 0
@@ -71,8 +71,8 @@ avahiservice() {
 }
 
 # bluetooth
-bluetoothservice() {
-    if [ "$bluetoothstatus" != "active" ]; then
+bluetooth_ser() {
+    if [ "$bluetooth_stat" != "active" ]; then
         sudo -A systemctl start bluetooth.service && \
             notify-send -i "$HOME/coding/shell/icons/service.png" "Service" "Bluetooth started!" && exit 0
     else
@@ -82,8 +82,8 @@ bluetoothservice() {
 }
 
 # modemmanager
-modemmanagerservice() {
-    if [ "$modemmanagerstatus" != "active" ]; then
+modemmanager_ser() {
+    if [ "$modemmanager_stat" != "active" ]; then
         sudo -A systemctl start ModemManager.service && \
             notify-send -i "$HOME/coding/shell/icons/service.png" "Service" "ModemManager started!" && exit 0
     else
@@ -93,8 +93,8 @@ modemmanagerservice() {
 }
 
 # firewall
-firewallservice() {
-    if [ "$firewallstatus" != "active" ]; then
+firewall_ser() {
+    if [ "$firewall_stat" != "active" ]; then
         sudo -A systemctl start ufw.service && \
             notify-send -i "$HOME/coding/shell/icons/service.png" "Service" "Firewall started!" && exit 0
     else
@@ -104,35 +104,35 @@ firewallservice() {
 }
 
 # status
-polkitstatus=$(if [ "$(pgrep -f /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1)" ]; then echo "active"; else echo "inactive"; fi)
-vpnstatus=$(if [ "$(nmcli connection show --active $vpnname)" ]; then echo "active"; else echo "inactive"; fi)
-nmappletstatus=$(if [ "$(pgrep nm-applet)" ]; then echo "active"; else echo "inactive"; fi)
-printerstatus=$(systemctl is-active org.cups.cupsd.service)
-avahiserstatus=$(systemctl is-active avahi-daemon.service)
-avahisocstatus=$(systemctl is-active avahi-daemon.socket)
-bluetoothstatus=$(systemctl is-active bluetooth.service)
-modemmanagerstatus=$(systemctl is-active ModemManager.service)
-firewallstatus=$(systemctl is-active ufw.service)
-conkystatus=$(if [ "$(pgrep -x conky)" ]; then echo "active"; else echo "inactive"; fi)
+polkit_stat=$(if [ "$(pgrep -f /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1)" ]; then echo "active"; else echo "inactive"; fi)
+vpn_stat=$(if [ "$(nmcli connection show --active $vpn_name)" ]; then echo "active"; else echo "inactive"; fi)
+nmapplet_stat=$(if [ "$(pgrep nm-applet)" ]; then echo "active"; else echo "inactive"; fi)
+printer_stat=$(systemctl is-active org.cups.cupsd.service)
+avahi_ser_stat=$(systemctl is-active avahi-daemon.service)
+avahi_soc_stat=$(systemctl is-active avahi-daemon.socket)
+bluetooth_stat=$(systemctl is-active bluetooth.service)
+modemmanager_stat=$(systemctl is-active ModemManager.service)
+firewall_stat=$(systemctl is-active ufw.service)
+conky_stat=$(if [ "$(pgrep -x conky)" ]; then echo "active"; else echo "inactive"; fi)
 
 # menu
 case $(printf "%s\n" \
-    "Authentication Agent ($polkitstatus)" \
-    "VPN $vpnname ($vpnstatus)" \
-    "Netzwerk Manager ($nmappletstatus)" \
-    "Printer ($printerstatus)" \
-    "Avahi Service/Socket ($avahiserstatus/$avahisocstatus)" \
-    "Bluetooth ($bluetoothstatus)" \
-    "ModemManager ($modemmanagerstatus)" \
-    "Firewall ($firewallstatus)" \
-    "Conky ($conkystatus)" | rofi -dmenu -i -p "") in
-        "Authentication Agent"*) polkitservice ;;
+    "Authentication Agent ($polkit_stat)" \
+    "VPN $vpn_name ($vpn_stat)" \
+    "Netzwerk Manager ($nmapplet_stat)" \
+    "Printer ($printer_stat)" \
+    "Avahi Service/Socket ($avahi_ser_stat/$avahi_soc_stat)" \
+    "Bluetooth ($bluetooth_stat)" \
+    "ModemManager ($modemmanager_stat)" \
+    "Firewall ($firewall_stat)" \
+    "Conky ($conky_stat)" | rofi -dmenu -i -p "") in
+        "Authentication Agent"*) polkit_ser ;;
         "VPN"*) vpn ;;
-        "Netzwerk Manager"*) nmappletservice ;;
-        "Printer"*) printerservice ;;
-        "Avahi Service/Socket"*) avahiservice ;;
-        "Bluetooth"*) bluetoothservice ;;
-        "ModemManager"*) modemmanagerservice ;;
-        "Firewall"*) firewallservice ;;
+        "Netzwerk Manager"*) nmapplet_ser ;;
+        "Printer"*) printer_ser ;;
+        "Avahi Service/Socket"*) avahi_ser ;;
+        "Bluetooth"*) bluetooth_ser ;;
+        "ModemManager"*) modemmanager_ser ;;
+        "Firewall"*) firewall_ser ;;
         "Conky"*) conky.sh ;;
 esac

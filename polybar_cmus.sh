@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/polybar_cmus.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 13:52:29
+# date:       2019-12-04 18:16:36
 
 if info=$(cmus-remote -Q 2> /dev/null); then
 
@@ -20,11 +20,11 @@ if info=$(cmus-remote -Q 2> /dev/null); then
 #    comment=$(echo "$info" | grep '^tag comment ' | sed 's/^tag comment //')
 
     if [ "$duration" -ge 0 ]; then
-        position_minutes=$(printf "%02d" $((position / 60)))
-        position_seconds=$(printf "%02d" $((position % 60)))
-        duration_minutes=$(printf "%02d" $((duration / 60)))
-        duration_seconds=$(printf "%02d" $((duration % 60)))
-        title_status="$position_minutes:$position_seconds / $duration_minutes:$duration_seconds"
+        pos_min=$(printf "%02d" $((position / 60)))
+        pos_sec=$(printf "%02d" $((position % 60)))
+        dur_min=$(printf "%02d" $((duration / 60)))
+        dur_sec=$(printf "%02d" $((duration % 60)))
+        title_status="$pos_min:$pos_sec / $dur_min:$dur_sec"
     fi
 
     case $status in

@@ -3,7 +3,20 @@
 # path:       ~/coding/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 16:08:51
+# date:       2019-12-04 17:53:32
+
+script=$(basename "$0")
+help="$script [-h/--help] -- script to copy from/to cloud with rclone
+  Usage:
+    $script [option]
+
+  Setting:
+    [option] = check or sync
+      -c = check
+      -s = sync
+
+  Example:
+    $script -c"
 
 # color variables
 #black=$(tput setaf 0)
@@ -48,15 +61,7 @@ exclude+=("")
 
 # rclone to copy data from and to cloud
 if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
-    echo "Usage:"
-    echo "	cloudsync.sh [option]"
-    echo
-    echo "Options:"
-    echo "  -c - check"
-    echo "  -s - sync"
-    echo
-    echo "Example:"
-    echo "	cloudsync.sh -c"
+    echo "$help"
     exit 0
 elif [[ $1 == "-c" ]]; then
     for ((i=0;i<${#title[@]};i++)); do

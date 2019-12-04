@@ -3,14 +3,14 @@
 # path:       ~/coding/shell/screenlayout.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 05:43:16
+# date:       2019-12-04 18:12:11
 
-internal=eDP1
-external=HDMI2
+int=eDP1
+ext=HDMI2
 
 # if extrenal monitor is disconnected use internal screen else use default configuration
-if xrandr | grep "$external disconnected"; then
-    xrandr --output "$external" --off --output "$internal" --auto
+if xrandr | grep "$ext disconnected"; then
+    xrandr --output "$ext" --off --output "$int" --auto
 else
     "$HOME/.screenlayout/default.sh"
 fi
