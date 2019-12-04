@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # path:       ~/coding/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 07:42:49
+# date:       2019-12-04 16:08:51
 
 # color variables
 #black=$(tput setaf 0)

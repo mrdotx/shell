@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # path:       ~/coding/shell/snippets/motd.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-02 19:13:16
+# date:       2019-12-04 16:11:00
 
 # functions {{{
 color() {

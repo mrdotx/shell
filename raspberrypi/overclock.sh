@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # path:       ~/coding/shell/raspberrypi/overclock.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 16:43:48
+# date:       2019-12-04 16:11:41
 
 # simple stress test for raspberry pi. if it survives this, it's probably stable.
 echo "Testing overclock stability..."

@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # path:       ~/coding/shell/raspberrypi/undervoltage.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 05:50:37
+# date:       2019-12-04 16:11:53
 
 # information for results
 # 0: under-voltage
