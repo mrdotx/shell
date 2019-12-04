@@ -3,22 +3,25 @@
 # path:       ~/coding/shell/rofi_calc.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 14:01:54
+# date:       2019-12-04 15:02:58
+
+script=$(basename "$0")
+help="$script [-h/--help] -- script to run bc calculations in rofi
+  Usage:
+    $script [calculation]
+
+  Setting:
+    [calculation] = all operators from bc can be used to calculate
+
+  Examples:
+    $script \"0+2\"
+    $script \"(2+4)*5\"
+    $script \"5^7\"
+    $script \"sqrt(7)\"
+    $script \"c(8)\""
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    echo "Usage:"
-    echo "  roficalc.sh [calculation]"
-    echo
-    echo "calculation:"
-    echo "  all operators from bc can be used"
-    echo
-    echo "Example:"
-    echo "  roficalc.sh \"1+2\""
-    echo "  roficalc.sh \"(3+4)*5\""
-    echo "  roficalc.sh \"6^7\""
-    echo "  roficalc.sh \"sqrt(8)\""
-    echo "  roficalc.sh \"c(9)\""
-    echo
+    echo "$help"
     exit 0
 else
     menu="$(command -v rofi) -monitor -2 -theme klassiker-vertical -dmenu -l 3"

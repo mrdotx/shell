@@ -3,23 +3,27 @@
 # path:       ~/coding/shell/service_toggle.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 14:07:59
+# date:       2019-12-04 15:04:33
+
+script=$(basename "$0")
+help="$script [-h/--help] -- script to toggle services on and off
+  Usage:
+    $script [servicename]
+
+  Setting:
+    [servicename] = name of the service to be toggle
+      org.cups.cupsd.service | Print Service
+      bluetooth.service      | Bluetooth Service
+      ufw.service            | Firewall Service
+      ...
+
+  Example:
+    $script bluetooth.service"
 
 service=$1
 
-# if service ist not running turn it on and vice versa
 if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
-    echo "Usage:"
-    echo "  service_toggle.sh [servicename]"
-    echo
-    echo "Example:"
-    echo "  service_toggle.sh bluetooth.service"
-    echo
-    echo "Example Services:"
-    echo "  org.cups.cupsd.service | Print Service"
-    echo "  bluetooth.service      | Bluetooth Service"
-    echo "  ufw.service            | Firewall Service"
-    echo
+    echo "$help"
     exit 0
 elif [ "$(systemctl is-active "$service")" != "active" ]; then
     echo "$service wasn't running so attempting to start"

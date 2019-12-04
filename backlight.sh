@@ -3,30 +3,38 @@
 # path:       ~/coding/shell/backlight.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 23:01:21
+# date:       2019-12-04 15:07:46
+
+script=$(basename "$0")
+help="$script [-h/--help] -- script to change intel backlight
+  Usage:
+    $script [-inc/-dec] [percent]
+
+  Settings:
+    [-inc] = increase in percent (0-100%)
+    [-dec] = decrease in percent (0-100%)
+    [percent] = how much percent to increase/decrease the brightness
+
+  Examples:
+    $script -inc 10
+    $script -dec 10"
 
 direction=$1
 divider=$2
 
-# change intel backlight
 if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ -z "$2" ] || [ $# -eq 0 ]; then
-    echo "Usage:"
-    echo "  backlight.sh [-inc/-dec] [divider]"
-    echo
-    echo "Setting:"
-    echo "  -inc        increase"
-    echo "  -dec        decrease"
-    echo "  divider     how often divide the maximum brightness value"
-    echo
-    echo "Example:"
-    echo "  backlight.sh -inc 20"
-    echo "  backlight.sh -dec 20"
-    echo
+    echo "$help"
     exit 0
 else
     maximal=$(cat /sys/class/backlight/intel_backlight/max_brightness)
     actual=$(cat /sys/class/backlight/intel_backlight/actual_brightness)
 
+    if [ "$divider" -lt 101 ] ; then
+        divider=$((100 / divider))
+    else
+        echo "$help"
+        exit 0
+    fi
     factor=$((maximal / divider))
     maximal=$((factor * divider))
 
