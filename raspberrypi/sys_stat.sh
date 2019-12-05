@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/raspberrypi/sys_stat.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 22:43:06
+# date:       2019-12-05 12:58:08
 
 # start time
 start=$(date +%s.%N)
@@ -49,7 +49,7 @@ echo
 echo "[Failures]"
 echo "--------------------------------------------------------------------------------"
 failures=$(sudo systemctl --failed && sudo journalctl -p 3 -xb &)
-echo "${failures}"
+echo "${failures}" | fold
 echo
 
 # packages
