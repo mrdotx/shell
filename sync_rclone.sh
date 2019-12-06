@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 17:53:32
+# date:       2019-12-06 15:33:31
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy from/to cloud with rclone
@@ -39,7 +39,7 @@ title+=("GMX")
 src+=("$HOME/cloud/gmx/")
 dest+=("gmx:/")
 icon+=("$HOME/coding/shell/icons/gmx.png")
-exclude+=("KeePass/klassiker.kdbx")
+exclude+=("")
 
 title+=("Google Drive")
 src+=("$HOME/cloud/googledrive/")
@@ -57,7 +57,7 @@ title+=("Dropbox")
 src+=("$HOME/cloud/dropbox/")
 dest+=("dropbox:/")
 icon+=("$HOME/coding/shell/icons/dropbox.png")
-exclude+=("")
+exclude+=("KeePass/klassiker.kdbx")
 
 # rclone to copy data from and to cloud
 if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
