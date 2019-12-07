@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/service_toggle.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 15:04:33
+# date:       2019-12-07 22:35:58
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to toggle services on and off
@@ -11,7 +11,7 @@ help="$script [-h/--help] -- script to toggle services on and off
     $script [servicename]
 
   Setting:
-    [servicename] = name of the service to be toggle
+    [servicename]            = name of the service to be toggle
       org.cups.cupsd.service | Print Service
       bluetooth.service      | Bluetooth Service
       ufw.service            | Firewall Service

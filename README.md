@@ -6,6 +6,7 @@
 
 | shell scripts         | comment                                                                                 |
 | :-------------------- | :-------------------------------------------------------------------------------------- |
+| audio.sh              | toggle audio output analog/hdmi and increase/decrease/mute volume                       |
 | backlight.sh          | change intel backlight brightness                                                       |
 | backup.sh             | rsync backup to remote location (ssh)                                                   |
 | backup_usb.sh         | rsync backup to usb                                                                     |

@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/backlight.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 15:07:46
+# date:       2019-12-07 22:34:12
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to change intel backlight
@@ -11,8 +11,8 @@ help="$script [-h/--help] -- script to change intel backlight
     $script [-inc/-dec] [percent]
 
   Settings:
-    [-inc] = increase in percent (0-100%)
-    [-dec] = decrease in percent (0-100%)
+    [-inc]    = increase in percent (0-100%)
+    [-dec]    = decrease in percent (0-100%)
     [percent] = how much percent to increase/decrease the brightness
 
   Examples:

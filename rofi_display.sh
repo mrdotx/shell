@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 18:08:04
+# date:       2019-12-08 00:05:02
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -46,18 +46,18 @@ all=$(xrandr -q | grep "connected")
 disp=$(echo "$all" | grep " connected" | awk '{print $1}')
 
 # menu
-chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection" "$disp" | rofi -dmenu -i -p "") && \
+chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection\\naudio toggle" "$disp" | rofi -dmenu -i -p "") && \
     case "$chosen" in
     "second display") sec_disp ;;
     "saved settings") saved_set ;;
-    "manual selection")
-        arandr
-        exit
-        ;;
+    "manual selection") arandr ;;
+    "audio toggle") audio.sh -tog;;
     *) eval xrandr --output "$chosen" --auto --scale 1.0x1.0 "$(echo "$all" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ')" ;;
     esac
 
-# maintenance after setup disp
-nitrogen --restore
-pgrep -x dunst >/dev/null && killall dunst &
-polybar.sh i3slim
+# maintenance after setup display if
+if [ -n "$chosen" ] && ! [ "$chosen" = "audio toggle" ]; then
+    nitrogen --restore
+    pgrep -x dunst >/dev/null && killall dunst &
+    polybar.sh i3slim
+fi
