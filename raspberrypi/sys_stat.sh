@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/raspberrypi/sys_stat.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-06 00:15:24
+# date:       2019-12-08 23:12:41
 
 # start time
 start=$(date +%s.%N)
@@ -56,36 +56,39 @@ echo
 
 echo "[Services]"
 echo "--------------------------------------------------------------------------------"
-status() {
+service() {
     if [ "$(systemctl is-active "$1")" = "active" ]; then
-        echo "up  "
+        status="up  "
+        runtime="$(systemctl status "$1" | awk -F '; ' 'FNR == 3 {print $NF}')"
     else
-        echo "down"
+        status="down"
+        runtime="-"
     fi
 }
-runtime() {
-    if [ "$(systemctl is-active "$1")" = "active" ]; then
-        systemctl status "$1" | awk -F '; ' 'FNR == 3 {print $NF}'
-    else
-        echo "-"
-    fi
-}
-port() {
+ports() {
     if netstat -nlt | grep -q ":$1 "; then
-        echo "open  "
+        port="open  "
     else
-        echo "closed"
+        port="closed"
     fi
 }
-echo "Service      Status  Port            RunTime"
-echo "ssh          $(status "sshd")    22    $(port "22")    $(runtime "sshd")"
-echo "pihole       $(status "pihole-FTL")    53    $(port "53")    $(runtime "pihole-FTL")"
-echo "cloudflared  $(status "cloudflared-dns")    5300  $(port "5300")    $(runtime "cloudflared-dns")"
-echo "tor          $(status "tor")    9050  $(port "9050")    $(runtime "tor")"
-echo "cups         $(status "org.cups.cupsd")    631   $(port "631")    $(runtime "org.cups.cupsd")"
-echo "nginx        $(status "nginx")    80    $(port "80")    $(runtime "nginx")"
-echo "                     443   $(port "443")"
-echo "rpimonitor   $(status "rpimonitord")    8888  $(port "8888")    $(runtime "rpimonitord")"
+echo "Service           Status  Port            RunTime"
+service "sshd"; ports "22"
+echo "ssh               $status    22    $port    $runtime"
+service "pihole-FTL"; ports "53"
+echo "pihole            $status    53    $port    $runtime"
+service "cloudflared-dns"; ports "5300"
+echo "cloudflared       $status    5300  $port    $runtime"
+service "tor"; ports "9050"
+echo "tor               $status    9050  $port    $runtime"
+service "org.cups.cupsd"; ports "631"
+echo "cups              $status    631   $port    $runtime"
+service "nginx"; ports "80"
+echo "nginx             $status    80    $port    $runtime"
+ports "443"
+echo "                          443   $port"
+service "rpimonitord"; ports "8888"
+echo "rpimonitor        $status    8888  $port    $runtime"
 echo
 
 # failures
