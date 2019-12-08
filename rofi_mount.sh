@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/rofi_mount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 18:01:21
+# date:       2019-12-08 12:26:55
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -15,7 +15,7 @@ fi
 
 # remote mount
 remote_mnt() {
-    chosen=$(find "$HOME/coding/hidden/mount/" -iname "*.sh" | cut -d / -f 7 | sed "s/.sh//g" | sort | rofi -dmenu -i -p "")
+    chosen=$(find "$HOME/coding/hidden/mount/" -iname "*.sh" | cut -d / -f 7 | sed "s/.sh//g" | sort | rofi -monitor -1 -dmenu -i -p "")
     [ -z "$chosen" ] && exit
     mnt_point="$HOME/mount/$chosen"
     if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi && \
@@ -25,7 +25,7 @@ remote_mnt() {
 
 # usb mount
 usb_mnt() {
-    chosen="$(lsblk -rpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4=="" || $2=="rom"&&$4=="" || $3=="1,4M"&&$4=="") printf "%s (%s)\n",$1,$3}' | rofi -dmenu -i -p "" | awk '{print $1}')"
+    chosen="$(lsblk -rpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4=="" || $2=="rom"&&$4=="" || $3=="1,4M"&&$4=="") printf "%s (%s)\n",$1,$3}' | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')"
     [ -z "$chosen" ] && exit
     mnt_point="$HOME/mount/$(basename "$chosen")"
     part_typ="$(lsblk -no "fstype" "$chosen")"
@@ -44,7 +44,7 @@ usb_mnt() {
 
 # android mount
 android_mnt() {
-    chosen=$(simple-mtpfs -l 2>/dev/null | rofi -dmenu -i -p "" | cut -d : -f 1)
+    chosen=$(simple-mtpfs -l 2>/dev/null | rofi -monitor -1 -dmenu -i -p "" | cut -d : -f 1)
     [ -z "$chosen" ] && exit
     mnt_point="$HOME"/mount/$chosen
     if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi && \
@@ -56,7 +56,7 @@ android_mnt() {
 case $(printf "%s\n" \
     "Remote Mount" \
     "USB Mount" \
-    "Android Mount" | rofi -dmenu -i -p "") in
+    "Android Mount" | rofi -monitor -1 -dmenu -i -p "") in
         "Remote Mount") remote_mnt ;;
         "USB Mount") usb_mnt ;;
         "Android Mount") android_mnt ;;

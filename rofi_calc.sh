@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/rofi_calc.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 15:02:58
+# date:       2019-12-08 12:08:53
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to run bc calculations in rofi
@@ -24,7 +24,7 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     echo "$help"
     exit 0
 else
-    menu="$(command -v rofi) -monitor -2 -theme klassiker-vertical -dmenu -l 3"
+    menu="rofi -monitor -2 -theme klassiker-vertical -dmenu -l 3"
     result=$(echo "$@" | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//')
     chosen=$(printf "Copy to clipboard\nClear\nClose" | $menu -p "= $result")
     case $chosen in
