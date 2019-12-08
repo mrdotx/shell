@@ -3,16 +3,16 @@
 # path:       ~/coding/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-08 12:16:02
+# date:       2019-12-08 18:38:23
 
 # exit if rofi is running
 pgrep -x rofi && exit
 
 # second display
 sec_disp() {
-    mirror=$(printf "no\\nyes" | rofi -monitor -1 -dmenu -i -p "Mirror displays?")
+    mirror=$(printf "no\\nyes" | rofi -monitor -1 -lines 2 -theme klassiker-center -dmenu -i -p "Mirror displays?")
     if [ "$mirror" = "yes" ]; then
-        ext=$(echo "$disp" | rofi -monitor -1 -dmenu -i -p "Optimize resolution for:")
+        ext=$(echo "$disp" | rofi -monitor -1 -lines 2 -theme klassiker-center -dmenu -i -p "Optimize resolution for:")
         int=$(echo "$disp" | grep -v "$ext")
 
         res_external=$(xrandr --query | sed -n "/^$ext/,/\+/p" | tail -n 1 | awk '{print $1}')
@@ -28,16 +28,16 @@ sec_disp() {
 
         xrandr --output "$ext" --auto --scale 1.0x1.0 --output "$int" --auto --same-as "$ext" --scale "$scale_x"x"$scale_y"
     else
-        pri=$(echo "$disp" | rofi -monitor -1 -dmenu -i -p "Select primary display:")
+        pri=$(echo "$disp" | rofi -monitor -1 -lines 2 -theme klassiker-center -dmenu -i -p "Select primary display:")
         sec=$(echo "$disp" | grep -v "$pri")
-        direction=$(printf "right\\nleft" | rofi -monitor -1 -dmenu -i -p "What side of $pri should $sec be on?")
+        direction=$(printf "right\\nleft" | rofi -monitor -1 -lines 2 -theme klassiker-center -dmenu -i -p "What side of $pri should $sec be on?")
         xrandr --output "$pri" --auto --scale 1.0x1.0 --output "$sec" --"$direction"-of "$pri" --auto --scale 1.0x1.0
     fi
 }
 
 # saved arandr settings
 saved_set() {
-    chosen=$(find "$HOME/.screenlayout/" -iname "*.sh" | cut -d / -f 5 | sed "s/.sh//g" | sort | rofi -monitor -1 -dmenu -i -p "")
+    chosen=$(find "$HOME/.screenlayout/" -iname "*.sh" | cut -d / -f 5 | sed "s/.sh//g" | sort | rofi -monitor -1 -lines 5 -theme klassiker-center -dmenu -i -p "")
     "$HOME/.screenlayout/$chosen.sh"
 }
 
@@ -46,7 +46,7 @@ all=$(xrandr -q | grep "connected")
 disp=$(echo "$all" | grep " connected" | awk '{print $1}')
 
 # menu
-chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection\\naudio toggle" "$disp" | rofi -monitor -1 -dmenu -i -p "") && \
+chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection\\naudio toggle" "$disp" | rofi -monitor -1 -lines 5 -theme klassiker-center -dmenu -i -p "") && \
     case "$chosen" in
     "second display") sec_disp ;;
     "saved settings") saved_set ;;

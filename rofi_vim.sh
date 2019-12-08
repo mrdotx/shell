@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/rofi_vim.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-08 12:12:09
+# date:       2019-12-08 18:44:30
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -22,7 +22,7 @@ case $(printf "%s\n" \
     "firetv4k" \
     "p9" \
     "m3" \
-    "explore" | rofi -monitor -1 -dmenu -i -p "") in
+    "explore" | rofi -monitor -1 -lines 13 -theme klassiker-center -dmenu -i -p "") in
 "nvim") $TERMINAL -e vim ;;
 "notes") $TERMINAL -e vim "$HOME/coding/hidden/notes/index.md" ;;
 "middlefinger-streetwear.com") $TERMINAL -e vim scp://middlefinger/ -c "Lexplore" ;;
