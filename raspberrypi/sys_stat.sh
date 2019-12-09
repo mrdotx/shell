@@ -3,15 +3,15 @@
 # path:       ~/coding/shell/raspberrypi/sys_stat.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-08 23:12:41
+# date:       2019-12-09 23:51:49
 
 # start time
 start=$(date +%s.%N)
 
 echo "################################################################################"
-systemname=$(hostname &)
-standardtime=$(date +"%c" &)
-echo "[${systemname}] - ${standardtime}"
+system_name=$(hostname &)
+standard_time=$(date +"%c" &)
+echo "[${system_name}] - ${standard_time}"
 echo "################################################################################"
 echo
 
@@ -27,7 +27,7 @@ echo
 
 echo "[System]"
 echo "--------------------------------------------------------------------------------"
-operatingtime=$(uptime --pretty &)
+operating_time=$(uptime --pretty &)
 net_send=$(awk '{print $1/1024/1024/1024}' /sys/class/net/eth0/statistics/tx_bytes &)
 net_received=$(awk '{print $1/1024/1024/1024}' /sys/class/net/eth0/statistics/rx_bytes &)
 cpu=$(awk -F ": " '/Hardware/{print $2}' /proc/cpuinfo &)
@@ -35,13 +35,13 @@ cpu_frequency=$(/opt/vc/bin/vcgencmd measure_clock arm | awk -F "=" '{printf ("%
 cpu_temp=$(/opt/vc/bin/vcgencmd measure_temp | awk -F '=' '{print $2}' &)
 voltage=$(/opt/vc/bin/vcgencmd measure_volts | awk -F '=' '{print $2}' | sed 's/000//' &)
 scaling_governor=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor &)
-loadavg=$(awk -F ' ' '{print $1" "$2" "$3}' /proc/loadavg &)
+load_avg=$(awk -F ' ' '{print $1" "$2" "$3}' /proc/loadavg &)
 memory=$(free -h &)
 disc=$(df -hPT /boot / &)
-echo "uptime:       ${operatingtime}"
+echo "uptime:       ${operating_time}"
 echo "ethernet:     sent: ${net_send}GB received: ${net_received}GB"
 echo "processor:    ${cpu} ${cpu_frequency}MHz ${voltage} ${scaling_governor} ${cpu_temp}"
-echo "load:         ${loadavg}"
+echo "load:         ${load_avg}"
 echo
 echo "${memory}"
 echo
@@ -66,7 +66,7 @@ service() {
     fi
 }
 ports() {
-    if netstat -nlt | grep -q ":$1 "; then
+    if ss -nlt | grep -q ":$1 "; then
         port="open  "
     else
         port="closed"
