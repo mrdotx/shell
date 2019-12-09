@@ -3,15 +3,15 @@
 # path:       ~/coding/shell/polybar_bluetooth.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 13:48:05
+# date:       2019-12-09 23:07:31
 
 case "$1" in
     --polybar)
         if [ "$(systemctl is-active bluetooth.service)" = "active" ]
         then
-        	echo "%{F#dfdfdf}%{o#00b200}%{o-}%{F-}"
+            echo "%{F#dfdfdf}%{o#00b200}%{o-}%{F-}"
         else
-        	echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
         fi
         ;;
     *)

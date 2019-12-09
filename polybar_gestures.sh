@@ -3,15 +3,15 @@
 # path:       ~/coding/shell/polybar_gestures.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 13:52:00
+# date:       2019-12-09 23:06:45
 
 case "$1" in
     --polybar)
         if [ "$(pgrep -f /usr/bin/libinput-gestures)" ]
         then
-        	echo "%{F#dfdfdf}%{o#00b200}%{o-}%{F-}"
+            echo "%{F#dfdfdf}%{o#00b200}%{o-}%{F-}"
         else
-        	echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
         fi
         ;;
     *)

@@ -3,15 +3,15 @@
 # path:       ~/coding/shell/polybar_polkit.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 13:52:55
+# date:       2019-12-09 23:06:26
 
 case "$1" in
     --polybar)
         if [ "$(pgrep -f /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1)" ]
         then
-        	echo "%{F#dfdfdf}%{o#00b200}%{o-}%{F-}"
+            echo "%{F#dfdfdf}%{o#00b200}%{o-}%{F-}"
         else
-        	echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
         fi
         ;;
     *)
