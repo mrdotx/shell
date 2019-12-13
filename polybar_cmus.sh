@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/polybar_cmus.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 18:16:36
+# date:       2019-12-12 21:00:25
 
 if info=$(cmus-remote -Q 2> /dev/null); then
 
@@ -28,9 +28,9 @@ if info=$(cmus-remote -Q 2> /dev/null); then
     fi
 
     case $status in
-        "playing") info="%{F#dfdfdf}%{o#00b200} $title_status" ;;
-        "paused") info="%{F#dfdfdf}%{o#b0b200} $title_status" ;;
-        "stopped") info="%{F#dfdfdf}%{o#ff5555} $title_status" ;;
+        "playing") info="%{F#dfdfdf}%{o#4084d6} $title_status" ;;
+        "paused") info="%{F#dfdfdf}%{o#ff5555} $title_status" ;;
+        "stopped") info="%{F#dfdfdf}%{o#666666} $title_status" ;;
         *) info="" ;;
     esac
 
