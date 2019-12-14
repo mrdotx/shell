@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/polybar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 11:47:47
+# date:       2019-12-14 15:57:17
 
 # toggle for polybar bars
 if [ -n "$1" ]; then
@@ -26,12 +26,3 @@ while pgrep -x polybar >/dev/null; do sleep 0.1; done
 for m in $(polybar -m | tail -1 | sed -e 's/:.*$//g'); do
     MONITOR=$m polybar $bar &
 done
-
-# launch polybar on multiple monitors
-#if type "xrandr"; then
-#    for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-#        MONITOR=$m polybar $bar &
-#    done
-#else
-#    polybar --reload $bar &
-#fi
