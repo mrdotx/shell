@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-07 22:36:20
+# date:       2019-12-15 13:34:50
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy from/to cloud with rclone
@@ -76,7 +76,7 @@ elif [[ $1 == "-s" ]]; then
         rclone copy -P "${src[i]}" "${dest[i]}" --exclude="${exclude[i]}"
         #rclone sync -P "${src[i]}" "${dest[i]}" --exclude="${exclude[i]}"
         echo "[${magenta}${title[i]}${reset}] -> ${src[i]}"
-        rclone copy -P "${dest[i]}" "${src[i]}" --exclud="${exclude[i]}"
+        rclone copy -P "${dest[i]}" "${src[i]}" --exclude="${exclude[i]}"
         #rclone sync -P "${dest[i]}" "${src[i]}" --exclude="${exclude[i]}"
         notify-send -i "${icon[i]}" "Sync ${title[i]}" "completed!"
     done
