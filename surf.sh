@@ -3,7 +3,7 @@
 # path:       ~/coding/shell/surf.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-19 10:51:18
+# date:       2019-12-19 12:29:34
 
 xidfile="/tmp/tabbed-surf.xid"
 uri=""
@@ -23,12 +23,10 @@ then
 	runtabbed
 else
 	xid=$(cat "$xidfile")
-	xprop -id "$xid" >/dev/null 2>&1
-	if [ $? -gt 0 ];
+	if xprop -id "$xid" >/dev/null 2>&1;
 	then
-		runtabbed
-	else
 		surf -e "$xid" "$uri" >/dev/null 2>&1 &
+	else
+        runtabbed
 	fi
 fi
-
