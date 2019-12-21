@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# path:       ~/coding/shell/sync_rclone.sh
+# path:       ~/projects/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-15 13:34:50
+# date:       2019-12-21 15:02:12
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy from/to cloud with rclone
@@ -32,31 +32,31 @@ reset=$(tput sgr0)
 title=("web.de")
 src=("$HOME/cloud/webde/")
 dest=("webde:/")
-icon=("$HOME/coding/shell/icons/web.de.png")
+icon=("$HOME/projects/shell/icons/web.de.png")
 exclude=("")
 
 title+=("GMX")
 src+=("$HOME/cloud/gmx/")
 dest+=("gmx:/")
-icon+=("$HOME/coding/shell/icons/gmx.png")
+icon+=("$HOME/projects/shell/icons/gmx.png")
 exclude+=("")
 
 title+=("Google Drive")
 src+=("$HOME/cloud/googledrive/")
 dest+=("googledrive:/")
-icon+=("$HOME/coding/shell/icons/google-drive.png")
+icon+=("$HOME/projects/shell/icons/google-drive.png")
 exclude+=("")
 
 title+=("OneDrive")
 src+=("$HOME/cloud/onedrive/")
 dest+=("onedrive:/")
-icon+=("$HOME/coding/shell/icons/onedrive.png")
+icon+=("$HOME/projects/shell/icons/onedrive.png")
 exclude+=("")
 
 title+=("Dropbox")
 src+=("$HOME/cloud/dropbox/")
 dest+=("dropbox:/")
-icon+=("$HOME/coding/shell/icons/dropbox.png")
+icon+=("$HOME/projects/shell/icons/dropbox.png")
 exclude+=("KeePass/klassiker.kdbx")
 
 # rclone to copy data from and to cloud

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/polybar_printer.sh
+# path:       ~/projects/shell/polybar_printer.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-13 10:17:54
+# date:       2019-12-21 14:56:36
 
 case "$1" in
     --status)

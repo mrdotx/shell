@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# path:       ~/coding/shell/snippets/hera.sh
+# path:       ~/projects/shell/snippets/hera.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 16:11:19
+# date:       2019-12-21 14:50:17
 
 case "$1" in
 wakeup)
@@ -16,12 +16,12 @@ poweroff)
     ;;
 status)
     # call hoststatus script
-    status="$("$HOME"/coding/shell/snippets/host_status.sh hera)"
+    status="$("$HOME"/projects/shell/snippets/host_status.sh hera)"
 
     if [[ $status == *offline* ]]; then
-        echo "$status [sudo $HOME/coding/shell/snippets/hera.sh wakeup]      "
+        echo "$status [sudo $HOME/projects/shell/snippets/hera.sh wakeup]      "
     elif [[ $status == *online* ]]; then
-        echo "$status [sudo $HOME/coding/shell/snippets/hera.sh poweroff]    "
+        echo "$status [sudo $HOME/projects/shell/snippets/hera.sh poweroff]    "
     else
         echo "unknown"
     fi

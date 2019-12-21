@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/mount/sftp.sh
+# path:       ~/projects/shell/mount/sftp.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 15:25:53
+# date:       2019-12-21 14:48:18
 
 sftpdir=$1
 sftphost=<Hostname>

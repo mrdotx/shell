@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/polybar.sh
+# path:       ~/projects/shell/polybar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-14 15:57:17
+# date:       2019-12-21 14:55:26
 
 # toggle for polybar bars
 if [ -n "$1" ]; then

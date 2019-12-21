@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/polybar_polkit.sh
+# path:       ~/projects/shell/polybar_polkit.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-13 10:14:54
+# date:       2019-12-21 14:56:29
 
 case "$1" in
     --status)

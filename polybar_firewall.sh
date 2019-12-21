@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/polybar_firewall.sh
+# path:       ~/projects/shell/polybar_firewall.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-13 10:02:42
+# date:       2019-12-21 14:56:05
 
 case "$1" in
     --status)

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/sync_keepass.sh
+# path:       ~/projects/shell/sync_keepass.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-06 18:39:06
+# date:       2019-12-21 15:01:53
 
 rc_name="dropbox"
 kp_file="klassiker.kdbx"
@@ -53,13 +53,13 @@ sync_pass ()
     remote_mtime=$(get_remote_pass_mtime)
 
     # modification times
-    notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass [Files]" "local:  $local_mtime\nremote: $remote_mtime"
+    notify-send -i "$HOME/projects/shell/icons/keepass.png" "KeePass [Files]" "local:  $local_mtime\nremote: $remote_mtime"
 
     # if remote file don't exists
     if [ -z "$remote_mtime" ]; then
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass [Files]" "remote file not found!\nuploading...!"
+        notify-send -i "$HOME/projects/shell/icons/keepass.png" "KeePass [Files]" "remote file not found!\nuploading...!"
         $pass_exp
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass [Database]" "created!"
+        notify-send -i "$HOME/projects/shell/icons/keepass.png" "KeePass [Database]" "created!"
         return 0
     fi
 
@@ -69,18 +69,18 @@ sync_pass ()
 
     # local file - 10 sec being newer than remote
     if [ $((local_mtime_sec-10)) -gt "$remote_mtime_sec" ]; then
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass [Files]" "local file is probably newer than remote!\nuploading...!"
+        notify-send -i "$HOME/projects/shell/icons/keepass.png" "KeePass [Files]" "local file is probably newer than remote!\nuploading...!"
         $pass_exp
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass [Database]" "synchronized!"
+        notify-send -i "$HOME/projects/shell/icons/keepass.png" "KeePass [Database]" "synchronized!"
         return 0
     # local file +10 sec being older than remote
     elif [ $((local_mtime_sec+10)) -lt "$remote_mtime_sec" ]; then
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass [Files]" "local file is probably older than remote!\ndownloading...!"
+        notify-send -i "$HOME/projects/shell/icons/keepass.png" "KeePass [Files]" "local file is probably older than remote!\ndownloading...!"
         $pass_imp
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass [Database]" "synchronized!"
+        notify-send -i "$HOME/projects/shell/icons/keepass.png" "KeePass [Database]" "synchronized!"
         return 0
     else
-        notify-send -i "$HOME/coding/shell/icons/keepass.png" "KeePass [Database]" "allready synchronized!"
+        notify-send -i "$HOME/projects/shell/icons/keepass.png" "KeePass [Database]" "allready synchronized!"
         return 0
     fi
 }
@@ -89,5 +89,5 @@ sync_pass ()
 if ping -c1 -W1 -q 1.1.1.1 > /dev/null 2>&1; then
     sync_pass
 else
-    notify-send -i "$HOME/coding/shell/icons/caution.png" "KeePass [Failure]" "internet connection not available!"
+    notify-send -i "$HOME/projects/shell/icons/caution.png" "KeePass [Failure]" "internet connection not available!"
 fi

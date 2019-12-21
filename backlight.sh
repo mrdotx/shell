@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/backlight.sh
+# path:       ~/projects/shell/backlight.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-07 22:34:12
+# date:       2019-12-21 14:52:39
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to change intel backlight

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/screenlayout.sh
+# path:       ~/projects/shell/screenlayout.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 18:12:11
+# date:       2019-12-21 14:59:54
 
 int=eDP1
 ext=HDMI2

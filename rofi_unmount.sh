@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/rofi_unmount.sh
+# path:       ~/projects/shell/rofi_unmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-08 12:25:17
+# date:       2019-12-21 14:59:24
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -15,7 +15,7 @@ remote_unmnt() {
         [ -z "$chosen" ] && exit
         fusermount -u "$chosen" && \
             if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
-                notify-send -i "$HOME/coding/shell/icons/usb.png" "Unmount Remote" "$chosen unmounted"
+                notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount Remote" "$chosen unmounted"
     else
         exit
     fi
@@ -29,7 +29,7 @@ usb_unmnt() {
     [ -z "$chosen" ] && exit
     sudo -A umount "$chosen" && \
         if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
-            notify-send -i "$HOME/coding/shell/icons/usb.png" "Unmount USB" "$chosen unmounted"
+            notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount USB" "$chosen unmounted"
 }
 
 # android unmount
@@ -39,7 +39,7 @@ android_unmnt() {
         [ -z "$chosen" ] && exit
         fusermount -u "$chosen" && \
             if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
-                notify-send -i "$HOME/coding/shell/icons/usb.png" "Unmount Android" "$chosen unmounted"
+                notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount Android" "$chosen unmounted"
     else
         exit
     fi
@@ -52,7 +52,7 @@ dvd_eject() {
     chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
     sudo -A eject "$chosen" && \
-        notify-send -i "$HOME/coding/shell/icons/usb.png" "Eject DVD" "$chosen ejected"
+        notify-send -i "$HOME/projects/shell/icons/usb.png" "Eject DVD" "$chosen ejected"
 }
 
 # menu

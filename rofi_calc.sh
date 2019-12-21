@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/rofi_calc.sh
+# path:       ~/projects/shell/rofi_calc.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 13:54:26
+# date:       2019-12-21 14:57:30
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to run bc calculations in rofi
@@ -29,7 +29,7 @@ else
     chosen=$(printf "Copy to clipboard\nClear\nClose" | $menu -p "= $result")
     case $chosen in
         "Copy to clipboard") echo "$result" | xsel -b && \
-            notify-send -i "$HOME/coding/shell/icons/clipboard.png" "Clipboard" "Result copied: $result" ;;
+            notify-send -i "$HOME/projects/shell/icons/clipboard.png" "Clipboard" "Result copied: $result" ;;
         "Clear") $0 ;;
         "Close") ;;
         "") ;;

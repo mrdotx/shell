@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# path:       ~/coding/shell/terminal_wrapper.sh
+# path:       ~/projects/shell/terminal_wrapper.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 17:41:16
+# date:       2019-12-21 15:02:28
 
 # color variables
 #black=$(tput setaf 0)

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/polybar_cmus.sh
+# path:       ~/projects/shell/polybar_cmus.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-12 21:00:25
+# date:       2019-12-21 14:55:51
 
 if info=$(cmus-remote -Q 2> /dev/null); then
 

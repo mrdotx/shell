@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/surf.sh
+# path:       ~/projects/shell/surf.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-19 12:29:34
+# date:       2019-12-21 15:01:20
 
 xidfile="/tmp/tabbed-surf.xid"
 uri=""

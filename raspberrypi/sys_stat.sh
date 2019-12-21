@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/raspberrypi/sys_stat.sh
+# path:       ~/projects/shell/raspberrypi/sys_stat.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-09 23:51:49
+# date:       2019-12-21 14:48:55
 
 # start time
 start=$(date +%s.%N)

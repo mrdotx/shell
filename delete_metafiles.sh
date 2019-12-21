@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/delete_metafiles.sh
+# path:       ~/projects/shell/delete_metafiles.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 13:26:45
+# date:       2019-12-21 14:54:33
 
 output=$HOME/delmetafile.txt
 

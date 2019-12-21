@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/cmus_notify.sh
+# path:       ~/projects/shell/cmus_notify.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-04 18:15:31
+# date:       2019-12-21 14:53:56
 
 if info=$(cmus-remote -Q 2> /dev/null); then
 
@@ -41,11 +41,11 @@ if info=$(cmus-remote -Q 2> /dev/null); then
     fi
 
     if [ "$artist" = "" ] && [ "$title" = "" ]; then
-        notify-send -i "$HOME/coding/shell/icons/cmus.png" "C* Music Player | $info" "${file##*/}"
+        notify-send -i "$HOME/projects/shell/icons/cmus.png" "C* Music Player | $info" "${file##*/}"
     else
-        notify-send -i "$HOME/coding/shell/icons/cmus.png" "C* Music Player | $info" "$info_body"
+        notify-send -i "$HOME/projects/shell/icons/cmus.png" "C* Music Player | $info" "$info_body"
     fi
 
 else
-    notify-send -i "$HOME/conding/shell/icons/cmus.png" "C* Music Player" "Not running!"
+    notify-send -i "$HOME/projects/shell/icons/cmus.png" "C* Music Player" "Not running!"
 fi

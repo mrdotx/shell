@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/mount/rclone.sh
+# path:       ~/projects/shell/mount/rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 15:14:50
+# date:       2019-12-21 14:48:06
 
 rclonedir=$1
 rclonehost=<rclonename>

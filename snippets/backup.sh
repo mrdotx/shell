@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/snippets/backup.sh
+# path:       ~/projects/shell/snippets/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 07:45:18
+# date:       2019-12-21 14:50:00
 
 # color variables {{{
 #black=$(tput setaf 0)

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/maintenance_github.sh
+# path:       ~/projects/shell/maintenance_github.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 13:38:25
+# date:       2019-12-21 14:54:56
 
 # color variables
 #black=$(tput setaf 0)

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/rofi_display.sh
+# path:       ~/projects/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-08 18:38:23
+# date:       2019-12-21 14:57:42
 
 # exit if rofi is running
 pgrep -x rofi && exit

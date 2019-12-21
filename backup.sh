@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/backup.sh
+# path:       ~/projects/shell/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 07:23:43
+# date:       2019-12-21 14:52:49
 
 backup_name="morpheus"
 local_home="/home/klassiker"

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/polybar_bluetooth.sh
+# path:       ~/projects/shell/polybar_bluetooth.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-13 09:55:50
+# date:       2019-12-21 14:55:38
 
 case "$1" in
     --status)

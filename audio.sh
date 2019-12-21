@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/audio.sh
+# path:       ~/projects/shell/audio.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-07 23:23:37
+# date:       2019-12-21 14:52:30
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for audio output

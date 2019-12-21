@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/mount/ftp.sh
+# path:       ~/projects/shell/mount/ftp.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-01 15:46:40
+# date:       2019-12-21 14:47:54
 
 ftpdir=$1
 ftphost=<Hostname>

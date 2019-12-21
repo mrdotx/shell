@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/backup_usb.sh
+# path:       ~/projects/shell/backup_usb.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 16:04:14
+# date:       2019-12-21 14:53:04
 
 backup_name="morpheus"
 mount_point="/mnt/$backup_name"

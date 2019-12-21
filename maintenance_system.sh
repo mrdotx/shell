@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/maintenance_system.sh
+# path:       ~/projects/shell/maintenance_system.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-03 06:06:17
+# date:       2019-12-21 14:55:08
 
 # color variables
 #black=$(tput setaf 0)

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/polybar_rss.sh
+# path:       ~/projects/shell/polybar_rss.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-20 20:42:05
+# date:       2019-12-21 14:56:54
 
 # exit if newsboat is running
 pgrep -x newsboat > /dev/null 2>&1 && polybar-msg hook module/rss 2 > /dev/null 2>&1 && exit

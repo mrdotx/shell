@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/polybar_gestures.sh
+# path:       ~/projects/shell/polybar_gestures.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-13 10:11:07
+# date:       2019-12-21 14:56:20
 
 case "$1" in
     --status)

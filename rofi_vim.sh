@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/coding/shell/rofi_vim.sh
+# path:       ~/projects/shell/rofi_vim.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-14 14:04:52
+# date:       2019-12-21 14:59:43
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -24,7 +24,7 @@ case $(printf "%s\n" \
     "m3" \
     "explore" | rofi -monitor -1 -lines 13 -theme klassiker-center -dmenu -i -p "") in
 "nvim") $TERMINAL -e vim ;;
-"notes") $TERMINAL -e vim "$HOME/coding/hidden/notes/index.md" ;;
+"notes") $TERMINAL -e vim "$HOME/projects/hidden/notes/index.md" ;;
 "middlefinger-streetwear.com") $TERMINAL -e vim scp://middlefinger/ -c "Lexplore" ;;
 "prinzipal-kreuzberg.com") $TERMINAL -e vim scp://prinzipal/ -c "Lexplore" ;;
 "klassiker.online.de") $TERMINAL -e vim ftp://klassiker.online.de/ -c "Lexplore" ;;
