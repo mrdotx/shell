@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/knockout.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-23 14:49:09
+# date:       2019-12-23 22:08:24
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
@@ -34,29 +34,24 @@ help="$script [-h/--help] -- script for \"knockout\" the system
 # suckless simple lock
 lock_simple ()
 {
-    # message locked [user] at [date]
-    slock -m "locked $(whoami) at $(date "+%a %d, %H:%M:%S")" &
+    # slock message "locked [user] at [date]"
+    slock -m "locked $(whoami) at $(date "+%a %e.%m.%G %H:%M")" &
 }
 
 # take screenshot, blur it and lock the screen with i3lock
 lock_blur ()
 {
     # take screenshot
-    import -window root /tmp/screenshot.png
+    scrot -o /tmp/screenshot.png
 
     # blur it
-    #convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png
-
-    # similar blur but faster
-    convert -scale 10% -blur 0x0.5 -resize 1000% /tmp/screenshot.png /tmp/screenshotblur.png
+    #convert -scale 10% -blur 0x0.5 -resize 1000% /tmp/screenshot.png /tmp/screenshot_blur.png
 
     # more blur but faster
-    #convert -scale 10% -blur 0x2.5 -resize 1000% /tmp/screenshot.png /tmp/screenshotblur.png
-
-    rm /tmp/screenshot.png
+    convert -scale 10% -blur 0x2.5 -resize 1000% /tmp/screenshot.png /tmp/screenshot_blur.png
 
     # lock the screen
-    i3lock -i /tmp/screenshotblur.png &
+    i3lock -i /tmp/screenshot_blur.png
 }
 
 case "$1" in
