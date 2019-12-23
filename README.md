@@ -14,6 +14,7 @@
 | cmus_notify.sh        | cmus notification with notify-send                                                      |
 | conky.sh              | start conky                                                                             |
 | delete_metafiles.sh   | delete hidden apple metadata files in home folder                                       |
+| knockout.sh           | lock/suspend/logout/reboot/shutdown/switch user script                                  |
 | link_handler.sh       | opens specific program for picture, videos and audio by giving url. mainly for newsboat |
 | maintenance_github.sh | remove history from github repository                                                   |
 | maintenance_system.sh | purge cache and remove duplicated entries from python_-, bash_- and zsh_history         |
@@ -26,9 +27,11 @@
 | polybar_gestures.sh   | enable/disable gestures and show gestures status for polybar                            |
 | polybar_polkit.sh     | enable/disable gnome authentication agent and show agent status for polybar             |
 | polybar_printer.sh    | enable/disable printer and show printer status for polybar                              |
+| polybar_rss.sh        | shows the quantity of new articles in newsboat for polybar                              |
 | polybar_vpnhades.sh   | enable/disable vpn and show vpn status for polybar                                      |
 | rofi_calc.sh          | use rofi to calculate with bc                                                           |
 | rofi_display.sh       | use rofi to manage displays with arandr/xrandr                                          |
+| rofi_font_symbols.sh  | use rofi to to search and copy unicode symbols                                          |
 | rofi_mount.sh         | use rofi to mount remote, usb and android locations                                     |
 | rofi_service.sh       | use rofi to start/stop some services like bluetooth, printer, firewall etc.             |
 | rofi_unmount.sh       | use rofi to unmount remote, usb and android locations                                   |
@@ -40,3 +43,4 @@
 | terminal_wrapper.sh   | terminal wrapper for tiling window managers floating windows                            |
 | urxvtc.sh             | start urxvt daemon if not running                                                       |
 | wlan.sh               | connect to wlan via command line interface                                              |
+| xsel.sh               | shows the content of clipboard and primary to notify-send                               |
