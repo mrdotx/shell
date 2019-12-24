@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_exit.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-24 11:53:51
+# date:       2019-12-24 12:08:40
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -17,7 +17,7 @@ case $(printf "%s\n" \
     "suspend blur" \
     "suspend simple" \
     "lock blur" \
-    "lock simple" | rofi -monitor -1 -lines 8 -theme klassiker-center -dmenu -i -p "") in
+    "lock simple" | rofi -monitor -1 -lines 8 -theme klassiker-center -dmenu -i -p "") in
 "shutdown") knockout.sh -shutdown ;;
 "reboot") knockout.sh -reboot ;;
 "logout") knockout.sh -logout ;;
