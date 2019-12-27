@@ -3,15 +3,15 @@
 # path:       ~/projects/shell/rofi_unmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:59:24
+# date:       2019-12-27 10:56:03
 
 # exit if rofi is running
 pgrep -x rofi && exit
 
 # remote unmount
 remote_unmnt() {
-    if grep -E "$HOME/mount/.*fuse" /etc/mtab; then
-        chosen=$(awk '/\/mount\/.*fuse/ {print $2}' /etc/mtab | sort | rofi -monitor -1 -dmenu -i -p "")
+    if grep -E "/media/.*fuse" /etc/mtab; then
+        chosen=$(awk '/\/media\/.*fuse/ {print $2}' /etc/mtab | sort | rofi -monitor -1 -dmenu -i -p "")
         [ -z "$chosen" ] && exit
         fusermount -u "$chosen" && \
             if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
@@ -23,7 +23,7 @@ remote_unmnt() {
 
 # usb unmount
 usb_unmnt() {
-    mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4!~/\/boot|\/home\/klassiker\/mount\/data|\/home$|SWAP/&&length($4)>1 || $2=="rom"&&length($4)>1 || $3=="1,4M"&&length($4)>1) printf "%s (%s)\n",$4,$3}')
+    mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4!~/\/boot|\/media\/disk1|\/home$|SWAP/&&length($4)>1 || $2=="rom"&&length($4)>1 || $3=="1,4M"&&length($4)>1) printf "%s (%s)\n",$4,$3}')
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
