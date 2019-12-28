@@ -3,12 +3,11 @@
 # path:       ~/projects/shell/backup_usb.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:53:04
+# date:       2019-12-28 11:52:59
 
 backup_name="morpheus"
 mount_point="/mnt/$backup_name"
-usb_device="/dev/sdb1"
-local_home="/home/klassiker"
+usb_device="/dev/disk/by-uuid/2bdffcfb-b365-4321-a64b-5ffce2f1c211"
 remote_location="$mount_point/backup/$backup_name"
 
 # create and mount folder for usb-disk
@@ -19,16 +18,13 @@ sudo mount $usb_device $mount_point
 sudo mkdir -p $remote_location
 sudo rsync -aAXv --delete \
     --exclude="/dev/*" \
-    --exclude="/proc/*" \
-    --exclude="/sys/*" \
-    --exclude="/tmp/*" \
-    --exclude="/run/*" \
-    --exclude="$local_home/mount/*" \
-    --exclude="$local_home/VM/*" \
-    --exclude="/mnt/*" \
-    --exclude="/media/*" \
     --exclude="/lost+found" \
-    --exclude="/swapfile" / $remote_location
+    --exclude="/media/disk1/lost+found" \
+    --exclude="/mnt/*" \
+    --exclude="/proc/*" \
+    --exclude="/run/*" \
+    --exclude="/sys/*" \
+    --exclude="/tmp/*" / $remote_location
 
 # unmount and delete folder
 sudo umount $mount_point
