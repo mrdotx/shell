@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:57:42
+# date:       2019-12-29 19:52:52
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -59,5 +59,5 @@ chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection\\naudio
 if [ -n "$chosen" ] && ! [ "$chosen" = "audio toggle" ]; then
     nitrogen --restore
     pgrep -x dunst >/dev/null && killall dunst &
-    polybar.sh i3slim
+    polybar.sh i3
 fi
