@@ -3,17 +3,17 @@
 # path:       ~/projects/shell/polybar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:55:26
+# date:       2019-12-29 16:44:22
 
 # toggle for polybar bars
 if [ -n "$1" ]; then
     bar="$1"
-elif [ "$(pgrep -xf "polybar i3slim")" ]; then
-    bar="i3"
 elif [ "$(pgrep -xf "polybar i3")" ]; then
-    bar="i3slim"
+    bar="i3stat"
+elif [ "$(pgrep -xf "polybar i3stat")" ]; then
+    bar="i3"
 else
-    bar="i3slim"
+    bar="i3"
 fi
 
 # terminate already running bar instances
