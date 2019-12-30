@@ -3,27 +3,29 @@
 # path:       ~/projects/shell/polybar_vpn_hades.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:57:11
+# date:       2019-12-31 00:03:07
 
 vpnname=hades
+grey=$(xrdb -query | grep Polybar.foreground1: | cut -f2)
+red=$(xrdb -query | grep color9: | cut -f2)
 
 case "$1" in
     --status)
         if [ "$(nmcli connection show --active $vpnname)" ]
         then
-            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{o$red}%{o-}"
         else
-            echo "%{F#dfdfdf}%{o#666666}%{o-}%{F-}"
+            echo "%{o$grey}%{o-}"
         fi
         ;;
     *)
         if [ "$(nmcli connection show --active $vpnname)" ]
         then
             nmcli con down id $vpnname && \
-            echo "%{F#dfdfdf}%{o#666666}%{o-}%{F-}"
+            echo "%{o$grey}%{o-}"
         else
             nmcli con up id $vpnname passwd-file "$HOME"/projects/hidden/vpn/$vpnname && \
-            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{o$red}%{o-}"
         fi
         ;;
 esac

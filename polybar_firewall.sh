@@ -3,25 +3,28 @@
 # path:       ~/projects/shell/polybar_firewall.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:56:05
+# date:       2019-12-31 00:11:13
+
+grey=$(xrdb -query | grep Polybar.foreground1: | cut -f2)
+red=$(xrdb -query | grep color9: | cut -f2)
 
 case "$1" in
     --status)
         if [ "$(systemctl is-active ufw.service)" = "active" ]
         then
-            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{o$red}%{o-}"
         else
-            echo "%{F#dfdfdf}%{o#666666}%{o-}%{F-}"
+            echo "%{o$grey}%{o-}"
         fi
         ;;
     *)
         if [ "$(systemctl is-active ufw.service)" != "active" ]
         then
             sudo -A systemctl start ufw.service && \
-            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{o$red}%{o-}"
         else
             sudo -A systemctl stop ufw.service && \
-            echo "%{F#dfdfdf}%{o#666666}%{o-}%{F-}"
+            echo "%{o$grey}%{o-}"
         fi
         ;;
 esac

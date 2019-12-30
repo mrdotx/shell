@@ -3,25 +3,28 @@
 # path:       ~/projects/shell/polybar_polkit.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:56:29
+# date:       2019-12-31 00:07:49
+
+grey=$(xrdb -query | grep Polybar.foreground1: | cut -f2)
+red=$(xrdb -query | grep color9: | cut -f2)
 
 case "$1" in
     --status)
         if [ "$(pgrep -f /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1)" ]
         then
-            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{o$red}%{o-}"
         else
-            echo "%{F#dfdfdf}%{o#666666}%{o-}%{F-}"
+            echo "%{o$grey}%{o-}"
         fi
         ;;
     *)
         if [ "$(pgrep -f /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1)" ]
         then
             killall /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 && \
-            echo "%{F#dfdfdf}%{o#666666}%{o-}%{F-}"
+            echo "%{o$grey}%{o-}"
         else
             /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 >/dev/null 2>&1 & \
-            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "{o$red}%{o-}"
         fi
         ;;
 esac

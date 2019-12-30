@@ -3,25 +3,28 @@
 # path:       ~/projects/shell/polybar_gestures.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:56:20
+# date:       2019-12-31 00:09:46
+
+grey=$(xrdb -query | grep Polybar.foreground1: | cut -f2)
+red=$(xrdb -query | grep color9: | cut -f2)
 
 case "$1" in
     --status)
         if [ "$(pgrep -f /usr/bin/libinput-gestures)" ]
         then
-            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{o$red}%{o-}"
         else
-            echo "%{F#dfdfdf}%{o#666666}%{o-}%{F-}"
+            echo "%{o$grey}%{o-}"
         fi
         ;;
     *)
         if [ "$(pgrep -f /usr/bin/libinput-gestures)" ]
         then
             libinput-gestures-setup stop && \
-            echo "%{F#dfdfdf}%{o#666666}%{o-}%{F-}"
+            echo "%{o$grey}%{o-}"
         else
             libinput-gestures-setup start >/dev/null 2>&1 && \
-            echo "%{F#dfdfdf}%{o#ff5555}%{o-}%{F-}"
+            echo "%{o$red}%{o-}"
         fi
         ;;
 esac

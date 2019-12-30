@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/cmus_notify.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-29 20:02:13
+# date:       2019-12-31 00:21:41
 
 if info=$(cmus-remote -Q 2> /dev/null); then
     status=$(echo "$info" | grep '^status ' | sed 's/^status //')
@@ -38,33 +38,36 @@ case "$1" in
             *) info="" ;;
         esac
 
-        if [ "$stream" = "" ]; then
+        if [ -z "$stream" ]; then
             info_body="Artist: $artist\nAlbum : $album\nTrack : $tracknumber\nTitle : <b>$title</b>"
         else
             info_body="$title\n$genre\n$comment\n<b>$stream</b>"
         fi
 
-        if [ "$artist" = "" ] && [ "$title" = "" ]; then
+        if [ -z "$artist" ] && [ -z "$title" ]; then
             notify-send -i "$HOME/projects/shell/icons/cmus.png" "C* Music Player | $info" "${file##*/}"
         else
             notify-send -i "$HOME/projects/shell/icons/cmus.png" "C* Music Player | $info" "$info_body"
         fi
         ;;
     --polybar)
+        grey=$(xrdb -query | grep Polybar.foreground1: | cut -f2)
+        red=$(xrdb -query | grep color9: | cut -f2)
+
         case $status in
             "playing") info="" ;;
-            "paused") info="%{F#dfdfdf}%{o#666666}" ;;
-            "stopped") info="%{F#dfdfdf}%{o#ff5555}" ;;
+            "paused") info="%{o$grey}" ;;
+            "stopped") info="%{o$red}" ;;
             *) info="" ;;
         esac
 
-        if [ "$stream" = "" ]; then
+        if [ -z "$stream" ]; then
             info_body="$album | $tracknumber | $artist - $title"
         else
             info_body="$title | $genre | $stream"
         fi
 
-        if [ "$artist" = "" ] && [ "$title" = "" ]; then
+        if [ -z "$artist" ] && [ -z "$title" ]; then
             echo "$info ${file##*/}"
         else
             echo "$info $info_body"
