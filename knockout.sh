@@ -3,27 +3,28 @@
 # path:       ~/projects/shell/knockout.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-23 22:08:24
+# date:       2019-12-30 14:49:42
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
   Usage:
-    $script [-lock/-suspend/-logout/-reboot/-shutdown/-switch] [method]
+    $script [-lock/-suspend/-logout/-reboot/-shutdown/-switch] [lockmethod]
 
   Settings:
-    [-lock]     = lock the screen with [method]
-    [-suspend]  = lock and suspend the screen with [method]
-    [-logout]   = logout from current session
-    [-reboot]   = reboot the system
-    [-shutdown] = shutdown the system
-    [-switch]   = switch user
-    [method]    = method to lock the screen
-      blur      = blured screenshot of the desktop
-      simple    = single color with message
+    [-lock]         = lock the screen with [lockmethod]
+    [-suspend]      = suspend or suspend with [lockmethod]
+    [-logout]       = logout from current session
+    [-reboot]       = reboot the system
+    [-shutdown]     = shutdown the system
+    [-switch]       = switch user
+    [lockmethod]    = method to lock the screen
+      blur          = blured screenshot of the desktop
+      simple        = single color with message
 
   Examples:
     $script -lock blur
     $script -lock simple
+    $script -suspend
     $script -suspend blur
     $script -suspend simple
     $script -logout
@@ -68,7 +69,10 @@ case "$1" in
         fi
         ;;
     -suspend)
-        if [ "$2" = "blur" ]; then
+        if [ -z "$2" ]; then
+            systemctl suspend
+            exit 0
+        elif [ "$2" = "blur" ]; then
             lock_blur && systemctl suspend
             exit 0
         elif [ "$2" = "simple" ]; then
