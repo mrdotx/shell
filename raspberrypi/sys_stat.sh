@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/raspberrypi/sys_stat.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:48:55
+# date:       2019-12-31 18:02:43
 
 # start time
 start=$(date +%s.%N)
@@ -77,8 +77,8 @@ service "sshd"; ports "22"
 echo "ssh               $status    22    $port    $runtime"
 service "pihole-FTL"; ports "53"
 echo "pihole            $status    53    $port    $runtime"
-service "cloudflared-dns"; ports "5300"
-echo "cloudflared       $status    5300  $port    $runtime"
+service "dnscrypt-proxy"; ports "5300"
+echo "dnscrypt          $status    5300  $port    $runtime"
 service "tor"; ports "9050"
 echo "tor               $status    9050  $port    $runtime"
 service "org.cups.cupsd"; ports "631"
