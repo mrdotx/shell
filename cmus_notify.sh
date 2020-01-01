@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/cmus_notify.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-01 17:35:14
+# date:       2020-01-01 22:39:35
 
 if info=$(cmus-remote -Q 2> /dev/null); then
     status=$(echo "$info" | grep '^status ' | sed 's/^status //')
@@ -55,22 +55,25 @@ case "$1" in
         red=$(xrdb -query | grep color9: | cut -f2)
 
         case $status in
-            "playing") info="" ;;
-            "paused") info="%{o$grey}" ;;
-            "stopped") info="%{o$red}" ;;
+            "playing") info=""
+                len=100 ;;
+            "paused") info="%{o$grey}"
+                len=111 ;;
+            "stopped") info="%{o$red}"
+                len=111 ;;
             *) info="" ;;
         esac
 
         if [ -z "$stream" ]; then
-            info_body="$artist - $album - $tracknumber. $title"
+            info_body="$artist | $title | $album"
         else
-            info_body="$stream - $genre - $title"
+            info_body="$stream | $genre | $title"
         fi
 
         if [ -z "$artist" ] && [ -z "$title" ]; then
-            echo "$info ${file##*/}"
+            echo "$info ${file##*/}" | cut -c 1-$len
         else
-            echo "$info $info_body"
+            echo "$info $info_body" | cut -c 1-$len
         fi
         ;;
     *)
