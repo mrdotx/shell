@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/cmus_notify.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-31 00:21:41
+# date:       2020-01-01 17:35:14
 
 if info=$(cmus-remote -Q 2> /dev/null); then
     status=$(echo "$info" | grep '^status ' | sed 's/^status //')
@@ -41,7 +41,7 @@ case "$1" in
         if [ -z "$stream" ]; then
             info_body="Artist: $artist\nAlbum : $album\nTrack : $tracknumber\nTitle : <b>$title</b>"
         else
-            info_body="$title\n$genre\n$comment\n<b>$stream</b>"
+            info_body="<b>$stream</b>\n$genre\n$title\n$comment"
         fi
 
         if [ -z "$artist" ] && [ -z "$title" ]; then
@@ -62,9 +62,9 @@ case "$1" in
         esac
 
         if [ -z "$stream" ]; then
-            info_body="$album | $tracknumber | $artist - $title"
+            info_body="$artist - $album - $tracknumber. $title"
         else
-            info_body="$title | $genre | $stream"
+            info_body="$stream - $genre - $title"
         fi
 
         if [ -z "$artist" ] && [ -z "$title" ]; then
