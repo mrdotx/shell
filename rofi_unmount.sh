@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_unmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-27 10:56:03
+# date:       2020-01-01 12:02:58
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -23,13 +23,24 @@ remote_unmnt() {
 
 # usb unmount
 usb_unmnt() {
-    mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4!~/\/boot|\/media\/disk1|\/home$|SWAP/&&length($4)>1 || $2=="rom"&&length($4)>1 || $3=="1,4M"&&length($4)>1) printf "%s (%s)\n",$4,$3}')
+    mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '{if ($2=="part"&&$4!~/\/boot|\/media\/disk1|\/home$|SWAP/&&length($4)>1 || $2=="rom"&&length($4)>1 || $3=="1,4M"&&length($4)>1) printf "%s (%s)\n",$4,$3}')
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
     sudo -A umount "$chosen" && \
         if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
             notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount USB" "$chosen unmounted"
+}
+
+# iso unmount
+iso_unmnt() {
+    mounts=$(lsblk -npo "name,type,size,mountpoint" | awk '{if ($2=="loop") printf "%s (%s)\n",$4,$3}')
+    [ -z "$mounts" ] && exit
+    chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
+    [ -z "$chosen" ] && exit
+    sudo -A umount "$chosen" && \
+        if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
+            notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount ISO" "$chosen unmounted"
 }
 
 # android unmount
@@ -59,10 +70,12 @@ dvd_eject() {
 case $(printf "%s\n" \
     "Remote Unmount" \
     "USB Unmount" \
+    "ISO Unmount" \
     "Android Unmount" \
     "DVD Eject" | rofi -monitor -1 -dmenu -i -p "") in
         "Remote Unmount") remote_unmnt ;;
         "USB Unmount") usb_unmnt ;;
+        "ISO Unmount") iso_unmnt ;;
         "Android Unmount") android_unmnt ;;
         "DVD Eject") dvd_eject ;;
 esac

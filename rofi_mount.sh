@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_mount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-27 10:54:09
+# date:       2020-01-01 12:19:26
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -37,6 +37,15 @@ usb_mnt() {
     esac
 }
 
+# iso mount
+iso_mnt() {
+    chosen=$(find /media/disk1/downloads -type f -iname "*.iso" | cut -d / -f 5 | sed "s/.iso//g" | sort | rofi -monitor -1 -dmenu -i -p "")
+    [ -z "$chosen" ] && exit
+    mnt_point="/media/$chosen"
+    if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi && \
+        sudo mount -o loop "/media/disk1/downloads/$chosen.iso" "$mnt_point" && \
+        notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount ISO" "$chosen mounted to $mnt_point"
+}
 # android mount
 android_mnt() {
     chosen=$(simple-mtpfs -l 2>/dev/null | rofi -monitor -1 -dmenu -i -p "" | cut -d : -f 1)
@@ -51,8 +60,10 @@ android_mnt() {
 case $(printf "%s\n" \
     "Remote Mount" \
     "USB Mount" \
+    "ISO Mount" \
     "Android Mount" | rofi -monitor -1 -dmenu -i -p "") in
         "Remote Mount") remote_mnt ;;
         "USB Mount") usb_mnt ;;
+        "ISO Mount") iso_mnt ;;
         "Android Mount") android_mnt ;;
 esac
