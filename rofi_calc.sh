@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_calc.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:57:30
+# date:       2020-01-02 00:18:17
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to run bc calculations in rofi
@@ -28,8 +28,8 @@ else
     result=$(echo "$@" | bc -l | sed '/\./ s/\.\{0,1\}0\{1,\}$//')
     chosen=$(printf "Copy to clipboard\nClear\nClose" | $menu -p "= $result")
     case $chosen in
-        "Copy to clipboard") echo "$result" | xsel -b && \
-            notify-send -i "$HOME/projects/shell/icons/clipboard.png" "Clipboard" "Result copied: $result" ;;
+        "Copy to clipboard") echo "$result" | xsel -b \
+            && notify-send -i "$HOME/projects/shell/icons/clipboard.png" "Clipboard" "Result copied: $result" ;;
         "Clear") $0 ;;
         "Close") ;;
         "") ;;

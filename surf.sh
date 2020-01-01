@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/surf.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-26 18:29:49
+# date:       2020-01-01 23:57:03
 
 xidfile="/tmp/tabbed-surf.xid"
 uri=""
@@ -14,8 +14,7 @@ then
 fi
 
 runtabbed() {
-    tabbed -cdn tabbed-surf -r 2 surf -e '' "$uri" >"$xidfile" \
-        2>/dev/null &
+    tabbed -cdn tabbed-surf -r 2 surf -e '' "$uri" >"$xidfile" 2>/dev/null &
 }
 
 if [ ! -r "$xidfile" ];

@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_mount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-01 12:19:26
+# date:       2020-01-02 00:13:52
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -13,9 +13,9 @@ remote_mnt() {
     chosen=$(find "$HOME/projects/hidden/mount/" -iname "*.sh" | cut -d / -f 7 | sed "s/.sh//g" | sort | rofi -monitor -1 -dmenu -i -p "")
     [ -z "$chosen" ] && exit
     mnt_point="/media/$chosen"
-    if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi && \
-        "$HOME/projects/hidden/mount/$chosen.sh" "$mnt_point" && \
-        notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount Remote" "$chosen mounted to $mnt_point"
+    if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi \
+        && "$HOME/projects/hidden/mount/$chosen.sh" "$mnt_point" \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount Remote" "$chosen mounted to $mnt_point"
 }
 
 # usb mount
@@ -25,11 +25,11 @@ usb_mnt() {
     mnt_point="/media/$(basename "$chosen")"
     part_typ="$(lsblk -no "fstype" "$chosen")"
     if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi && case "$part_typ" in
-    "vfat") sudo -A mount -t vfat "$chosen" "$mnt_point" -o rw,umask=0000 && \
-        notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount $part_typ USB" "$chosen mounted to $mnt_point" ;;
+    "vfat") sudo -A mount -t vfat "$chosen" "$mnt_point" -o rw,umask=0000 \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount $part_typ USB" "$chosen mounted to $mnt_point" ;;
     *)
-        sudo -A mount "$chosen" "$mnt_point" && \
-            notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount $part_typ USB" "$chosen mounted to $mnt_point"
+        sudo -A mount "$chosen" "$mnt_point" \
+            && notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount $part_typ USB" "$chosen mounted to $mnt_point"
         user="$(whoami)"
         ug="$(groups | awk '{print $1}')"
         sudo -A chown "$user":"$ug" 741 "$mnt_point"
@@ -42,18 +42,18 @@ iso_mnt() {
     chosen=$(find /media/disk1/downloads -type f -iname "*.iso" | cut -d / -f 5 | sed "s/.iso//g" | sort | rofi -monitor -1 -dmenu -i -p "")
     [ -z "$chosen" ] && exit
     mnt_point="/media/$chosen"
-    if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi && \
-        sudo mount -o loop "/media/disk1/downloads/$chosen.iso" "$mnt_point" && \
-        notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount ISO" "$chosen mounted to $mnt_point"
+    if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi \
+        && sudo mount -o loop "/media/disk1/downloads/$chosen.iso" "$mnt_point" \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount ISO" "$chosen mounted to $mnt_point"
 }
 # android mount
 android_mnt() {
     chosen=$(simple-mtpfs -l 2>/dev/null | rofi -monitor -1 -dmenu -i -p "" | cut -d : -f 1)
     [ -z "$chosen" ] && exit
     mnt_point="/media/$chosen"
-    if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi && \
-        simple-mtpfs --device "$chosen" "$mnt_point" && \
-        notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount Android" "$chosen mounted to $mnt_point"
+    if [ ! -d "$mnt_point" ]; then mkdir "$mnt_point"; fi \
+        && simple-mtpfs --device "$chosen" "$mnt_point" \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "Mount Android" "$chosen mounted to $mnt_point"
 }
 
 # menu

@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_unmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-01 12:02:58
+# date:       2020-01-02 00:10:37
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -13,9 +13,9 @@ remote_unmnt() {
     if grep -E "/media/.*fuse" /etc/mtab; then
         chosen=$(awk '/\/media\/.*fuse/ {print $2}' /etc/mtab | sort | rofi -monitor -1 -dmenu -i -p "")
         [ -z "$chosen" ] && exit
-        fusermount -u "$chosen" && \
-            if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
-                notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount Remote" "$chosen unmounted"
+        fusermount -u "$chosen" \
+            && if [ -d "$chosen" ]; then rmdir "$chosen"; fi \
+            && notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount Remote" "$chosen unmounted"
     else
         exit
     fi
@@ -27,9 +27,9 @@ usb_unmnt() {
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
-    sudo -A umount "$chosen" && \
-        if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
-            notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount USB" "$chosen unmounted"
+    sudo -A umount "$chosen" \
+        && if [ -d "$chosen" ]; then rmdir "$chosen"; fi \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount USB" "$chosen unmounted"
 }
 
 # iso unmount
@@ -38,9 +38,9 @@ iso_unmnt() {
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
-    sudo -A umount "$chosen" && \
-        if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
-            notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount ISO" "$chosen unmounted"
+    sudo -A umount "$chosen" \
+        && if [ -d "$chosen" ]; then rmdir "$chosen"; fi \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount ISO" "$chosen unmounted"
 }
 
 # android unmount
@@ -48,9 +48,9 @@ android_unmnt() {
     if grep simple-mtpfs /etc/mtab; then
         chosen=$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | sort | rofi -monitor -1 -dmenu -i -p "")
         [ -z "$chosen" ] && exit
-        fusermount -u "$chosen" && \
-            if [ -d "$chosen" ]; then rmdir "$chosen"; fi && \
-                notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount Android" "$chosen unmounted"
+        fusermount -u "$chosen" \
+            && if [ -d "$chosen" ]; then rmdir "$chosen"; fi \
+            && notify-send -i "$HOME/projects/shell/icons/usb.png" "Unmount Android" "$chosen unmounted"
     else
         exit
     fi
@@ -62,8 +62,8 @@ dvd_eject() {
     [ -z "$mounts" ] && exit
     chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
     [ -z "$chosen" ] && exit
-    sudo -A eject "$chosen" && \
-        notify-send -i "$HOME/projects/shell/icons/usb.png" "Eject DVD" "$chosen ejected"
+    sudo -A eject "$chosen" \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "Eject DVD" "$chosen ejected"
 }
 
 # menu

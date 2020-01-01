@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/conky.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:54:10
+# date:       2020-01-02 00:29:39
 
 conky_dir="conky -q -c $HOME/.config/conky"
 
@@ -26,13 +26,13 @@ case "$choice" in
 small)
     if [ "$(pgrep -f "$conky2")" ]; then
         # slim horizontal -> horizontal"
-        kill "$(pgrep -f "$conky2")" && \
-            $conky1 &
+        kill "$(pgrep -f "$conky2")" \
+            && $conky1 &
         exit 0
     elif [ "$(pgrep -f "$conky1")" ]; then
         # horizontal -> slim horizontal"
-        kill "$(pgrep -f "$conky1")" && \
-            $conky2 &
+        kill "$(pgrep -f "$conky1")" \
+            && $conky2 &
         exit 0
     else
         # start"
@@ -43,16 +43,17 @@ small)
 large)
     if [ "$(pgrep -f "$conky3")" ]; then
         # vertical -> stop"
-        kill "$(pgrep -f "$conky3")" && exit 0
+        kill "$(pgrep -f "$conky3")" \
+            && exit 0
     elif [ "$(pgrep -f "$conky2")" ]; then
         # slim horizontal -> vertical"
-        kill "$(pgrep -f "$conky2")" && \
-            $conky3 &
+        kill "$(pgrep -f "$conky2")" \
+            && $conky3 &
         exit 0
     elif [ "$(pgrep -f "$conky1")" ]; then
         # horizontal -> slim horizontal"
-        kill "$(pgrep -f "$conky1")" && \
-            $conky2 &
+        kill "$(pgrep -f "$conky1")" \
+            && $conky2 &
         exit 0
     else
         # start"

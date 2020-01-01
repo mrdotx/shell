@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_service.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:58:59
+# date:       2020-01-02 00:10:08
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -13,22 +13,26 @@ polkit_ser() {
     polkit_app=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
     if [ "$(pgrep -f $polkit_app)" ]; then
-        killall $polkit_app && \
-            notify-send -i "$HOME/projects/shell/icons/polkit.png" "Polkit" "Gnome Authentication Agent stopped!" && exit 0
+        killall $polkit_app \
+            && notify-send -i "$HOME/projects/shell/icons/polkit.png" "Polkit" "Gnome Authentication Agent stopped!" \
+            && exit 0
     else
         $polkit_app >/dev/null 2>&1 &
-        notify-send -i "$HOME/projects/shell/icons/polkit.png" "Polkit" "Gnome Authentication Agent started!" && exit 0
+        notify-send -i "$HOME/projects/shell/icons/polkit.png" "Polkit" "Gnome Authentication Agent started!" \
+            && exit 0
     fi
 }
 
 # gestures
 gestures_ser() {
     if [ "$(pgrep -f /usr/bin/libinput-gestures)" ]; then
-        libinput-gestures-setup stop && \
-            notify-send -i "$HOME/projects/shell/icons/gestures.png" "Gestures" "Gestures stopped!" && exit 0
+        libinput-gestures-setup stop \
+            && notify-send -i "$HOME/projects/shell/icons/gestures.png" "Gestures" "Gestures stopped!" \
+            && exit 0
     else
-        libinput-gestures-setup start >/dev/null 2>&1 && \
-            notify-send -i "$HOME/projects/shell/icons/gestures.png" "Gestures" "Gestures started!" && exit 0
+        libinput-gestures-setup start >/dev/null 2>&1 \
+            && notify-send -i "$HOME/projects/shell/icons/gestures.png" "Gestures" "Gestures started!" \
+            && exit 0
     fi
 }
 
@@ -36,11 +40,13 @@ gestures_ser() {
 vpn_name=hades
 vpn() {
     if [ "$(nmcli connection show --active $vpn_name)" ]; then
-        nmcli con down id $vpn_name && \
-            notify-send -i "$HOME/projects/shell/icons/vpn.png" "VPN" "$vpn_name disconnected!" && exit 0
+        nmcli con down id $vpn_name \
+            && notify-send -i "$HOME/projects/shell/icons/vpn.png" "VPN" "$vpn_name disconnected!" \
+            && exit 0
     else
-        nmcli con up id $vpn_name passwd-file "$HOME"/projects/hidden/vpn/$vpn_name && \
-            notify-send -i "$HOME/projects/shell/icons/vpn.png" "VPN" "$vpn_name connected!" && exit 0
+        nmcli con up id $vpn_name passwd-file "$HOME"/projects/hidden/vpn/$vpn_name \
+            && notify-send -i "$HOME/projects/shell/icons/vpn.png" "VPN" "$vpn_name connected!" \
+            && exit 0
     fi
 }
 
@@ -49,68 +55,80 @@ nmapplet_ser() {
     nmapplet_app=nm-applet
 
     if [ "$(pgrep $nmapplet_app)" ]; then
-        killall $nmapplet_app && \
-            notify-send -i "$HOME/projects/shell/icons/service.png" "Network Manager" "stopped!" && exit 0
+        killall $nmapplet_app \
+            && notify-send -i "$HOME/projects/shell/icons/service.png" "Network Manager" "stopped!" \
+            && exit 0
     else
         $nmapplet_app >/dev/null 2>&1 &
-        notify-send -i "$HOME/projects/shell/icons/service.png" "Network Manager" "started!" && exit 0
+        notify-send -i "$HOME/projects/shell/icons/service.png" "Network Manager" "started!" \
+            && exit 0
     fi
 }
 
 # printer
 printer_ser() {
     if [ "$printer_stat" != "active" ]; then
-        sudo -A systemctl start org.cups.cupsd.service && \
-            notify-send -i "$HOME/projects/shell/icons/printer.png" "Service" "Printer started!" && exit 0
+        sudo -A systemctl start org.cups.cupsd.service \
+            && notify-send -i "$HOME/projects/shell/icons/printer.png" "Service" "Printer started!" \
+            && exit 0
     else
-        sudo -A systemctl stop org.cups.cupsd.service && \
-            notify-send -i "$HOME/projects/shell/icons/printer.png" "Service" "Printer stopped!" && exit 0
+        sudo -A systemctl stop org.cups.cupsd.service \
+            && notify-send -i "$HOME/projects/shell/icons/printer.png" "Service" "Printer stopped!" \
+            && exit 0
     fi
 }
 
 # avahi
 avahi_ser() {
     if [ "$avahi_ser_stat" != "active" ]; then
-        sudo -A systemctl start avahi-daemon.service && \
-            sudo -A systemctl start avahi-daemon.socket && \
-            notify-send -i "$HOME/projects/shell/icons/printer.png" "Service" "Avahi started!" && exit 0
+        sudo -A systemctl start avahi-daemon.service \
+            && sudo -A systemctl start avahi-daemon.socket \
+            && notify-send -i "$HOME/projects/shell/icons/printer.png" "Service" "Avahi started!" \
+            && exit 0
     else
-        sudo -A systemctl stop avahi-daemon.service && \
-            sudo -A systemctl stop avahi-daemon.socket && \
-            notify-send -i "$HOME/projects/shell/icons/printer.png" "Service" "Avahi stopped!" && exit 0
+        sudo -A systemctl stop avahi-daemon.service \
+            && sudo -A systemctl stop avahi-daemon.socket \
+            && notify-send -i "$HOME/projects/shell/icons/printer.png" "Service" "Avahi stopped!" \
+            && exit 0
     fi
 }
 
 # bluetooth
 bluetooth_ser() {
     if [ "$bluetooth_stat" != "active" ]; then
-        sudo -A systemctl start bluetooth.service && \
-            notify-send -i "$HOME/projects/shell/icons/bluetooth.png" "Service" "Bluetooth started!" && exit 0
+        sudo -A systemctl start bluetooth.service \
+            && notify-send -i "$HOME/projects/shell/icons/bluetooth.png" "Service" "Bluetooth started!" \
+            && exit 0
     else
-        sudo -A systemctl stop bluetooth.service && \
-            notify-send -i "$HOME/projects/shell/icons/bluetooth.png" "Service" "Bluetooth stopped!" && exit 0
+        sudo -A systemctl stop bluetooth.service \
+            && notify-send -i "$HOME/projects/shell/icons/bluetooth.png" "Service" "Bluetooth stopped!" \
+            && exit 0
     fi
 }
 
 # modemmanager
 modemmanager_ser() {
     if [ "$modemmanager_stat" != "active" ]; then
-        sudo -A systemctl start ModemManager.service && \
-            notify-send -i "$HOME/projects/shell/icons/service.png" "Service" "ModemManager started!" && exit 0
+        sudo -A systemctl start ModemManager.service \
+            && notify-send -i "$HOME/projects/shell/icons/service.png" "Service" "ModemManager started!" \
+            && exit 0
     else
-        sudo -A systemctl stop ModemManager.service && \
-            notify-send -i "$HOME/projects/shell/icons/service.png" "Service" "ModemManager stopped!" && exit 0
+        sudo -A systemctl stop ModemManager.service \
+            && notify-send -i "$HOME/projects/shell/icons/service.png" "Service" "ModemManager stopped!" \
+            && exit 0
     fi
 }
 
 # firewall
 firewall_ser() {
     if [ "$firewall_stat" != "active" ]; then
-        sudo -A systemctl start ufw.service && \
-            notify-send -i "$HOME/projects/shell/icons/firewall.png" "Service" "Firewall started!" && exit 0
+        sudo -A systemctl start ufw.service \
+            && notify-send -i "$HOME/projects/shell/icons/firewall.png" "Service" "Firewall started!" \
+            && exit 0
     else
-        sudo -A systemctl stop ufw.service && \
-            notify-send -i "$HOME/projects/shell/icons/firewall.png" "Service" "Firewall stopped!" && exit 0
+        sudo -A systemctl stop ufw.service \
+            && notify-send -i "$HOME/projects/shell/icons/firewall.png" "Service" "Firewall stopped!" \
+            && exit 0
     fi
 }
 
