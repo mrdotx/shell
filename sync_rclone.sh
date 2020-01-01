@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-29 16:07:39
+# date:       2020-01-01 15:33:53
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy from/to cloud with rclone
@@ -32,31 +32,26 @@ reset=$(tput sgr0)
 title=("web.de")
 src=("$HOME/cloud/webde/")
 dest=("webde:/")
-icon=("$HOME/projects/shell/icons/web.de.png")
 filter=("$HOME/cloud/webde/.filter")
 
 title+=("GMX")
 src+=("$HOME/cloud/gmx/")
 dest+=("gmx:/")
-icon+=("$HOME/projects/shell/icons/gmx.png")
 filter+=("$HOME/cloud/gmx/.filter")
 
 title+=("Google Drive")
 src+=("$HOME/cloud/googledrive/")
 dest+=("googledrive:/")
-icon+=("$HOME/projects/shell/icons/google-drive.png")
 filter+=("$HOME/cloud/googledrive/.filter")
 
 title+=("OneDrive")
 src+=("$HOME/cloud/onedrive/")
 dest+=("onedrive:/")
-icon+=("$HOME/projects/shell/icons/onedrive.png")
 filter+=("$HOME/cloud/onedrive/.filter")
 
 title+=("Dropbox")
 src+=("$HOME/cloud/dropbox/")
 dest+=("dropbox:/")
-icon+=("$HOME/projects/shell/icons/dropbox.png")
 filter+=("$HOME/cloud/dropbox/.filter")
 
 # rclone to copy data from and to cloud
@@ -67,7 +62,6 @@ elif [[ $1 == "-c" ]]; then
     for ((i=0;i<${#title[@]};i++)); do
         echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
         rclone check -P "${src[i]}" "${dest[i]}" --filter-from="${filter[i]}"
-        notify-send -i "${icon[i]}" "Check ${title[i]}" "completed!"
     done
     exit 0
 elif [[ $1 == "-s" ]]; then
@@ -78,7 +72,6 @@ elif [[ $1 == "-s" ]]; then
         echo "[${magenta}${title[i]}${reset}] -> ${src[i]}"
         rclone copy -P "${dest[i]}" "${src[i]}" --filter-from="${filter[i]}"
         #rclone sync -P "${dest[i]}" "${src[i]}" --filter-from="${filter[i]}"
-        notify-send -i "${icon[i]}" "Sync ${title[i]}" "completed!"
     done
     exit 0
 fi
