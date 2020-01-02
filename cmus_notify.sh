@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/cmus_notify.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-01 22:39:35
+# date:       2020-01-02 21:33:37
 
 if info=$(cmus-remote -Q 2> /dev/null); then
     status=$(echo "$info" | grep '^status ' | sed 's/^status //')
@@ -38,6 +38,16 @@ case "$1" in
             *) info="" ;;
         esac
 
+        if [ -n "$file" ]; then
+            ffmpeg -y -i "$file" -c:v copy /tmp/cmus_notify_album_art.png >/dev/null 2>&1
+        fi
+
+        if [ -e /tmp/cmus_notify_album_art.png ]; then
+            albumart="/tmp/cmus_notify_album_art.png"
+        else
+            albumart="$HOME/projects/shell/icons/cmus.png"
+        fi
+
         if [ -z "$stream" ]; then
             info_body="Artist: $artist\nAlbum : $album\nTrack : $tracknumber\nTitle : <b>$title</b>"
         else
@@ -45,10 +55,12 @@ case "$1" in
         fi
 
         if [ -z "$artist" ] && [ -z "$title" ]; then
-            notify-send -i "$HOME/projects/shell/icons/cmus.png" "C* Music Player | $info" "${file##*/}"
+            notify-send -i "$albumart" "C* Music Player | $info" "${file##*/}"
         else
-            notify-send -i "$HOME/projects/shell/icons/cmus.png" "C* Music Player | $info" "$info_body"
+            notify-send -i "$albumart" "C* Music Player | $info" "$info_body"
         fi
+
+        rm -f "/tmp/cmus_notify_album_art.png"
         ;;
     --polybar)
         grey=$(xrdb -query | grep Polybar.foreground1: | cut -f2)
