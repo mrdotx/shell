@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_unmount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-02 00:10:37
+# date:       2020-01-03 23:26:35
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -73,9 +73,9 @@ case $(printf "%s\n" \
     "ISO Unmount" \
     "Android Unmount" \
     "DVD Eject" | rofi -monitor -1 -dmenu -i -p "") in
-        "Remote Unmount") remote_unmnt ;;
-        "USB Unmount") usb_unmnt ;;
-        "ISO Unmount") iso_unmnt ;;
-        "Android Unmount") android_unmnt ;;
-        "DVD Eject") dvd_eject ;;
+    "Remote Unmount") remote_unmnt ;;
+    "USB Unmount") usb_unmnt ;;
+    "ISO Unmount") iso_unmnt ;;
+    "Android Unmount") android_unmnt ;;
+    "DVD Eject") dvd_eject ;;
 esac

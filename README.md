@@ -1,6 +1,5 @@
 | shell script folder | comment                                              |
 | :------------------ | :--------------------------------------------------- |
-| mount               | templates to connect to ftp/sftp via curlftpfs/sshfs |
 | raspberrypi         | a few scripts for the raspberry pi                   |
 | snippets            | old stuff                                            |
 

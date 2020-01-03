@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_service.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-02 00:10:08
+# date:       2020-01-03 23:26:16
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -157,14 +157,14 @@ case $(printf "%s\n" \
     "ModemManager ($modemmanager_stat)" \
     "Firewall ($firewall_stat)" \
     "Conky ($conky_stat)" | rofi -monitor -1 -dmenu -i -p "") in
-        "Authentication Agent"*) polkit_ser ;;
-        "Gestures"*) gestures_ser ;;
-        "VPN"*) vpn ;;
-        "Netzwerk Manager"*) nmapplet_ser ;;
-        "Printer"*) printer_ser ;;
-        "Avahi Service/Socket"*) avahi_ser ;;
-        "Bluetooth"*) bluetooth_ser ;;
-        "ModemManager"*) modemmanager_ser ;;
-        "Firewall"*) firewall_ser ;;
-        "Conky"*) conky.sh ;;
+    "Authentication Agent"*) polkit_ser ;;
+    "Gestures"*) gestures_ser ;;
+    "VPN"*) vpn ;;
+    "Netzwerk Manager"*) nmapplet_ser ;;
+    "Printer"*) printer_ser ;;
+    "Avahi Service/Socket"*) avahi_ser ;;
+    "Bluetooth"*) bluetooth_ser ;;
+    "ModemManager"*) modemmanager_ser ;;
+    "Firewall"*) firewall_ser ;;
+    "Conky"*) conky.sh ;;
 esac
