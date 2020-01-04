@@ -3,10 +3,18 @@
 # path:       ~/projects/shell/rofi_vim.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-03 22:41:23
+# date:       2020-01-04 12:40:33
 
 # exit if rofi is running
 pgrep -x rofi && exit
+
+netrc() {
+    rmt_name=$1
+    gpg "$HOME/.netrc.gpg" \
+        && chmod 600 "$HOME/.netrc" \
+        && $TERMINAL -e vim "$rmt_name" -c "Lexplore" \
+        && rm -f "$HOME/.netrc"
+}
 
 # menu for vim shortcuts
 case $(printf "%s\n" \
@@ -27,8 +35,8 @@ case $(printf "%s\n" \
     "notes") $TERMINAL -e vim "$HOME/projects/hidden/notes/index.md" ;;
     "middlefinger-streetwear.com") $TERMINAL -e vim scp://middlefinger/ -c "Lexplore" ;;
     "prinzipal-kreuzberg.com") $TERMINAL -e vim scp://prinzipal/ -c "Lexplore" ;;
-    "klassiker.online.de") $TERMINAL -e vim ftp://klassiker.online.de/ -c "Lexplore" ;;
-    "marcusreith.de") $TERMINAL -e vim ftp://marcusreith.de/ -c "Lexplore" ;;
+    "klassiker.online.de") netrc ftp://klassiker.online.de/ ;;
+    "marcusreith.de") netrc ftp://marcusreith.de/ ;;
     "pi") $TERMINAL -e vim scp://hermes/ -c "Lexplore" ;;
     "pi2") $TERMINAL -e vim scp://prometheus/ -c "Lexplore" ;;
     "firetv") $TERMINAL -e vim scp://firetv/ -c "Lexplore" ;;
