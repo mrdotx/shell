@@ -3,14 +3,14 @@
 # path:       ~/projects/shell/rofi_vim.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-04 12:40:33
+# date:       2020-01-04 12:57:52
 
 # exit if rofi is running
 pgrep -x rofi && exit
 
 netrc() {
     rmt_name=$1
-    gpg "$HOME/.netrc.gpg" \
+    gpg -o "$HOME/.netrc" "$HOME/cloud/webde/Keys/netrc.gpg" \
         && chmod 600 "$HOME/.netrc" \
         && $TERMINAL -e vim "$rmt_name" -c "Lexplore" \
         && rm -f "$HOME/.netrc"
