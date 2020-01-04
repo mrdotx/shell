@@ -3,15 +3,15 @@
 # path:       ~/projects/shell/polybar_vpn_hades.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-02 00:18:59
+# date:       2020-01-04 11:38:37
 
-vpnname=hades
+vpn_name=hades
 grey=$(xrdb -query | grep Polybar.foreground1: | cut -f2)
 red=$(xrdb -query | grep color9: | cut -f2)
 
 case "$1" in
     --status)
-        if [ "$(nmcli connection show --active $vpnname)" ]
+        if [ "$(nmcli connection show --active $vpn_name)" ]
         then
             echo "%{o$red}%{o-}"
         else
@@ -19,12 +19,14 @@ case "$1" in
         fi
         ;;
     *)
-        if [ "$(nmcli connection show --active $vpnname)" ]
+        if [ "$(nmcli connection show --active $vpn_name)" ]
         then
-            nmcli con down id $vpnname \
+            nmcli con down id $vpn_name \
                 && echo "%{o$grey}%{o-}"
         else
-            nmcli con up id $vpnname passwd-file "$HOME"/projects/hidden/vpn/$vpnname \
+            gpg -o "/tmp/$vpn_name.txt" "$HOME/cloud/webde/Keys/$vpn_name.txt.gpg" \
+                && nmcli con up id $vpn_name passwd-file "/tmp/$vpn_name.txt" \
+                && rm "/tmp/$vpn_name.txt" \
                 && echo "%{o$red}%{o-}"
         fi
         ;;

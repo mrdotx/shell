@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_service.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-03 23:26:16
+# date:       2020-01-04 11:40:05
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -44,7 +44,9 @@ vpn() {
             && notify-send -i "$HOME/projects/shell/icons/vpn.png" "VPN" "$vpn_name disconnected!" \
             && exit 0
     else
-        nmcli con up id $vpn_name passwd-file "$HOME"/projects/hidden/vpn/$vpn_name \
+        gpg -o "/tmp/$vpn_name.txt" "$HOME/cloud/webde/Keys/$vpn_name.txt.gpg" \
+            && nmcli con up id $vpn_name passwd-file "/tmp/$vpn_name.txt" \
+            && rm "/tmp/$vpn_name.txt" \
             && notify-send -i "$HOME/projects/shell/icons/vpn.png" "VPN" "$vpn_name connected!" \
             && exit 0
     fi
