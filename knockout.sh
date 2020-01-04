@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/knockout.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-30 14:49:42
+# date:       2020-01-04 15:59:21
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
@@ -36,7 +36,7 @@ help="$script [-h/--help] -- script for \"knockout\" the system
 lock_simple ()
 {
     # slock message "locked [user] at [date]"
-    slock -m "locked $(whoami) at $(date "+%a %e.%m.%G %H:%M")" &
+    slock -m "locked $(whoami) at $(date "+%a %d.%m.%Y %k:%M")" &
 }
 
 # take screenshot, blur it and lock the screen with i3lock
