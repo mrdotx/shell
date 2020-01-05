@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_mount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-03 23:22:28
+# date:       2020-01-05 10:26:31
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -51,6 +51,19 @@ rclone_mnt() {
     esac
 }
 
+# remote unmount
+remote_unmnt() {
+    if grep -E "/media/.*fuse" /etc/mtab; then
+        chosen=$(awk '/\/media\/.*fuse/ {print $2}' /etc/mtab | sort | rofi -monitor -1 -dmenu -i -p "")
+        [ -z "$chosen" ] && exit
+        fusermount -u "$chosen" \
+            && if [ -d "$chosen" ]; then rmdir "$chosen"; fi \
+            && notify-send -i "$HOME/projects/shell/icons/usb.png" "Remote Unmount" "$chosen unmounted"
+    else
+        exit
+    fi
+}
+
 # usb mount
 usb_mnt() {
     chosen="$(lsblk -rpo "name,type,size,mountpoint" | awk '{ if ($2=="part"&&$4=="" || $2=="rom"&&$4=="" || $3=="1,4M"&&$4=="") printf "%s (%s)\n",$1,$3}' | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')"
@@ -70,6 +83,17 @@ usb_mnt() {
     esac
 }
 
+# usb unmount
+usb_unmnt() {
+    mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '{if ($2=="part"&&$4!~/\/boot|\/media\/disk1|\/home$|SWAP/&&length($4)>1 || $2=="rom"&&length($4)>1 || $3=="1,4M"&&length($4)>1) printf "%s (%s)\n",$4,$3}')
+    [ -z "$mounts" ] && exit
+    chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
+    [ -z "$chosen" ] && exit
+    sudo -A umount "$chosen" \
+        && if [ -d "$chosen" ]; then rmdir "$chosen"; fi \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "USB Unmount" "$chosen unmounted"
+}
+
 # iso mount
 iso_mnt() {
     chosen=$(find /media/disk1/downloads -type f -iname "*.iso" | cut -d / -f 5 | sed "s/.iso//g" | sort | rofi -monitor -1 -dmenu -i -p "")
@@ -79,6 +103,18 @@ iso_mnt() {
         && sudo mount -o loop "/media/disk1/downloads/$chosen.iso" "$mnt_point" \
         && notify-send -i "$HOME/projects/shell/icons/usb.png" "ISO Mount" "$chosen mounted to $mnt_point"
 }
+
+# iso unmount
+iso_unmnt() {
+    mounts=$(lsblk -npo "name,type,size,mountpoint" | awk '{if ($2=="loop") printf "%s (%s)\n",$4,$3}')
+    [ -z "$mounts" ] && exit
+    chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
+    [ -z "$chosen" ] && exit
+    sudo -A umount "$chosen" \
+        && if [ -d "$chosen" ]; then rmdir "$chosen"; fi \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "ISO Unmount" "$chosen unmounted"
+}
+
 # android mount
 android_mnt() {
     chosen=$(simple-mtpfs -l 2>/dev/null | rofi -monitor -1 -dmenu -i -p "" | cut -d : -f 1)
@@ -89,14 +125,47 @@ android_mnt() {
         && notify-send -i "$HOME/projects/shell/icons/usb.png" "Android Mount" "$chosen mounted to $mnt_point"
 }
 
+# android unmount
+android_unmnt() {
+    if grep simple-mtpfs /etc/mtab; then
+        chosen=$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | sort | rofi -monitor -1 -dmenu -i -p "")
+        [ -z "$chosen" ] && exit
+        fusermount -u "$chosen" \
+            && if [ -d "$chosen" ]; then rmdir "$chosen"; fi \
+            && notify-send -i "$HOME/projects/shell/icons/usb.png" "Android Unmount" "$chosen unmounted"
+    else
+        exit
+    fi
+}
+
+# dvd eject
+dvd_eject() {
+    mounts=$(lsblk -nrpo "name,type,size,mountpoint" | awk '$2=="rom"{printf "%s (%s)\n",$1,$3}')
+    [ -z "$mounts" ] && exit
+    chosen=$(echo "$mounts" | rofi -monitor -1 -dmenu -i -p "" | awk '{print $1}')
+    [ -z "$chosen" ] && exit
+    sudo -A eject "$chosen" \
+        && notify-send -i "$HOME/projects/shell/icons/usb.png" "DVD Eject" "$chosen ejected"
+}
+
 # menu
 case $(printf "%s\n" \
     "RClone Mount" \
+    "Remote Unmount" \
     "USB Mount" \
+    "USB Unmount" \
     "ISO Mount" \
-    "Android Mount" | rofi -monitor -1 -dmenu -i -p "") in
-        "RClone Mount") rclone_mnt ;;
-        "USB Mount") usb_mnt ;;
-        "ISO Mount") iso_mnt ;;
-        "Android Mount") android_mnt ;;
+    "ISO Unmount" \
+    "Android Mount" \
+    "Android Unmount" \
+    "DVD Eject" | rofi -monitor -1 -dmenu -i -p "") in
+    "RClone Mount") rclone_mnt ;;
+    "Remote Unmount") remote_unmnt ;;
+    "USB Mount") usb_mnt ;;
+    "USB Unmount") usb_unmnt ;;
+    "ISO Mount") iso_mnt ;;
+    "ISO Unmount") iso_unmnt ;;
+    "Android Mount") android_mnt ;;
+    "Android Unmount") android_unmnt ;;
+    "DVD Eject") dvd_eject ;;
 esac
