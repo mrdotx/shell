@@ -3,20 +3,20 @@
 # path:       ~/projects/shell/rofi_mount.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-05 10:26:31
+# date:       2020-01-06 10:32:03
 
 # exit if rofi is running
 pgrep -x rofi && exit
 
-# rclone mount
-rclone_mnt() {
+# remote mount
+remote_mnt() {
     rcl() {
         rcl_host=$1
         rcl_mnt=/media/$rcl_host
         rmt_dir=$2
         if [ ! -d "$rcl_mnt" ]; then mkdir "$rcl_mnt"; fi \
             && rclone mount "$rcl_host:$rmt_dir" "$rcl_mnt" \
-            & notify-send -i "$HOME/projects/shell/icons/usb.png" "RClone Mount" "$rcl_host mounted to $rcl_mnt"
+            & notify-send -i "$HOME/projects/shell/icons/usb.png" "Remote Mount" "$rcl_host mounted to $rcl_mnt"
         }
 
     case $(printf "%s\n" \
@@ -150,7 +150,7 @@ dvd_eject() {
 
 # menu
 case $(printf "%s\n" \
-    "RClone Mount" \
+    "Remote Mount" \
     "Remote Unmount" \
     "USB Mount" \
     "USB Unmount" \
@@ -159,7 +159,7 @@ case $(printf "%s\n" \
     "Android Mount" \
     "Android Unmount" \
     "DVD Eject" | rofi -monitor -1 -dmenu -i -p "") in
-    "RClone Mount") rclone_mnt ;;
+    "Remote Mount") remote_mnt ;;
     "Remote Unmount") remote_unmnt ;;
     "USB Mount") usb_mnt ;;
     "USB Unmount") usb_unmnt ;;
