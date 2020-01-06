@@ -3,24 +3,30 @@
 # path:       ~/projects/shell/polybar.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-03 12:00:58
+# date:       2020-01-06 23:47:04
 
 pri=$(polybar -m | grep "(primary)" | sed -e 's/:.*$//g')
 sec=$(polybar -m | grep -v "(primary)" | sed -e 's/:.*$//g')
 
-# toggle for the bars
+# toggle the bars
 if [ -n "$1" ]; then
     bar="$1"
 elif [ "$(pgrep -xf "polybar i3_top")" ] \
     || [ "$(pgrep -xf "polybar i3_btm_pri")" ] \
-    || [ "$(pgrep -xf "polybar i3_btm_sec")" ]; then
+    || [ "$(pgrep -xf "polybar i3_top_sec")" ]; then
     bar="i3"
 elif [ "$(pgrep -xf "polybar i3")" ]; then
     bar_top="i3_top"
     bar_btm_pri="i3_btm_pri"
-    bar_btm_sec="i3_btm_sec"
+    bar_top_sec="i3_top_sec"
 else
-    bar="i3"
+    if [ "$(polybar -m | wc -l)" = 2 ]; then
+        bar_top="i3_top"
+        bar_btm_pri="i3_btm_pri"
+        bar_top_sec="i3_top_sec"
+    else
+        bar="i3"
+    fi
 fi
 
 # terminate already running bar instances
@@ -35,9 +41,9 @@ if [ -z $bar_top ]; then
         MONITOR=$pri polybar $bar  >>/tmp/polybar_$bar.log 2>&1 &
 else
     if [ "$(polybar -m | wc -l)" = 2 ]; then
-        echo "---" | tee -a /tmp/polybar_$bar_top.log /tmp/polybar_$bar_btm_sec.log
+        echo "---" | tee -a /tmp/polybar_$bar_top.log /tmp/polybar_$bar_top_sec.log
         MONITOR=$pri polybar $bar_top >>/tmp/polybar_$bar_top.log 2>&1 &
-        MONITOR=$sec polybar $bar_btm_sec >>/tmp/polybar_$bar_btm_sec.log 2>&1 &
+        MONITOR=$sec polybar $bar_top_sec >>/tmp/polybar_$bar_top_sec.log 2>&1 &
     else
         echo "---" | tee -a /tmp/polybar_$bar_top.log /tmp/polybar_$bar_btm_pri.log
         MONITOR=$pri polybar $bar_top >>/tmp/polybar_$bar_top.log 2>&1 &
