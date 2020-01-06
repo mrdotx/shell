@@ -31,11 +31,12 @@
 | rofi_calc.sh          | use rofi to calculate with bc                                                           |
 | rofi_display.sh       | use rofi to manage displays with arandr/xrandr                                          |
 | rofi_font_symbols.sh  | use rofi to to search and copy unicode symbols                                          |
-| rofi_mount.sh         | use rofi to mount remote, usb and android locations                                     |
+| rofi_mount.sh         | use rofi to mount/unmount remote, usb and android locations/devices                     |
 | rofi_service.sh       | use rofi to start/stop some services like bluetooth, printer, firewall etc.             |
 | rofi_unmount.sh       | use rofi to unmount remote, usb and android locations                                   |
 | rofi_vim.sh           | use rofi to start vim with a few shortcuts                                              |
 | screenlayout.sh       | default screen setup                                                                    |
+| scrot.sh              | screenshot script for scrot                                                             |
 | service_toggle.sh     | switch status of service active or inactive                                             |
 | sync_keepass.sh       | sync keepassfile with rclone based on modification date                                 |
 | sync_rclone.sh        | cloudsync with rclone                                                                   |
