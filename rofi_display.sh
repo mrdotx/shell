@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-29 19:52:52
+# date:       2020-01-08 20:18:36
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -55,9 +55,8 @@ chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection\\naudio
     *) eval xrandr --output "$chosen" --auto --scale 1.0x1.0 "$(echo "$all" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ')" ;;
     esac
 
-# maintenance after setup display if
+# maintenance after setup display
 if [ -n "$chosen" ] && ! [ "$chosen" = "audio toggle" ]; then
     nitrogen --restore
-    pgrep -x dunst >/dev/null && killall dunst &
-    polybar.sh i3
+    polybar.sh
 fi
