@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_vim.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-04 12:57:52
+# date:       2020-01-10 09:45:53
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -32,7 +32,7 @@ case $(printf "%s\n" \
     "m3" \
     "explore" | rofi -monitor -1 -lines 13 -theme klassiker-center -dmenu -i -p "") in
     "nvim") $TERMINAL -e vim ;;
-    "notes") $TERMINAL -e vim "$HOME/projects/hidden/notes/index.md" ;;
+    "notes") $TERMINAL -e vim "$HOME/Dokumente/Notes/index.md" ;;
     "middlefinger-streetwear.com") $TERMINAL -e vim scp://middlefinger/ -c "Lexplore" ;;
     "prinzipal-kreuzberg.com") $TERMINAL -e vim scp://prinzipal/ -c "Lexplore" ;;
     "klassiker.online.de") netrc ftp://klassiker.online.de/ ;;
