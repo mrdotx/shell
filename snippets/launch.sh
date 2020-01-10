@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/launch.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:50:36
+# date:       2020-01-10 18:58:05
 
 case "$1" in
 
@@ -20,7 +20,7 @@ ranger)
 
 # desktop  2
 web)
-    wmctrl -s 1 && firefox-developer-edition >/dev/null 2>&1 &
+    wmctrl -s 1 && firefox >/dev/null 2>&1 &
     ;;
 ftp)
     wmctrl -s 1 && filezilla >/dev/null 2>&1 &
