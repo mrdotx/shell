@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-01 15:33:53
+# date:       2020-01-10 11:11:57
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy from/to cloud with rclone
@@ -61,16 +61,16 @@ if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
 elif [[ $1 == "-c" ]]; then
     for ((i=0;i<${#title[@]};i++)); do
         echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
-        rclone check -P "${src[i]}" "${dest[i]}" --filter-from="${filter[i]}"
+        rclone check -l -P "${src[i]}" "${dest[i]}" --filter-from="${filter[i]}"
     done
     exit 0
 elif [[ $1 == "-s" ]]; then
     for ((i=0;i<${#title[@]};i++)); do
         echo "[${magenta}${title[i]}${reset}] <- ${src[i]}"
-        rclone copy -P "${src[i]}" "${dest[i]}" --filter-from="${filter[i]}"
+        rclone copy -l -P "${src[i]}" "${dest[i]}" --filter-from="${filter[i]}"
         #rclone sync -P "${src[i]}" "${dest[i]}" --filter-from="${filter[i]}"
         echo "[${magenta}${title[i]}${reset}] -> ${src[i]}"
-        rclone copy -P "${dest[i]}" "${src[i]}" --filter-from="${filter[i]}"
+        rclone copy -l -P "${dest[i]}" "${src[i]}" --filter-from="${filter[i]}"
         #rclone sync -P "${dest[i]}" "${src[i]}" --filter-from="${filter[i]}"
     done
     exit 0
