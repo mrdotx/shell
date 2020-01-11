@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-08 20:18:36
+# date:       2020-01-11 13:29:45
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -37,7 +37,7 @@ sec_disp() {
 
 # saved arandr settings
 saved_set() {
-    chosen=$(find "$HOME/.screenlayout/" -iname "*.sh" | cut -d / -f 5 | sed "s/.sh//g" | sort | rofi -monitor -1 -lines 5 -theme klassiker-center -dmenu -i -p "")
+    chosen=$(find "$HOME/.screenlayout/" -iname "*.sh" | cut -d / -f 5 | sed "s/.sh//g" | sort | rofi -monitor -1 -lines 6 -theme klassiker-center -dmenu -i -p "")
     "$HOME/.screenlayout/$chosen.sh"
 }
 
@@ -46,10 +46,10 @@ all=$(xrandr -q | grep "connected")
 disp=$(echo "$all" | grep " connected" | awk '{print $1}')
 
 # menu
-chosen=$(printf "%s\\nsecond display\\nsaved settings\\nmanual selection\\naudio toggle" "$disp" | rofi -monitor -1 -lines 5 -theme klassiker-center -dmenu -i -p "") && \
+chosen=$(printf "saved settings\\nsecond display\\n%s\\nmanual selection\\naudio toggle" "$disp" | rofi -monitor -1 -lines 6 -theme klassiker-center -dmenu -i -p "") && \
     case "$chosen" in
-    "second display") sec_disp ;;
     "saved settings") saved_set ;;
+    "second display") sec_disp ;;
     "manual selection") arandr ;;
     "audio toggle") audio.sh -tog;;
     *) eval xrandr --output "$chosen" --auto --scale 1.0x1.0 "$(echo "$all" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ')" ;;
