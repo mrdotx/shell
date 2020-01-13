@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_vim.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-10 09:45:53
+# date:       2020-01-13T12:16:37+0100
 
 # exit if rofi is running
 pgrep -x rofi && exit

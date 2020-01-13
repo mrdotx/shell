@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/polybar_rss.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-02 00:20:01
+# date:       2020-01-13T12:15:48+0100
 
 # exit if newsboat is running
 pgrep -x newsboat > /dev/null 2>&1 \

@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/scrot.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-06 18:41:13
+# date:       2020-01-13T12:16:49+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for screenshots with scrot
@@ -25,7 +25,7 @@ help="$script [-h/--help] -- script for screenshots with scrot
     $script -select"
 
 scrot_dir=$HOME/Downloads
-scrot_file=screenshot-$(date --iso-8601=seconds).jpg
+scrot_file=screenshot-$(date +"%FT%T%z").jpg
 scrot_cmd="scrot $scrot_dir/$scrot_file"
 
 if [ -n "$2" ]; then

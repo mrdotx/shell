@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/launch.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-10 18:58:05
+# date:       2020-01-13T12:12:52+0100
 
 case "$1" in
 

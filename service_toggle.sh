@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/service_toggle.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-01 15:38:18
+# date:       2020-01-13T12:16:53+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to toggle services on and off

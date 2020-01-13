@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/screenlayout.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:59:54
+# date:       2020-01-13T12:16:44+0100
 
 int=eDP1
 ext=HDMI2

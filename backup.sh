@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-29 10:27:56
+# date:       2020-01-13T12:14:06+0100
 
 backup_name="morpheus"
 remote_location="alarm@prometheus:/home/alarm/backup/$backup_name/"

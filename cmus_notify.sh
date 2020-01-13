@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/cmus_notify.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-02 21:33:37
+# date:       2020-01-13T12:14:21+0100
 
 if info=$(cmus-remote -Q 2> /dev/null); then
     status=$(echo "$info" | grep '^status ' | sed 's/^status //')

@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_calc.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-02 00:18:17
+# date:       2020-01-13T12:15:58+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to run bc calculations in rofi

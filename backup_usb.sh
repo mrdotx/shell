@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/backup_usb.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-28 11:52:59
+# date:       2020-01-13T12:14:11+0100
 
 backup_name="morpheus"
 mount_point="/mnt/$backup_name"

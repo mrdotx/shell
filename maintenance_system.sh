@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/maintenance_system.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:55:08
+# date:       2020-01-13T12:15:04+0100
 
 # color variables
 #black=$(tput setaf 0)

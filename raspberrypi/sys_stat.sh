@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/raspberrypi/sys_stat.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-31 18:02:43
+# date:       2020-01-13T12:12:05+0100
 
 # start time
 start=$(date +%s.%N)

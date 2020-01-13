@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/link_handler.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-02 00:27:51
+# date:       2020-01-13T12:14:51+0100
 
 movies="mpv --quiet"
 podcasts="$TERMINAL -e mpv --no-audio-display"

@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/backup.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:50:00
+# date:       2020-01-13T12:12:30+0100
 
 # color variables {{{
 #black=$(tput setaf 0)

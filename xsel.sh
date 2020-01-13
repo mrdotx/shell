@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/xsel.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 15:03:00
+# date:       2020-01-13T12:17:36+0100
 
 # display contents of clipboard
 clip=$(xsel -o -b)

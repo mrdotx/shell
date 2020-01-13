@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/hera.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:50:17
+# date:       2020-01-13T12:12:37+0100
 
 case "$1" in
 wakeup)

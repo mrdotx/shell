@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/delete_metafiles.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:54:33
+# date:       2020-01-13T12:14:42+0100
 
 output=$HOME/delmetafile.txt
 

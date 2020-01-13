@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/sync_keepass.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 15:01:53
+# date:       2020-01-13T12:16:59+0100
 
 rc_name="dropbox"
 kp_file="klassiker.kdbx"

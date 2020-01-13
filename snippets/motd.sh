@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/motd.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:51:20
+# date:       2020-01-13T12:12:57+0100
 
 # functions {{{
 color() {

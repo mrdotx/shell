@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/host_status.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:50:26
+# date:       2020-01-13T12:12:43+0100
 
 # color variables
 #black=$(tput setaf 0)

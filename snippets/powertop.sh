@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/powertop.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 14:51:32
+# date:       2020-01-13T12:13:04+0100
 
 # software settings in need of tuning
 # sets all tunable options to their good setting

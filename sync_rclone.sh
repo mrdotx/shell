@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-10 11:11:57
+# date:       2020-01-13T12:17:05+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy from/to cloud with rclone

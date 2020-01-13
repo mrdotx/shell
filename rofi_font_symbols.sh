@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_font_symbols.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-02 00:16:20
+# date:       2020-01-13T12:16:20+0100
 
 chosen=$(< ~/.local/share/font-symbols rofi -monitor -2 -theme klassiker-vertical -dmenu -i -p "Which symbol to copy?" -l 10)
 

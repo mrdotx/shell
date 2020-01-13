@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/conky.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-02 00:29:39
+# date:       2020-01-13T12:14:30+0100
 
 conky_dir="conky -q -c $HOME/.config/conky"
 

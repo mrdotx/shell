@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/wlan.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-09 12:39:16
+# date:       2020-01-13T12:17:26+0100
 
 script=$(basename "$0")
 help="$script [--help/-h] -- script for networkmanager

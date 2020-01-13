@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/urxvtc.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 15:02:37
+# date:       2020-01-13T12:17:19+0100
 
 # start urxvt daemon if not running and open urxvt client
 if [ "$(pgrep -x urxvtd)" ]; then

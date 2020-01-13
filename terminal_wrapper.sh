@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/terminal_wrapper.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2019-12-21 15:02:28
+# date:       2020-01-13T12:17:13+0100
 
 # color variables
 #black=$(tput setaf 0)

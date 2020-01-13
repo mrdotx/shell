@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_display.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-11 13:29:45
+# date:       2020-01-13T12:16:05+0100
 
 # exit if rofi is running
 pgrep -x rofi && exit
