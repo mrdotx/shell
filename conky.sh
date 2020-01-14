@@ -3,19 +3,13 @@
 # path:       ~/projects/shell/conky.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:14:30+0100
+# date:       2020-01-14T17:32:07+0100
 
 conky_dir="conky -q -c $HOME/.config/conky"
 
 conky1="$conky_dir/klassiker_horizontal.conf"
 conky2="$conky_dir/klassiker_slim_horizontal.conf"
 conky3="$conky_dir/klassiker_vertical.conf"
-conky4="$conky_dir/shortcuts_foreground_left.conf"
-conky5="$conky_dir/shortcuts_foreground_middle.conf"
-conky6="$conky_dir/shortcuts_foreground_right.conf"
-conky7="$conky_dir/shortcuts_background_left.conf"
-conky8="$conky_dir/shortcuts_background_middle.conf"
-conky9="$conky_dir/shortcuts_background_right.conf"
 
 choice=$1
 
@@ -91,36 +85,6 @@ vertical)
     else
         # start"
         $conky3 &
-        exit 0
-    fi
-    ;;
-shortcutsforeground)
-    if [ "$(pgrep -f "$conky6")" ]; then
-        # stop"
-        kill "$(pgrep -f "$conky4")" &
-        kill "$(pgrep -f "$conky5")" &
-        kill "$(pgrep -f "$conky6")" &
-        exit 0
-    else
-        # start"
-        $conky4 &
-        $conky5 &
-        $conky6 &
-        exit 0
-    fi
-    ;;
-shortcutsbackground)
-    if [ "$(pgrep -f "$conky9")" ]; then
-        # stop"
-        kill "$(pgrep -f "$conky7")" &
-        kill "$(pgrep -f "$conky8")" &
-        kill "$(pgrep -f "$conky9")" &
-        exit 0
-    else
-        # start"
-        $conky7 &
-        $conky8 &
-        $conky9 &
         exit 0
     fi
     ;;
