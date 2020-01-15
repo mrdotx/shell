@@ -1,11 +1,11 @@
 #!/bin/sh
 
-# path:       ~/projects/shell/rofi_font_symbols.sh
+# path:       ~/projects/shell/rofi_unicode_symbols.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:16:20+0100
+# date:       2020-01-15T14:55:31+0100
 
-chosen=$(< ~/.local/share/font-symbols rofi -monitor -2 -theme klassiker-vertical -dmenu -i -p "Which symbol to copy?" -l 10)
+chosen=$(< ~/.local/share/unicode-symbols rofi -monitor -2 -theme klassiker-vertical -dmenu -i -p "Which symbol to copy?" -l 10)
 
 [ -n "$chosen" ] || exit
 
