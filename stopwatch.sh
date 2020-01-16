@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/stopwatch.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-16T23:23:46+0100
+# date:       2020-01-17T00:57:44+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to measure the time
@@ -19,10 +19,14 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     exit 0
 else
 
-stat=2
+clear
+printf " Start/Stop: space\n Quit:       q    \n\n"
+
 t_stop=0
 t_now=0
-t_index=0
+t_idx=0
+stat=2
+n=1
 
 set_t_now(){
     t_now=$(date +%s%N)
@@ -32,33 +36,28 @@ stopwatch() {
     t="$1"
     s=$(printf "%1d\n" "${t: 0 : -9}")
     ns=${t: -9 : 9 }
-    printf '\r%s' "$(TZ=UTC date -d"@$s.$ns" +%H:%M:%S.%N)"
+    printf "\r%s" " $n) $(TZ=UTC date -d"@$s.$ns" +%H:%M:%S.%N)"
 }
 
 run(){
-    t_stop=$((t_now - t_index))
+    t_stop=$((t_now-t_idx))
     stopwatch $t_stop
 }
 
 reset(){
     set_t_now
-    t_index=$t_now
+    t_idx=$t_now
 }
 
-read_cmd(){
+read_key(){
     last=$1
-    read -r -s -t0.1 -N1 key;
+    read -r -s -t.1 -N1 key;
     case "$stat" in
-        1) [ "$key" = $'\x20' ] && printf "\n" && return 2 ;;
+        1) [ "$key" = $'\x20' ] && printf "\n" && n=$((n+1)) && return 2 ;;
         2) [ "$key" = $'\x20' ] && return 1 ;;
     esac
     return "$last";
 }
-
-stat=2
-clear
-echo "Start/Stop: space"
-echo -e "Quit:       q\n"
 
 while [ ! "$key" = "q" ]
 do
@@ -67,9 +66,9 @@ do
         1) run ;;
         2) reset ;;
     esac
-    read_cmd $stat
+    read_key $stat
     stat=$?
-    sleep 0.1
+    sleep .1
 done
 
 fi
