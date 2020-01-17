@@ -37,6 +37,7 @@
 | screenlayout.sh       | default screen setup                                                                    |
 | scrot.sh              | screenshot script for scrot                                                             |
 | service_toggle.sh     | switch status of service active or inactive                                             |
+| stopwatch.sh          | tool to measure time                                                                    |
 | surf.sh               | start tabbed surf                                                                       |
 | sync_keepass.sh       | sync keepassfile with rclone based on modification date                                 |
 | sync_rclone.sh        | cloudsync with rclone                                                                   |
