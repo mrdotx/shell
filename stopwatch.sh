@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/stopwatch.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-17T11:51:29+0100
+# date:       2020-01-17T12:05:16+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to measure the time
@@ -15,14 +15,14 @@ help="$script [-h/--help] -- script to measure the time
 
   Keys:
     Start/Stop: space
-    Quit:       q
+    Quit:       q or ESC
 
   Examples:
     $script
     $script -d"
 
 header=" Start/Stop: space
- Quit:       q
+ Quit:       q or ESC
  "
 
 t_stop=0
@@ -54,7 +54,7 @@ reset(){
 
 read_key(){
     last=$1
-    read -r -s -t.1 -N1 key;
+    read -rsN1 -t.1 key;
     case "$stat" in
         1) [ "$key" = $'\x20' ] && printf "\n" && n=$((n+1)) && return 2 ;;
         2) [ "$key" = $'\x20' ] && return 1 ;;
@@ -63,7 +63,7 @@ read_key(){
 }
 
 stopwatch(){
-    while [ ! "$key" = "q" ]
+    while [ ! "$key" = "q" ] && [ ! "$key" = $'\x1B' ]
     do
         set_t_now
         case "$stat" in
