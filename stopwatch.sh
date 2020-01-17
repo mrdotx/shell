@@ -3,24 +3,27 @@
 # path:       ~/projects/shell/stopwatch.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-17T00:57:44+0100
+# date:       2020-01-17T11:51:29+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to measure the time
   Usage:
-    $script
+    $script [-d]
+
+  Settings:
+    [-d] = disable header
 
   Keys:
     Start/Stop: space
-    Quit:       q"
+    Quit:       q
 
-if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    echo "$help"
-    exit 0
-else
+  Examples:
+    $script
+    $script -d"
 
-clear
-printf " Start/Stop: space\n Quit:       q    \n\n"
+header=" Start/Stop: space
+ Quit:       q
+ "
 
 t_stop=0
 t_now=0
@@ -32,7 +35,7 @@ set_t_now(){
     t_now=$(date +%s%N)
 }
 
-stopwatch() {
+t_date() {
     t="$1"
     s=$(printf "%1d\n" "${t: 0 : -9}")
     ns=${t: -9 : 9 }
@@ -41,7 +44,7 @@ stopwatch() {
 
 run(){
     t_stop=$((t_now-t_idx))
-    stopwatch $t_stop
+    t_date $t_stop
 }
 
 reset(){
@@ -59,16 +62,32 @@ read_key(){
     return "$last";
 }
 
-while [ ! "$key" = "q" ]
-do
-    set_t_now
-    case "$stat" in
-        1) run ;;
-        2) reset ;;
-    esac
-    read_key $stat
-    stat=$?
-    sleep .1
-done
+stopwatch(){
+    while [ ! "$key" = "q" ]
+    do
+        set_t_now
+        case "$stat" in
+            1) run ;;
+            2) reset ;;
+        esac
+        read_key $stat
+        stat=$?
+        sleep .1
+    done
+}
 
-fi
+case "$1" in
+    -h|--help)
+        echo "$help"
+        exit0
+        ;;
+    -d)
+        clear
+        stopwatch
+        ;;
+    *)
+        clear
+        echo "$header"
+        stopwatch
+        ;;
+esac
