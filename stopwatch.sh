@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/stopwatch.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-17T12:57:12+0100
+# date:       2020-01-17T13:01:19+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to measure the time
@@ -39,7 +39,7 @@ t_date() {
     t="$1"
     s=$(printf "%1d\n" "${t: 0 : -3}")
     ms=${t: -3 : 3 }
-    printf "\r%s" "  $n) $(TZ=UTC date -d"@$s.$ms" +%H:%M:%S.%3N)"
+    printf "\r%s" "   $n) $(TZ=UTC date -d"@$s.$ms" +%H:%M:%S.%3N)"
 }
 
 run(){
