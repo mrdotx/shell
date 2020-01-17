@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/terminal_wrapper.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-15T20:11:54+0100
+# date:       2020-01-17T15:06:36+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -18,7 +18,7 @@ reset=$(tput sgr0)
 
 # execute command in new terminal window
 if [ $# -eq 0 ]; then
-    "${SHELL:-zsh}";
+    "${SHELL:-bash}";
 else
     "$@";
 fi
