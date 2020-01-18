@@ -3,7 +3,18 @@
 # path:       ~/projects/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:17:05+0100
+# date:       2020-01-18T12:33:33+0100
+
+# color variables
+#black=$(tput setaf 0)
+#red=$(tput setaf 1)
+#green=$(tput setaf 2)
+#yellow=$(tput setaf 3)
+#blue=$(tput setaf 4)
+magenta=$(tput setaf 5)
+#cyan=$(tput setaf 6)
+#white=$(tput setaf 7)
+reset=$(tput sgr0)
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy from/to cloud with rclone
@@ -17,17 +28,6 @@ help="$script [-h/--help] -- script to copy from/to cloud with rclone
 
   Example:
     $script -c"
-
-# color variables
-#black=$(tput setaf 0)
-#red=$(tput setaf 1)
-#green=$(tput setaf 2)
-#yellow=$(tput setaf 3)
-#blue=$(tput setaf 4)
-magenta=$(tput setaf 5)
-#cyan=$(tput setaf 6)
-#white=$(tput setaf 7)
-reset=$(tput sgr0)
 
 title=("web.de")
 src=("$HOME/cloud/webde/")
