@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # path:       ~/projects/shell/terminal_wrapper.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-17T15:52:59+0100
+# date:       2020-01-18T12:30:06+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -16,26 +16,53 @@ yellow=$(tput setaf 3)
 #white=$(tput setaf 7)
 reset=$(tput sgr0)
 
-# execute command in new terminal window
-if [ $# -eq 0 ]; then
-    "${SHELL:-bash}";
-else
-    "$@";
-fi
-echo
+script=$(basename "$0")
+help="$script [-h/--help] -- script for execute command in new terminal window
+  Usage:
+    $script [command]
+
+  Examples:
+    $script git status"
 
 stat="The command exited with ${yellow}status $?${reset}.
 "
-keys="Press ${green}ESC${reset}, [${green}q${reset}]${green}uit${reset} \
+keys="Press [${green}q${reset}]${green}uit${reset} \
 to exit this window or [${green}s${reset}]${green}hell${reset} to run $SHELL..."
 
-# wait for key
-while true; do
-    read -rsN1 -p "${stat}${keys}" key
+readc()
+{
+  if [ -t 0 ]; then
+    saved_tty_settings=$(stty -g)
+    stty -icanon min 1 time 0
+  fi
+  eval "$1="
+  while
+    c=$(dd bs=1 count=1 2> /dev/null; echo .)
+    c=${c%.}
+    [ -n "$c" ] &&
+      eval "$1=\${$1}"'$c
+        [ "$(($(printf %s "${'"$1"'}" | wc -m)))" -eq 0 ]'; do
+    continue
+  done
+  if [ -t 0 ]; then
+    stty "$saved_tty_settings"
+  fi
+}
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
+    echo "$help"
+    exit 0
+else
+    "$@"
     echo
-    case "$key" in
-        q|Q|$'\x1B') exit 0 ;;
-        s|S) $SHELL && exit 0;;
-        *) stat=""
-    esac
-done
+    key=""
+    while true; do
+        printf "\r%s" "${stat}${keys}" && readc "key"
+        echo
+        case "$key" in
+            q|Q) exit 0 ;;
+            s|S) $SHELL && exit 0;;
+            *) stat=""
+        esac
+    done
+fi
