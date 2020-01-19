@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/maintenance_system.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-19T10:41:05+0100
+# date:       2020-01-19T11:46:09+0100
 
 echo "python history"
 echo "  1. remove white space the from end of line"
@@ -37,6 +37,6 @@ while true; do
     case "$key" in
         y|Y) find "$HOME/.cache/" -type f -atime +100 -delete && exit 0;;
         n|N) exit 0;;
-        *) find "$HOME/.cache/" -type f -atime +100 ;;
+        *) find "$HOME/.cache/" -type f -atime +100 && echo;;
     esac
 done
