@@ -3,36 +3,26 @@
 # path:       ~/projects/shell/maintenance_github.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:14:58+0100
+# date:       2020-01-19T10:46:22+0100
 
-# color variables
-#black=$(tput setaf 0)
-#red=$(tput setaf 1)
-#green=$(tput setaf 2)
-#yellow=$(tput setaf 3)
-#blue=$(tput setaf 4)
-magenta=$(tput setaf 5)
-#cyan=$(tput setaf 6)
-#white=$(tput setaf 7)
-reset=$(tput sgr0)
-
-echo "[${magenta}github${reset}] checkout"
+echo "github"
+echo "  1. checkout"
 git checkout --orphan latest_branch
 
-echo "[${magenta}github${reset}] add all the files and folders"
+echo "  2. add all the files and folders"
 git add -A
 
-echo "[${magenta}github${reset}] commit the changes"
+echo "  3. commit the changes"
 git commit -am "reset commits"
 
-echo "[${magenta}github${reset}] delete the branch"
+echo "  4. delete the branch"
 git branch -D master
 
-echo "[${magenta}github${reset}] rename the current branch to master"
+echo "  5. rename the current branch to master"
 git branch -m master
 
-echo "[${magenta}github${reset}] force update repository"
+echo "  6. force update repository"
 git push -f origin master
 
-echo "[${magenta}github${reset}] set upstream"
+echo "  7. set upstream"
 git push --set-upstream origin master
