@@ -3,7 +3,75 @@
 # path:       ~/projects/shell/cmus_notify.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:14:21+0100
+# date:       2020-01-19T11:37:12+0100
+
+notify(){
+    if [ "$duration" -ge 0 ]; then
+        pos_min=$(printf "%02d" $((position / 60)))
+        pos_sec=$(printf "%02d" $((position % 60)))
+        dur_min=$(printf "%02d" $((duration / 60)))
+        dur_sec=$(printf "%02d" $((duration % 60)))
+        title_status="$pos_min:$pos_sec / $dur_min:$dur_sec"
+    fi
+
+    case $status in
+        "playing") info=" $title_status" ;;
+        "paused") info=" $title_status" ;;
+        "stopped") info=" $title_status" ;;
+        *) info="" ;;
+    esac
+
+    if [ -n "$file" ]; then
+        ffmpeg -y -i "$file" -c:v copy /tmp/cmus_notify_album_art.png >/dev/null 2>&1
+    fi
+
+    if [ -e /tmp/cmus_notify_album_art.png ]; then
+        albumart="/tmp/cmus_notify_album_art.png"
+    else
+        albumart="$HOME/projects/shell/icons/cmus.png"
+    fi
+
+    if [ -z "$stream" ]; then
+        info_body="Artist: $artist\nAlbum : $album\nTrack : $tracknumber\nTitle : <b>$title</b>"
+    else
+        info_body="<b>$stream</b>\n$genre\n$title\n$comment"
+    fi
+
+    if [ -z "$artist" ] && [ -z "$title" ]; then
+        notify-send -i "$albumart" "C* Music Player | $info" "${file##*/}"
+    else
+        notify-send -i "$albumart" "C* Music Player | $info" "$info_body"
+    fi
+
+    rm -f "/tmp/cmus_notify_album_art.png"
+}
+
+bar(){
+    grey=$(xrdb -query | grep Polybar.foreground1: | cut -f2)
+    red=$(xrdb -query | grep color9: | cut -f2)
+
+    case $status in
+        "playing") info=""
+            len=100 ;;
+        "paused") info="%{o$grey}"
+            len=111 ;;
+        "stopped") info="%{o$red}"
+            len=111 ;;
+        *) info="" ;;
+    esac
+
+    if [ -z "$stream" ]; then
+        info_body="$artist | $title | $album"
+    else
+        info_body="$stream | $genre | $title"
+    fi
+
+    if [ -z "$artist" ] && [ -z "$title" ]; then
+        echo "$info ${file##*/}" | cut -c 1-$len
+    else
+        echo "$info $info_body" | cut -c 1-$len
+    fi
+}
 
 if info=$(cmus-remote -Q 2> /dev/null); then
     status=$(echo "$info" | grep '^status ' | sed 's/^status //')
@@ -23,70 +91,10 @@ fi
 
 case "$1" in
     --notify-send)
-        if [ "$duration" -ge 0 ]; then
-            pos_min=$(printf "%02d" $((position / 60)))
-            pos_sec=$(printf "%02d" $((position % 60)))
-            dur_min=$(printf "%02d" $((duration / 60)))
-            dur_sec=$(printf "%02d" $((duration % 60)))
-            title_status="$pos_min:$pos_sec / $dur_min:$dur_sec"
-        fi
-
-        case $status in
-            "playing") info=" $title_status" ;;
-            "paused") info=" $title_status" ;;
-            "stopped") info=" $title_status" ;;
-            *) info="" ;;
-        esac
-
-        if [ -n "$file" ]; then
-            ffmpeg -y -i "$file" -c:v copy /tmp/cmus_notify_album_art.png >/dev/null 2>&1
-        fi
-
-        if [ -e /tmp/cmus_notify_album_art.png ]; then
-            albumart="/tmp/cmus_notify_album_art.png"
-        else
-            albumart="$HOME/projects/shell/icons/cmus.png"
-        fi
-
-        if [ -z "$stream" ]; then
-            info_body="Artist: $artist\nAlbum : $album\nTrack : $tracknumber\nTitle : <b>$title</b>"
-        else
-            info_body="<b>$stream</b>\n$genre\n$title\n$comment"
-        fi
-
-        if [ -z "$artist" ] && [ -z "$title" ]; then
-            notify-send -i "$albumart" "C* Music Player | $info" "${file##*/}"
-        else
-            notify-send -i "$albumart" "C* Music Player | $info" "$info_body"
-        fi
-
-        rm -f "/tmp/cmus_notify_album_art.png"
+        notify
         ;;
     --polybar)
-        grey=$(xrdb -query | grep Polybar.foreground1: | cut -f2)
-        red=$(xrdb -query | grep color9: | cut -f2)
-
-        case $status in
-            "playing") info=""
-                len=100 ;;
-            "paused") info="%{o$grey}"
-                len=111 ;;
-            "stopped") info="%{o$red}"
-                len=111 ;;
-            *) info="" ;;
-        esac
-
-        if [ -z "$stream" ]; then
-            info_body="$artist | $title | $album"
-        else
-            info_body="$stream | $genre | $title"
-        fi
-
-        if [ -z "$artist" ] && [ -z "$title" ]; then
-            echo "$info ${file##*/}" | cut -c 1-$len
-        else
-            echo "$info $info_body" | cut -c 1-$len
-        fi
+        bar
         ;;
     *)
         polybar-msg hook module/cmus 2
