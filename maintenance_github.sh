@@ -3,26 +3,26 @@
 # path:       ~/projects/shell/maintenance_github.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-19T10:46:22+0100
+# date:       2020-01-20T00:47:40+0100
 
-echo "github"
-echo "  1. checkout"
+echo ":: github"
+echo " checkout..."
 git checkout --orphan latest_branch
 
-echo "  2. add all the files and folders"
+echo " add all the files and folders..."
 git add -A
 
-echo "  3. commit the changes"
+echo " commit the changes..."
 git commit -am "reset commits"
 
-echo "  4. delete the branch"
+echo " delete the branch..."
 git branch -D master
 
-echo "  5. rename the current branch to master"
+echo " rename the current branch to master..."
 git branch -m master
 
-echo "  6. force update repository"
+echo " force update repository..."
 git push -f origin master
 
-echo "  7. set upstream"
+echo " set upstream..."
 git push --set-upstream origin master
