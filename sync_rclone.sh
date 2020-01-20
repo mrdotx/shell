@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # path:       ~/projects/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-19T11:55:11+0100
+# date:       2020-01-20T12:46:37+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -17,61 +17,102 @@ yellow=$(tput setaf 3)
 reset=$(tput sgr0)
 
 script=$(basename "$0")
-help="$script [-h/--help] -- script to copy from/to cloud with rclone
+help="$script [-h/--help] -- script to copy/sync from/to cloud with rclone
   Usage:
     $script [option]
 
   Setting:
-    [option] = check or sync
-      -c     = check
-      -s     = sync
+    [option]     = check, copy or sync
+      -check     = check
+      -copy      = copy
+      -sync_to   = sync to destination
+      -sync_from = sync from destination
 
   Example:
-    $script -c"
+    $script -check
+    $script -copy
+    $script -sync_to
+    $script -sync_from"
 
-title=("web.de")
-src=("$HOME/cloud/webde/")
-dest=("webde:/")
-filter=("$HOME/cloud/webde/.filter")
+rc_cfg="
+web.de;$HOME/cloud/webde/;webde:/;$HOME/cloud/webde/.filter
+GMX;$HOME/cloud/gmx/;gmx:/;$HOME/cloud/gmx/.filter
+Google Drive;$HOME/cloud/googledrive/;googledrive:/;$HOME/cloud/googledrive/.filter
+OneDrive;$HOME/cloud/onedrive/;onedrive:/;$HOME/cloud/onedrive/.filter
+Dropbox;$HOME/cloud/dropbox/;dropbox:/;$HOME/cloud/dropbox/.filter
+"
 
-title+=("GMX")
-src+=("$HOME/cloud/gmx/")
-dest+=("gmx:/")
-filter+=("$HOME/cloud/gmx/.filter")
+rc_split() {
+    title=$(echo "$1" | cut -d ";" -f1)
+    src=$(echo "$1" | cut -d ";" -f2)
+    dest=$(echo "$1" | cut -d ";" -f3)
+    filter=$(echo "$1" | cut -d ";" -f4)
+}
 
-title+=("Google Drive")
-src+=("$HOME/cloud/googledrive/")
-dest+=("googledrive:/")
-filter+=("$HOME/cloud/googledrive/.filter")
+rc_check() {
+    echo "[${yellow}$1${reset}] <- $2"
+    rclone check -l -P "$2" "$3" --filter-from="$4"
+}
 
-title+=("OneDrive")
-src+=("$HOME/cloud/onedrive/")
-dest+=("onedrive:/")
-filter+=("$HOME/cloud/onedrive/.filter")
+rc_copy() {
+    echo "[${yellow}$1${reset}] <- $2"
+    rclone copy -l -P "$2" "$3" --filter-from="$4"
+    echo "[${yellow}$1${reset}] -> $2"
+    rclone copy -l -P "$3" "$2" --filter-from="$4"
+}
 
-title+=("Dropbox")
-src+=("$HOME/cloud/dropbox/")
-dest+=("dropbox:/")
-filter+=("$HOME/cloud/dropbox/.filter")
+rc_sync_to() {
+    echo "[${yellow}$1${reset}] <- $2"
+    rclone sync -P "$2" "$3" --filter-from="$4"
+}
+
+rc_sync_from() {
+    echo "[${yellow}$1${reset}] -> $2"
+    rclone sync -P "$3" "$2" --filter-from="$4"
+}
 
 # rclone to copy data from and to cloud
-if [[ $1 == "-h" || $1 == "--help" || $# -eq 0 ]]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
     echo "$help"
     exit 0
-elif [[ $1 == "-c" ]]; then
-    for ((i=0;i<${#title[@]};i++)); do
-        echo "[${yellow}${title[i]}${reset}] <- ${src[i]}"
-        rclone check -l -P "${src[i]}" "${dest[i]}" --filter-from="${filter[i]}"
+elif [ "$1" = "-check" ]; then
+    printf "%s\n" "$rc_cfg" | {
+    while IFS= read -r line
+    do
+        if [ -n "$line" ]; then
+            rc_split "$line"
+            rc_check "$title" "$src" "$dest" "$filter"
+        fi
     done
-    exit 0
-elif [[ $1 == "-s" ]]; then
-    for ((i=0;i<${#title[@]};i++)); do
-        echo "[${yellow}${title[i]}${reset}] <- ${src[i]}"
-        rclone copy -l -P "${src[i]}" "${dest[i]}" --filter-from="${filter[i]}"
-        #rclone sync -P "${src[i]}" "${dest[i]}" --filter-from="${filter[i]}"
-        echo "[${yellow}${title[i]}${reset}] -> ${src[i]}"
-        rclone copy -l -P "${dest[i]}" "${src[i]}" --filter-from="${filter[i]}"
-        #rclone sync -P "${dest[i]}" "${src[i]}" --filter-from="${filter[i]}"
+}
+elif [ "$1" = "-copy" ]; then
+    printf "%s\n" "$rc_cfg" | {
+    while IFS= read -r line
+    do
+        if [ -n "$line" ]; then
+            rc_split "$line"
+            rc_copy "$title" "$src" "$dest" "$filter"
+        fi
     done
-    exit 0
+}
+elif [ "$1" = "-sync_to" ]; then
+    printf "%s\n" "$rc_cfg" | {
+    while IFS= read -r line
+    do
+        if [ -n "$line" ]; then
+            rc_split "$line"
+            rc_sync_to "$title" "$src" "$dest" "$filter"
+        fi
+    done
+}
+elif [ "$1" = "-sync_from" ]; then
+    printf "%s\n" "$rc_cfg" | {
+    while IFS= read -r line
+    do
+        if [ -n "$line" ]; then
+            rc_split "$line"
+            rc_sync_from "$title" "$src" "$dest" "$filter"
+        fi
+    done
+}
 fi
