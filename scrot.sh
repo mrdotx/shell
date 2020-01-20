@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/scrot.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:16:49+0100
+# date:       2020-01-20T09:28:16+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for screenshots with scrot
@@ -24,33 +24,27 @@ help="$script [-h/--help] -- script for screenshots with scrot
     $script -window 5
     $script -select"
 
-scrot_dir=$HOME/Downloads
-scrot_file=screenshot-$(date +"%FT%T%z").jpg
-scrot_cmd="scrot $scrot_dir/$scrot_file"
+sc_dir=$HOME/Schreibtisch
+sc_file=screenshot-$(date +"%FT%T%z").jpg
+sc_cmd="scrot $sc_dir/$sc_file"
+sc_prev="sxiv $sc_dir/$sc_file"
 
 if [ -n "$2" ]; then
-    cmd="$scrot_cmd -d $2"
+    cmd="$sc_cmd -d $2"
 else
-    cmd="$scrot_cmd"
+    cmd="$sc_cmd"
 fi
 
 case "$1" in
     -desk)
-        $cmd \
-            && notify-send -i "$HOME/projects/shell/icons/screenshot.png" "scrot" "screenshot has been saved to $scrot_dir/$scrot_file"
-
-        exit 0
+        $cmd && $sc_prev
         ;;
     -window)
-        $cmd -u \
-            && notify-send -i "$HOME/projects/shell/icons/screenshot.png" "scrot" "screenshot has been saved to $scrot_dir/$scrot_file"
-        exit 0
+        $cmd -u && $sc_prev
         ;;
     -select)
         notify-send -i "$HOME/projects/shell/icons/screenshot.png" "scrot" "select an area for the screenshot" \
-            & $scrot_cmd -s \
-            && notify-send -i "$HOME/projects/shell/icons/screenshot.png" "scrot" "screenshot has been saved in $scrot_dir/$scrot_file"
-        exit 0
+            & $sc_cmd -l style=solid,width=2 -s && $sc_prev
         ;;
     *)
         echo "$help"
