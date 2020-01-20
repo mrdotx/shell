@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-20T14:21:38+0100
+# date:       2020-01-20T17:54:23+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -34,19 +34,20 @@ help="$script [-h/--help] -- script to copy/sync from/to cloud with rclone
     $script -sync_to
     $script -sync_from"
 
+rc_dir="$HOME/cloud"
 rc_cfg="
-web.de;$HOME/cloud/webde/;webde:/;$HOME/cloud/webde/.filter
-GMX;$HOME/cloud/gmx/;gmx:/;$HOME/cloud/gmx/.filter
-Google Drive;$HOME/cloud/googledrive/;googledrive:/;$HOME/cloud/googledrive/.filter
-OneDrive;$HOME/cloud/onedrive/;onedrive:/;$HOME/cloud/onedrive/.filter
-Dropbox;$HOME/cloud/dropbox/;dropbox:/;$HOME/cloud/dropbox/.filter
+web.de;       $rc_dir/webde/;       webde:/;       $rc_dir/webde/.filter
+GMX;          $rc_dir/gmx/;         gmx:/;         $rc_dir/gmx/.filter
+Google Drive; $rc_dir/googledrive/; googledrive:/; $rc_dir/googledrive/.filter
+OneDrive;     $rc_dir/onedrive/;    onedrive:/;    $rc_dir/onedrive/.filter
+Dropbox;      $rc_dir/dropbox/;     dropbox:/;     $rc_dir/dropbox/.filter
 "
 
 rc_vars() {
-    title=$(echo "$1" | cut -d ";" -f1)
-    src=$(echo "$1" | cut -d ";" -f2)
-    dest=$(echo "$1" | cut -d ";" -f3)
-    filter=$(echo "$1" | cut -d ";" -f4)
+    title=$(echo "$1" | cut -d ";" -f1 | tr -d ' ')
+    src=$(echo "$1" | cut -d ";" -f2 | tr -d ' ')
+    dest=$(echo "$1" | cut -d ";" -f3 | tr -d ' ')
+    filter=$(echo "$1" | cut -d ";" -f4 | tr -d ' ')
 }
 
 rc_check() {
