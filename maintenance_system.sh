@@ -3,26 +3,25 @@
 # path:       ~/projects/shell/maintenance_system.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-20T00:43:26+0100
+# date:       2020-01-20T14:39:31+0100
 
-readc()
-{
-  if [ -t 0 ]; then
-    saved_tty_settings=$(stty -g)
-    stty -icanon min 1 time 0
-  fi
-  eval "$1="
-  while
-    c=$(dd bs=1 count=1 2> /dev/null; echo .)
-    c=${c%.}
-    [ -n "$c" ] &&
-      eval "$1=\${$1}"'$c
-        [ "$(($(printf %s "${'"$1"'}" | wc -m)))" -eq 0 ]'; do
-    continue
-  done
-  if [ -t 0 ]; then
-    stty "$saved_tty_settings"
-  fi
+readc() {
+    if [ -t 0 ]; then
+        saved_tty_settings=$(stty -g)
+        stty -icanon min 1 time 0
+    fi
+    eval "$1="
+    while
+        c=$(dd bs=1 count=1 2> /dev/null; echo .)
+        c=${c%.}
+        [ -n "$c" ] &&
+            eval "$1=\${$1}"'$c
+                [ "$(($(printf %s "${'"$1"'}" | wc -m)))" -eq 0 ]'; do
+        continue
+    done
+    if [ -t 0 ]; then
+        stty "$saved_tty_settings"
+    fi
 }
 
 echo ":: python history"
