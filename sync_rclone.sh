@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-20T13:47:25+0100
+# date:       2020-01-20T14:21:38+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -63,12 +63,12 @@ rc_copy() {
 
 rc_sync_to() {
     echo "[${yellow}$1${reset}] <- $2"
-    rclone sync -P "$2" "$3" --filter-from="$4"
+    rclone sync -l -P "$2" "$3" --filter-from="$4"
 }
 
 rc_sync_from() {
     echo "[${yellow}$1${reset}] -> $2"
-    rclone sync -P "$3" "$2" --filter-from="$4"
+    rclone sync -l -P "$3" "$2" --filter-from="$4"
 }
 
 rc_exec() {
