@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/sync_rclone.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-20T12:46:37+0100
+# date:       2020-01-20T13:47:25+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -42,7 +42,7 @@ OneDrive;$HOME/cloud/onedrive/;onedrive:/;$HOME/cloud/onedrive/.filter
 Dropbox;$HOME/cloud/dropbox/;dropbox:/;$HOME/cloud/dropbox/.filter
 "
 
-rc_split() {
+rc_vars() {
     title=$(echo "$1" | cut -d ";" -f1)
     src=$(echo "$1" | cut -d ";" -f2)
     dest=$(echo "$1" | cut -d ";" -f3)
@@ -71,48 +71,27 @@ rc_sync_from() {
     rclone sync -P "$3" "$2" --filter-from="$4"
 }
 
-# rclone to copy data from and to cloud
+rc_exec() {
+    printf "%s\n" "$rc_cfg" | {
+        while IFS= read -r line
+        do
+            if [ -n "$line" ]; then
+                rc_vars "$line"
+                $1 "$title" "$src" "$dest" "$filter"
+            fi
+        done
+    }
+}
+
 if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
     echo "$help"
     exit 0
 elif [ "$1" = "-check" ]; then
-    printf "%s\n" "$rc_cfg" | {
-    while IFS= read -r line
-    do
-        if [ -n "$line" ]; then
-            rc_split "$line"
-            rc_check "$title" "$src" "$dest" "$filter"
-        fi
-    done
-}
+    rc_exec "rc_check"
 elif [ "$1" = "-copy" ]; then
-    printf "%s\n" "$rc_cfg" | {
-    while IFS= read -r line
-    do
-        if [ -n "$line" ]; then
-            rc_split "$line"
-            rc_copy "$title" "$src" "$dest" "$filter"
-        fi
-    done
-}
+    rc_exec "rc_copy"
 elif [ "$1" = "-sync_to" ]; then
-    printf "%s\n" "$rc_cfg" | {
-    while IFS= read -r line
-    do
-        if [ -n "$line" ]; then
-            rc_split "$line"
-            rc_sync_to "$title" "$src" "$dest" "$filter"
-        fi
-    done
-}
+    rc_exec "rc_sync_to"
 elif [ "$1" = "-sync_from" ]; then
-    printf "%s\n" "$rc_cfg" | {
-    while IFS= read -r line
-    do
-        if [ -n "$line" ]; then
-            rc_split "$line"
-            rc_sync_from "$title" "$src" "$dest" "$filter"
-        fi
-    done
-}
+    rc_exec "rc_sync_from"
 fi
