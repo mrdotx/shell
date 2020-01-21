@@ -14,6 +14,7 @@
 | cmus_notify.sh        | cmus notification with notify-send                                                      |
 | conky.sh              | start conky                                                                             |
 | delete_metafiles.sh   | delete hidden apple metadata files in home folder                                       |
+| i3_tiling.sh          | optimal i3 tiling                                                                       |
 | knockout.sh           | lock/suspend/logout/reboot/shutdown/switch user script                                  |
 | link_handler.sh       | opens specific program for picture, videos and audio by giving url. mainly for newsboat |
 | maintenance_github.sh | remove history from github repository                                                   |
