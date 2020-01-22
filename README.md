@@ -1,7 +1,6 @@
 | shell script folder | comment                                              |
 | :------------------ | :--------------------------------------------------- |
 | icons               | icons for notify-send                                |
-| raspberrypi         | a few scripts for the raspberry pi                   |
 | snippets            | old stuff                                            |
 
 | shell scripts         | comment                                                                                 |
