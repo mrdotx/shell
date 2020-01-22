@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # path:       ~/projects/shell/raspberrypi/undervoltage.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:12:11+0100
+# date:       2020-01-22T22:11:21+0100
 
 # information for results
 # 0: under-voltage
@@ -15,41 +15,43 @@
 # 18: throttling has occurred
 
 # bad values
-#  Temp  CPU fake/real     Health state    Vcore
-# 50.8'C  900/ 900 MHz 1010000000000000000 1.3125V
-# 49.8'C  900/ 900 MHz 1010000000000000000 1.3125V
-# 49.8'C  900/ 600 MHz 1010000000000000101 1.2V
-# 49.8'C  900/ 600 MHz 1010000000000000101 1.2V
-# 48.7'C  900/ 600 MHz 1010000000000000101 1.2V
-# 49.2'C  900/ 600 MHz 1010000000000000101 1.2V
-# 48.7'C  900/ 900 MHz 1010000000000000000 1.3125V
-# 46.5'C  900/ 900 MHz 1010000000000000000 1.3125V
+#     Health state    Vcore
+# 1000000000000000000 1.3125V
+# 1010000000000000000 1.3125V
+# 1010000000000000101 1.2V
+# 1010000000000000101 1.2V
+# 1010000000000000101 1.2V
+# 1010000000000000101 1.2V
+# 1010000000000000000 1.3125V
+# 1010000000000000000 1.3125V
 
 # good values
-#  Temp  CPU fake/real     Health state    Vcore
-# 36.9'C  900/ 900 MHz 0000000000000000000 1.3125V
-# 37.9'C  900/ 900 MHz 0000000000000000000 1.3125V
-# 37.4'C  900/ 600 MHz 0000000000000000000 1.3125V
-# 36.3'C  900/ 600 MHz 0000000000000000000 1.3125V
-# 37.9'C  900/ 600 MHz 0000000000000000000 1.3125V
-# 37.4'C  900/ 600 MHz 0000000000000000000 1.3125V
-# 37.9'C  900/ 900 MHz 0000000000000000000 1.3125V
-# 37.4'C  900/ 900 MHz 0000000000000000000 1.3125V
+#     Health state    Vcore
+# 0000000000000000000 1.3125V
+# 0000000000000000000 1.3125V
+# 0000000000000000000 1.3125V
+# 0000000000000000000 1.3125V
+# 0000000000000000000 1.3125V
+# 0000000000000000000 1.3125V
+# 0000000000000000000 1.3125V
+# 0000000000000000000 1.3125V
 
-echo -e "To stop simply press [ctrl]-[c]\n"
-counter=14
-display_header="Time       Temp  CPU fake/real     Health state    Vcore"
+vcgencmd="/opt/vc/bin/vcgencmd"
+cpu_freq="/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
+echo "to stop simply press [ctrl]-[c]"
+i=14
+header="time       temp  cpu fake/real     health state    vcore"
 while true; do
-    (( counter++ ))
-    if [ ${counter} -eq 15 ]; then
-        echo -e "${display_header}"
-        counter=0
+    i=$(( i + 1 ))
+    if [ "$i" -eq 15 ]; then
+        echo "$header"
+        i=0
     fi
-    health=$(perl -e "printf \"%19b\n\", $(/opt/vc/bin/vcgencmd get_throttled | cut -f2 -d=)")
-    temp=$(/opt/vc/bin/vcgencmd measure_temp | cut -f2 -d=)
-    real_clockspeed=$(/opt/vc/bin/vcgencmd measure_clock arm | awk -F"=" '{printf ("%0.0f",$2/1000000); }')
-    sys_clockspeed=$(awk '{printf ("%0.0f",$1/1000); }' </sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq)
-    core_voltage=$(/opt/vc/bin/vcgencmd measure_volts | cut -f2 -d= | sed 's/000//')
-    echo -e "$(date "+%H:%M:%S") ${temp}$(printf "%5s" "${sys_clockspeed}")/$(printf "%4s" "${real_clockspeed}") MHz $(printf "%019d" "${health}") ${core_voltage}"
+    health=$(perl -e "printf \"%19b\n\", $($vcgencmd get_throttled | cut -f2 -d=)")
+    temp=$($vcgencmd measure_temp | cut -f2 -d=)
+    real_cs=$($vcgencmd measure_clock arm | awk -F"=" '{printf ("%0.0f",$2/1000000); }')
+    sys_cs=$(awk '{printf ("%0.0f",$1/1000); }' <$cpu_freq)
+    v_core=$($vcgencmd measure_volts | cut -f2 -d= | sed 's/000//')
+    echo "$(date "+%H:%M:%S") $temp$(printf "%5s" "$sys_cs")/$(printf "%4s" "$real_cs") MHz $(printf "%019d" "$health") $v_core"
     sleep 5
 done
