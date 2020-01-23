@@ -17,7 +17,6 @@
 | delete_metafiles.sh   | delete hidden apple metadata files in home folder                                       |
 | i3_knockout.sh        | lock/suspend/logout/reboot/shutdown/switch user script                                  |
 | i3_tiling.sh          | automatic or for specific applications optimal i3 tilings                               |
-| link_handler.sh       | opens specific program for picture, videos and audio by giving url. mainly for newsboat |
 | maintenance_github.sh | remove history from github repository                                                   |
 | maintenance_system.sh | purge cache and remove duplicated entries from python_-, bash_- and zsh_history         |
 | pdf_shrink.sh         | shrink pdf file with ghostscript                                                        |
