@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/rofi_exit.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:16:15+0100
+# date:       2020-01-23T11:08:40+0100
 
 # exit if rofi is running
 pgrep -x rofi && exit
@@ -19,13 +19,13 @@ case $(printf "%s\n" \
     "suspend simple" \
     "lock blur" \
     "lock simple" | rofi -monitor -1 -lines 9 -theme klassiker-center -dmenu -i -p "") in
-    "shutdown") knockout.sh -shutdown ;;
-    "reboot") knockout.sh -reboot ;;
-    "logout") knockout.sh -logout ;;
-    "switch user") knockout.sh -switch ;;
-    "suspend") knockout.sh -suspend ;;
-    "suspend blur") knockout.sh -suspend blur ;;
-    "suspend simple") knockout.sh -suspend simple ;;
-    "lock blur") knockout.sh -lock blur ;;
-    "lock simple") knockout.sh -lock simple ;;
+    "shutdown") i3_knockout.sh -shutdown ;;
+    "reboot") i3_knockout.sh -reboot ;;
+    "logout") i3_knockout.sh -logout ;;
+    "switch user") i3_knockout.sh -switch ;;
+    "suspend") i3_knockout.sh -suspend ;;
+    "suspend blur") i3_knockout.sh -suspend blur ;;
+    "suspend simple") i3_knockout.sh -suspend simple ;;
+    "lock blur") i3_knockout.sh -lock blur ;;
+    "lock simple") i3_knockout.sh -lock simple ;;
 esac
