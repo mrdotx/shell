@@ -18,13 +18,6 @@
 | maintenance_github.sh | remove history from github repository                                                   |
 | maintenance_system.sh | purge cache and remove duplicated entries from python_-, bash_- and zsh_history         |
 | pdf_shrink.sh         | shrink pdf file with ghostscript                                                        |
-| rofi_calc.sh          | use rofi to calculate with bc                                                           |
-| rofi_display.sh       | use rofi to manage displays with arandr/xrandr                                          |
-| rofi_exit             | use rofi to shutdown/reboot/logout/switch user/suspend or lock the system               |
-| rofi_font_symbols.sh  | use rofi to to search and copy unicode symbols                                          |
-| rofi_mount.sh         | use rofi to mount/unmount remote, usb and android locations/devices                     |
-| rofi_service.sh       | use rofi to start/stop some services like bluetooth, printer, firewall etc.             |
-| rofi_vim.sh           | use rofi to start vim with a few shortcuts                                              |
 | screenlayout.sh       | default screen setup                                                                    |
 | scrot.sh              | screenshot script for scrot                                                             |
 | service_toggle.sh     | switch status of service active or inactive                                             |
