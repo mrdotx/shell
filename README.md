@@ -11,8 +11,6 @@
 | backlight.sh          | change intel backlight brightness                                                       |
 | backup.sh             | rsync backup to remote location (ssh)                                                   |
 | backup_usb.sh         | rsync backup to usb                                                                     |
-| cmus.sh               | start cmus, if it's not running toogle from/to i3 scratchpad                            |
-| cmus_notify.sh        | cmus notification with notify-send                                                      |
 | conky.sh              | start conky                                                                             |
 | delete_metafiles.sh   | delete hidden apple metadata files in home folder                                       |
 | i3_knockout.sh        | lock/suspend/logout/reboot/shutdown/switch user script                                  |
