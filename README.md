@@ -1,9 +1,11 @@
-| shell script folder | comment                                              |
-| :------------------ | :--------------------------------------------------- |
-| icons               | icons for notify-send                                |
-| snippets            | old stuff                                            |
+# shell
 
-| shell scripts         | comment                                                                                 |
+| folder name           | comment                                              |
+| :-------------------- | :--------------------------------------------------- |
+| icons                 | icons for notify-send                                |
+| snippets              | old stuff                                            |
+
+| script name           | comment                                                                                 |
 | :-------------------- | :-------------------------------------------------------------------------------------- |
 | audio.sh              | toggle audio output analog/hdmi and increase/decrease/mute volume                       |
 | backlight.sh          | change intel backlight brightness                                                       |
