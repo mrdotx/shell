@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/scrot.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-20T09:28:16+0100
+# date:       2020-01-23T10:14:24+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for screenshots with scrot
@@ -25,7 +25,7 @@ help="$script [-h/--help] -- script for screenshots with scrot
     $script -select"
 
 sc_dir=$HOME/Schreibtisch
-sc_file=screenshot-$(date +"%FT%T%z").jpg
+sc_file=screenshot-$(date +"%FT%T%z").png
 sc_cmd="scrot $sc_dir/$sc_file"
 sc_prev="sxiv $sc_dir/$sc_file"
 
