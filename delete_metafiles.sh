@@ -3,9 +3,9 @@
 # path:       ~/projects/shell/delete_metafiles.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:14:42+0100
+# date:       2020-01-23T19:04:14+0100
 
-output=$HOME/delmetafile.txt
+output=$HOME/deleted_metafiles.txt
 
 # files to delete
 sudo su -c "find /home -name \".DS_Store\" > $output"
@@ -23,7 +23,7 @@ sudo su -c "chmod 755 $output"
 while read -r f; do
     #echo "[info] delete $f"
     #rm -r "$f"
-    gio trash "$f"
+    trash-put "$f"
 done < "$output"
 
 # output result
