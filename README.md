@@ -7,5 +7,4 @@
 
 | script name           | comment                                                                                 |
 | :-------------------- | :-------------------------------------------------------------------------------------- |
-| conky.sh              | start conky                                                                             |
 | pdf_shrink.sh         | shrink pdf file with ghostscript                                                        |
