@@ -16,5 +16,3 @@
 | maintenance_github.sh | remove history from github repository                                                   |
 | maintenance_system.sh | purge cache and remove duplicated entries from python_-, bash_- and zsh_history         |
 | pdf_shrink.sh         | shrink pdf file with ghostscript                                                        |
-| sync_keepass.sh       | sync keepassfile with rclone based on modification date                                 |
-| sync_rclone.sh        | cloudsync with rclone                                                                   |
