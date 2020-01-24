@@ -1,10 +1,12 @@
 # shell
 
-| folder name           | comment                                              |
-| :-------------------- | :--------------------------------------------------- |
-| icons                 | icons for notify-send                                |
-| snippets              | old stuff                                            |
+old stuff and things that couldn't be assigned
 
-| script name           | comment                                                                                 |
-| :-------------------- | :-------------------------------------------------------------------------------------- |
-| pdf_shrink.sh         | shrink pdf file with ghostscript                                                        |
+| folder name   | comment                          |
+| :------------ | :------------------------------- |
+| icons         | icons for notify-send            |
+| snippets      | old stuff                        |
+
+| script name   | comment                          |
+| :------------ | :------------------------------- |
+| pdf_shrink.sh | shrink pdf file with ghostscript |

@@ -1,4 +1,4 @@
-| shell scripts   | comment                                            |
+| name            | comment                                            |
 | :-------------  | :------------------------------------------------- |
 | backup.sh       | backup for specific files                          |
 | hera.sh         | wakeup, poweroff, status of specific server        |
