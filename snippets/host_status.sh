@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/host_status.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:12:43+0100
+# date:       2020-01-27T12:01:48+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -17,7 +17,7 @@ green=$(tput setaf 2)
 reset=$(tput sgr0)
 
 # ping host and echo online or offline
-if ping -c 1 "$1" -w 1 > /dev/null 2>&1; then
+if ping -c 1 "$1" -w 1 >/dev/null 2>&1; then
     echo "${green}online ${reset}"
 else
     echo "${red}offline${reset}"
