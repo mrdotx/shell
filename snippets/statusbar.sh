@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # path:       ~/projects/shell/snippets/statusbar.sh
-# user:       klassiker [mrdotx]
+# author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:13:22+0100
+# date:       2020-02-03T13:47:08+0100
 
 # combining commands for output
 cputemp="$(< /sys/class/thermal/thermal_zone0/temp cut -c "1-2")ºC"

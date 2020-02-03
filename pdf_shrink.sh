@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # path:       ~/projects/shell/pdf_shrink.sh
-# user:       klassiker [mrdotx]
+# author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:15:09+0100
+# date:       2020-02-03T13:47:41+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to shrink pdf files

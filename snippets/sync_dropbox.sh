@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # path:       ~/projects/shell/snippets/sync_dropbox.sh
-# user:       klassiker [mrdotx]
+# author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:13:32+0100
+# date:       2020-02-03T13:47:14+0100
 
 dbuser=klassiker
 dbstatus=$(sudo -u $dbuser dropbox-cli status)

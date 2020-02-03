@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # path:       ~/projects/shell/snippets/host_status.sh
-# user:       klassiker [mrdotx]
+# author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-27T12:01:48+0100
+# date:       2020-02-03T13:46:39+0100
 
 # color variables
 #black=$(tput setaf 0)

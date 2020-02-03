@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # path:       ~/projects/shell/snippets/hera.sh
-# user:       klassiker [mrdotx]
+# author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-01-13T12:12:37+0100
+# date:       2020-02-03T13:46:33+0100
 
 case "$1" in
 wakeup)
