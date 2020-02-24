@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/backup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-02-03T13:46:27+0100
+# date:       2020-02-24T12:35:46+0100
 
 # color variables {{{
 #black=$(tput setaf 0)
@@ -59,7 +59,7 @@ src="$src
 "
 
 # backup
-echo "[${magenta}backup${reset}] folder & files"
+printf "[%sbackup%s] folder & files\n" "${magenta}" "${reset}"
 for dir in $src; do
     case "${dir}" in
     $HOME/.newsboat)
@@ -75,10 +75,10 @@ for dir in $src; do
         rsync --delete -acqP "${dir}" "$destroot"
         ;;
     esac
-    echo "[${cyan}source${reset}] ${dir}"
+    printf "[%ssource%s] %s" "${cyan}" "${reset}" "${dir}"
 done
 
 # backup size
-echo "[${blue}backup${reset}] size"
+printf "[%sbackup%s] size" "%{blue}" "%{reset}"
 du -sh "$HOME/Backup/"
 notify-send "Backup complete" "$(du -sh "$HOME/Backup/")"

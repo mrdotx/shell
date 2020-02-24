@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/hera.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-02-03T13:46:33+0100
+# date:       2020-02-24T12:38:26+0100
 
 case "$1" in
 wakeup)
@@ -19,16 +19,16 @@ status)
     status="$("$HOME"/projects/shell/snippets/host_status.sh hera)"
 
     if [[ $status == *offline* ]]; then
-        echo "$status [sudo $HOME/projects/shell/snippets/hera.sh wakeup]      "
+        printf "%s [sudo %s/projects/shell/snippets/hera.sh wakeup]      " "$status" "$HOME"
     elif [[ $status == *online* ]]; then
-        echo "$status [sudo $HOME/projects/shell/snippets/hera.sh poweroff]    "
+        printf "%s [sudo %s/projects/shell/snippets/hera.sh poweroff]    " "$status" "$HOME"
     else
-        echo "unknown"
+        printf "unknown\n"
     fi
     ;;
 *)
     # if no parameters are given, print which are avaiable.
-    echo "Usage: $0 {wakeup|poweroff|status}"
+    printf "Usage: %s {wakeup|poweroff|status}" "$0"
     exit 1
     ;;
 esac

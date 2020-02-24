@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/snippets/statusbar.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-02-03T13:47:08+0100
+# date:       2020-02-24T12:43:23+0100
 
 # combining commands for output
 cputemp="$(< /sys/class/thermal/thermal_zone0/temp cut -c "1-2")ºC"
@@ -47,4 +47,4 @@ uptime="$(uptime -p | sed 's/s//g; s/,//g; s/up //g; s/ week/w/g; s/ day/d/g; s/
 statusbar="cpu: $cputemp [$cpuusage] | ram: $ram/$ramtotalg [$ramusage] | swap: $swap/$swaptotalg [$swapusage] | hdd: $hdd/$hddtotal [$hddusage] | wlan: $wlan [$wlansignal] | ip: $ip | name: $name | uptime: $uptime | $clock"
 
 # output
-echo -e "$statusbar"
+printf "%s\n" "$statusbar"

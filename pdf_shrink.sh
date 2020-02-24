@@ -3,7 +3,7 @@
 # path:       ~/projects/shell/pdf_shrink.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-02-03T13:47:41+0100
+# date:       2020-02-24T12:04:56+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to shrink pdf files
@@ -26,7 +26,7 @@ pdf_file=$2
 pdf_name=$(basename "$2" .pdf)
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ -z "$2" ] || [ $# -eq 0 ]; then
-    echo "$help"
+    printf "%s\n" "$help"
     exit 0
 else
     gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/"$pdf_setting" -dNOPAUSE -dBATCH -sOutputFile="$pdf_name"-compressed.pdf "$pdf_file"
