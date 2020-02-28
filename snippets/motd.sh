@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# path:       ~/projects/shell/snippets/motd.sh
+# path:       ~/repos/shell/snippets/motd.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-02-24T12:44:46+0100
+# date:       2020-02-28T08:25:52+0100
 
 # functions {{{
 color() {
@@ -171,10 +171,10 @@ label6="$borderBar  $(color $statsLabelColor "EFI space.....:") $label6$borderBa
 label7="$(extend "CPU: $(echo $(($(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq) / 1000)))MHz, Temp: $(cat /sys/class/thermal/thermal_zone0/temp | cut -c "1-2")ºC")"
 label7="$borderBar  $(color $statsLabelColor "System:.......:") $label7$borderBar"
 
-#label8="$(extend "$($HOME/projects/shell/snippets/hera.sh status)")"
+#label8="$(extend "$($HOME/repos/shell/snippets/hera.sh status)")"
 #label8="$borderBar  $(color $statsLabelColor "NAS...........:") $label8$borderBar"
 
-#label9="$(extend "$($HOME/projects/shell/snippets/host_status.sh elysion) [elysion]                                           ")"
+#label9="$(extend "$($HOME/repos/shell/snippets/host_status.sh elysion) [elysion]                                           ")"
 #label9="$borderBar  $(color $statsLabelColor "BACKUP........:") $label12$borderBar"
 
 stats="$label1\n$label2\n$label3\n$label4\n$label5\n$label6\n$label7"

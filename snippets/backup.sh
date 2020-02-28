@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/projects/shell/snippets/backup.sh
+# path:       ~/repos/shell/snippets/backup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-02-24T12:35:46+0100
+# date:       2020-02-28T08:24:53+0100
 
 # color variables {{{
 #black=$(tput setaf 0)

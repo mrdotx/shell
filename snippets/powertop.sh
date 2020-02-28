@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/projects/shell/snippets/powertop.sh
+# path:       ~/repos/shell/snippets/powertop.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-02-24T12:41:59+0100
+# date:       2020-02-28T08:26:03+0100
 
 # software settings in need of tuning
 # sets all tunable options to their good setting
