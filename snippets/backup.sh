@@ -1,16 +1,16 @@
 #!/bin/sh
 
-# path:       ~/repos/shell/snippets/backup.sh
+# path:       ~/.local/share/repos/shell/snippets/backup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-02-28T08:24:53+0100
+# date:       2020-03-25T23:30:01+0100
 
 # color variables {{{
 #black=$(tput setaf 0)
 #red=$(tput setaf 1)
 #green=$(tput setaf 2)
 #yellow=$(tput setaf 3)
-blue=$(tput setaf 4)
+#blue=$(tput setaf 4)
 magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
 #white=$(tput setaf 7)

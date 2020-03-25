@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/repos/shell/snippets/host_status.sh
+# path:       ~/.local/share/repos/shell/snippets/host_status.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-02-28T08:25:23+0100
+# date:       2020-03-25T23:30:54+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -20,5 +20,5 @@ reset=$(tput sgr0)
 if ping -c 1 "$1" -w 1 >/dev/null 2>&1; then
     printf "%sonline %s" "${green}" "${reset}"
 else
-    printf "%soffline%s" "${green}" "${reset}"
+    printf "%soffline%s" "${red}" "${reset}"
 fi
