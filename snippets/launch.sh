@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/.local/share/repos/shell/snippets/launch.sh
+# path:       /home/klassiker/.local/share/repos/shell/snippets/launch.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-03-25T23:31:38+0100
+# date:       2020-04-29T11:16:40+0200
 
 case "$1" in
 
