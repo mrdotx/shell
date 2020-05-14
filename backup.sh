@@ -1,84 +1,29 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/snippets/backup.sh
+# path:       /home/klassiker/.local/share/repos/shell/backup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-04-29T11:16:09+0200
+# date:       2020-05-14T13:39:51+0200
 
-# color variables {{{
-#black=$(tput setaf 0)
-#red=$(tput setaf 1)
-#green=$(tput setaf 2)
-#yellow=$(tput setaf 3)
-#blue=$(tput setaf 4)
-magenta=$(tput setaf 5)
-cyan=$(tput setaf 6)
-#white=$(tput setaf 7)
-reset=$(tput sgr0)
-# }}}
+# auth can be something like sudo -A, doas -- or
+# nothing, depending on configuration requirements
+auth="doas --"
+backup_name="morpheus"
+remote_location="alarm@prometheus:/home/alarm/backup/$backup_name/"
 
-destroot="$HOME/Backup/"
-destconf="$HOME/Backup/.config/"
+printf ":: create installed packages list\n"
+yay -Qqe > "$XDG_CONFIG_HOME/yay/installed_packages.txt"
+# to reinstall the packages: yay -S --needed - < "$XDG_CONFIG_HOME/yay/installed_packages.txt"
 
-# home/folders
-src="
-#$HOME/.conky
-#$HOME/.jameica
-#$HOME/.newsboat
-#$HOME/.ssh
-#$HOME/.weechat
-"
-# home/files
-src="$src
-#$HOME/.bashrc
-#$HOME/.gitconfig
-#$HOME/.jameica.properties
-#$HOME/.lynx_bookmarks.html
-#$HOME/.lynxrc
-#$HOME/.profile
-#$HOME/.tmux.conf
-#$HOME/.vimrc
-"
-# home/.config/folders
-src="$src
-#$HOME/.config/cmus
-#$HOME/.config/filezilla
-#$HOME/.config/htop
-#$HOME/.config/kitty
-#$HOME/.config/mc
-#$HOME/.config/mpv
-#$HOME/.config/polybar
-#$HOME/.config/powerline-shell
-#$HOME/.config/ranger
-#$HOME/.config/rofi
-#$HOME/.config/zathura
-"
-# home/.config/files
-src="$src
-#$HOME/.config/libinput-gestures.conf
-"
-
-# backup
-printf "[%sbackup%s] folder & files\n" "${magenta}" "${reset}"
-for dir in $src; do
-    case "${dir}" in
-    $HOME/.newsboat)
-        rsync --delete -acqP --exclude="cache.db" "${dir}" "$destroot"
-        ;;
-    $HOME/.weechat)
-        rsync --delete -acqP --exclude="weechat.log" --exclude="logs" "${dir}" "$destroot"
-        ;;
-    $HOME/.config/*)
-        rsync --delete -acqP "${dir}" "$destconf"
-        ;;
-    $HOME/*)
-        rsync --delete -acqP "${dir}" "$destroot"
-        ;;
-    esac
-    printf "[%ssource%s] %s" "${cyan}" "${reset}" "${dir}"
-done
-
-# backup size
-printf "[%sbackup%s] size" "%{blue}" "%{reset}"
-du -sh "$HOME/Backup/"
-notify-send "Backup complete" "$(du -sh "$HOME/Backup/")"
+printf "\n:: backup / to remote location\n"
+# for testing rsync option --dry-run
+$auth rsync -aAXv --delete \
+    --exclude="/dev/*" \
+    --exclude="/home/klassiker/Downloads/*" \
+    --exclude="/home/klassiker/VMs/*" \
+    --exclude="/lost+found" \
+    --exclude="/mnt/*" \
+    --exclude="/proc/*" \
+    --exclude="/run/*" \
+    --exclude="/sys/*" \
+    --exclude="/tmp/*" / $remote_location

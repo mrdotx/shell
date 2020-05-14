@@ -1,14 +1,33 @@
 # shell
 
-old stuff and things that couldn't be assigned
+shell scripts for system/hardware management and general maintenance
 
-| name            | comment                                            |
-| :-------------  | :------------------------------------------------- |
-| backup.sh       | backup for specific files                          |
-| hera.sh         | wakeup, poweroff, status of specific server        |
-| host_status.sh  | get status online/offline for host with ping       |
-| launch.sh       | open specified applications on specific desktop    |
-| motd.sh         | dynamic motd with a few system informations        |
-| powertop.sh     | tuning the power consumption                       |
-| statusbar.sh    | simple script for system information in status bar |
-| sync_dropbox.sh | single dropbox sync with dropbox-cli               |
+| folder name  | comment                    |
+| :----------- | :------------------------- |
+| old          | old stuff                  |
+| screenlayout | screenlayouts for displays |
+
+| name                     | comment                                                                                  |
+| :----------------------- | :--------------------------------------------------------------------------------------- |
+| alpha_restore.sh         | find png files with suspicious data in alpha channel                                     |
+| audio.sh                 | toggle audio output analog/hdmi and increase/decrease/mute volume for alsa or pulseaudio |
+| backlight.sh             | change intel backlight brightness                                                        |
+| backup.sh                | rsync backup to remote location (ssh)                                                    |
+| backup_usb.sh            | rsync backup to usb                                                                      |
+| bookmarks.sh             | copy bookmarks from brave to surf and qutebrowser                                        |
+| chameleon.sh             | pick color with chameleon to copy to clipboard and primary                               |
+| delete_github_commits.sh | remove commits from a github repository                                                  |
+| delete_metafiles.sh      | delete hidden apple metadata files in home folder                                        |
+| pdf_shrink.sh            | shrink pdf file with ghostscript                                                         |
+| screenlayout.sh          | default screen setup                                                                     |
+| screenshot.sh            | screenshot script for maim                                                               |
+| service_toggle.sh        | switch status of service active or inactive                                              |
+| system_cleanup.sh        | purge cache and remove duplicated entries from python-, bash- and zsh-history            |
+| terminal_colors.sh       | shows base colors, color palette, greyscale and true colors                              |
+| terminal_wrapper.sh      | terminal wrapper for tiling window managers floating windows                             |
+| touchpad.sh              | toggle disable/enable touchpad                                                           |
+| urxvtc.sh                | start urxvt daemon if not running                                                        |
+| wallpaper.sh             | set wallpaper with xwallpaper                                                            |
+| wlan.sh                  | connect to wlan via command line interface                                               |
+| xsel.sh                  | shows the content of clipboard and primary with notify-send                              |
+| yay-fzf.sh               | install/remove packages with yay and fzf                                                 |
