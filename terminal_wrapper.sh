@@ -3,17 +3,11 @@
 # path:       /home/klassiker/.local/share/repos/shell/terminal_wrapper.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:44:07+0200
+# date:       2020-05-22T16:39:12+0200
 
 # color variables
-# black=$(tput setaf 0)
-# red=$(tput setaf 1)
-green=$(tput setaf 2)
 yellow=$(tput setaf 3)
-# blue=$(tput setaf 4)
-# magenta=$(tput setaf 5)
-# cyan=$(tput setaf 6)
-# white=$(tput setaf 7)
+blue=$(tput setaf 12)
 reset=$(tput sgr0)
 
 script=$(basename "$0")
@@ -26,8 +20,8 @@ help="$script [-h/--help] -- script for execute command in new terminal window
 
 stat="The command exited with ${yellow}status $?${reset}.
 "
-keys="Press [${green}q${reset}]${green}uit${reset} \
-to exit this window or [${green}s${reset}]${green}hell${reset} to run $SHELL..."
+keys="Press [${blue}q${reset}]${blue}uit${reset} \
+to exit this window or [${blue}s${reset}]${blue}hell${reset} to run $SHELL..."
 
 read_c() {
     [ -t 0 ] \
