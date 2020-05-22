@@ -3,17 +3,11 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/host_status.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:17:34+0200
+# date:       2020-05-22T16:42:12+0200
 
 # color variables
-#black=$(tput setaf 0)
 red=$(tput setaf 1)
 green=$(tput setaf 2)
-#yellow=$(tput setaf 3)
-#blue=$(tput setaf 4)
-#magenta=$(tput setaf 5)
-#cyan=$(tput setaf 6)
-#white=$(tput setaf 7)
 reset=$(tput sgr0)
 
 # ping host and echo online or offline

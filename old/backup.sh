@@ -3,19 +3,12 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/backup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:17:13+0200
+# date:       2020-05-22T16:41:28+0200
 
-# color variables {{{
-#black=$(tput setaf 0)
-#red=$(tput setaf 1)
-#green=$(tput setaf 2)
-#yellow=$(tput setaf 3)
-#blue=$(tput setaf 4)
+# color variables
 magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
-#white=$(tput setaf 7)
 reset=$(tput sgr0)
-# }}}
 
 destroot="$HOME/Backup/"
 destconf="$HOME/Backup/.config/"
