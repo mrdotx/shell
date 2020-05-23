@@ -3,13 +3,15 @@
 # path:       /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:43:37+0200
+# date:       2020-05-23T20:48:48+0200
 
 iw_hist="$HOME/.local/share/iwctl/history"
 cmd_hist="$HOME/.local/share/cmd_history" # zsh and bash history merged
 cache_dir="$HOME/.cache/"
 cache_days=120
-cache_files=$(find "$cache_dir" -type f -atime +$cache_days | wc -l)
+cache_files=$(find "$cache_dir" -type f -atime +$cache_days \
+    | wc -l \
+)
 tmp_file=$(mktemp /tmp/history.XXXXXX)
 
 hist_clean() {

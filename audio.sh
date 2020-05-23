@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/audio.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:39:03+0200
+# date:       2020-05-23T20:45:38+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for audio output
@@ -29,11 +29,19 @@ perc=$2
 # use pulseaudio (1) or alsa (0)
 pulse=0
 
-[ $pulse = 1 ] && pacmd_sink=$(pacmd list-sinks | grep "index:" | awk -F ': ' '{print $2}')
+[ $pulse = 1 ] \
+    && pacmd_sink=$(pacmd list-sinks \
+    | grep "index:" \
+    | awk -F ': ' '{print $2}' \
+)
 
 pulseaudio() {
-    pacmd_name=$(pacmd list-cards | grep "active profile:" | awk -F ': ' '{print $2}')
-    if [ "$pacmd_name" = "<output:analog-stereo+input:analog-stereo>" ] || [ "$pacmd_name" = "<output:analog-stereo>" ]; then
+    pacmd_name=$(pacmd list-cards \
+        | grep "active profile:" \
+        | awk -F ': ' '{print $2}' \
+    )
+    if [ "$pacmd_name" = "<output:analog-stereo+input:analog-stereo>" ] \
+            || [ "$pacmd_name" = "<output:analog-stereo>" ]; then
         pacmd set-card-profile 0 "output:hdmi-stereo-extra1"
         pactl set-sink-volume $((pacmd_sink+2)) 100%
     else
