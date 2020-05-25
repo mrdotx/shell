@@ -28,6 +28,5 @@ shell scripts for system/hardware management and general maintenance
 | touchpad.sh              | toggle disable/enable touchpad                                                           |
 | urxvtc.sh                | start urxvt daemon if not running                                                        |
 | wallpaper.sh             | set wallpaper with xwallpaper                                                            |
-| wlan.sh                  | connect to wlan via command line interface                                               |
 | xsel.sh                  | shows the content of clipboard and primary with notify-send                              |
 | yay-fzf.sh               | install/remove packages with yay and fzf                                                 |
