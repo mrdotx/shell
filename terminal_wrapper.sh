@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/terminal_wrapper.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-22T16:39:12+0200
+# date:       2020-05-26T12:42:06+0200
 
 # color variables
 yellow=$(tput setaf 3)
@@ -23,7 +23,7 @@ stat="The command exited with ${yellow}status $?${reset}.
 keys="Press [${blue}q${reset}]${blue}uit${reset} \
 to exit this window or [${blue}s${reset}]${blue}hell${reset} to run $SHELL..."
 
-read_c() {
+read_c(){
     [ -t 0 ] \
         && sav_tty_set=$(stty -g) \
         && stty -icanon min 1 time 0

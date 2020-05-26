@@ -3,14 +3,14 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/motd.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:17:56+0200
+# date:       2020-05-26T12:43:35+0200
 
 # functions {{{
-color() {
+color(){
     echo "\e[$1m$2\e[0m"
 }
 
-extend() {
+extend(){
     str="$1"
     (( spaces=60-${#1} ))
     while [ $spaces -gt 0 ]; do
@@ -20,7 +20,7 @@ extend() {
     echo "$str"
 }
 
-center() {
+center(){
     str="$1"
     (( spacesLeft=(78-${#1})/2 ))
     (( spacesRight=78-spacesLeft-${#1} ))
@@ -37,7 +37,7 @@ center() {
     echo "$str"
 }
 
-logoCenter() {
+logoCenter(){
     str="$1"
     (( spacesLeft=(60-${#1})/2 ))
     (( spacesRight=60-spacesLeft-${#1} ))
@@ -54,7 +54,7 @@ logoCenter() {
     echo "$str"
 }
 
-sec2time() {
+sec2time(){
     input=$1
 
     if [ "$input" -lt 60 ]; then

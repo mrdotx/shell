@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-23T20:48:48+0200
+# date:       2020-05-26T12:41:24+0200
 
 iw_hist="$HOME/.local/share/iwctl/history"
 cmd_hist="$HOME/.local/share/cmd_history" # zsh and bash history merged
@@ -14,17 +14,17 @@ cache_files=$(find "$cache_dir" -type f -atime +$cache_days \
 )
 tmp_file=$(mktemp /tmp/history.XXXXXX)
 
-hist_clean() {
+hist_clean(){
     printf ":: purge %s history\n remove white space from the end of the line...\n" "$1"
     sed -i "s/ *$//" "$2"
     printf " remove duplicates...\n"
 }
 
-cache_header() {
+cache_header(){
     printf "\n:: delete .cache files\n %s files that haven't been accessed in %d days...\n" "$cache_files" "$cache_days"
 }
 
-cache_clean() {
+cache_clean(){
     cache_header
     find "$cache_dir" -type f -atime +$cache_days
 

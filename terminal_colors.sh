@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/terminal_colors.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:43:55+0200
+# date:       2020-05-26T12:41:55+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show terminal colors
@@ -43,7 +43,7 @@ else
     esac
 fi
 
-plot() {
+plot(){
     if [ -z "$num" ]; then
         printf "\033[48;5;%sm %3d \033[0m" "$1" "$1"
     else
@@ -51,7 +51,7 @@ plot() {
     fi
 }
 
-base() {
+base(){
     s_col=0
     e_col=15
     while [ "$s_col" -le "$e_col" ]; do
@@ -64,7 +64,7 @@ base() {
     done
 }
 
-color() {
+color(){
     s_col=16
     e_col=231
     blk=$(($(tput cols)/30))
@@ -93,7 +93,7 @@ color() {
     done
 }
 
-grey() {
+grey(){
     s_col=232
     e_col=255
     blk=$(($(tput cols)/30))
@@ -113,7 +113,7 @@ grey() {
     done
 }
 
-t_color() {
+t_color(){
     awk -v col_qty=$(($(tput cols)*24)) 'BEGIN{
         s="/\\";
         for (col = 0; col<col_qty; col++) {
@@ -129,7 +129,7 @@ t_color() {
     }'
 }
 
-out() {
+out(){
     [ -z "${opt##*$1*}" ] \
     && if [ -z "$head" ]; then
         printf ":: %s\n" "$3"

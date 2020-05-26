@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/pdf_shrink.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:42:02+0200
+# date:       2020-05-26T12:40:50+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to shrink pdf files
@@ -29,7 +29,7 @@ help="$script [-h/--help] -- script to shrink pdf files
 setting=$1
 file=$2
 
-format() {
+format(){
     printf "\n\r%s" \
         ":: which compression format [S]creen/[e]book/[p]rinter/p[r]epress: " \
         && read -r "key"

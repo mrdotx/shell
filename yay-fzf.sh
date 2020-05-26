@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/yay-fzf.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:45:17+0200
+# date:       2020-05-26T12:42:34+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to install/remove packages with yay and fzf
@@ -20,7 +20,7 @@ help="$script [-h/--help] -- script to install/remove packages with yay and fzf
     $script -R
     $script -Re"
 
-proc() {
+proc(){
     srch_args="$1"
     proc_args="$2"
     yay -"$srch_args" \
