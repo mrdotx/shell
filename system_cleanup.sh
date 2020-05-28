@@ -3,12 +3,12 @@
 # path:       /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-26T12:41:24+0200
+# date:       2020-05-28T09:12:31+0200
 
 iw_hist="$HOME/.local/share/iwctl/history"
 cmd_hist="$HOME/.local/share/cmd_history" # zsh and bash history merged
 cache_dir="$HOME/.cache/"
-cache_days=120
+cache_days=365
 cache_files=$(find "$cache_dir" -type f -atime +$cache_days \
     | wc -l \
 )
@@ -21,7 +21,7 @@ hist_clean(){
 }
 
 cache_header(){
-    printf "\n:: delete .cache files\n %s files that haven't been accessed in %d days...\n" "$cache_files" "$cache_days"
+    printf "\n:: delete files from .cache folder\n %s files that haven't been accessed in %d days...\n" "$cache_files" "$cache_days"
 }
 
 cache_clean(){
@@ -30,7 +30,7 @@ cache_clean(){
 
     key=""
     while true; do
-        printf "\n\r%s" " delete .cache files [y]es/[N]o: " && read -r "key"
+        printf "\n\r%s" " delete files from .cache folder [y]es/[N]o: " && read -r "key"
         case "$key" in
             y|Y|yes|Yes)
                 find "$cache_dir" -type f -atime +$cache_days -delete \
