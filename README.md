@@ -18,7 +18,6 @@ shell scripts for system/hardware management and general maintenance
 | chameleon.sh             | pick color with chameleon to copy to clipboard and primary                               |
 | delete_github_commits.sh | remove commits from a github repository                                                  |
 | delete_metafiles.sh      | delete hidden apple metadata files in home folder                                        |
-| pdf_shrink.sh            | shrink pdf file with ghostscript                                                         |
 | screenlayout.sh          | default screen setup                                                                     |
 | screenshot.sh            | screenshot script for maim                                                               |
 | service_toggle.sh        | switch status of service active or inactive                                              |
