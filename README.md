@@ -14,7 +14,6 @@ shell scripts for system/hardware management and general maintenance
 | backlight.sh             | change intel backlight brightness                                                        |
 | backup.sh                | rsync backup to remote location (ssh)                                                    |
 | backup_usb.sh            | rsync backup to usb                                                                      |
-| bookmarks.sh             | copy bookmarks from brave to surf and qutebrowser                                        |
 | chameleon.sh             | pick color with chameleon to copy to clipboard and primary                               |
 | delete_github_commits.sh | remove commits from a github repository                                                  |
 | delete_metafiles.sh      | delete hidden apple metadata files in home folder                                        |
