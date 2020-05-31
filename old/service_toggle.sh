@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/service_toggle.sh
+# path:       /home/klassiker/.local/share/repos/shell/old/service_toggle.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:43:02+0200
+# date:       2020-05-31T11:06:31+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to toggle services on and off

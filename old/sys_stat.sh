@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/sys_stat.sh
+# path:       /home/klassiker/.local/share/repos/shell/old/sys_stat.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:43:13+0200
+# date:       2020-05-31T11:06:51+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
