@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/terminal_colors.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-26T12:41:55+0200
+# date:       2020-06-05T18:08:20+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show terminal colors
@@ -137,6 +137,7 @@ out(){
     else
         "$2"
     fi
+    return 0
 }
 
 [ -z "${opt##*n*}" ] \
