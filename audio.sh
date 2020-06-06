@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/audio.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-26T12:39:57+0200
+# date:       2020-06-06T09:29:46+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for audio output
@@ -35,7 +35,7 @@ pulse=0
     | awk -F ': ' '{print $2}' \
 )
 
-pulseaudio(){
+pulseaudio() {
     pacmd_name=$(pacmd list-cards \
         | grep "active profile:" \
         | awk -F ': ' '{print $2}' \
@@ -51,8 +51,8 @@ pulseaudio(){
     exit 0
 }
 
-alsa(){
-    alsadevice(){
+alsa() {
+    alsadevice() {
         printf "defaults.pcm.!type hw\n" > "$HOME/.asoundrc"
         printf "defaults.pcm.!card 0\n" >> "$HOME/.asoundrc"
         printf "defaults.pcm.!device %s" "$1" >> "$HOME/.asoundrc"

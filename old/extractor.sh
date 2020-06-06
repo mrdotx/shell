@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/extractor.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-02T10:19:12+0200
+# date:       2020-06-06T09:27:52+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to extract files
@@ -19,7 +19,7 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
     exit 0
 fi
 
-ext(){
+ext() {
     cmd="${1%% *}"
     if ! [ -x "$(command -v "$cmd")" ]; then
         printf "\"%s\" is not installed\n" "$cmd"
