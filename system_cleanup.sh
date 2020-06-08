@@ -3,18 +3,18 @@
 # path:       /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-06T09:30:35+0200
+# date:       2020-06-08T13:10:39+0200
 
-iw_hist="$HOME/.local/share/iwctl/history"
-cmd_hist="$HOME/.local/share/cmd_history" # zsh and bash history merged
-cache_dir="$HOME/.cache/"
+iwd_history="$HOME/.local/share/iwctl/history"
+cmd_history="$HOME/.local/share/cmd_history" # zsh and bash history merged
+cache_directory="$HOME/.cache/"
 cache_days=365
-cache_files=$(find "$cache_dir" -type f -atime +$cache_days \
+cache_files=$(find "$cache_directory" -type f -atime +$cache_days \
     | wc -l \
 )
 tmp_file=$(mktemp /tmp/history.XXXXXX)
 
-hist_clean() {
+history_clean() {
     printf ":: purge %s history\n remove white space from the end of the line...\n" "$1"
     sed -i "s/ *$//" "$2"
     printf " remove duplicates...\n"
@@ -26,14 +26,14 @@ cache_header() {
 
 cache_clean() {
     cache_header
-    find "$cache_dir" -type f -atime +$cache_days
+    find "$cache_directory" -type f -atime +$cache_days
 
     key=""
     while true; do
         printf "\n\r%s" " delete files from .cache folder [y]es/[N]o: " && read -r "key"
         case "$key" in
             y|Y|yes|Yes)
-                find "$cache_dir" -type f -atime +$cache_days -delete \
+                find "$cache_directory" -type f -atime +$cache_days -delete \
                     && exit 0
                 ;;
             *)
@@ -43,14 +43,14 @@ cache_clean() {
     done
 }
 
-hist_clean "iwctl" "$iw_hist"
-tac "$iw_hist" | awk '! seen[$0]++' | tac > "$tmp_file"
-cp "$tmp_file" "$iw_hist"
+history_clean "iwctl" "$iwd_history"
+tac "$iwd_history" | awk '! seen[$0]++' | tac > "$tmp_file"
+cp "$tmp_file" "$iwd_history"
 
 printf "\n"
-hist_clean "merged zsh and bash" "$cmd_hist"
-tac "$cmd_hist" | awk '! seen[$0]++' | tac > "$tmp_file"
-mv "$tmp_file" "$cmd_hist"
+history_clean "merged zsh and bash" "$cmd_history"
+tac "$cmd_history" | awk '! seen[$0]++' | tac > "$tmp_file"
+mv "$tmp_file" "$cmd_history"
 
 if [ "$cache_files" -gt 0 ]; then
     cache_clean

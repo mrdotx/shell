@@ -3,18 +3,18 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/backup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-22T16:41:28+0200
+# date:       2020-06-08T14:01:27+0200
 
 # color variables
 magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
 reset=$(tput sgr0)
 
-destroot="$HOME/Backup/"
-destconf="$HOME/Backup/.config/"
+destination_root="$HOME/Backup/"
+destination_config="$HOME/Backup/.config/"
 
 # home/folders
-src="
+source_object="
 #$HOME/.conky
 #$HOME/.jameica
 #$HOME/.newsboat
@@ -22,7 +22,7 @@ src="
 #$HOME/.weechat
 "
 # home/files
-src="$src
+source_object="$source_object
 #$HOME/.bashrc
 #$HOME/.gitconfig
 #$HOME/.jameica.properties
@@ -33,7 +33,7 @@ src="$src
 #$HOME/.vimrc
 "
 # home/.config/folders
-src="$src
+source_object="$source_object
 #$HOME/.config/cmus
 #$HOME/.config/filezilla
 #$HOME/.config/htop
@@ -47,28 +47,28 @@ src="$src
 #$HOME/.config/zathura
 "
 # home/.config/files
-src="$src
+source_object="$source_object
 #$HOME/.config/libinput-gestures.conf
 "
 
 # backup
 printf "[%sbackup%s] folder & files\n" "${magenta}" "${reset}"
-for dir in $src; do
+for dir in $source_object; do
     case "${dir}" in
     $HOME/.newsboat)
-        rsync --delete -acqP --exclude="cache.db" "${dir}" "$destroot"
+        rsync --delete -acqP --exclude="cache.db" "${dir}" "$destination_root"
         ;;
     $HOME/.weechat)
-        rsync --delete -acqP --exclude="weechat.log" --exclude="logs" "${dir}" "$destroot"
+        rsync --delete -acqP --exclude="weechat.log" --exclude="logs" "${dir}" "$destination_root"
         ;;
     $HOME/.config/*)
-        rsync --delete -acqP "${dir}" "$destconf"
+        rsync --delete -acqP "${dir}" "$destination_config"
         ;;
     $HOME/*)
-        rsync --delete -acqP "${dir}" "$destroot"
+        rsync --delete -acqP "${dir}" "$destination_root"
         ;;
     esac
-    printf "[%ssource%s] %s" "${cyan}" "${reset}" "${dir}"
+    printf "[%ssource_object%s] %s" "${cyan}" "${reset}" "${dir}"
 done
 
 # backup size

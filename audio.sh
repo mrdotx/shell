@@ -3,19 +3,19 @@
 # path:       /home/klassiker/.local/share/repos/shell/audio.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-06T09:29:46+0200
+# date:       2020-06-08T12:39:54+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for audio output
   Usage:
-    $script [-tog/-inc/-dec/-mute] [perc]
+    $script [-tog/-inc/-dec/-mute] [percent]
 
   Settings:
-    [-tog]  = toggle output from analog to hdmi stereo
-    [-mute] = mute volume
-    [-inc]  = increase in perc (0-100%)
-    [-dec]  = decrease in perc (0-100%)
-    [perc]  = how much perc to increase/decrease the brightness
+    [-tog]    = toggle output from analog to hdmi stereo
+    [-mute]   = mute volume
+    [-inc]    = increase in percent (0-100%)
+    [-dec]    = decrease in percent (0-100%)
+    [percent] = how much percent to increase/decrease the brightness
 
   Examples:
     $script -tog
@@ -23,8 +23,8 @@ help="$script [-h/--help] -- script for audio output
     $script -inc 10
     $script -dec 10"
 
-dirc=$1
-perc=$2
+option=$1
+percent=$2
 
 # use pulseaudio (1) or alsa (0)
 pulse=0
@@ -78,10 +78,10 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ -z "$2" ] || [ $# -eq 0 ]; then
     printf "%s\n" "$help"
 fi
 
-if [ "$dirc" = "-inc" ]; then
-    [ $pulse = 1 ] && pactl set-sink-volume "$pacmd_sink" +"$perc"%
-    [ $pulse = 0 ] && amixer set Master "$perc"%+
-elif [ "$dirc" = "-dec" ]; then
-    [ $pulse = 1 ] && pactl set-sink-volume "$pacmd_sink" -"$perc"%
-    [ $pulse = 0 ] && amixer set Master "$perc"%-
+if [ "$option" = "-inc" ]; then
+    [ $pulse = 1 ] && pactl set-sink-volume "$pacmd_sink" +"$percent"%
+    [ $pulse = 0 ] && amixer set Master "$percent"%+
+elif [ "$option" = "-dec" ]; then
+    [ $pulse = 1 ] && pactl set-sink-volume "$pacmd_sink" -"$percent"%
+    [ $pulse = 0 ] && amixer set Master "$percent"%-
 fi

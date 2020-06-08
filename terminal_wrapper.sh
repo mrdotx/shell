@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/terminal_wrapper.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-06T09:31:17+0200
+# date:       2020-06-08T13:20:58+0200
 
 # color variables
 yellow=$(tput setaf 3)
@@ -18,14 +18,14 @@ help="$script [-h/--help] -- script for execute command in new terminal window
   Examples:
     $script git status"
 
-stat="The command exited with ${yellow}status $?${reset}.
+status="The command exited with ${yellow}status $?${reset}.
 "
 keys="Press [${blue}q${reset}]${blue}uit${reset} \
 to exit this window or [${blue}s${reset}]${blue}hell${reset} to run $SHELL..."
 
 read_c() {
     [ -t 0 ] \
-        && sav_tty_set=$(stty -g) \
+        && save_tty_set=$(stty -g) \
         && stty -icanon min 1 time 0
     eval "$1="
     while
@@ -38,7 +38,7 @@ read_c() {
     done
     printf "\r"
     [ -t 0 ] \
-        && stty "$sav_tty_set"
+        && stty "$save_tty_set"
 }
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
@@ -48,7 +48,7 @@ else
     "$@"
     key=""
     while true; do
-        printf "\n\r%s%s" "${stat}" "${keys}" && read_c "key"
+        printf "\n\r%s%s" "${status}" "${keys}" && read_c "key"
         case "$key" in
             q|Q)
                 exit 0
@@ -58,7 +58,7 @@ else
                 && exit 0
                 ;;
             *)
-                stat=""
+                status=""
                 ;;
         esac
     done

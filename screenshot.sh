@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/screenshot.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:42:43+0200
+# date:       2020-06-08T13:05:24+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to make screenshots with maim
@@ -24,25 +24,25 @@ help="$script [-h/--help] -- script to make screenshots with maim
     $script -window 5
     $script -select"
 
-sc_dir=$HOME/Schreibtisch
-sc_file=screenshot-$(date +"%FT%T%z").png
-sc_cmd="maim -B $sc_dir/$sc_file"
-sc_prev="sxiv $sc_dir/$sc_file"
+screenshot_directory=$HOME/Schreibtisch
+screenshot_file=screenshot-$(date +"%FT%T%z").png
+screenshot_command="maim -B $screenshot_directory/$screenshot_file"
+screenshot_preview="sxiv $screenshot_directory/$screenshot_file"
 
 [ -n "$2" ] \
-    && cmd="$sc_cmd -d $2" \
-    || cmd="$sc_cmd"
+    && execute="$screenshot_command -d $2" \
+    || execute="$screenshot_command"
 
 case "$1" in
     -desk)
-        $cmd && $sc_prev
+        $execute && $screenshot_preview
         ;;
     -window)
-        $cmd -i "$(xdotool getactivewindow)" && $sc_prev
+        $execute -i "$(xdotool getactivewindow)" && $screenshot_preview
         ;;
     -select)
         notify-send "maim" "select an area or window to screenshot" \
-            & $sc_cmd -s && $sc_prev
+            & $screenshot_command -s && $screenshot_preview
         ;;
     *)
         printf "%s\n" "$help"

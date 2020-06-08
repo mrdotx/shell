@@ -3,23 +3,23 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/sync_dropbox.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:18:29+0200
+# date:       2020-06-08T14:05:44+0200
 
-dbuser=klassiker
-dbstatus=$(sudo -u $dbuser dropbox-cli status)
+dropbox_user=klassiker
+dropbox_status=$(sudo -u $dropbox_user dropbox-cli status)
 
 # start, sync and stop dropbox
-if [ "$dbstatus" = "Dropbox isn't running!" ]; then
-    sudo -u $dbuser dropbox-cli start
+if [ "$dropbox_status" = "Dropbox isn't running!" ]; then
+    sudo -u $dropbox_user dropbox-cli start
 fi
 
 count_done=1
 while true; do
-    sudo -u $dbuser dropbox-cli status
-    if [ "$dbstatus" = "Aktualisiert" ]; then
+    sudo -u $dropbox_user dropbox-cli status
+    if [ "$dropbox_status" = "Aktualisiert" ]; then
         count_done=$(( count_done + 1 ))
         if [ $count_done -gt 10 ]; then
-            sudo -u $dbuser dropbox-cli stop && sudo -u $dbuser dropbox-cli autostart n
+            sudo -u $dropbox_user dropbox-cli stop && sudo -u $dropbox_user dropbox-cli autostart n
             break
         fi
     fi

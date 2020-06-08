@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/extractor.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-06T09:27:52+0200
+# date:       2020-06-08T13:27:33+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to extract files
@@ -19,10 +19,10 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
     exit 0
 fi
 
-ext() {
-    cmd="${1%% *}"
-    if ! [ -x "$(command -v "$cmd")" ]; then
-        printf "\"%s\" is not installed\n" "$cmd"
+extract() {
+    execute="${1%% *}"
+    if ! [ -x "$(command -v "$execute")" ]; then
+        printf "\"%s\" is not installed\n" "$execute"
         exit 1
     else
         $1
@@ -34,52 +34,52 @@ do
     if [ -f "$n" ] ; then
         case "${n%,}" in
             *.cbt|*.tar|*.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz)
-                ext "tar xvf $n"
+                extract "tar xvf $n"
                 ;;
             *.tar.zst)
-                ext "tar -I zstd -xvf $n"
+                extract "tar -I zstd -xvf $n"
                 ;;
             *.cbz|*.epub|*.zip)
-                ext "unzip $n"
+                extract "unzip $n"
                 ;;
             *.cbr|*.rar)
-                ext "unrar x -ad $n"
+                extract "unrar x -ad $n"
                 ;;
             *.ace|*.cba)
-                ext "unace x $n"
+                extract "unace x $n"
                 ;;
             *.7z|*.apk|*.arj|*.cab|*.cb7|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.pkg|*.rpm|*.udf|*.wim|*.xar)
-                ext "7z x $n"
+                extract "7z x $n"
                 ;;
             *.gz)
-                ext "gunzip $n"
+                extract "gunzip $n"
                 ;;
             *.bz2)
-                ext "bunzip2 $n"
+                extract "bunzip2 $n"
                 ;;
             *.lzma)
-                ext "unlzma $n"
+                extract "unlzma $n"
                 ;;
             *.cpio)
-                ext "cpio -id < $n"
+                extract "cpio -id < $n"
                 ;;
             *.z)
-                ext "uncompress $n"
+                extract "uncompress $n"
                 ;;
             *.xz)
-                ext "unxz $n"
+                extract "unxz $n"
                 ;;
             *.arc)
-                ext "arc e $n"
+                extract "arc e $n"
                 ;;
             *.zpaq)
-                ext "zpaq x $n"
+                extract "zpaq x $n"
                 ;;
             *.cso)
-                ext "ciso 0 $n $n.iso"
+                extract "ciso 0 $n $n.iso"
                 ;;
             *.exe)
-                ext "cabextract $n"
+                extract "cabextract $n"
                 ;;
             *)
                 printf "\"%s\" has an unknown extension\n" "$n"

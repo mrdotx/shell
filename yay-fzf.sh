@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/yay-fzf.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-06T09:31:47+0200
+# date:       2020-06-08T13:24:33+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to install/remove packages with yay and fzf
@@ -20,24 +20,24 @@ help="$script [-h/--help] -- script to install/remove packages with yay and fzf
     $script -R
     $script -Re"
 
-proc() {
-    srch_args="$1"
-    proc_args="$2"
-    yay -"$srch_args" \
+execute() {
+    search_options="$1"
+    process_options="$2"
+    yay -"$search_options" \
         | fzf -m -e -i --preview "cat <(yay -Si {1}) <(yay -Fl {1} \
             | awk \"{print \$2}\")" \
-        | xargs -ro yay -"$proc_args"
+        | xargs -ro yay -"$process_options"
 }
 
 case "$1" in
     -S)
-        proc "Slq" "S"
+        execute "Slq" "S"
         ;;
     -R)
-        proc "Qq" "Rsn"
+        execute "Qq" "Rsn"
         ;;
     -Re)
-        proc "Qqe" "Rsn"
+        execute "Qqe" "Rsn"
         ;;
     *)
         printf "%s\n" "$help"
