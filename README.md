@@ -15,6 +15,7 @@ shell scripts for system/hardware management and general maintenance
 | backup.sh                | rsync backup to remote location (ssh)                                                    |
 | backup_usb.sh            | rsync backup to usb                                                                      |
 | chameleon.sh             | pick color with chameleon to copy to clipboard and primary                               |
+| cpu_boost.sh             | use tlp to toggle scaling governor                                                       |
 | delete_github_commits.sh | remove commits from a github repository                                                  |
 | delete_metafiles.sh      | delete hidden apple metadata files in home folder                                        |
 | screenlayout.sh          | default screen setup                                                                     |
