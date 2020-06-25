@@ -3,12 +3,12 @@
 # path:       /home/klassiker/.local/share/repos/shell/cpu_boost.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/polybar
-# date:       2020-06-15T22:52:30+0200
+# date:       2020-06-25T21:15:06+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
 auth="doas --"
-file="/etc/tlp.d/69-klassiker.conf"
+file="/etc/tlp.d/99-xiaomi-mi.conf"
 
 # toggle powersave <-> performance
 if grep -q "CPU_SCALING_GOVERNOR_ON_AC=performance" "$file"; then
