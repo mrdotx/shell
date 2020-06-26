@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/backup_usb.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:40:15+0200
+# date:       2020-06-26T18:41:35+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -32,10 +32,6 @@ $auth rsync -aAXv --delete \
     --exclude="/run/*" \
     --exclude="/sys/*" \
     --exclude="/tmp/*" / $remote_location
-
-subfolder="/tmp/media/disk1"
-$auth rsync -aAXv --delete \
-    --exclude="/lost+found" $subfolder/ $remote_location$subfolder
 
 printf "\n:: unmount and delete folder\n"
 $auth umount $mount_point

@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/backup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:39:51+0200
+# date:       2020-06-26T16:54:47+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -19,8 +19,7 @@ printf "\n:: backup / to remote location\n"
 # for testing rsync option --dry-run
 $auth rsync -aAXv --delete \
     --exclude="/dev/*" \
-    --exclude="/home/klassiker/Downloads/*" \
-    --exclude="/home/klassiker/VMs/*" \
+    --exclude="/vms/*" \
     --exclude="/lost+found" \
     --exclude="/mnt/*" \
     --exclude="/proc/*" \
