@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-27T07:50:03+0200
+# date:       2020-06-27T12:52:49+0200
 
 iwd_history="$HOME/.local/share/iwctl/history"
 cmd_history="$HOME/.local/share/cmd_history" # zsh and bash history merged
@@ -17,7 +17,7 @@ tmp_file=$(mktemp /tmp/history.XXXXXX)
 history_clean() {
     printf ":: purge %s history\n remove white space from the end of the line...\n" "$1"
     sed -i "s/ *$//" "$2"
-    printf " remove duplicates..."
+    printf " remove duplicates...\n"
 }
 
 cache_header() {
