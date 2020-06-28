@@ -3,22 +3,24 @@
 # path:       /home/klassiker/.local/share/repos/shell/yay-fzf.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-08T13:24:33+0200
+# date:       2020-06-28T08:48:45+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to install/remove packages with yay and fzf
   Usage:
-    $script [-S/-R/-Re]
+    $script [-s/-r/-e/-a]
 
   Settings:
-    [-S]    = install packages from pacman or aur
-    [-R]    = remove installed packages from pacman or aur
-    [-Re]   = remove explicit installed packages from pacman or aur
+    [-s] = install packages from pacman or aur
+    [-r] = remove installed packages from pacman or aur
+    [-e] = remove explicit installed packages from pacman or aur
+    [-a] = remove installed packages from aur
 
   Examples:
-    $script -S
-    $script -R
-    $script -Re"
+    $script -s
+    $script -r
+    $script -e
+    $script -a"
 
 execute() {
     search_options="$1"
@@ -30,14 +32,17 @@ execute() {
 }
 
 case "$1" in
-    -S)
+    -s)
         execute "Slq" "S"
         ;;
-    -R)
+    -r)
         execute "Qq" "Rsn"
         ;;
-    -Re)
+    -e)
         execute "Qqe" "Rsn"
+        ;;
+    -a)
+        execute "Qm" "Rsn"
         ;;
     *)
         printf "%s\n" "$help"
