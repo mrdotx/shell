@@ -3,21 +3,21 @@
 # path:       /home/klassiker/.local/share/repos/shell/terminal_colors.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-08T13:59:07+0200
+# date:       2020-06-28T08:48:26+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show terminal colors
   Usage:
-    $script [settings]
+    $script [-bcgtnh]
 
   Settings:
     without given settings will show all informations
-    -b = base colors
-    -c = color palette
-    -g = greyscale
-    -t = true colors
-    -n = hide numbers
-    -h = hide header
+    [-b] = base colors
+    [-c] = color palette
+    [-g] = greyscale
+    [-t] = true colors
+    [-n] = hide numbers
+    [-h] = hide header
 
   Example:
     $script -bcg

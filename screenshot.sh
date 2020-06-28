@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/screenshot.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-08T13:05:24+0200
+# date:       2020-06-28T08:45:37+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to make screenshots with maim
@@ -11,11 +11,11 @@ help="$script [-h/--help] -- script to make screenshots with maim
     $script [-desk/-window/-select] [seconds]
 
   Settings:
-    [-desk]         = full screen screenshot
-    [-window]       = active window screenshot
-    [-select]       = selection screenshot
-    [seconds]       = the option -desk and -window can be used
-                      with delay in seconds to make screenshot
+    [-desk]   = full screen screenshot
+    [-window] = active window screenshot
+    [-select] = selection screenshot
+    [seconds] = the option -desk and -window can be used
+                with delay in seconds to make screenshot
 
   Examples:
     $script -desk
