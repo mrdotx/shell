@@ -3,14 +3,9 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/sys_stat.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-31T11:06:51+0200
+# date:       2020-07-04T13:05:29+0200
 
-# auth can be something like sudo -A, doas -- or
-# nothing, depending on configuration requirements
-auth="doas --"
-
-tmux -f "$HOME/.config/tmux/tmux.conf" new -d -s sys_stat "watch -n2 smem -a -t"
-tmux splitw -h "watch -n2 $auth smem -u -a -t"
-tmux splitw -v -p 100 "watch -n2 grep 'MHz' /proc/cpuinfo"
+tmux -f "$HOME/.config/tmux/tmux.conf" new -d -s sys_stat "htop"
+tmux splitw -h "watch -n2 grep 'MHz' /proc/cpuinfo"
 tmux splitw -v -p 100 "watch -n2 sensors"
 tmux -2 attach -d
