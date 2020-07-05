@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/launch.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-08T14:03:28+0200
+# date:       2020-07-05T12:31:52+0200
 
 case "$1" in
     # desktop  1
@@ -19,7 +19,7 @@ case "$1" in
 
     # desktop  2
     web)
-        wmctrl -s 1 && brave >/dev/null 2>&1 &
+        wmctrl -s 1 && firefox-developer-edition >/dev/null 2>&1 &
         ;;
     ftp)
         wmctrl -s 1 && filezilla >/dev/null 2>&1 &
