@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/yay-fzf.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-07-12T17:38:37+0200
+# date:       2020-08-01T11:36:32+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to install/remove packages with yay and fzf
@@ -44,7 +44,7 @@ case "$1" in
         execute "Qqe" "Rsn"
         ;;
     -a)
-        execute "Qm" "Rsn"
+        execute "Qmq" "Rsn"
         ;;
     -d)
         execute "Qqt" "Rsn"
