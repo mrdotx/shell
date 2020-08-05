@@ -25,4 +25,3 @@ shell scripts for system/hardware management and general maintenance
 | terminal_wrapper.sh      | terminal wrapper for tiling window managers floating windows                             |
 | touchpad.sh              | toggle disable/enable touchpad                                                           |
 | urxvtc.sh                | start urxvt daemon if not running                                                        |
-| yay-fzf.sh               | install/remove packages with yay and fzf                                                 |
