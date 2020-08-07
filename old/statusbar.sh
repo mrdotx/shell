@@ -3,9 +3,9 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/statusbar.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:18:22+0200
+# date:       2020-08-07T07:29:40+0200
 
-# combining commands for output
+# commands for output
 cputemp="$(< /sys/class/thermal/thermal_zone0/temp cut -c "1-2")ºC"
 cores="$(grep -c "^processor" /proc/cpuinfo)"
 cpuusage="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum}')"
@@ -26,24 +26,24 @@ swaptotalg="$(bc <<<"scale=3;$swaptotal/1024/1024" | awk '{ printf("%.2f\n",$1) 
 swaptotal="$(bc <<<"scale=3;$swaptotal/1024" | awk '{ printf("%.0f\n",$1) }')M"
 swapusage="$(bc <<<"scale=3;$swap/($swaptotal/100)" | awk '{ printf("%.0f\n",$1) }')%"
 
-hddtotal="$(df /dev/nvme0n1 | awk 'NR==2 { printf "%s",$2; }')"
-hdd="$(df /dev/nvme0n1 | awk 'NR==2 { printf "%s",$3; }')"
+hddtotal="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$2; }')"
+hdd="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$3; }')"
 hdd="$(bc <<<"scale=3;$hdd/1024/1024" | awk '{ printf("%.2f\n",$1) }')G"
 hddtotal="$(bc <<<"scale=3;$hddtotal/1024/1024" | awk '{ printf("%.2f\n",$1) }')G"
-hddusage="$(df /dev/nvme0n1 | awk 'NR==2 { printf "%s",$5; }')"
+hddusage="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$5; }')"
 
 wlan="$(iwgetid -r)"
-wlansignal="$(iwconfig wlp2s0 | grep -i Link | cut -c "24-25")"
+wlansignal="$(iwconfig wlan0 | grep -i Link | cut -c "24-25")"
 wlansignal="$(bc <<<"scale=3;$wlansignal/70*100" | awk '{ printf("%.0f\n",$1) }')%"
 
-ip="$(ip -4 addr show wlp2s0 | grep -oP "(?<=inet ).*(?=/)")"
+ip="$(ip -4 addr show wlan0 | grep -oP "(?<=inet ).*(?=/)")"
 name="$(users)@$(hostname)"
 
 clock="$(date '+%a, %e %B %G, %k:%M')"
 
 uptime="$(uptime -p | sed 's/s//g; s/,//g; s/up //g; s/ week/w/g; s/ day/d/g; s/ hour/h/g; s/ minute/m/g')"
 
-# combination
+# put together
 statusbar="cpu: $cputemp [$cpuusage] | ram: $ram/$ramtotalg [$ramusage] | swap: $swap/$swaptotalg [$swapusage] | hdd: $hdd/$hddtotal [$hddusage] | wlan: $wlan [$wlansignal] | ip: $ip | name: $name | uptime: $uptime | $clock"
 
 # output
