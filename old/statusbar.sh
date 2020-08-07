@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/statusbar.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-08-07T07:29:40+0200
+# date:       2020-08-07T07:53:47+0200
 
 # commands for output
 cputemp="$(< /sys/class/thermal/thermal_zone0/temp cut -c "1-2")ºC"
@@ -37,7 +37,7 @@ wlansignal="$(iwconfig wlan0 | grep -i Link | cut -c "24-25")"
 wlansignal="$(bc <<<"scale=3;$wlansignal/70*100" | awk '{ printf("%.0f\n",$1) }')%"
 
 ip="$(ip -4 addr show wlan0 | grep -oP "(?<=inet ).*(?=/)")"
-name="$(users)@$(hostname)"
+name="$(whoami)@$(hostname)"
 
 clock="$(date '+%a, %e %B %G, %k:%M')"
 
