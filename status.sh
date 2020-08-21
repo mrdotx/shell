@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/status.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-08-21T18:37:52+0200
+# date:       2020-08-21T19:38:34+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show system information
@@ -96,7 +96,7 @@ case "$1" in
         exit 0
         ;;
     -l)
-        printf "cpu: %s | ram: %s | swap: %s | nvme: %s | sda: %s | wlan: %s | ip: %s | kernel: %s | name: %s | up: %s | %s\n" \
+        printf "cpu: %s | ram: %s | swap: %s | nvme: %s | sda: %s | wlan: %s | ip: %s | up: %s | kernel: %s | name: %s | %s\n" \
             "$(cpu)" \
             "$(ram)" \
             "$(swap)" \
@@ -104,14 +104,13 @@ case "$1" in
             "$(sda)" \
             "$(wlan)" \
             "$(ipv4)" \
+            "$(up)" \
             "$(kernel)" \
             "$(name)" \
-            "$(up)" \
             "$(clock)"
         ;;
     *)
-        printf "# %s\n--\n\ncpu:    %s\nram:    %s\nswap:   %s\nnvme:   %s\nsda:    %s\nwlan:   %s\nip:     %s\nuptime: %s\nkernel: %s\n\n--\n# %s\n" \
-            "$(name)" \
+        printf "cpu:    %s\nram:    %s\nswap:   %s\nnvme:   %s\nsda:    %s\nwlan:   %s\nip:     %s\nuptime: %s\nkernel: %s\n\n--\n# %s\n# %s\n" \
             "$(cpu)" \
             "$(ram)" \
             "$(swap)" \
@@ -121,6 +120,7 @@ case "$1" in
             "$(ipv4)" \
             "$(up)" \
             "$(kernel)" \
+            "$(name)" \
             "$(clock)"
         ;;
 esac
