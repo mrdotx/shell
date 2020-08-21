@@ -1,22 +1,29 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/old/status.sh
+# path:       /home/klassiker/.local/share/repos/shell/status.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-08-21T17:10:59+0200
+# date:       2020-08-21T18:37:52+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show system information
   Usage:
-    $script [-l/-v]
+    $script [-l]
 
   Settings:
     [-l] = system information in line
-    [-v] = system information vertical
 
   Examples:
-    $script -l
-    $script -v"
+    $script
+    $script -l"
+
+kbtogb() {
+    printf "%.2f\n" "$(($1*1000/1024/1024))e-3"
+}
+
+kernel() {
+    printf "%s" "$(uname -r)"
+}
 
 cpu() {
     cpu_temp="$(< /sys/class/thermal/thermal_zone0/temp cut -c "1-2")C"
@@ -30,49 +37,30 @@ ram() {
     ram_total="$(free | awk 'NR==2 { printf "%s",$2; }')"
     ram_together="$(free | awk 'NR==2 { printf "%s",$5; }')"
     ram="$(free | awk 'NR==2 { printf "%s",$3; }')"
-    ram="$(printf "%.0f\n" "$(((ram+ram_together)/1024))")"
-    ram_g="$(printf "%.2f\n" "$((ram*1000/1024))e-3")"
-    ram_total="$(printf "%.0f\n" "$((ram_total/1024))")"
-    ram_totalg="$(printf "%.2f\n" "$((ram_total*1000/1024))e-3")"
-    ram_usage="$(printf "%.0f\n" "$((ram/(ram_total/100)))")"
-    if [ "$ram" -ge 1024 ]; then
-        printf "%sG/%sG [%s%%]" "$ram_g" "$ram_totalg" "$ram_usage"
-    else
-        printf "%sM/%sM [%s%%]" "$ram" "$ram_total" "$ram_usage"
-    fi
+    ram="$(printf "%.0f\n" "$(((ram+ram_together)))")"
+    ram_usage="$(printf "%.0f\n" "$(((ram)/((ram_total)/100)))")"
+    printf "%sG/%sG [%s%%]" "$(kbtogb "$ram")" "$(kbtogb "$ram_total")" "$ram_usage"
 }
 
 swap() {
     swap_total="$(free | awk 'NR==3 { printf "%s",$2; }')"
     swap="$(free | awk 'NR==3 { printf "%s",$3; }')"
-    swap="$(printf "%.0f\n" "$((swap/1024))")"
-    swap_g="$(printf "%.2f\n" "$((swap*1000/1024))e-3")"
-    swap_total="$(printf "%.0f\n" "$((swap_total/1024))")"
-    swap_totalg="$(printf "%.2f\n" "$((swap_total*1000/1024))e-3")"
-    swap_usage="$(printf "%.0f\n" "$((swap/(swap_total/100)))")"
-    if [ "$swap" -ge 1024 ]; then
-        printf "%sG/%sG [%s%%]" "$swap_g" "$swap_totalg" "$swap_usage"
-    else
-        printf "%sM/%sM [%s%%]" "$swap" "$swap_total" "$swap_usage"
-    fi
+    swap_usage="$(printf "%.0f\n" "$(((swap)/((swap_total)/100)))")"
+    printf "%sG/%sG [%s%%]" "$(kbtogb "$swap")" "$(kbtogb "$swap_total")" "$swap_usage"
 }
 
 nvme() {
     nvme_total="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$2; }')"
     nvme="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$3; }')"
-    nvme="$(printf "%.2f\n" "$((nvme*1000/1024/1024))e-3")"
-    nvme_total="$(printf "%.2f\n" "$((nvme_total*1000/1024/1024))e-3")"
     nvme_usage="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$5; }')"
-    printf "%sG/%sG [%s]" "$nvme" "$nvme_total" "$nvme_usage"
+    printf "%sG/%sG [%s]" "$(kbtogb "$nvme")" "$(kbtogb "$nvme_total")" "$nvme_usage"
 }
 
 sda() {
     sda_total="$(df /dev/sda1 | awk 'NR==2 { printf "%s",$2; }')"
     sda="$(df /dev/sda1 | awk 'NR==2 { printf "%s",$3; }')"
-    sda="$(printf "%.2f\n" "$((sda*1000/1024/1024))e-3")"
-    sda_total="$(printf "%.2f\n" "$((sda_total*1000/1024/1024))e-3")"
     sda_usage="$(df /dev/sda1 | awk 'NR==2 { printf "%s",$5; }')"
-    printf "%sG/%sG [%s]" "$sda" "$sda_total" "$sda_usage"
+    printf "%sG/%sG [%s]" "$(kbtogb "$sda")" "$(kbtogb "$sda_total")" "$sda_usage"
 }
 
 wlan() {
@@ -103,22 +91,12 @@ clock() {
 }
 
 case "$1" in
-    -l)
-        printf "cpu: %s | ram: %s | swap: %s | nvme: %s | sda: %s | wlan: %s | ip: %s | name: %s | up: %s | %s\n" \
-            "$(cpu)" \
-            "$(ram)" \
-            "$(swap)" \
-            "$(nvme)" \
-            "$(sda)" \
-            "$(wlan)" \
-            "$(ipv4)" \
-            "$(name)" \
-            "$(up)" \
-            "$(clock)"
+    -h|--help)
+        printf "%s\n" "$help"
+        exit 0
         ;;
-    -v)
-        printf "%s\n\ncpu:  %s\nram:  %s\nswap: %s\nnvme: %s\nsda:  %s\nwlan: %s\nip:   %s\nup:   %s\n\n--\n# %s\n" \
-            "$(name)" \
+    -l)
+        printf "cpu: %s | ram: %s | swap: %s | nvme: %s | sda: %s | wlan: %s | ip: %s | kernel: %s | name: %s | up: %s | %s\n" \
             "$(cpu)" \
             "$(ram)" \
             "$(swap)" \
@@ -126,11 +104,23 @@ case "$1" in
             "$(sda)" \
             "$(wlan)" \
             "$(ipv4)" \
+            "$(kernel)" \
+            "$(name)" \
             "$(up)" \
             "$(clock)"
         ;;
     *)
-        printf "%s\n" "$help"
-        exit 0
+        printf "# %s\n--\n\ncpu:    %s\nram:    %s\nswap:   %s\nnvme:   %s\nsda:    %s\nwlan:   %s\nip:     %s\nuptime: %s\nkernel: %s\n\n--\n# %s\n" \
+            "$(name)" \
+            "$(cpu)" \
+            "$(ram)" \
+            "$(swap)" \
+            "$(nvme)" \
+            "$(sda)" \
+            "$(wlan)" \
+            "$(ipv4)" \
+            "$(up)" \
+            "$(kernel)" \
+            "$(clock)"
         ;;
 esac

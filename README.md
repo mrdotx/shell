@@ -20,6 +20,7 @@ shell scripts for system/hardware management and general maintenance
 | delete_metafiles.sh      | delete hidden apple metadata files in home folder                                        |
 | screenlayout.sh          | default screen setup                                                                     |
 | screenshot.sh            | screenshot script for maim                                                               |
+| status.sh                | simple script for system information in different formats                                |
 | system_cleanup.sh        | purge cache and remove duplicated entries from python-, bash- and zsh-history            |
 | terminal_colors.sh       | shows base colors, color palette, greyscale and true colors                              |
 | terminal_wrapper.sh      | terminal wrapper for tiling window managers floating windows                             |

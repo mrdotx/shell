@@ -12,6 +12,5 @@ old stuff and things that couldn't be assigned
 | motd.sh           | dynamic motd with a few system informations               |
 | powertop.sh       | tuning the power consumption                              |
 | service_toggle.sh | switch status of service active or inactive               |
-| status.sh         | simple script for system information in different formats |
 | sync_dropbox.sh   | single dropbox sync with dropbox-cli                      |
 | sys_stat.sh       | system status in a few tmux windows                       |
