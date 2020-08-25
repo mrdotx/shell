@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/status.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-08-21T19:38:34+0200
+# date:       2020-08-25T18:47:17+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show system information
@@ -17,8 +17,12 @@ help="$script [-h/--help] -- script to show system information
     $script
     $script -l"
 
-kbtogb() {
-    printf "%.2f\n" "$(($1*1000/1024/1024))e-3"
+kb_mb() {
+    printf "%.0fM\n" "$(($1*1000/1024))e-3"
+}
+
+kb_gb() {
+    printf "%.2fG\n" "$(($1*1000/1024/1024))e-3"
 }
 
 kernel() {
@@ -39,28 +43,36 @@ ram() {
     ram="$(free | awk 'NR==2 { printf "%s",$3; }')"
     ram="$(printf "%.0f\n" "$(((ram+ram_together)))")"
     ram_usage="$(printf "%.0f\n" "$(((ram)/((ram_total)/100)))")"
-    printf "%sG/%sG [%s%%]" "$(kbtogb "$ram")" "$(kbtogb "$ram_total")" "$ram_usage"
+    if [ "$ram" -le 1048576 ]; then
+        printf "%s/%s [%s%%]" "$(kb_mb "$ram")" "$(kb_gb "$ram_total")" "$ram_usage"
+    else
+        printf "%s/%s [%s%%]" "$(kb_gb "$ram")" "$(kb_gb "$ram_total")" "$ram_usage"
+    fi
 }
 
 swap() {
     swap_total="$(free | awk 'NR==3 { printf "%s",$2; }')"
     swap="$(free | awk 'NR==3 { printf "%s",$3; }')"
     swap_usage="$(printf "%.0f\n" "$(((swap)/((swap_total)/100)))")"
-    printf "%sG/%sG [%s%%]" "$(kbtogb "$swap")" "$(kbtogb "$swap_total")" "$swap_usage"
+    if [ "$swap" -le 1048576 ]; then
+        printf "%s/%s [%s%%]" "$(kb_mb "$swap")" "$(kb_gb "$swap_total")" "$swap_usage"
+    else
+        printf "%s/%s [%s%%]" "$(kb_gb "$swap")" "$(kb_gb "$swap_total")" "$swap_usage"
+    fi
 }
 
 nvme() {
     nvme_total="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$2; }')"
     nvme="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$3; }')"
     nvme_usage="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$5; }')"
-    printf "%sG/%sG [%s]" "$(kbtogb "$nvme")" "$(kbtogb "$nvme_total")" "$nvme_usage"
+    printf "%s/%s [%s]" "$(kb_gb "$nvme")" "$(kb_gb "$nvme_total")" "$nvme_usage"
 }
 
 sda() {
     sda_total="$(df /dev/sda1 | awk 'NR==2 { printf "%s",$2; }')"
     sda="$(df /dev/sda1 | awk 'NR==2 { printf "%s",$3; }')"
     sda_usage="$(df /dev/sda1 | awk 'NR==2 { printf "%s",$5; }')"
-    printf "%sG/%sG [%s]" "$(kbtogb "$sda")" "$(kbtogb "$sda_total")" "$sda_usage"
+    printf "%s/%s [%s]" "$(kb_gb "$sda")" "$(kb_gb "$sda_total")" "$sda_usage"
 }
 
 wlan() {
