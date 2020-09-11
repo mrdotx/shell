@@ -3,10 +3,10 @@
 # path:       /home/klassiker/.local/share/repos/shell/audio.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-08T12:39:54+0200
+# date:       2020-09-11T09:23:06+0200
 
 script=$(basename "$0")
-help="$script [-h/--help] -- script for audio output
+help="$script [-h/--help] -- script to change audio output
   Usage:
     $script [-tog/-inc/-dec/-mute] [percent]
 

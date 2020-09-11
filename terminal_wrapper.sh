@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/terminal_wrapper.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-08T13:20:58+0200
+# date:       2020-09-11T09:12:47+0200
 
 # color variables
 yellow=$(tput setaf 3)
@@ -11,7 +11,7 @@ blue=$(tput setaf 12)
 reset=$(tput sgr0)
 
 script=$(basename "$0")
-help="$script [-h/--help] -- script for execute command in new terminal window
+help="$script [-h/--help] -- script to execute command in new terminal window
   Usage:
     $script [command]
 
