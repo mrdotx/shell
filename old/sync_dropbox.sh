@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/sync_dropbox.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-08T14:05:44+0200
+# date:       2020-09-12T15:07:13+0200
 
 dropbox_user=klassiker
 dropbox_status=$(sudo -u $dropbox_user dropbox-cli status)
@@ -24,4 +24,3 @@ while true; do
         fi
     fi
 done
-exit 0

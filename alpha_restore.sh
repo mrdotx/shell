@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/alpha_restore.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-08T12:26:20+0200
+# date:       2020-09-12T15:05:07+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to find png files with suspicious data
@@ -18,7 +18,7 @@ help="$script [-h/--help] -- script to find png files with suspicious data
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
     printf "%s\n" "$help"
-    exit 0
+    exit 1
 else
     tmp_directory=$(mktemp -d /tmp/alpha_restore.XXXXXX)
     suspicious=0
