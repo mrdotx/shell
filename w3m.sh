@@ -3,45 +3,30 @@
 # path:       /home/klassiker/.local/share/repos/shell/w3m.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-09-13T18:30:09+0200
+# date:       2020-09-14T00:03:03+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- wrapper script to start w3m
   Usage:
-    $script [--readable/readable_window/--tabbed]
-
-    without settings the url opens in new terminal window
+    $script [--tabbed]
 
   Settings:
-    [--readable]        = make the html content radable with readability-cli
-                          (Mozilla's Readability library)
-    [--readable_window] = same as readable in new window
-    [--tabbed]          = start w3m in suckless tabbed tool
+    [--tabbed] = start w3m in suckless tabbed tool
 
   Examples:
     $script
     $script suckless.org
-    $script --readable suckless.org
-    $script --readable_window suckless.org
     $script --tabbed suckless.org"
 
 case "$1" in
     -h | --help)
         printf "%s\n" "$help"
         ;;
-    --readable)
-        readable "$2" | w3m -T text/html
-        ;;
-    --readable_window)
-        readable "$2" > "/tmp/readable.html"
-        $TERMINAL -e w3m "/tmp/readable.html" &
-        ;;
     --tabbed)
         xidfile="/tmp/w3m/tabbed-w3m.xid"
         uri=""
 
-        [ ! -d /tmp/w3m ] \
-            && mkdir -p "/tmp/w3m"
+        mkdir -p "/tmp/w3m"
 
         [ -n "$2" ] \
             && uri="$2"
