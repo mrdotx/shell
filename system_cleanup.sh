@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-09-19T19:29:51+0200
+# date:       2020-09-20T19:38:33+0200
 
 iwd_history="$HOME/.local/share/iwctl/history"
 cmd_history="$HOME/.local/share/cmd_history" # zsh and bash history merged
@@ -12,7 +12,6 @@ cache_days=365
 cache_files=$(find "$cache_directory" -type f -atime +$cache_days \
     | wc -l \
 )
-tmp_file=$(mktemp /tmp/history.XXXXXX)
 
 history_clean() {
     printf ":: purge %s history\n remove white space from the end of the line...\n" "$1"
@@ -44,13 +43,17 @@ cache_clean() {
 }
 
 history_clean "iwctl" "$iwd_history"
-tac "$iwd_history" | awk '! seen[$0]++' | tac > "$tmp_file"
-cp "$tmp_file" "$iwd_history"
+printf "%s\n" "$(tac "$iwd_history" \
+    | awk '! seen[$0]++' \
+    | tac \
+)" > "$iwd_history"
 
 printf "\n"
 history_clean "merged zsh and bash" "$cmd_history"
-tac "$cmd_history" | awk '! seen[$0]++' | tac > "$tmp_file"
-mv "$tmp_file" "$cmd_history"
+printf "%s\n" "$(tac "$cmd_history" \
+    | awk '! seen[$0]++' \
+    | tac \
+)" > "$cmd_history"
 
 if [ "$cache_files" -gt 0 ]; then
     cache_clean
