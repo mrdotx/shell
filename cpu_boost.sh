@@ -2,8 +2,8 @@
 
 # path:       /home/klassiker/.local/share/repos/shell/cpu_boost.sh
 # author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/polybar
-# date:       2020-09-19T19:31:57+0200
+# github:     https://github.com/mrdotx/shell
+# date:       2020-09-22T18:46:59+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
