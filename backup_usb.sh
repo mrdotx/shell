@@ -3,11 +3,11 @@
 # path:       /home/klassiker/.local/share/repos/shell/backup_usb.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-26T18:41:35+0200
+# date:       2020-10-18T11:22:30+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
-auth="doas --"
+auth="doas"
 backup_name="morpheus"
 mount_point="/mnt/$backup_name"
 usb_device="/dev/disk/by-uuid/2bdffcfb-b365-4321-a64b-5ffce2f1c211"

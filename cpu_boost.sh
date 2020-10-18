@@ -3,11 +3,11 @@
 # path:       /home/klassiker/.local/share/repos/shell/cpu_boost.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-09-22T18:46:59+0200
+# date:       2020-10-18T11:22:48+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
-auth="doas --"
+auth="doas"
 file="/etc/tlp.d/99-xiaomi-mi.conf"
 
 # toggle powersave <-> performance
