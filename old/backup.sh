@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/backup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-06-08T14:01:27+0200
+# date:       2020-10-19T19:39:22+0200
 
 # color variables
 magenta=$(tput setaf 5)
@@ -55,16 +55,16 @@ source_object="$source_object
 printf "[%sbackup%s] folder & files\n" "${magenta}" "${reset}"
 for dir in $source_object; do
     case "${dir}" in
-    $HOME/.newsboat)
+    "$HOME"/.newsboat)
         rsync --delete -acqP --exclude="cache.db" "${dir}" "$destination_root"
         ;;
-    $HOME/.weechat)
+    "$HOME"/.weechat)
         rsync --delete -acqP --exclude="weechat.log" --exclude="logs" "${dir}" "$destination_root"
         ;;
-    $HOME/.config/*)
+    "$HOME"/.config/*)
         rsync --delete -acqP "${dir}" "$destination_config"
         ;;
-    $HOME/*)
+    "$HOME"/*)
         rsync --delete -acqP "${dir}" "$destination_root"
         ;;
     esac
