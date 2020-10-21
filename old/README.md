@@ -12,4 +12,3 @@ old stuff and things that couldn't be assigned
 | powertop.sh       | tuning the power consumption                              |
 | service_toggle.sh | switch status of service active or inactive               |
 | sync_dropbox.sh   | single dropbox sync with dropbox-cli                      |
-| sys_stat.sh       | system status in a few tmux windows                       |
