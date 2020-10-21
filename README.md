@@ -19,6 +19,7 @@ shell scripts for system/hardware management and general maintenance
 | screenlayout.sh          | default screen setup                                                                     |
 | status.sh                | simple script for system information in different formats                                |
 | system_cleanup.sh        | purge cache and remove duplicated entries from python-, bash- and zsh-history            |
+| tmux.sh                  | start tmux with autostart and if tmux is running attach session                          |
 | touchpad.sh              | toggle disable/enable touchpad                                                           |
 | urxvtc.sh                | start urxvt daemon if not running                                                        |
 | w3m.sh                   | terminal wrapper for w3m with or without suckless tabbed                                 |
