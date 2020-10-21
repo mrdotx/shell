@@ -3,10 +3,10 @@
 # path:       /home/klassiker/.local/share/repos/shell/tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-10-21T10:35:38+0200
+# date:       2020-10-21T11:16:50+0200
 
 tmux_config="$HOME/.config/tmux/tmux.conf"
-tmux_session="$1"
+tmux_session="${1:-mi}"
 
 tmux_autostart() {
     tmux -f "$tmux_config" new -d -s "$1" -n "shell"
