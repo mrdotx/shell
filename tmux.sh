@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-10-21T20:24:36+0200
+# date:       2020-10-21T22:06:08+0200
 
 config="$HOME/.config/tmux/tmux.conf"
 session="${1:-mi}"
@@ -13,7 +13,7 @@ tmux_neww() {
     shift
     cmd="$*"
     ! [ "$(pgrep -f "$cmd")" ] \
-        && tmux neww -t "$session":"$window" -n "$cmd" "$cmd"
+        && tmux neww -t "$session:$window" -n "$cmd" "$cmd"
 }
 
 tmux_splitw() {
@@ -22,22 +22,24 @@ tmux_splitw() {
     shift 2
     cmd="$*"
     ! [ "$(pgrep -f "$cmd")" ] \
-        && tmux splitw -t "$session":"$window" -"$direction" "$cmd"
+        && tmux splitw -t "$session:$window" -"$direction" "$cmd"
 }
 
 tmux_attach() {
-    tmux attach -t "$session"
+    tmux -2 attach -t "$session" -d
 }
 
 tmux_autostart() {
-    tmux -f "$config" new -d -s "$session" -n "shell"
+    tmux -f "$config" new -s "$session" -n "shell" -d
     tmux_neww 9 "bpytop"
     # tmux_splitw 9 h "watch -n2 grep 'MHz' /proc/cpuinfo"
     tmux selectw -t "$session":0
-    tmux -2 attach -d
+    tmux_attach
 }
 
-if [ -z "$TMUX" ]; then
-    tmux_attach \
-        || tmux_autostart
-fi
+[ -z "$TMUX" ] \
+    && if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
+        tmux_attach
+    else
+        tmux_autostart
+    fi
