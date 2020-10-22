@@ -20,5 +20,4 @@ shell scripts for system/hardware management and general maintenance
 | status.sh                | simple script for system information in different formats                                |
 | system_cleanup.sh        | purge cache and remove duplicated entries from python-, bash- and zsh-history            |
 | touchpad.sh              | toggle disable/enable touchpad                                                           |
-| urxvtc.sh                | start urxvt daemon if not running                                                        |
 | w3m.sh                   | terminal wrapper for w3m with or without suckless tabbed                                 |
