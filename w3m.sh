@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/w3m.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-09-14T10:02:02+0200
+# date:       2020-10-26T20:05:21+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- wrapper script to start w3m
@@ -48,6 +48,10 @@ case "$1" in
         fi
         ;;
     *)
-        $TERMINAL -e w3m "$@" &
+        if [ -z "$TMUX" ]; then
+            $TERMINAL -e w3m "$@" &
+        else
+            w3m "$@"
+        fi
         ;;
 esac
