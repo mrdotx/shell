@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/old/backup.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-10-19T19:39:22+0200
+# date:       2020-10-30T23:14:01+0100
 
 # color variables
 magenta=$(tput setaf 5)
@@ -74,4 +74,6 @@ done
 # backup size
 printf "[%sbackup%s] size" "%{blue}" "%{reset}"
 du -sh "$HOME/Backup/"
-notify-send "Backup complete" "$(du -sh "$HOME/Backup/")"
+notify-send \
+    "Backup complete" \
+    "$(du -sh "$HOME/Backup/")"
