@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/backup_usb.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-10-18T11:22:30+0200
+# date:       2020-11-05T14:03:56+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -14,8 +14,8 @@ usb_device="/dev/disk/by-uuid/2bdffcfb-b365-4321-a64b-5ffce2f1c211"
 remote_location="$mount_point/backup/$backup_name"
 
 printf ":: create installed packages list\n"
-yay -Qqe > "$XDG_CONFIG_HOME/yay/installed_packages.txt"
-# to reinstall the packages: yay -S --needed - < "$XDG_CONFIG_HOME/yay/installed_packages.txt"
+paru -Qqe > "$XDG_CONFIG_HOME/paru/installed_packages.txt"
+# to reinstall the packages: paru -S --needed - < "$XDG_CONFIG_HOME/paru/installed_packages.txt"
 
 printf "\n:: create and mount folder for usb-disk\n"
 $auth mkdir -p $mount_point
