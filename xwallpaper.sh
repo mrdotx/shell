@@ -3,12 +3,12 @@
 # path:       /home/klassiker/.local/share/repos/shell/xwallpaper.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-11-18T18:32:13+0100
+# date:       2020-11-18T19:34:11+0100
 
 # set xresources uri
 set_uri() {
     file="$HOME/.config/xorg/xwallpaper"
-    sed -i "/Xwallpaper.uri:/c\Xwallpaper.uri:     \"$1\"" "$file"
+    sed -i "/Xwallpaper.uri:/c\Xwallpaper.uri:     $1" "$file"
     xrdb -merge "$HOME/.config/xorg/Xresources"
 }
 
