@@ -3,9 +3,9 @@
 # path:       /home/klassiker/.local/share/repos/shell/delete_metafiles.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:41:36+0200
+# date:       2020-12-03T17:58:06+0100
 
-output=$(mktemp /tmp/deleted_metafiles.XXXXXX)
+output=$(mktemp -t deleted_metafiles.XXXXXX)
 
 [ ! "$(id -u)" = 0 ] \
    && printf "this script needs root privileges to run\n" \
@@ -34,3 +34,6 @@ done < "$output"
 
 # output result
 $EDITOR "$output"
+
+# delete tmp file
+rm -f "$output"
