@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/status.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-09-12T15:04:27+0200
+# date:       2020-12-05T15:02:07+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show system information
@@ -107,31 +107,30 @@ case "$1" in
         printf "%s\n" "$help"
         ;;
     -l)
-        printf "cpu: %s | ram: %s | swap: %s | nvme: %s | sda: %s | wlan: %s | ip: %s | up: %s | kernel: %s | name: %s | %s\n" \
-            "$(cpu)" \
-            "$(ram)" \
-            "$(swap)" \
-            "$(nvme)" \
-            "$(sda)" \
-            "$(wlan)" \
-            "$(ipv4)" \
-            "$(up)" \
-            "$(kernel)" \
-            "$(name)" \
-            "$(clock)"
+        printf "cpu: %s | " "$(cpu)"
+        printf "ram: %s | " "$(ram)"
+        printf "swap: %s | " "$(swap)"
+        printf "nvme: %s | " "$(nvme)"
+        printf "sda: %s | " "$(sda)"
+        printf "wlan: %s | " "$(wlan)"
+        printf "ip: %s | " "$(ipv4)"
+        printf "up: %s | " "$(up)"
+        printf "kernel: %s | " "$(kernel)"
+        printf "name: %s | " "$(name)"
+        printf "%s\n" "$(clock)"
         ;;
     *)
-        printf "cpu:    %s\nram:    %s\nswap:   %s\nnvme:   %s\nsda:    %s\nwlan:   %s\nip:     %s\nuptime: %s\nkernel: %s\n\n--\n# %s\n# %s\n" \
-            "$(cpu)" \
-            "$(ram)" \
-            "$(swap)" \
-            "$(nvme)" \
-            "$(sda)" \
-            "$(wlan)" \
-            "$(ipv4)" \
-            "$(up)" \
-            "$(kernel)" \
-            "$(name)" \
-            "$(clock)"
+        printf "cpu:    %s\n" "$(cpu)"
+        printf "ram:    %s\n" "$(ram)"
+        printf "swap:   %s\n" "$(swap)"
+        printf "nvme:   %s\n" "$(nvme)"
+        printf "sda:    %s\n" "$(sda)"
+        printf "wlan:   %s\n" "$(wlan)"
+        printf "ip:     %s\n" "$(ipv4)"
+        printf "uptime: %s\n" "$(up)"
+        printf "kernel: %s\n" "$(kernel)"
+        printf "\n--\n"
+        printf "# %s\n" "$(name)"
+        printf "# %s\n" "$(clock)"
         ;;
 esac
