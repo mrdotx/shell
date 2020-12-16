@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/screenlayout/asus.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-12-16T13:56:33+0100
+# date:       2020-12-16T13:59:14+0100
 
 xrandr \
     --output eDP1 --primary \
@@ -11,7 +11,6 @@ xrandr \
     --pos 0x1080 \
     --rotate normal \
     --output HDMI2 \
-    --above eDP1 \
     --mode 1920x1080 \
     --pos 0x0 \
     --rotate normal \
