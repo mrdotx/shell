@@ -1,1 +1,1 @@
-lg.sh
+asus.sh
