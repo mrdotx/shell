@@ -5,7 +5,6 @@ shell scripts for system/hardware management and general maintenance
 | folder name  | comment                    |
 | :----------- | :------------------------- |
 | old          | old stuff                  |
-| screenlayout | screenlayouts for displays |
 
 | name                     | comment                                                                       |
 | :----------------------- | :---------------------------------------------------------------------------- |
