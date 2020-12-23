@@ -3,11 +3,11 @@
 # path:       /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-12-21T00:00:05+0100
+# date:       2020-12-23T12:53:41+0100
 
 internal="eDP1"
 external="HDMI2"
-default="1920x1080"
+default="1920x1080_75"
 
 case "$1" in
     list)
