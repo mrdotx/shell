@@ -3,11 +3,12 @@
 # path:       /home/klassiker/.local/share/repos/shell/git_fetch.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-12-28T21:43:42+0100
+# date:       2020-12-28T22:42:27+0100
 
 config="
     $HOME/.local/share/repos
 "
+options="${*:-status}"
 
 folder() {
     printf "%s\n" "$config" | {
@@ -25,8 +26,8 @@ printf "%s\n" "$(folder)" | {
         [ -n "$line" ] \
             && line=$(printf "%s" "$line" \
                 | sed 's/ //g;s/\/.git//') \
-            && printf ":: git fetch \"%s\"\n" "$line" \
+            && printf ":: git $options \"%s\"\n" "$line" \
             && cd "$line" \
-            && git fetch origin
+            && eval git "$options"
     done
 }
