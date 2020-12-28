@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/status.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-12-05T15:02:07+0100
+# date:       2020-12-28T10:59:03+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show system information
@@ -120,6 +120,7 @@ case "$1" in
         printf "%s\n" "$(clock)"
         ;;
     *)
+        printf "\n"
         printf "cpu:    %s\n" "$(cpu)"
         printf "ram:    %s\n" "$(ram)"
         printf "swap:   %s\n" "$(swap)"
@@ -132,5 +133,6 @@ case "$1" in
         printf "\n--\n"
         printf "# %s\n" "$(name)"
         printf "# %s\n" "$(clock)"
+        printf "\n"
         ;;
 esac
