@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-12-29T13:23:05+0100
+# date:       2020-12-29T21:22:55+0100
 
 # config
 default="status"
@@ -41,7 +41,9 @@ case $1 in
         [ $# -ge 1 ] \
             && shift
 esac
-config="$(printf "%s" "${*:-$(pwd)}" | sed 's/ /\n/g')"
+config="$(printf "%s" "${*:-$(pwd)}" \
+    | sed 's/ /\n/g' \
+)"
 
 folder() {
     printf "%s\n" "$config" | {
