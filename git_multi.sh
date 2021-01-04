@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-12-29T21:22:55+0100
+# date:       2021-01-04T19:24:57+0100
 
 # config
 default="status"
@@ -49,7 +49,7 @@ folder() {
     printf "%s\n" "$config" | {
         while IFS= read -r line; do
             [ -n "$line" ] \
-                && find "$line" -name ".git" -maxdepth 2 |
+                && find "$line" -maxdepth 2 -name ".git" |
                     sort
         done
     }
