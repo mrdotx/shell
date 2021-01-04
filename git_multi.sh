@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2021-01-04T19:24:57+0100
+# date:       2021-01-04T20:44:13+0100
 
 # config
 default="status"
@@ -25,7 +25,7 @@ help="$script [-h/--help] -- script to execute git command on multiple repositor
 
   Examples:
     $script
-    $script \"git fetch\" \"$HOME/.local/share/repos\"
+    $script \"fetch origin\" \"$HOME/.local/share/repos\"
     $script \"pull\" \"\$HOME/.local/share/repos\" \"/srv/http\""
 
 case $1 in
@@ -49,7 +49,7 @@ folder() {
     printf "%s\n" "$config" | {
         while IFS= read -r line; do
             [ -n "$line" ] \
-                && find "$line" -maxdepth 2 -name ".git" |
+                && find "$line" -maxdepth 2 -type d -name ".git" |
                     sort
         done
     }
@@ -59,7 +59,7 @@ printf "%s\n" "$(folder)" | {
     while IFS= read -r line; do
         [ -n "$line" ] \
             && line=$(printf "%s" "$line" \
-                | sed 's/ //g;s/\/.git//') \
+                | sed 's/\/.git//') \
             && printf ":: %sgit %s %s\"%s\"%s\n" \
                 "$green" \
                 "$options" \
