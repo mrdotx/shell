@@ -1,11 +1,11 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/xwallpaper.sh
+# path:       /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/shell
-# date:       2020-11-19T11:34:28+0100
+# date:       2021-01-07T10:08:24+0100
 
-config="$HOME/.config/xorg/xwallpaper"
+config="$HOME/.config/xorg/wallpaper"
 xresource="$HOME/.config/xorg/Xresources"
 
 # get random picture from directory
@@ -18,11 +18,11 @@ xresource() {
     case "$1" in
         get_value)
             printf "%s" "$(xrdb -query \
-                | grep Xwallpaper."$2": \
+                | grep wallpaper."$2": \
                 | cut -f2)"
             ;;
         set_value)
-            sed -i "/Xwallpaper.uri:/c\Xwallpaper.$2:         $3" "$config"
+            sed -i "/wallpaper.uri:/c\wallpaper.$2:      $3" "$config"
             xrdb -merge "$xresource"
             ;;
     esac
@@ -41,6 +41,6 @@ else
         && uri="$(rnd_pic "$uri")"
 fi
 
-options="$(xresource get_value options)"
+tool="$(xresource get_value tool)"
 
-eval xwallpaper "$options" "$uri"
+eval "$tool $uri" >/dev/null 2>&1
