@@ -22,4 +22,4 @@ shell scripts for system/hardware management and general maintenance
 | touchpad.sh          | toggle disable/enable touchpad                                                |
 | urxvtc.sh            | start urxvtd if not already running and open urxvtc                           |
 | w3m.sh               | terminal wrapper for w3m with or without suckless tabbed                      |
-| xwallpaper.sh        | set and load wallpaper (file/random file from directory) from xresources      |
+| wallpaper.sh         | set and load wallpaper (file/random file from directory) from xresources      |
