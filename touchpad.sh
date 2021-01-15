@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/touchpad.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-05-23T20:49:51+0200
+# path:   /home/klassiker/.local/share/repos/shell/touchpad.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:59:34+0100
 
 device="$(xinput list \
         | grep -P '(?<= )[\w\s:]*(?i)(touchpad|synaptics)(?-i).*?(?=\s*id)' -o \

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/system_cleanup.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-10-20T19:51:57+0200
+# path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:59:27+0100
 
 iwd_history="$HOME/.local/share/iwctl/history"
 cmd_history="$HOME/.local/share/cmd_history" # zsh and bash history merged

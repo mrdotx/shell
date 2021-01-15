@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/urxvtc.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-11-14T10:11:19+0100
+# path:   /home/klassiker/.local/share/repos/shell/urxvtc.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:59:43+0100
 
 daemon="urxvtd -q -o -f"
 

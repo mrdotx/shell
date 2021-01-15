@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# path:       /home/klassiker/.local/share/repos/shell/old/motd.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-06-06T09:28:26+0200
+# path:   /home/klassiker/.local/share/repos/shell/old/motd.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:57:40+0100
 
 # functions {{{
 color() {

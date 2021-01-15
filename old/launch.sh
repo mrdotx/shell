@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/old/launch.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-07-05T12:31:52+0200
+# path:   /home/klassiker/.local/share/repos/shell/old/launch.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:57:31+0100
 
 case "$1" in
     # desktop  1

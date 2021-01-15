@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/delete_metafiles.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-12-03T19:20:42+0100
+# path:   /home/klassiker/.local/share/repos/shell/delete_metafiles.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:58:52+0100
 
 output=$(mktemp -t delete_metafiles.XXXXXX)
 

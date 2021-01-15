@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/backup_usb.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-11-05T14:03:56+0100
+# path:   /home/klassiker/.local/share/repos/shell/backup_usb.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:58:32+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/git_multi.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2021-01-04T20:44:13+0100
+# path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:58:59+0100
 
 # config
 default="status"

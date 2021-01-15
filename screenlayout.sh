@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/screenlayout.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-12-25T21:26:42+0100
+# path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:59:16+0100
 
 # config
 internal="eDP1"

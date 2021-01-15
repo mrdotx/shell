@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/alpha_restore.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-12-03T18:46:07+0100
+# path:   /home/klassiker/.local/share/repos/shell/alpha_restore.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:58:18+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to find png files with suspicious data

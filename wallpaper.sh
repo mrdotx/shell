@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/wallpaper.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2021-01-07T10:08:24+0100
+# path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:59:56+0100
 
 config="$HOME/.config/xorg/wallpaper"
 xresource="$HOME/.config/xorg/Xresources"

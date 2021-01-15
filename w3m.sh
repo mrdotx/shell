@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/w3m.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-10-26T20:05:21+0100
+# path:   /home/klassiker/.local/share/repos/shell/w3m.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:59:49+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- wrapper script to start w3m

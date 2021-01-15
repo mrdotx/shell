@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/delete_github_commits.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-05-14T13:41:11+0200
+# path:   /home/klassiker/.local/share/repos/shell/git_reset_commits.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:59:06+0100
 
 printf ":: github\n checkout...\n"
 git checkout --orphan latest_branch

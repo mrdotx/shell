@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/shell/chameleon.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/shell
-# date:       2020-10-30T23:14:29+0100
+# path:   /home/klassiker/.local/share/repos/shell/chameleon.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2021-01-15T13:58:39+0100
 
 color=$(chameleon)
 preview="/tmp/chameleon_preview.png"
