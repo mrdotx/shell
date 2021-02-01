@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:59:16+0100
+# date:   2021-02-01T17:20:46+0100
 
 # config
 internal="eDP1"
@@ -17,7 +17,7 @@ help="$script [-h/--help] -- script to set screenlayout
 
   Settings:
     [--list]    = list of defined settings for dmenu
-    [parameter] = semicolon separated list
+    [parameter] = semicolon separated
                   1) internal mode (default: 1920x1080)
                   2) internal position (default: 0x1080)
                   3) external mode (default: 1920x1080)
