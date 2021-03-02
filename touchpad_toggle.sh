@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/touchpad.sh
+# path:   /home/klassiker/.local/share/repos/shell/touchpad_toggle.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:59:34+0100
+# date:   2021-03-02T11:16:10+0100
 
 device="$(xinput list \
         | grep -P '(?<= )[\w\s:]*(?i)(touchpad|synaptics)(?-i).*?(?=\s*id)' -o \

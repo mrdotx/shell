@@ -19,7 +19,7 @@ shell scripts for system/hardware management and general maintenance
 | screenlayout.sh      | default screen setup                                                          |
 | status.sh            | simple script for system information in different formats                     |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
-| touchpad.sh          | toggle disable/enable touchpad                                                |
+| touchpad_toggle.sh   | disable/enable touchpad                                                       |
 | urxvtc.sh            | start urxvtd if not already running and open urxvtc                           |
 | w3m.sh               | terminal wrapper for w3m with or without suckless tabbed                      |
 | wallpaper.sh         | set and load wallpaper (file/random file from directory) from xresources      |
