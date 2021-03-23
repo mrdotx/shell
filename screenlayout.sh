@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-02-01T17:20:46+0100
+# date:   2021-03-23T20:55:54+0100
 
 # config
 internal="eDP1"
@@ -23,13 +23,12 @@ help="$script [-h/--help] -- script to set screenlayout
                   3) external mode (default: 1920x1080)
                   4) external position (default: 0x0)
                   5) external rate (default: 75)
-                  6) external orientation (default: above)
 
   Examples:
     $script
     $script --list
-    $script \"1920x1080;0x1080;1920x1080;0x0;75;above\"
-    $script \";;;;60;\"
+    $script \"1920x1080;0x1080;1920x1080;0x0;75\"
+    $script \";;;;60\"
 
   Config:
     internal = $internal
@@ -41,9 +40,9 @@ case "$1" in
         ;;
     --list)
         printf "%s\n" \
-            "1920x1080;0x1080;1920x1080;0x0;75;above" \
-            "1920x1080;0x1080;1920x1080;0x0;60;above" \
-            "1920x1080;0x1050;1680x1050;120x0;60;right-of"
+            "1920x1080;0x1080;1920x1080;0x0;75" \
+            "1920x1080;0x1080;1920x1080;0x0;60" \
+            "1920x1080;0x1050;1680x1050;120x0;60"
         ;;
     *)
         # if extrenal monitor is disconnected use internal screen else use configuration
@@ -60,7 +59,6 @@ case "$1" in
             sec_mode=$(printf "%s" "$1" | cut -d ';' -f3)
             sec_pos=$(printf "%s" "$1" | cut -d ';' -f4)
             sec_rate=$(printf "%s" "$1" | cut -d ';' -f5)
-            sec_side=$(printf "%s" "$1" | cut -d ';' -f6)
 
             xrandr \
                 --output "$internal" --primary \
@@ -70,7 +68,6 @@ case "$1" in
                 --mode "${sec_mode:-1920x1080}" \
                 --pos "${sec_pos:-0x0}" \
                 --rate "${sec_rate:-75}" \
-                --"${sec_side:-above}" "$internal" \
                 --output DP1 --off \
                 --output HDMI1 --off \
                 --output VIRTUAL1 --off
