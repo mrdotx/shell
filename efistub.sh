@@ -3,15 +3,16 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-01T01:01:27+0200
+# date:   2021-04-01T11:53:00+0200
 
 # config
 disk="/dev/nvme0n1"
 root="root=UUID=5b21fe4a-3cae-4150-91bc-bf1d5ddbe03a rw"
 initrd="initrd=/intel-ucode.img"
-# options="quiet udev.log_priority=3 mitigations=off"
-options="quiet udev.log_priority=3 mitigations=off snd_hda_codec_hdmi.enable_silent_stream=0"
-# options="quiet udev.log_priority=3 mitigations=off i915.mitigations=off snd_hda_codec_hdmi.enable_silent_stream=0"
+
+# i915.mitigations=off
+options="quiet udev.log_priority=3 random.trust_cpu=on mitigations=off snd_hda_codec_hdmi.enable_silent_stream=0"
+
 boot_max=6
 boot_order="0,1,2,3,4,5,6"
 
