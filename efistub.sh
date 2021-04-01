@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-01T11:53:00+0200
+# date:   2021-04-01T19:06:34+0200
 
 # config
 disk="/dev/nvme0n1"
@@ -34,65 +34,72 @@ done
 printf "\n"
 
 # create entries
-printf ":: create Con Kolivas Skylake Linux entry\n"
+label="Con Kolivas Skylake Linux"
+printf ":: create %s entry\n" "$label"
 efibootmgr \
     --disk "$disk" \
     --create \
-    --label "Con Kolivas Skylake Linux" \
+    --label "$label" \
     --loader /vmlinuz-linux-ck-skylake \
     --unicode "$root $initrd initrd=/initramfs-linux-ck-skylake.img $options" \
     --quiet
 
-printf ":: create Con Kolivas Skylake Linux Fallback entry\n"
+label="Con Kolivas Skylake Linux Fallback"
+printf ":: create %s entry\n" "$label"
 efibootmgr \
     --disk "$disk" \
     --create \
-    --label "Con Kolivas Skylake Linux Fallback" \
+    --label "$label" \
     --loader /vmlinuz-linux-ck-skylake \
     --unicode "$root $initrd initrd=/initramfs-linux-ck-skylake-fallback.img" \
     --quiet
 
-printf ":: create Manjaro Linux 5.11 entry\n"
+label="Manjaro Linux 5.11"
+printf ":: create %s entry\n" "$label"
 efibootmgr \
     --disk "$disk" \
     --create \
-    --label "Manjaro Linux 5.11" \
+    --label "$label" \
     --loader /vmlinuz-5.11-x86_64 \
     --unicode "$root $initrd initrd=/initramfs-5.11-x86_64.img $options" \
     --quiet
 
-printf ":: create Manjaro Linux 5.11 Fallback entry\n"
+label="Manjaro Linux 5.11 Fallback"
+printf ":: create %s entry\n" "$label"
 efibootmgr \
     --disk "$disk" \
     --create \
-    --label "Manjaro Linux 5.11 Fallback" \
+    --label "$label" \
     --loader /vmlinuz-5.11-x86_64 \
     --unicode "$root $initrd initrd=/initramfs-5.11-x86_64-fallback.img" \
     --quiet
 
-printf ":: create Manjaro Linux 5.4 entry\n"
+label="Manjaro Linux 5.4"
+printf ":: create %s entry\n" "$label"
 efibootmgr \
     --disk "$disk" \
     --create \
-    --label "Manjaro Linux 5.4" \
+    --label "$label" \
     --loader /vmlinuz-5.4-x86_64 \
     --unicode "$root $initrd initrd=/initramfs-5.4-x86_64.img $options" \
     --quiet
 
-printf ":: create Manjaro Linux 5.4 Fallback entry\n"
+label="Manjaro Linux 5.4 Fallback"
+printf ":: create %s entry\n" "$label"
 efibootmgr \
     --disk "$disk" \
     --create \
-    --label "Manjaro Linux 5.4 Fallback" \
+    --label "$label" \
     --loader /vmlinuz-5.4-x86_64 \
     --unicode "$root $initrd initrd=/initramfs-5.4-x86_64-fallback.img" \
     --quiet
 
-printf ":: create MemTest86 9.0 entry\n"
+label="MemTest86 9.0"
+printf ":: create %s entry\n" "$label"
 efibootmgr \
     --disk "$disk" \
     --create \
-    --label "MemTest86 9.0" \
+    --label "$label" \
     --loader /EFI/memtest86/BOOTX64.efi \
     --quiet
 printf "\n"
