@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-02T18:08:14+0200
+# date:   2021-04-02T21:07:33+0200
 
 # config
 disk="/dev/nvme0n1"
@@ -19,7 +19,7 @@ options="$logging $mitigations $others"
 boot_num="0000 0001 0002 0003 0004 0005 0006 0007 0008"
 boot_order="0000,0002,0004,0006,0008,0001,0003,0005,0007"
 
-# functions
+# functions for efibootmgr
 delete_entries() {
     for i in $boot_num
     do
@@ -45,18 +45,26 @@ create_entry() {
     i=$((i + 1))
 }
 
-create_ck() {
+create_boot_order() {
+    printf "   %s\n" "$boot_order"
+    efibootmgr \
+        --bootorder "$boot_order" \
+        --quiet
+}
+
+# functions to create entries
+ck() {
     create_entry \
-        "Con Kolivas Skylake Linux" \
+        "Con Kolivas Skylake Linux $1" \
         "/vmlinuz-linux-ck-skylake" \
         "$root $initrd initrd=/initramfs-linux-ck-skylake.img $options"
     create_entry \
-        "Con Kolivas Skylake Linux Fallback" \
+        "Con Kolivas Skylake Linux $1 Fallback" \
         "/vmlinuz-linux-ck-skylake" \
         "$root $initrd initrd=/initramfs-linux-ck-skylake-fallback.img"
 }
 
-create_manjaro() {
+manjaro() {
     create_entry \
         "Manjaro Linux $1" \
         "/vmlinuz-$1-x86_64" \
@@ -67,17 +75,10 @@ create_manjaro() {
         "$root $initrd initrd=/initramfs-$1-x86_64-fallback.img"
 }
 
-create_memtest() {
+memtest() {
     create_entry \
-        "MemTest86 9.0" \
+        "MemTest86 $1" \
         "/EFI/memtest86/BOOTX64.efi"
-}
-
-create_boot_order() {
-    printf "   %s\n" "$boot_order"
-    efibootmgr \
-        --bootorder "$boot_order" \
-        --quiet
 }
 
 # main
@@ -89,12 +90,12 @@ else
     delete_entries
     printf "\n"
 
-    printf ":: create entries\n"
-    create_ck
-    create_manjaro "5.12"
-    create_manjaro "5.11"
-    create_manjaro "5.4"
-    create_memtest
+    printf ":: create boot entries\n"
+    ck "5.11"
+    manjaro "5.12"
+    manjaro "5.11"
+    manjaro "5.4"
+    memtest "9.0"
     printf "\n"
 
     printf ":: create boot order\n"
