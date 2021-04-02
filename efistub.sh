@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-02T13:21:47+0200
+# date:   2021-04-02T18:08:14+0200
 
 # config
 disk="/dev/nvme0n1"
@@ -16,125 +16,87 @@ mitigations="mitigations=off"
 others="random.trust_cpu=on snd_hda_codec_hdmi.enable_silent_stream=0"
 options="$logging $mitigations $others"
 
-boot_max=8
-boot_order="0,2,4,6,8,1,3,5,7"
+boot_num="0000 0001 0002 0003 0004 0005 0006 0007 0008"
+boot_order="0000,0002,0004,0006,0008,0001,0003,0005,0007"
 
-# check permission
-[ ! "$(id -u)" = 0 ] \
-   && printf "this script needs root privileges to run\n" \
-   && exit 1
+# functions
+delete_entries() {
+    for i in $boot_num
+    do
+        printf "%s " "$i"
+        efibootmgr \
+            --bootnum "$i" \
+            --delete-bootnum \
+            --quiet
+    done
+    i=0
+    printf "\n"
+}
 
-# delete existing entries
-while [ $boot_max -ge 0 ]
-do
-    printf ":: delete boot number %s\n" "$boot_max"
+create_entry() {
+    printf "   %04x %s\n" "$i" "$1"
     efibootmgr \
-        --bootnum "$boot_max" \
-        --delete-bootnum \
+        --disk "$disk" \
+        --create \
+        --label "$1" \
+        --loader "$2" \
+        --unicode "$3" \
         --quiet
-    boot_max=$((boot_max - 1))
-done
-printf "\n"
+    i=$((i + 1))
+}
 
-# create entries
-label="Con Kolivas Skylake Linux"
-printf ":: create %s entry\n" "$label"
-efibootmgr \
-    --disk "$disk" \
-    --create \
-    --label "$label" \
-    --loader /vmlinuz-linux-ck-skylake \
-    --unicode "$root $initrd initrd=/initramfs-linux-ck-skylake.img $options" \
-    --quiet
+create_ck() {
+    create_entry \
+        "Con Kolivas Skylake Linux" \
+        "/vmlinuz-linux-ck-skylake" \
+        "$root $initrd initrd=/initramfs-linux-ck-skylake.img $options"
+    create_entry \
+        "Con Kolivas Skylake Linux Fallback" \
+        "/vmlinuz-linux-ck-skylake" \
+        "$root $initrd initrd=/initramfs-linux-ck-skylake-fallback.img"
+}
 
-label="Con Kolivas Skylake Linux Fallback"
-printf ":: create %s entry\n" "$label"
-efibootmgr \
-    --disk "$disk" \
-    --create \
-    --label "$label" \
-    --loader /vmlinuz-linux-ck-skylake \
-    --unicode "$root $initrd initrd=/initramfs-linux-ck-skylake-fallback.img" \
-    --quiet
+create_manjaro() {
+    create_entry \
+        "Manjaro Linux $1" \
+        "/vmlinuz-$1-x86_64" \
+        "$root $initrd initrd=/initramfs-$1-x86_64.img $options"
+    create_entry \
+        "Manjaro Linux $1 Fallback" \
+        "/vmlinuz-$1-x86_64" \
+        "$root $initrd initrd=/initramfs-$1-x86_64-fallback.img"
+}
 
-label="Manjaro Linux 5.12"
-printf ":: create %s entry\n" "$label"
-efibootmgr \
-    --disk "$disk" \
-    --create \
-    --label "$label" \
-    --loader /vmlinuz-5.12-x86_64 \
-    --unicode "$root $initrd initrd=/initramfs-5.12-x86_64.img $options" \
-    --quiet
+create_memtest() {
+    create_entry \
+        "MemTest86 9.0" \
+        "/EFI/memtest86/BOOTX64.efi"
+}
 
-label="Manjaro Linux 5.12 Fallback"
-printf ":: create %s entry\n" "$label"
-efibootmgr \
-    --disk "$disk" \
-    --create \
-    --label "$label" \
-    --loader /vmlinuz-5.12-x86_64 \
-    --unicode "$root $initrd initrd=/initramfs-5.12-x86_64-fallback.img" \
-    --quiet
+create_boot_order() {
+    printf "   %s\n" "$boot_order"
+    efibootmgr \
+        --bootorder "$boot_order" \
+        --quiet
+}
 
-label="Manjaro Linux 5.11"
-printf ":: create %s entry\n" "$label"
-efibootmgr \
-    --disk "$disk" \
-    --create \
-    --label "$label" \
-    --loader /vmlinuz-5.11-x86_64 \
-    --unicode "$root $initrd initrd=/initramfs-5.11-x86_64.img $options" \
-    --quiet
+# main
+if [ ! "$(id -u)" = 0 ]; then
+    printf "this script needs root privileges to run\n"
+    exit 1
+else
+    printf ":: delete boot numbers\n   "
+    delete_entries
+    printf "\n"
 
-label="Manjaro Linux 5.11 Fallback"
-printf ":: create %s entry\n" "$label"
-efibootmgr \
-    --disk "$disk" \
-    --create \
-    --label "$label" \
-    --loader /vmlinuz-5.11-x86_64 \
-    --unicode "$root $initrd initrd=/initramfs-5.11-x86_64-fallback.img" \
-    --quiet
+    printf ":: create entries\n"
+    create_ck
+    create_manjaro "5.12"
+    create_manjaro "5.11"
+    create_manjaro "5.4"
+    create_memtest
+    printf "\n"
 
-label="Manjaro Linux 5.4"
-printf ":: create %s entry\n" "$label"
-efibootmgr \
-    --disk "$disk" \
-    --create \
-    --label "$label" \
-    --loader /vmlinuz-5.4-x86_64 \
-    --unicode "$root $initrd initrd=/initramfs-5.4-x86_64.img $options" \
-    --quiet
-
-label="Manjaro Linux 5.4 Fallback"
-printf ":: create %s entry\n" "$label"
-efibootmgr \
-    --disk "$disk" \
-    --create \
-    --label "$label" \
-    --loader /vmlinuz-5.4-x86_64 \
-    --unicode "$root $initrd initrd=/initramfs-5.4-x86_64-fallback.img" \
-    --quiet
-
-label="MemTest86 9.0"
-printf ":: create %s entry\n" "$label"
-efibootmgr \
-    --disk "$disk" \
-    --create \
-    --label "$label" \
-    --loader /EFI/memtest86/BOOTX64.efi \
-    --quiet
-printf "\n"
-
-# change boot order
-printf ":: change boot order to %s\n" "$boot_order"
-efibootmgr \
-    --bootorder "$boot_order" \
-    --quiet
-printf "\n"
-
-# show results
-printf ":: show results\n"
-efibootmgr
-# efibootmgr --verbose
+    printf ":: create boot order\n"
+    create_boot_order
+fi
