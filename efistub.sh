@@ -3,12 +3,12 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-02T21:07:33+0200
+# date:   2021-04-04T13:51:14+0200
 
 # config
 disk="/dev/nvme0n1"
 root="root=UUID=5b21fe4a-3cae-4150-91bc-bf1d5ddbe03a rw"
-initrd="initrd=/intel-ucode.img"
+ucode="initrd=/intel-ucode.img"
 
 logging="quiet udev.log_priority=3"
 mitigations="mitigations=off"
@@ -54,25 +54,31 @@ create_boot_order() {
 
 # functions to create entries
 ck() {
+    label="Con Kolivas Skylake Linux $1"
+    kernel="/vmlinuz-linux-ck-skylake"
+    initrd="/initramfs-linux-ck-skylake"
     create_entry \
-        "Con Kolivas Skylake Linux $1" \
-        "/vmlinuz-linux-ck-skylake" \
-        "$root $initrd initrd=/initramfs-linux-ck-skylake.img $options"
+        "$label" \
+        "$kernel" \
+        "$root $ucode initrd=$initrd.img $options"
     create_entry \
-        "Con Kolivas Skylake Linux $1 Fallback" \
-        "/vmlinuz-linux-ck-skylake" \
-        "$root $initrd initrd=/initramfs-linux-ck-skylake-fallback.img"
+        "$label Fallback" \
+        "$kernel" \
+        "$root $ucode initrd=$initrd-fallback.img"
 }
 
 manjaro() {
+    label="Manjaro Linux $1"
+    kernel="/vmlinuz-$1-x86_64"
+    initrd="/initramfs-$1-x86_64"
     create_entry \
-        "Manjaro Linux $1" \
-        "/vmlinuz-$1-x86_64" \
-        "$root $initrd initrd=/initramfs-$1-x86_64.img $options"
+        "$label" \
+        "$kernel" \
+        "$root $ucode initrd=$initrd.img $options"
     create_entry \
-        "Manjaro Linux $1 Fallback" \
-        "/vmlinuz-$1-x86_64" \
-        "$root $initrd initrd=/initramfs-$1-x86_64-fallback.img"
+        "$label Fallback" \
+        "$kernel" \
+        "$root $ucode initrd=$initrd-fallback.img"
 }
 
 memtest() {
