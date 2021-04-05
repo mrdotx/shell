@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-04T13:51:14+0200
+# date:   2021-04-05T17:27:07+0200
 
 # config
 disk="/dev/nvme0n1"
@@ -100,7 +100,7 @@ else
     ck "5.11"
     manjaro "5.12"
     manjaro "5.11"
-    manjaro "5.4"
+    manjaro "5.10"
     memtest "9.0"
     printf "\n"
 
