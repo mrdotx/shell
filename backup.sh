@@ -3,12 +3,12 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-08T08:30:05+0200
+# date:   2021-04-09T10:21:28+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
 auth="doas"
-backup_name="morpheus"
+backup_name=$(hostname)
 remote_location="alarm@prometheus:/home/alarm/backup/$backup_name/"
 
 printf ":: create installed packages list\n"
@@ -28,4 +28,4 @@ $auth rsync -aAXv --delete \
     --exclude="/run/*" \
     --exclude="/srv/*" \
     --exclude="/sys/*" \
-    --exclude="/tmp/*" / $remote_location
+    --exclude="/tmp/*" / "$remote_location"
