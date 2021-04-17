@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-05T17:27:07+0200
+# date:   2021-04-17T20:15:01+0200
 
 # config
 disk="/dev/nvme0n1"
@@ -29,12 +29,11 @@ delete_entries() {
             --delete-bootnum \
             --quiet
     done
-    i=0
     printf "\n"
 }
 
 create_entry() {
-    printf "   %04x %s\n" "$i" "$1"
+    printf "   "
     efibootmgr \
         --disk "$disk" \
         --create \
@@ -42,7 +41,7 @@ create_entry() {
         --loader "$2" \
         --unicode "$3" \
         --quiet
-    i=$((i + 1))
+    efibootmgr | grep "$1$"
 }
 
 create_boot_order() {
@@ -56,29 +55,29 @@ create_boot_order() {
 ck() {
     label="Con Kolivas Skylake Linux $1"
     kernel="/vmlinuz-linux-ck-skylake"
-    initrd="/initramfs-linux-ck-skylake"
+    initrd="$ucode initrd=/initramfs-linux-ck-skylake"
     create_entry \
         "$label" \
         "$kernel" \
-        "$root $ucode initrd=$initrd.img $options"
+        "$root $initrd.img $options"
     create_entry \
         "$label Fallback" \
         "$kernel" \
-        "$root $ucode initrd=$initrd-fallback.img"
+        "$root $initrd-fallback.img"
 }
 
 manjaro() {
     label="Manjaro Linux $1"
     kernel="/vmlinuz-$1-x86_64"
-    initrd="/initramfs-$1-x86_64"
+    initrd="$ucode initrd=/initramfs-$1-x86_64"
     create_entry \
         "$label" \
         "$kernel" \
-        "$root $ucode initrd=$initrd.img $options"
+        "$root $initrd.img $options"
     create_entry \
         "$label Fallback" \
         "$kernel" \
-        "$root $ucode initrd=$initrd-fallback.img"
+        "$root $initrd-fallback.img"
 }
 
 memtest() {
