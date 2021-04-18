@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-17T20:15:01+0200
+# date:   2021-04-18T09:47:47+0200
 
 # config
 disk="/dev/nvme0n1"
@@ -16,12 +16,10 @@ mitigations="mitigations=off"
 others="random.trust_cpu=on snd_hda_codec_hdmi.enable_silent_stream=0"
 options="$logging $mitigations $others"
 
-boot_num="0000 0001 0002 0003 0004 0005 0006 0007 0008"
-boot_order="0000,0002,0004,0006,0008,0001,0003,0005,0007"
-
 # functions for efibootmgr
 delete_entries() {
-    for i in $boot_num
+    boot_entries=$(efibootmgr | grep "\*" | sed 's/^Boot//g;s/\*.*//g')
+    for i in $boot_entries
     do
         printf "%s " "$i"
         efibootmgr \
@@ -45,9 +43,23 @@ create_entry() {
 }
 
 create_boot_order() {
-    printf "   %s\n" "$boot_order"
+    boot_order() {
+        boot_entries=$(efibootmgr | grep "\*" | sed 's/^Boot//g;s/\*.*//g')
+        printf "%s\n" "$boot_entries" | {
+            while IFS= read -r line; do
+                if [ -n "$entry" ]; then
+                    entry="$entry,$line"
+                else
+                    entry="$line"
+                fi
+            done
+            printf "%s\n" "$entry"
+        }
+    }
+
+    printf "   %s\n" "$(boot_order)"
     efibootmgr \
-        --bootorder "$boot_order" \
+        --bootorder "$(boot_order)" \
         --quiet
 }
 
@@ -56,28 +68,34 @@ ck() {
     label="Con Kolivas Skylake Linux $1"
     kernel="/vmlinuz-linux-ck-skylake"
     initrd="$ucode initrd=/initramfs-linux-ck-skylake"
-    create_entry \
-        "$label" \
-        "$kernel" \
-        "$root $initrd.img $options"
-    create_entry \
-        "$label Fallback" \
-        "$kernel" \
-        "$root $initrd-fallback.img"
+    if [ -z "$2" ]; then
+        create_entry \
+            "$label" \
+            "$kernel" \
+            "$root $initrd.img $options"
+    else
+        create_entry \
+            "$label $2" \
+            "$kernel" \
+            "$root $initrd-$2.img"
+    fi
 }
 
 manjaro() {
     label="Manjaro Linux $1"
     kernel="/vmlinuz-$1-x86_64"
     initrd="$ucode initrd=/initramfs-$1-x86_64"
-    create_entry \
-        "$label" \
-        "$kernel" \
-        "$root $initrd.img $options"
-    create_entry \
-        "$label Fallback" \
-        "$kernel" \
-        "$root $initrd-fallback.img"
+    if [ -z "$2" ]; then
+        create_entry \
+            "$label" \
+            "$kernel" \
+            "$root $initrd.img $options"
+    else
+        create_entry \
+            "$label $2" \
+            "$kernel" \
+            "$root $initrd-$2.img"
+    fi
 }
 
 memtest() {
@@ -97,9 +115,13 @@ else
 
     printf ":: create boot entries\n"
     ck "5.11"
+    ck "5.11" "fallback"
     manjaro "5.12"
+    manjaro "5.12" "fallback"
     manjaro "5.11"
+    manjaro "5.11" "fallback"
     manjaro "5.10"
+    manjaro "5.10" "fallback"
     memtest "9.0"
     printf "\n"
 
