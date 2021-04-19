@@ -3,15 +3,16 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-19T14:30:31+0200
+# date:   2021-04-19T20:47:25+0200
 
 # config
-disk="/dev/nvme0n1"
+loader_disk="/dev/nvme0n1"
+loader_partition=1
 
 root="root=UUID=5b21fe4a-3cae-4150-91bc-bf1d5ddbe03a rw"
 ucode="initrd=/intel-ucode.img"
 
-kernel_parameter() {
+loader_parameter() {
     parameter="
         quiet
         udev.log_priority=3
@@ -72,7 +73,8 @@ delete_entries() {
 create_entry() {
     printf "   "
     efibootmgr \
-        --disk "$disk" \
+        --disk "$loader_disk" \
+        --part "$loader_partition" \
         --create \
         --label "$1" \
         --loader "$2" \
@@ -92,34 +94,34 @@ create_boot_order() {
 # functions to create boot entries
 ck() {
     label="Con Kolivas Skylake Linux $1"
-    kernel="/vmlinuz-linux-ck-skylake"
+    loader="/vmlinuz-linux-ck-skylake"
     options="$root $ucode initrd=/initramfs-linux-ck-skylake"
     if [ -z "$2" ]; then
         create_entry \
             "$label" \
-            "$kernel" \
-            "$options.img $(kernel_parameter "$1")"
+            "$loader" \
+            "$options.img $(loader_parameter "$1")"
     else
         create_entry \
             "$label $2" \
-            "$kernel" \
+            "$loader" \
             "$options-$2.img"
     fi
 }
 
 manjaro() {
     label="Manjaro Linux $1"
-    kernel="/vmlinuz-$1-x86_64"
+    loader="/vmlinuz-$1-x86_64"
     options="$root $ucode initrd=/initramfs-$1-x86_64"
     if [ -z "$2" ]; then
         create_entry \
             "$label" \
-            "$kernel" \
-            "$options.img $(kernel_parameter "$1")"
+            "$loader" \
+            "$options.img $(loader_parameter "$1")"
     else
         create_entry \
             "$label $2" \
-            "$kernel" \
+            "$loader" \
             "$options-$2.img"
     fi
 }
