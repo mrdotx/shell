@@ -3,23 +3,62 @@
 # path:   /home/klassiker/.local/share/repos/shell/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-18T09:47:47+0200
+# date:   2021-04-19T14:30:31+0200
 
 # config
 disk="/dev/nvme0n1"
+
 root="root=UUID=5b21fe4a-3cae-4150-91bc-bf1d5ddbe03a rw"
 ucode="initrd=/intel-ucode.img"
 
-logging="quiet udev.log_priority=3"
-mitigations="mitigations=off"
-# mitigations="mitigations=off i915.mitigations=off"
-others="random.trust_cpu=on snd_hda_codec_hdmi.enable_silent_stream=0"
-options="$logging $mitigations $others"
+kernel_parameter() {
+    parameter="
+        quiet
+        udev.log_priority=3
+        random.trust_cpu=on
+        snd_hda_codec_hdmi.enable_silent_stream=0
+        mitigations=off
+        # i915.mitigations=off
+    "
 
-# functions for efibootmgr
+    if [ "$(printf "%s" "$1" | sed 's/\.//')" -ge 512 ]; then
+        printf "%s i915.mitigations=off" "$(pivot "$parameter" " ")"
+    else
+        printf "%s" "$(pivot "$parameter" " ")"
+    fi
+}
+
+# helper functions
+pivot() {
+    printf "%s\n" "$1" \
+        | awk '{gsub(/^ +| +$/,"")} !/^($|#)/ {print $0}' \
+        | {
+            while IFS= read -r line; do
+                if [ -n "$entry" ]; then
+                    entry="$entry$2$(printf "%s" "$line")"
+                else
+                    entry="$(printf "%s" "$line")"
+                fi
+            done
+            printf "%s\n" "$entry"
+        }
+}
+
+# efibootmgr functions
+get_entries() {
+    efibootmgr \
+        | grep "\*" \
+        | sed 's/^Boot//g;s/\*.*//g'
+}
+
+get_entry() {
+    efibootmgr \
+        | grep "$1$" \
+        | sed 's/^Boot//g;s/\*//g'
+}
+
 delete_entries() {
-    boot_entries=$(efibootmgr | grep "\*" | sed 's/^Boot//g;s/\*.*//g')
-    for i in $boot_entries
+    for i in $(get_entries)
     do
         printf "%s " "$i"
         efibootmgr \
@@ -39,62 +78,49 @@ create_entry() {
         --loader "$2" \
         --unicode "$3" \
         --quiet
-    efibootmgr | grep "$1$"
+    get_entry "$1"
 }
 
 create_boot_order() {
-    boot_order() {
-        boot_entries=$(efibootmgr | grep "\*" | sed 's/^Boot//g;s/\*.*//g')
-        printf "%s\n" "$boot_entries" | {
-            while IFS= read -r line; do
-                if [ -n "$entry" ]; then
-                    entry="$entry,$line"
-                else
-                    entry="$line"
-                fi
-            done
-            printf "%s\n" "$entry"
-        }
-    }
-
-    printf "   %s\n" "$(boot_order)"
+    boot_order="$(pivot "$(get_entries)" ",")"
+    printf "   %s\n" "$boot_order"
     efibootmgr \
-        --bootorder "$(boot_order)" \
+        --bootorder "$boot_order" \
         --quiet
 }
 
-# functions to create entries
+# functions to create boot entries
 ck() {
     label="Con Kolivas Skylake Linux $1"
     kernel="/vmlinuz-linux-ck-skylake"
-    initrd="$ucode initrd=/initramfs-linux-ck-skylake"
+    options="$root $ucode initrd=/initramfs-linux-ck-skylake"
     if [ -z "$2" ]; then
         create_entry \
             "$label" \
             "$kernel" \
-            "$root $initrd.img $options"
+            "$options.img $(kernel_parameter "$1")"
     else
         create_entry \
             "$label $2" \
             "$kernel" \
-            "$root $initrd-$2.img"
+            "$options-$2.img"
     fi
 }
 
 manjaro() {
     label="Manjaro Linux $1"
     kernel="/vmlinuz-$1-x86_64"
-    initrd="$ucode initrd=/initramfs-$1-x86_64"
+    options="$root $ucode initrd=/initramfs-$1-x86_64"
     if [ -z "$2" ]; then
         create_entry \
             "$label" \
             "$kernel" \
-            "$root $initrd.img $options"
+            "$options.img $(kernel_parameter "$1")"
     else
         create_entry \
             "$label $2" \
             "$kernel" \
-            "$root $initrd-$2.img"
+            "$options-$2.img"
     fi
 }
 
