@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-09T10:21:28+0200
+# date:   2021-04-19T14:53:50+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -20,7 +20,7 @@ paru -Qqe > "$XDG_CONFIG_HOME/paru/explicit_installed_packages.txt"
 
 printf "\n:: backup / to remote location\n"
 # for testing rsync option --dry-run
-$auth rsync -aAXv --delete \
+$auth rsync -aAXvh --delete \
     --exclude="/dev/*" \
     --exclude="/lost+found" \
     --exclude="/mnt/*" \

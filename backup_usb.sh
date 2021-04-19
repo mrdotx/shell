@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_usb.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-09T10:21:15+0200
+# date:   2021-04-19T14:59:45+0200
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -27,7 +27,7 @@ $auth mount "$usb_device $mount_point"
 printf "\n:: create folder and backup / to USB-Disk\n"
 $auth mkdir -p "$remote_location"
 # for testing rsync option --dry-run
-$auth rsync -aAXv --delete \
+$auth rsync -aAXvh --delete \
     --exclude="/dev/*" \
     --exclude="/lost+found" \
     --exclude="/mnt/*" \
