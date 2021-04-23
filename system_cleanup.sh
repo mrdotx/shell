@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:59:27+0100
+# date:   2021-04-23T19:05:51+0200
 
 iwd_history="$HOME/.local/share/iwctl/history"
 cmd_history="$HOME/.local/share/cmd_history" # zsh and bash history merged
@@ -35,6 +35,7 @@ cache_clean() {
             case "$key" in
                 y|Y|yes|Yes)
                     find "$cache_directory" -type f -atime +$cache_days -delete
+                    exit 0
                     ;;
                 *)
                     exit 0
