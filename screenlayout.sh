@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-03-23T20:55:54+0100
+# date:   2021-04-26T19:42:11+0200
 
 # config
 internal="eDP1"
@@ -19,7 +19,7 @@ help="$script [-h/--help] -- script to set screenlayout
     [--list]    = list of defined settings for dmenu
     [parameter] = semicolon separated
                   1) internal mode (default: 1920x1080)
-                  2) internal position (default: 0x1080)
+                  2) internal position (default: 1920x0)
                   3) external mode (default: 1920x1080)
                   4) external position (default: 0x0)
                   5) external rate (default: 75)
@@ -40,8 +40,8 @@ case "$1" in
         ;;
     --list)
         printf "%s\n" \
-            "1920x1080;0x1080;1920x1080;0x0;75" \
-            "1920x1080;0x1080;1920x1080;0x0;60" \
+            "1920x1080;1920x0;1920x1080;0x0;75" \
+            "1920x1080;1920x0;1920x1080;0x0;60" \
             "1920x1080;0x1050;1680x1050;120x0;60"
         ;;
     *)
@@ -63,7 +63,7 @@ case "$1" in
             xrandr \
                 --output "$internal" --primary \
                 --mode "${pri_mode:-1920x1080}" \
-                --pos "${pri_pos:-0x1080}" \
+                --pos "${pri_pos:-1920x0}" \
                 --output "$external" \
                 --mode "${sec_mode:-1920x1080}" \
                 --pos "${sec_pos:-0x0}" \
