@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-19T14:53:50+0200
+# date:   2021-04-30T10:02:19+0200
 
-# auth can be something like sudo -A, doas -- or
-# nothing, depending on configuration requirements
-auth="doas"
+# auth can be something like sudo -A, doas -- or nothing,
+# depending on configuration requirements
+auth="$EXEC_AS_USER"
 backup_name=$(hostname)
 remote_location="alarm@prometheus:/home/alarm/backup/$backup_name/"
 

@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/cpu_boost.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:58:45+0100
+# date:   2021-04-30T10:03:16+0200
 
-# auth can be something like sudo -A, doas -- or
-# nothing, depending on configuration requirements
-auth="doas"
+# auth can be something like sudo -A, doas -- or nothing,
+# depending on configuration requirements
+auth="$EXEC_AS_USER"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to toggle cpu indicators

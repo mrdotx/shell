@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_usb.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-21T21:29:01+0200
+# date:   2021-04-30T10:02:54+0200
 
-# auth can be something like sudo -A, doas -- or
-# nothing, depending on configuration requirements
-auth="doas"
+# auth can be something like sudo -A, doas -- or nothing,
+# depending on configuration requirements
+auth="$EXEC_AS_USER"
 backup_name=$(hostname)
 mount_point="/mnt/$backup_name"
 usb_device="/dev/disk/by-uuid/2bdffcfb-b365-4321-a64b-5ffce2f1c211"
