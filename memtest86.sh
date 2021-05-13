@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/memtest86.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-05-13T15:15:41+0200
+# date:   2021-05-13T21:01:10+0200
 
 [ ! "$(id -u)" = 0 ] \
     && printf "this script needs root privileges to run\n" \
@@ -12,35 +12,92 @@
 # config
 whats_new="https://www.memtest86.com/whats-new.html"
 download="https://www.memtest86.com/downloads/memtest86-usb.zip"
+
 destination="/boot/EFI/memtest86"
+version_file="$destination/version"
+
 tmp_directory=$(mktemp -t -d memtest86.XXXXXX)
 
-# download
-wget -O "$tmp_directory/whats-new.html" "$whats_new"
-wget -O "$tmp_directory/memtest86-usb.zip" "$download"
-unzip "$tmp_directory/memtest86-usb.zip" -d "$tmp_directory/memtest86-usb"
+zip_file="$tmp_directory/memtest86-usb.zip"
+zip_destination="$tmp_directory/memtest86-usb"
+mount_destination="$tmp_directory/mount"
+image="memtest86-usb.img"
 
-# mount
-start_sector=$(fdisk -lu "$tmp_directory/memtest86-usb/memtest86-usb.img" \
-    | grep "memtest86-usb.img2" \
-    | cut -d ' ' -f2)
-offset=$((start_sector * 512))
-mkdir "$tmp_directory/mount"
-mount -o loop,offset=$offset \
-    "$tmp_directory/memtest86-usb/memtest86-usb.img" \
-    "$tmp_directory/mount"
+# functions
+get_versions() {
+    printf "==> download %s\n" "$whats_new"
+    curl -o "$tmp_directory/whats-new.html" "$whats_new"
 
-# process files
-rm -rf "$destination"
-cp -r "$tmp_directory"/mount/EFI/BOOT "$tmp_directory"/memtest86
-grep -m1 ">Version" "$tmp_directory/whats-new.html" \
-        | sed -e 's/^[ \t]*//' \
-        | cut -d ' ' -f4 > "$tmp_directory/memtest86/version"
-mv "$tmp_directory"/memtest86 "$destination"
+    printf "==> version comparison\n"
+    [ -f "$version_file" ] \
+        && version="$(cat $version_file)"
+    printf "  -> version installed: %s\n" "$version"
 
-# clean up
-umount "$tmp_directory/mount"
+    version="$( \
+        grep -m1 ">Version" "$tmp_directory/whats-new.html" \
+            | sed -e 's/^[ \t]*//' \
+            | cut -d ' ' -f4 \
+        )"
+    printf "  -> version available: %s\n" "$version"
+}
+
+update_memtest86() {
+    printf "==> download %s\n" "$download"
+    curl -o \
+        "$zip_file" \
+        "$download"
+
+    printf "==> unzip %s\n" "$zip_file"
+    unzip -q \
+        "$zip_file" \
+        -d "$zip_destination"
+
+    printf "==> mount %s\n" "$image"
+    start_sector=$( \
+        fdisk -lu "$zip_destination/$image" \
+            | grep "${image}2" \
+            | cut -d ' ' -f2 \
+        )
+    offset=$((start_sector * 512))
+    mkdir "$mount_destination"
+    mount -o loop,offset=$offset \
+        "$zip_destination/$image" \
+        "$mount_destination"
+
+    printf "==> process files\n"
+    printf "  -> remove %s\n" "$destination"
+    rm -rf "$destination"
+    printf "  -> copy %s/mount/EFI/BOOT to %s/memtest86\n" \
+        "$tmp_directory" \
+        "$tmp_directory"
+    cp -r \
+        "$tmp_directory"/mount/EFI/BOOT \
+        "$tmp_directory"/memtest86
+    printf "  -> write %s to %s/memtest86/version\n" \
+        "$version" \
+        "$tmp_directory"
+    printf "%s\n" "$version" > "$tmp_directory/memtest86/version"
+    printf "  -> move %s/memtest86 to %s\n" \
+        "$tmp_directory" \
+        "$destination"
+    mv \
+        "$tmp_directory"/memtest86 \
+        "$destination"
+
+    printf "==> unmount %s\n" "$image"
+    umount "$mount_destination"
+}
+
+# main
+get_versions
+printf "  -> update [y]es/[N]o: " \
+    && read -r update
+case "$update" in
+    y|Y|yes|Yes)
+        update_memtest86
+        # rewrite uefi
+        efistub.sh
+        ;;
+esac
+printf "==> clean up\n"
 rm -rf "$tmp_directory"
-
-# rewrite uefi
-efistub.sh
