@@ -13,9 +13,10 @@ shell scripts for system/hardware management and general maintenance
 | backup_usb.sh        | rsync backup to usb                                                           |
 | chameleon.sh         | pick color with chameleon to copy to clipboard and primary                    |
 | cpu_boost.sh         | use tlp to toggle scaling governor                                            |
+| delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | git_reset_commits.sh | remove commits from a git repository                                          |
-| delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
+| memtest86.sh         | install or upgrade memtest86 on efi partition                                 |
 | screenlayout.sh      | default screen setup                                                          |
 | status.sh            | simple script for system information in different formats                     |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
