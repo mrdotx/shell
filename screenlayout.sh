@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-26T19:42:11+0200
+# date:   2021-05-14T14:14:36+0200
 
 # config
-internal="eDP1"
-external="HDMI2"
+primary="eDP1"
+secondary="HDMI2"
 
 # help
 script=$(basename "$0")
@@ -18,11 +18,11 @@ help="$script [-h/--help] -- script to set screenlayout
   Settings:
     [--list]    = list of defined settings for dmenu
     [parameter] = semicolon separated
-                  1) internal mode (default: 1920x1080)
-                  2) internal position (default: 1920x0)
-                  3) external mode (default: 1920x1080)
-                  4) external position (default: 0x0)
-                  5) external rate (default: 75)
+                  1) primary mode (default: 1920x1080)
+                  2) primary position (default: 1920x0)
+                  3) secondary mode (default: 1920x1080)
+                  4) secondary position (default: 0x0)
+                  5) secondary rate (default: 75)
 
   Examples:
     $script
@@ -31,8 +31,8 @@ help="$script [-h/--help] -- script to set screenlayout
     $script \";;;;60\"
 
   Config:
-    internal = $internal
-    external = $external"
+    primary = $primary
+    secondary = $secondary"
 
 case "$1" in
     -h | --help)
@@ -45,11 +45,11 @@ case "$1" in
             "1920x1080;0x1050;1680x1050;120x0;60"
         ;;
     *)
-        # if extrenal monitor is disconnected use internal screen else use configuration
-        if xrandr | grep "$external disconnected"; then
+        # if extrenal monitor is disconnected use primary screen else use configuration
+        if xrandr | grep "$secondary disconnected"; then
             xrandr \
-                --output "$internal" --auto \
-                --output "$external" --off \
+                --output "$primary" --auto \
+                --output "$secondary" --off \
                 --output DP1 --off \
                 --output HDMI1 --off \
                 --output VIRTUAL1 --off
@@ -61,10 +61,10 @@ case "$1" in
             sec_rate=$(printf "%s" "$1" | cut -d ';' -f5)
 
             xrandr \
-                --output "$internal" --primary \
+                --output "$primary" --primary \
                 --mode "${pri_mode:-1920x1080}" \
                 --pos "${pri_pos:-1920x0}" \
-                --output "$external" \
+                --output "$secondary" \
                 --mode "${sec_mode:-1920x1080}" \
                 --pos "${sec_pos:-0x0}" \
                 --rate "${sec_rate:-75}" \
