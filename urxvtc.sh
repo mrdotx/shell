@@ -3,13 +3,26 @@
 # path:   /home/klassiker/.local/share/repos/shell/urxvtc.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:59:43+0100
+# date:   2021-05-19T17:37:44+0200
 
 daemon="urxvtd -q -o -f"
+client="urxvtc"
 
-if [ "$(pgrep -fx "$daemon")" ]; then
-    urxvtc "$@"
-else
-    $daemon
-    urxvtc "$@"
-fi
+run() {
+    $1 -fx "$daemon" >/dev/null 2>&1
+}
+
+case "$1" in
+    --kill)
+        run "pgrep" \
+            && run "pkill"
+        ;;
+    *)
+        run "pgrep" \
+            && $client "$@" \
+            && exit 0
+
+            $daemon
+            $client "$@"
+        ;;
+esac
