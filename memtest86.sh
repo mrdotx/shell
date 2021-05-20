@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/memtest86.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-05-13T21:01:10+0200
+# date:   2021-05-20T19:18:30+0200
 
 [ ! "$(id -u)" = 0 ] \
     && printf "this script needs root privileges to run\n" \
@@ -26,7 +26,9 @@ image="memtest86-usb.img"
 # functions
 get_versions() {
     printf "==> download %s\n" "$whats_new"
-    curl -o "$tmp_directory/whats-new.html" "$whats_new"
+    curl -o \
+        "$tmp_directory/whats-new.html" \
+        "$whats_new"
 
     printf "==> version comparison\n"
     [ -f "$version_file" ] \
