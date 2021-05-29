@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-19T15:01:37+0200
+# date:   2021-05-29T10:17:23+0200
 
 # color variables
 magenta=$(tput setaf 5)
@@ -19,7 +19,6 @@ source_object="
 #$HOME/.jameica
 #$HOME/.newsboat
 #$HOME/.ssh
-#$HOME/.weechat
 "
 # home/files
 source_object="$source_object
