@@ -3,20 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-30T10:02:19+0200
+# date:   2021-06-04T19:46:20+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="$EXEC_AS_USER"
 backup_name=$(hostname)
 remote_location="alarm@prometheus:/home/alarm/backup/$backup_name/"
-
-printf ":: create installed packages list\n"
-paru -Qq > "$XDG_CONFIG_HOME/paru/installed_packages.txt"
-printf ":: create explicit installed packages list\n"
-paru -Qqe > "$XDG_CONFIG_HOME/paru/explicit_installed_packages.txt"
-# to reinstall the packages:
-# paru -S --needed - < "$XDG_CONFIG_HOME/paru/explicit_installed_packages.txt"
 
 printf "\n:: backup / to remote location\n"
 # for testing rsync option --dry-run
