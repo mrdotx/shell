@@ -3,57 +3,84 @@
 # path:   /home/klassiker/.local/share/repos/shell/cpu_boost.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-30T10:03:16+0200
+# date:   2021-06-12T14:32:33+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="$EXEC_AS_USER"
 
 script=$(basename "$0")
-help="$script [-h/--help] -- script to toggle cpu indicators
+help="$script [-h/--help] -- script to change cpu policies
   Usage:
-    $script [--toggle/--status/--available]
+    $script [--toggle/--performance/--powersave/--status/--available]
 
   Settings:
     [--toggle] = switch between powersave and performance
+    [--performance] = switch to performance
+    [--powersave] = switch to powersave
     [--status] = shows status of governor and epp
-    [--available] = shows available indicators of governor and epp
+    [--available] = shows available policies of governor and epp
 
   Examples:
     $script --toggle
+    $script --performance
+    $script --powersave
     $script --status
     $script --available"
 
+get_status() {
+    cpufreqctl --governor \
+        | cut -d ' ' -f1
+}
+
+set_policy() {
+    case "$1" in
+        performance)
+            $auth cpufreqctl --governor --set=performance
+            $auth cpufreqctl --epp --set=performance
+            ;;
+        powersave)
+            $auth cpufreqctl --governor --set=powersave
+            $auth cpufreqctl --epp --set=balance_power
+            ;;
+    esac
+}
+
 case "$1" in
     --toggle)
-        status=$($auth cpufreqctl --governor)
         # toggle powersave <-> performance
-        case $status in
-            performance*)
-                $auth cpufreqctl --governor --set=powersave
-                $auth cpufreqctl --epp --set=balance_power
+        case "$(get_status)" in
+            performance)
+                set_policy "powersave"
                 ;;
-            powersave*)
-                $auth cpufreqctl --governor --set=performance
-                $auth cpufreqctl --epp --set=performance
+            powersave)
+                set_policy "performance"
                 ;;
         esac
         ;;
+    --performance)
+        # toggle powersave -> performance
+        [ "$(get_status)" = "powersave" ] \
+            && set_policy "performance" \
+            || exit 0
+        ;;
+    --powersave)
+        # toggle performance -> powersave
+        [ "$(get_status)" = "performance" ] \
+            && set_policy "powersave" \
+            || exit 0
+        ;;
     --status)
-        printf "%s\n   %s\n" \
-            ":: CPU governors" \
-            "$($auth cpufreqctl --governor)"
-        printf "%s\n   %s\n" \
-            ":: CPU energy/perfomance policies (EPP)" \
-            "$($auth cpufreqctl --epp)"
+        printf ":: CPU governors\n   %s\n" \
+            "$(cpufreqctl --governor)"
+        printf ":: CPU energy/perfomance policies (EPP)\n   %s\n" \
+            "$(cpufreqctl --epp)"
         ;;
     --available)
-        printf "%s\n   %s\n" \
-            ":: CPU governors" \
-            "$($auth cpufreqctl --governor --available)"
-        printf "%s\n   %s\n" \
-            ":: CPU energy/perfomance policies (EPP)" \
-            "$($auth cpufreqctl --epp --available)"
+        printf ":: CPU governors\n   %s\n" \
+            "$(cpufreqctl --governor --available)"
+        printf ":: CPU energy/perfomance policies (EPP)\n   %s\n" \
+            "$(cpufreqctl --epp --available)"
         ;;
     *)
         printf "%s\n" "$help"
