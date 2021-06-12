@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/cpu_boost.sh
+# path:   /home/klassiker/.local/share/repos/shell/cpu_policy.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-06-12T14:32:33+0200
+# date:   2021-06-12T15:04:31+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
