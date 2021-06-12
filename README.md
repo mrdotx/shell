@@ -12,7 +12,7 @@ shell scripts for system/hardware management and general maintenance
 | backup.sh            | rsync backup to remote location (ssh)                                         |
 | backup_usb.sh        | rsync backup to usb                                                           |
 | chameleon.sh         | pick color with chameleon to copy to clipboard and primary                    |
-| cpu_boost.sh         | change cpu policies with cpufreqctl                                           |
+| cpu_policy.sh        | change cpu policies with cpufreqctl                                           |
 | delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | git_reset_commits.sh | remove commits from a git repository                                          |
