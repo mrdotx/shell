@@ -3,11 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/memtest86.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-05-20T19:18:30+0200
-
-[ ! "$(id -u)" = 0 ] \
-    && printf "this script needs root privileges to run\n" \
-    && exit 1
+# date:   2021-06-13T21:11:52+0200
 
 # config
 whats_new="https://www.memtest86.com/whats-new.html"
@@ -24,6 +20,12 @@ mount_destination="$tmp_directory/mount"
 image="memtest86-usb.img"
 
 # functions
+check_root() {
+    [ ! "$(id -u)" = 0 ] \
+        && printf "this script needs root privileges to run\n" \
+        && exit 1
+}
+
 get_versions() {
     printf "==> download %s\n" "$whats_new"
     curl -o \
@@ -91,6 +93,7 @@ update_memtest86() {
 }
 
 # main
+check_root
 get_versions
 printf "  -> update [y]es/[N]o: " \
     && read -r update
