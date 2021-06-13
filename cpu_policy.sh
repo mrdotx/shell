@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/cpu_policy.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-06-13T08:52:15+0200
+# date:   2021-06-13T19:52:01+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -12,18 +12,20 @@ auth="$EXEC_AS_USER"
 script=$(basename "$0")
 help="$script [-h/--help] -- script to change cpu policies
   Usage:
-    $script [--toggle/--performance/--powersave/--status]
+    $script [--toggle/--performance/--powersave/--info/--status]
 
   Settings:
-    [--toggle] = switch between powersave and performance
+    [--toggle]      = switch between powersave and performance
     [--performance] = switch to performance
-    [--powersave] = switch to powersave
-    [--status] = shows status of governor and epp
+    [--powersave]   = switch to powersave
+    [--info]        = shows information about governor and epp
+    [--status]      = shows performance or powersafe
 
   Examples:
     $script --toggle
     $script --performance
     $script --powersave
+    $script --info
     $script --status"
 
 get_status() {
@@ -68,17 +70,21 @@ case "$1" in
             && set_policy "powersave" \
             || exit 0
         ;;
-    --status)
+    --info)
         printf "==> CPU governors\n"
         printf "  -> available: %s\n" \
             "$(cpufreqctl --governor --available)"
         printf "  -> current:   %s\n" \
-            "$(cpufreqctl --governor | cut -d ' ' -f1)"
+            "$(get_status)"
         printf "==> CPU energy/perfomance policies (EPP)\n"
         printf "  -> available: %s\n" \
             "$(cpufreqctl --epp --available)"
         printf "  -> current:   %s\n" \
             "$(cpufreqctl --epp | cut -d ' ' -f1)"
+        ;;
+    --status)
+        printf "%s\n" \
+            "$(get_status)"
         ;;
     *)
         printf "%s\n" "$help"
