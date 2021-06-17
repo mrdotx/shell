@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/memtest86.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-06-13T21:11:52+0200
+# date:   2021-06-17T13:00:08+0200
 
 # config
 whats_new="https://www.memtest86.com/whats-new.html"
@@ -21,7 +21,7 @@ image="memtest86-usb.img"
 
 # functions
 check_root() {
-    [ ! "$(id -u)" = 0 ] \
+    [ "$(id -u)" -ne 0 ] \
         && printf "this script needs root privileges to run\n" \
         && exit 1
 }
