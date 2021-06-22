@@ -3,13 +3,12 @@
 # path:   /home/klassiker/.local/share/repos/shell/passgen.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-06-21T10:02:22+0200
+# date:   2021-06-22T17:56:41+0200
 
 c=14
 i=1
 
-while [ 1 -le "$#" ]
-do
+while [ 1 -le "$#" ]; do
     case "$1" in
         -c)
             c=$2
@@ -27,8 +26,7 @@ do
     esac
 done
 
-while [ 1 -le "$i" ]
-    do
-        printf "%s\n" "$(< /dev/urandom tr -dc A-Za-z0-9 | head -c"$c")"
-        i=$((i - 1))
+while [ 1 -le "$i" ]; do
+    printf "%s\n" "$(< /dev/urandom tr -dc A-Za-z0-9 | head -c"$c")"
+    i=$((i - 1))
 done
