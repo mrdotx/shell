@@ -10,6 +10,7 @@ old stuff and things that couldn't be assigned
 | host_status.sh    | get status online/offline for host with ping              |
 | launch.sh         | open specified applications on specific desktop           |
 | motd.sh           | dynamic motd with a few system informations               |
+| passgen.sh        | simple password generator                                 |
 | powertop.sh       | tuning the power consumption                              |
 | service_toggle.sh | switch status of service active or inactive               |
 | sync_dropbox.sh   | single dropbox sync with dropbox-cli                      |
