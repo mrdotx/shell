@@ -14,6 +14,7 @@ shell scripts for system/hardware management and general maintenance
 | chameleon.sh         | pick color with chameleon to copy to clipboard and primary                    |
 | cpu_policy.sh        | change cpu policies with cpufreqctl                                           |
 | delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
+| git_clone.sh         | clone all repositories of a user or organization                              |
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | git_reset_commits.sh | remove commits from a git repository                                          |
 | memtest86.sh         | install or upgrade memtest86 on efi partition                                 |
