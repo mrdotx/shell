@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:59:56+0100
+# date:   2021-07-03T18:07:50+0200
 
-config="$HOME/.config/xorg/wallpaper"
+config="$HOME/.config/xorg/modules/wallpaper"
 xresource="$HOME/.config/xorg/Xresources"
 
 # get random picture from directory
