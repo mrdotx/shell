@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-05-14T14:14:36+0200
+# date:   2021-07-08T07:58:37+0200
 
 # config
 primary="eDP1"
@@ -22,12 +22,12 @@ help="$script [-h/--help] -- script to set screenlayout
                   2) primary position (default: 1920x0)
                   3) secondary mode (default: 1920x1080)
                   4) secondary position (default: 0x0)
-                  5) secondary rate (default: 75)
+                  5) secondary rate (default: 74.99)
 
   Examples:
     $script
     $script --list
-    $script \"1920x1080;0x1080;1920x1080;0x0;75\"
+    $script \"1920x1080;0x1080;1920x1080;0x0;74.99\"
     $script \";;;;60\"
 
   Config:
@@ -40,7 +40,7 @@ case "$1" in
         ;;
     --list)
         printf "%s\n" \
-            "1920x1080;1920x0;1920x1080;0x0;75" \
+            "1920x1080;1920x0;1920x1080;0x0;74.99" \
             "1920x1080;1920x0;1920x1080;0x0;60" \
             "1920x1080;0x1050;1680x1050;120x0;60"
         ;;
@@ -67,7 +67,7 @@ case "$1" in
                 --output "$secondary" \
                 --mode "${sec_mode:-1920x1080}" \
                 --pos "${sec_pos:-0x0}" \
-                --rate "${sec_rate:-75}" \
+                --rate "${sec_rate:-74.99}" \
                 --output DP1 --off \
                 --output HDMI1 --off \
                 --output VIRTUAL1 --off
