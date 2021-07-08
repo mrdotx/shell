@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-07-08T14:56:26+0200
+# date:   2021-07-08T18:26:23+0200
 
 # config
 primary="HDMI2"
@@ -35,6 +35,37 @@ help="$script [-h/--help] -- script to set screenlayout
     primary = $primary
     secondary = $secondary"
 
+single_monitor() {
+    xrandr \
+        --output "$primary" --auto \
+        --output "$secondary" --off \
+        --output DP1 --off \
+        --output HDMI1 --off \
+        --output VIRTUAL1 --off
+}
+
+dual_monitor() {
+    pri_mode=$(printf "%s" "$1" | cut -d ';' -f1)
+    pri_pos=$(printf "%s" "$1" | cut -d ';' -f2)
+    pri_rate=$(printf "%s" "$1" | cut -d ';' -f3)
+    sec_mode=$(printf "%s" "$1" | cut -d ';' -f4)
+    sec_pos=$(printf "%s" "$1" | cut -d ';' -f5)
+    sec_rate=$(printf "%s" "$1" | cut -d ';' -f6)
+
+    xrandr \
+        --output "$primary" --primary \
+        --mode "${pri_mode:-1920x1080}" \
+        --pos "${pri_pos:-0x0}" \
+        --rate "${pri_rate:-74.99}" \
+        --output "$secondary" \
+        --mode "${sec_mode:-1920x1080}" \
+        --pos "${sec_pos:-1920x0}" \
+        --rate "${sec_rate:-60.00}" \
+        --output DP1 --off \
+        --output HDMI1 --off \
+        --output VIRTUAL1 --off
+}
+
 case "$1" in
     -h | --help)
         printf "%s\n" "$help"
@@ -46,34 +77,10 @@ case "$1" in
             "1920x1080;1680x1050;60.00;0x1050;120x0;60.00"
         ;;
     *)
-        # if extrenal monitor is disconnected use internal screen else use configuration
-        if xrandr | grep "$secondary disconnected"; then
-            xrandr \
-                --output "$primary" --auto \
-                --output "$secondary" --off \
-                --output DP1 --off \
-                --output HDMI1 --off \
-                --output VIRTUAL1 --off
+        if xrandr | grep "$primary disconnected"; then
+            single_monitor
         else
-            pri_mode=$(printf "%s" "$1" | cut -d ';' -f1)
-            pri_pos=$(printf "%s" "$1" | cut -d ';' -f2)
-            pri_rate=$(printf "%s" "$1" | cut -d ';' -f3)
-            sec_mode=$(printf "%s" "$1" | cut -d ';' -f4)
-            sec_pos=$(printf "%s" "$1" | cut -d ';' -f5)
-            sec_rate=$(printf "%s" "$1" | cut -d ';' -f6)
-
-            xrandr \
-                --output "$primary" --primary \
-                --mode "${pri_mode:-1920x1080}" \
-                --pos "${pri_pos:-0x0}" \
-                --rate "${pri_rate:-74.99}" \
-                --output "$secondary" \
-                --mode "${sec_mode:-1920x1080}" \
-                --pos "${sec_pos:-1920x0}" \
-                --rate "${sec_rate:-60.00}" \
-                --output DP1 --off \
-                --output HDMI1 --off \
-                --output VIRTUAL1 --off
+            dual_monitor "$1"
         fi
         ;;
 esac
