@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/w3m.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:59:49+0100
+# date:   2021-07-09T18:31:36+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- wrapper script to start w3m
@@ -34,13 +34,11 @@ case "$1" in
             tabbed -cdn tabbed-w3m -r 2 "$TERMINAL" -w '' -e w3m "$uri" >"$xidfile" 2>/dev/null &
         }
 
-        if [ ! -r "$xidfile" ];
-        then
+        if [ ! -r "$xidfile" ]; then
             runtabbed
         else
             xid=$(cat "$xidfile")
-            if xprop -id "$xid" >/dev/null 2>&1;
-            then
+            if xprop -id "$xid" >/dev/null 2>&1; then
                 "$TERMINAL" -w "$xid" -e w3m "$uri" >/dev/null 2>&1 &
             else
                 runtabbed
