@@ -25,3 +25,8 @@ shell scripts for system/hardware management and general maintenance
 | urxvtc.sh            | start urxvtd if not already running and open urxvtc                           |
 | w3m.sh               | terminal wrapper for w3m with or without suckless tabbed                      |
 | wallpaper.sh         | set and load wallpaper (file/random file from directory) from xresources      |
+
+related projects:
+
+- [dmenu](https://github.com/mrdotx/dmenu)
+- [dotfiles](https://github.com/mrdotx/dotfiles)
