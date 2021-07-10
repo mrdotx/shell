@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-07-10T11:19:43+0200
+# date:   2021-07-10T12:44:08+0200
 
 # config
 primary="HDMI2"
@@ -57,7 +57,7 @@ dual_monitor() {
         --mode "${pri_mode:-1920x1080}" \
         --pos "${pri_pos:-0x0}" \
         --rate "${pri_rate:-60}" \
-        --output "$secondary" \
+        --output "$secondary" --auto \
         --mode "${sec_mode:-1920x1080}" \
         --pos "${sec_pos:-1920x0}" \
         --rate "${sec_rate:-60}" \
