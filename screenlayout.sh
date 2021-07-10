@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-07-10T10:41:37+0200
+# date:   2021-07-10T11:19:43+0200
 
 # config
 primary="HDMI2"
@@ -37,7 +37,7 @@ help="$script [-h/--help] -- script to set screenlayout
 
 single_monitor() {
     xrandr \
-        --output "$primary" --auto \
+        --output "$primary" --auto --primary \
         --output "$secondary" --off \
         --output DP1 --off \
         --output HDMI1 --off \
@@ -53,7 +53,7 @@ dual_monitor() {
     sec_rate=$(printf "%s" "$1" | cut -d ';' -f6)
 
     xrandr \
-        --output "$primary" --primary \
+        --output "$primary" --auto --primary \
         --mode "${pri_mode:-1920x1080}" \
         --pos "${pri_pos:-0x0}" \
         --rate "${pri_rate:-60}" \
