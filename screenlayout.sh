@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/screenlayout.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-08-26T10:41:31+0200
+# date:   2021-08-08T17:28:17+0200
 
 # config
 primary="HDMI2"
@@ -81,8 +81,8 @@ case "$1" in
     --defaults)
         printf "%s\n" \
             "1920x1080;0x0;60;;1920x1080;1920x0;60;" \
-            "1920x1080;0x0;60;right;1920x1080;1920x0;60;" \
             "1920x1080;0x0;75;;1920x1080;1920x0;60;" \
+            "1920x1080;0x0;60;right;1920x1080;1920x0;60;" \
             "1920x1080;0x0;75;right;1920x1080;1920x0;60;" \
             "1920x1080;1680x1050;;60;0x1050;120x0;60;"
         ;;
