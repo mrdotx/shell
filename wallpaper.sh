@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-07-03T18:07:50+0200
+# date:   2021-09-08T14:51:32+0200
 
 config="$HOME/.config/xorg/modules/wallpaper"
 xresource="$HOME/.config/xorg/Xresources"
@@ -28,6 +28,7 @@ xresource() {
     esac
 }
 
+# set uri and xresource value
 if [ -d "$1" ]; then
     uri="$(rnd_pic "$1")"
     xresource set_value uri "$1"
@@ -36,11 +37,9 @@ elif [ -f "$1" ]; then
     xresource set_value uri "$1"
 else
     uri="$(xresource get_value uri)"
-
     [ -d "$uri" ] \
         && uri="$(rnd_pic "$uri")"
 fi
 
-tool="$(xresource get_value tool)"
-
-eval "$tool $uri" >/dev/null 2>&1
+# set wallpaper
+$(xresource get_value tool) "$uri" >/dev/null 2>&1
