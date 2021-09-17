@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wacom.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-09-17T10:05:55+0200
+# date:   2021-09-17T18:07:09+0200
 
 list=$(xsetwacom list devices)
 
@@ -63,7 +63,7 @@ get_dimension() {
 
     # reducing the drawing area height 15200 * 1080 / 1920 = 8550
     # default 0 0 15200 9500
-    printf "0 0 %s %s\n" "$wacom_x" "$((wacom_x * y / x))"
+    printf "0 0 %d %d\n" "$wacom_x" "$((wacom_x * y / x))"
 }
 
 set_wacom() {
