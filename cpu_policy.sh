@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/cpu_policy.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-06-13T19:52:01+0200
+# date:   2021-10-14T21:43:21+0200
+
+# speed up script by not using unicode
+LC_ALL=C
+LANG=C
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
