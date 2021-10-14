@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:59:21+0100
+# date:   2021-10-14T20:47:21+0200
+
+# speed up script by not using unicode
+LC_ALL=C
+LANG=C
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show system information
