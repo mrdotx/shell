@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/touchpad_toggle.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-03-02T11:16:10+0100
+# date:   2021-10-15T18:08:21+0200
+
+# speed up script by not using unicode
+LC_ALL=C
+LANG=C
 
 device="$(xinput list \
         | grep -P '(?<= )[\w\s:]*(?i)(touchpad|synaptics)(?-i).*?(?=\s*id)' -o \

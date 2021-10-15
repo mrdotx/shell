@@ -3,13 +3,17 @@
 # path:   /home/klassiker/.local/share/repos/shell/memtest86.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-06-17T13:00:08+0200
+# date:   2021-10-15T18:05:31+0200
+
+# speed up script by not using unicode
+LC_ALL=C
+LANG=C
 
 # config
 whats_new="https://www.memtest86.com/whats-new.html"
 download="https://www.memtest86.com/downloads/memtest86-usb.zip"
 
-destination="/boot/EFI/memtest86"
+destination="/boot/memtest86"
 version_file="$destination/version"
 
 tmp_directory=$(mktemp -t -d memtest86.XXXXXX)
