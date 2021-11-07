@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/aria2c.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-11-07T19:10:29+0100
+# date:   2021-11-07T21:42:24+0100
 
 # config
 links_file="$HOME/.config/aria2/aria2-download-links"
@@ -24,14 +24,26 @@ help="$script [-h/--help] -- wrapper script to download with aria2c
   Config:
     links file = $links_file"
 
-start_aria2c() {
-    pid=$(pgrep aria2c$)
+aria2c_stop() {
+    pid=$(pgrep -x aria2c$)
     [ -n "$pid" ] \
-        && kill "$pid"
+        && kill "$pid" \
+        && while pgrep -x aria2c >/dev/null; do
+                sleep .1
+            done
+}
+
+aria2c_start() {
     aria2c \
         -i "$links_file" \
-        --save-session="$links_file" \
-        --save-session-interval=60
+        --save-session="$links_file"
+}
+
+add_url() {
+    cleaned_list="$(grep -v " gid=" "$2")"
+    printf "%s\n%s\n" "$cleaned_list" "$1" \
+        | tr -d '[:blank:]' \
+        | sort -u > "$links_file"
 }
 
 case "$1" in
@@ -39,8 +51,9 @@ case "$1" in
         printf "%s\n" "$help"
         ;;
     *)
+        aria2c_stop
         [ -n "$1" ] \
-            && printf "%s\n" "$1" >> "$links_file"
-        start_aria2c
+            && add_url "$1" "$links_file"
+        aria2c_start
         ;;
 esac
