@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/aria2c.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-11-07T21:42:24+0100
+# date:   2021-11-11T09:13:25+0100
 
 # config
 links_file="$HOME/.config/aria2/aria2-download-links"
@@ -11,15 +11,17 @@ links_file="$HOME/.config/aria2/aria2-download-links"
 script=$(basename "$0")
 help="$script [-h/--help] -- wrapper script to download with aria2c
   Usage:
-    $script <url>
+    $script [-a/--add] <url>
 
   Settings:
     without given settings, continue downloading from links file
-    <url> = url to download
+    [-a/--add] = add url to links file (don't restart aria2c)
+    <url>      = file download link
 
   Examples:
     $script
-    $script \"http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz\"
+    $script \"http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz\"
+    $script -a \"http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz\"
 
   Config:
     links file = $links_file"
@@ -49,6 +51,10 @@ add_url() {
 case "$1" in
     -h | --help)
         printf "%s\n" "$help"
+        ;;
+    -a | --add)
+        [ -n "$2" ] \
+            && add_url "$2" "$links_file"
         ;;
     *)
         aria2c_stop
