@@ -3,10 +3,10 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-09-12T09:10:04+0200
+# date:   2021-11-22T11:20:06+0100
 
-xresource="$HOME/.config/xorg/Xresources"
-config="$HOME/.config/xorg/modules/wallpaper"
+xresource="$HOME/.config/X11/Xresources"
+config="$HOME/.config/X11/modules/wallpaper"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- wrapper script to set wallpaper
