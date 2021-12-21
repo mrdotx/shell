@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-10-14T20:47:21+0200
+# date:   2021-12-21T09:36:39+0100
 
 # speed up script by not using unicode
 LC_ALL=C
@@ -34,7 +34,7 @@ kernel() {
 }
 
 cpu() {
-    cpu_temp="$(< /sys/class/thermal/thermal_zone0/temp cut -c "1-2")C"
+    cpu_temp="$(cut -c "1-2" /sys/class/thermal/thermal_zone0/temp)C"
     cores="$(grep -c "^processor" /proc/cpuinfo)"
     cpu_usage="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum*1000}')"
     cpu_usage="$(printf "%.0f\n" "$((cpu_usage/${cores:-1}))e-3")"
