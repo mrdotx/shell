@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/passgen.sh
+# path:   /home/klassiker/.local/share/repos/shell/old/passgen.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-06-22T17:56:41+0200
+# date:   2021-12-21T10:05:11+0100
 
 c=14
 i=1
@@ -27,6 +27,6 @@ while [ 1 -le "$#" ]; do
 done
 
 while [ 1 -le "$i" ]; do
-    printf "%s\n" "$(< /dev/urandom tr -dc A-Za-z0-9 | head -c"$c")"
+    printf "%s\n" "$(tr -dc A-Za-z0-9 < /dev/urandom | head -c"$c")"
     i=$((i - 1))
 done
