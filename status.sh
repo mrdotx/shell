@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-12-21T09:36:39+0100
+# date:   2022-02-10T17:37:30+0100
 
 # speed up script by not using unicode
 LC_ALL=C
@@ -34,11 +34,16 @@ kernel() {
 }
 
 cpu() {
-    cpu_temp="$(cut -c "1-2" /sys/class/thermal/thermal_zone0/temp)C"
     cores="$(grep -c "^processor" /proc/cpuinfo)"
     cpu_usage="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum*1000}')"
     cpu_usage="$(printf "%.0f\n" "$((cpu_usage/${cores:-1}))e-3")"
-    printf "%s [%s%%]" "$cpu_temp" "$cpu_usage"
+
+    if test -d /sys/class/thermal/thermal_zone0/temp; then
+        cpu_temp="$(cut -c "1-2" /sys/class/thermal/thermal_zone0/temp)C"
+        printf "%s [%s%%]" "$cpu_temp" "$cpu_usage"
+    else
+        printf "%s%%" "$cpu_usage"
+    fi
 }
 
 ram() {
@@ -65,29 +70,22 @@ swap() {
     fi
 }
 
-nvme() {
-    nvme_total="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$2; }')"
-    nvme="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$3; }')"
-    nvme_usage="$(df /dev/nvme0n1p2 | awk 'NR==2 { printf "%s",$5; }')"
-    printf "%s/%s [%s]" "$(kb_gb "$nvme")" "$(kb_gb "$nvme_total")" "$nvme_usage"
-}
-
-sda() {
-    sda_total="$(df /dev/sda1 | awk 'NR==2 { printf "%s",$2; }')"
-    sda="$(df /dev/sda1 | awk 'NR==2 { printf "%s",$3; }')"
-    sda_usage="$(df /dev/sda1 | awk 'NR==2 { printf "%s",$5; }')"
-    printf "%s/%s [%s]" "$(kb_gb "$sda")" "$(kb_gb "$sda_total")" "$sda_usage"
+space() {
+    space_total="$(df "$1" | awk 'NR==2 { printf "%s",$2; }')"
+    space="$(df "$1" | awk 'NR==2 { printf "%s",$3; }')"
+    space_usage="$(df "$1" | awk 'NR==2 { printf "%s",$5; }')"
+    printf "%s/%s [%s]" "$(kb_gb "$space")" "$(kb_gb "$space_total")" "$space_usage"
 }
 
 wlan() {
     wlan="$(iwgetid -r)"
-    wlan_signal="$(iwconfig wlan0 | grep -i Link | cut -c "24-25")"
+    wlan_signal="$(iwconfig "$1" | grep -i Link | cut -c "24-25")"
     wlan_signal="$(printf "%.0f\n" "$((wlan_signal*100/70))")"
     printf "%s [%s%%]" "$wlan" "$wlan_signal"
 }
 
 ipv4() {
-    ip="$(ip -4 addr show wlan0 | grep -oP "(?<=inet ).*(?=/)")"
+    ip="$(ip -4 addr show "$1" | grep -oP "(?<=inet ).*(?=/)")"
     printf "%s" "$ip"
 }
 
@@ -114,10 +112,10 @@ case "$1" in
         printf "cpu: %s | " "$(cpu)"
         printf "ram: %s | " "$(ram)"
         printf "swap: %s | " "$(swap)"
-        printf "nvme: %s | " "$(nvme)"
-        printf "sda: %s | " "$(sda)"
-        printf "wlan: %s | " "$(wlan)"
-        printf "ip: %s | " "$(ipv4)"
+        printf "/: %s | " "$(space "/")"
+        printf "/home: %s | " "$(space "/home")"
+        printf "wlan: %s | " "$(wlan "wlan0")"
+        printf "ip: %s | " "$(ipv4 "wlan0")"
         printf "up: %s | " "$(up)"
         printf "kernel: %s | " "$(kernel)"
         printf "name: %s | " "$(name)"
@@ -128,10 +126,10 @@ case "$1" in
         printf "cpu:    %s\n" "$(cpu)"
         printf "ram:    %s\n" "$(ram)"
         printf "swap:   %s\n" "$(swap)"
-        printf "nvme:   %s\n" "$(nvme)"
-        printf "sda:    %s\n" "$(sda)"
-        printf "wlan:   %s\n" "$(wlan)"
-        printf "ip:     %s\n" "$(ipv4)"
+        printf "/:      %s\n" "$(space "/")"
+        printf "/home:  %s\n" "$(space "/home")"
+        printf "wlan:   %s\n" "$(wlan "wlan0")"
+        printf "ip:     %s\n" "$(ipv4 "wlan0")"
         printf "uptime: %s\n" "$(up)"
         printf "kernel: %s\n" "$(kernel)"
         printf "\n--\n"
