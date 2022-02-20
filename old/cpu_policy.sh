@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/cpu_policy.sh
+# path:   /home/klassiker/.local/share/repos/shell/old/cpu_policy.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-10-14T21:43:21+0200
+# date:   2022-02-20T21:09:24+0100
 
 # speed up script by not using unicode
 LC_ALL=C
