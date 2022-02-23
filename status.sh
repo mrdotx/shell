@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-02-10T17:37:30+0100
+# date:   2022-02-23T17:14:11+0100
 
 # speed up script by not using unicode
 LC_ALL=C
@@ -113,7 +113,7 @@ case "$1" in
         printf "ram: %s | " "$(ram)"
         printf "swap: %s | " "$(swap)"
         printf "/: %s | " "$(space "/")"
-        printf "/home: %s | " "$(space "/home")"
+        printf "/srv: %s | " "$(space "/srv")"
         printf "wlan: %s | " "$(wlan "wlan0")"
         printf "ip: %s | " "$(ipv4 "wlan0")"
         printf "up: %s | " "$(up)"
@@ -127,7 +127,7 @@ case "$1" in
         printf "ram:    %s\n" "$(ram)"
         printf "swap:   %s\n" "$(swap)"
         printf "/:      %s\n" "$(space "/")"
-        printf "/home:  %s\n" "$(space "/home")"
+        printf "/srv:   %s\n" "$(space "/srv")"
         printf "wlan:   %s\n" "$(wlan "wlan0")"
         printf "ip:     %s\n" "$(ipv4 "wlan0")"
         printf "uptime: %s\n" "$(up)"
