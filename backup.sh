@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-02-23T17:10:47+0100
+# date:   2022-03-09T13:39:29+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
-auth="$EXEC_AS_USER"
+auth="${EXEC_AS_USER:-sudo}"
 backup_name=$(hostname)
 remote_location="pi2:/home/alarm/backup/$backup_name/"
 

@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/cpu_policy.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-02-20T21:09:24+0100
+# date:   2022-03-09T13:38:54+0100
 
 # speed up script by not using unicode
 LC_ALL=C
@@ -11,7 +11,7 @@ LANG=C
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
-auth="$EXEC_AS_USER"
+auth="${EXEC_AS_USER:-sudo}"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to change cpu policies
