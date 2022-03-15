@@ -3,15 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:58:59+0100
+# date:   2022-03-15T19:24:21+0100
 
 # config
 default="status"
-
-# color variables
-green=$(tput setaf 2)
-yellow=$(tput setaf 3)
-reset=$(tput sgr0)
+procs=$(nproc)
 
 # help
 script=$(basename "$0")
@@ -45,28 +41,26 @@ config="$(printf "%s" "${*:-$(pwd)}" \
     | sed 's/ /\n/g' \
 )"
 
-folder() {
-    printf "%s\n" "$config" | {
-        while IFS= read -r line; do
-            [ -n "$line" ] \
-                && find "$line" -maxdepth 2 -type d -name ".git" |
-                    sort
-        done
-    }
-}
-
-printf "%s\n" "$(folder)" | {
-    while IFS= read -r line; do
-        [ -n "$line" ] \
-            && line=$(printf "%s" "$line" \
-                | sed 's/\/.git//') \
-            && printf ":: %sgit %s %s\"%s\"%s\n" \
-                "$green" \
-                "$options" \
-                "$yellow" \
-                "$line" \
-                "$reset" \
-            && cd "$line" \
-            && eval git "$options"
+git_folder() {
+    for folder in $config; do
+        find "$folder" -maxdepth 2 -type d -name ".git" \
+            | sed 's/\/.git//' \
+            | sort
     done
 }
+
+command_constructor() {
+    # color variables
+    green=$(tput setaf 2)
+    yellow=$(tput setaf 3)
+    reset=$(tput sgr0)
+
+    for folder in $1; do
+        footer="printf '${green}git $options $yellow$folder$reset completed...\n'" \
+        && printf "\"output=\$(cd $folder && git $options && %s)\"\n" \
+            "$footer"
+    done
+}
+
+command_constructor "$(git_folder)" \
+     | xargs -P"$procs" -I{} sh -c "{} && printf \"%s\n\" \"\$output\""
