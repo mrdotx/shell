@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-11-22T11:20:06+0100
+# date:   2022-03-15T07:26:32+0100
 
 xresource="$HOME/.config/X11/Xresources"
 config="$HOME/.config/X11/modules/wallpaper"
@@ -43,7 +43,7 @@ xresource() {
                 | cut -f2)"
             ;;
         set_value)
-            sed -i "/wallpaper.uri:/c\wallpaper.$2:      $3" "$config"
+            sed -i "/wallpaper.uri:/c\wallpaper.$2:  $3" "$config"
             xrdb -merge "$xresource"
             ;;
     esac
