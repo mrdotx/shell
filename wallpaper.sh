@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-03-15T07:26:32+0100
+# date:   2022-03-16T08:07:40+0100
 
 xresource="$HOME/.config/X11/Xresources"
 config="$HOME/.config/X11/modules/wallpaper"
@@ -30,11 +30,6 @@ help="$script [-h/--help] -- wrapper script to set wallpaper
     xresource = $xresource
     config    = $config"
 
-rnd_pic() {
-    find "$1" -type f \
-        | shuf -n 1
-}
-
 xresource() {
     case "$1" in
         get_value)
@@ -49,19 +44,24 @@ xresource() {
     esac
 }
 
+random_pic() {
+    find "$1" -type f \
+        | shuf -n 1
+}
+
 random_uri() {
     uri="$(xresource get_value uri)"
     if [ -d "$uri" ]; then \
-        uri="$(rnd_pic "$uri")"
+        uri="$(random_pic "$uri")"
     else
-        uri="$(rnd_pic "$(dirname "$uri")")"
+        uri="$(random_pic "$(dirname "$uri")")"
     fi
     printf "%s" "$uri"
 }
 
 process_uri() {
     if [ -d "$1" ]; then
-        uri="$(rnd_pic "$1")"
+        uri="$(random_pic "$1")"
         xresource set_value uri "$1"
     elif [ -f "$1" ]; then
         uri="$1"
@@ -69,7 +69,7 @@ process_uri() {
     else
         uri="$(xresource get_value uri)"
         [ -d "$uri" ] \
-            && uri="$(rnd_pic "$uri")"
+            && uri="$(random_pic "$uri")"
     fi
     printf "%s" "$uri"
 }
