@@ -19,6 +19,7 @@ shell scripts for system/hardware management and general maintenance
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | git_reset_commits.sh | remove commits from a git repository                                          |
 | memtest86.sh         | install or upgrade memtest86 on efi partition                                 |
+| screenshot.sh        | script to make screenshots with maim                                          |
 | status.sh            | simple script for system information in different formats                     |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
 | touchpad_toggle.sh   | disable/enable touchpad                                                       |
