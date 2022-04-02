@@ -12,5 +12,6 @@ old stuff and things that couldn't be assigned
 | motd.sh           | dynamic motd with a few system informations               |
 | passgen.sh        | simple password generator                                 |
 | powertop.sh       | tuning the power consumption                              |
+| screenshot.sh     | script to make screenshots with maim                      |
 | service_toggle.sh | switch status of service active or inactive               |
 | sync_dropbox.sh   | single dropbox sync with dropbox-cli                      |
