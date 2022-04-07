@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/chameleon.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-10-15T18:02:23+0200
+# date:   2022-04-07T08:46:17+0200
 
 # speed up script by not using unicode
 LC_ALL=C
@@ -16,7 +16,7 @@ color=$( \
 )
 preview="/tmp/chameleon_preview.png"
 
-convert xc:"$color" -resize 50 "$preview"
+convert xc:"$color" -resize 32 "$preview"
 
 [ -n "$color" ] \
     && printf "%s\n" "$color" \
