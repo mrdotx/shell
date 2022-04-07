@@ -3,18 +3,15 @@
 # path:   /home/klassiker/.local/share/repos/shell/chameleon.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-04-07T08:46:17+0200
+# date:   2022-04-07T11:07:47+0200
 
 # speed up script by not using unicode
 LC_ALL=C
 LANG=C
 
-color=$( \
-    # workaround (sleep -> https://github.com/i3/i3/issues/3298)
-    sleep .5 \
-    && chameleon \
-)
-preview="/tmp/chameleon_preview.png"
+color=$(chameleon)
+
+preview="$(mktemp -t chameleon_preview.XXXXXX.png)"
 
 convert xc:"$color" -resize 32 "$preview"
 
