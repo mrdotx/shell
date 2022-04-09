@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/service_toggle.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:57:56+0100
+# date:   2022-04-09T08:13:28+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to toggle services on and off
@@ -22,14 +22,13 @@ help="$script [-h/--help] -- script to toggle services on and off
 
 service=$1
 
-if [ "$1" = "-h" ] \
-    || [ "$1" = "--help" ] \
+if [ "$1" = "-h" ] || [ "$1" = "--help" ] \
     || [ $# -eq 0 ]; then
         printf "%s\n" "$help"
-elif [ "$(systemctl is-active "$service")" != "active" ]; then
-    printf "%s wasn't running so attempting to start\n" "$service"
-    systemctl start "$service"
-else
+elif systemctl -q is-active "$service"; then
     printf "%s was running so attempting to stop\n" "$service"
     systemctl stop "$service"
+else
+    printf "%s wasn't running so attempting to start\n" "$service"
+    systemctl start "$service"
 fi
