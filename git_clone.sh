@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_clone.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-02-19T12:25:28+0100
+# date:   2022-04-14T21:15:50+0200
 
 # config
 cn="users"
@@ -32,7 +32,7 @@ case $1 in
         exit 0
         ;;
     *)
-        curl -s "https://api.github.com/${1-$cn}/${2-$name}/repos?per_page=1000" \
+        curl -fsS "https://api.github.com/${1-$cn}/${2-$name}/repos?per_page=1000" \
             | grep 'git_url' \
             | cut -d "\"" -f 4 \
             | xargs -P"${3-$procs}" -L1 git clone
