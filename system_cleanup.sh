@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-23T19:16:48+0200
+# date:   2022-04-17T18:33:02+0200
 
 iwd_history="$HOME/.local/share/iwctl/history"
 cmd_history="$HOME/.local/share/cmd_history" # zsh and bash history merged
@@ -14,7 +14,11 @@ cache_files=$(find "$cache_directory" -type f -atime +$cache_days \
 )
 
 history_clean() {
-    printf ":: purge %s history\n remove white space from the end of the line...\n" "$1"
+    printf "%s %s %s\n %s\n" \
+        ":: purge" \
+        "$1" \
+        "history" \
+        "remove white space from the end of the line..."
     sed -i 's/ *$//' "$2"
     printf " remove duplicates...\n"
     printf "%s\n" "$(tac "$2" \
@@ -24,13 +28,19 @@ history_clean() {
 }
 
 cache_clean() {
-    printf "\n:: delete files from .cache folder\n %s files that haven't been accessed in %d days...\n" "$cache_files" "$cache_days"
+    printf "\n%s\n %s %s %d %s\n" \
+        ":: delete files from .cache folder" \
+        "$cache_files" \
+        "files that haven't been accessed in" \
+        "$cache_days" \
+        "days..."
 
     if [ "$cache_files" -gt 0 ]; then
         find "$cache_directory" -type f -atime +$cache_days
 
         key=""
-        printf "\n\r%s" " delete files from .cache folder [y]es/[N]o: " && read -r "key"
+        printf "\n\r delete files from .cache folder [y]es/[N]o: " \
+            && read -r "key"
         case "$key" in
             y|Y|yes|Yes)
                 find "$cache_directory" -type f -atime +$cache_days -delete
