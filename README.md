@@ -8,8 +8,10 @@ shell scripts for system/hardware management and general maintenance
 
 | name                 | comment                                                                       |
 | :------------------- | :---------------------------------------------------------------------------- |
+| alsa.sh              | change volume with status notification                                        |
 | alpha_restore.sh     | find png files with suspicious data in alpha channel                          |
 | aria2c.sh            | add download urls to aria2c                                                   |
+| backlight.sh         | change backlight brightness with status notification                          |
 | backup.sh            | rsync backup to remote location (ssh)                                         |
 | backup_usb.sh        | rsync backup to usb                                                           |
 | chameleon.sh         | pick color with chameleon to copy to clipboard and primary                    |
