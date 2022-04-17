@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/alpha_restore.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:58:18+0100
+# date:   2022-04-17T18:40:11+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to find png files with suspicious data
@@ -31,7 +31,8 @@ else
             ); then
             printf " %s\n" "$f"
             cp "$f" "$tmp_directory"
-            convert -strip -alpha off "$f" "$tmp_directory/$(basename "$f").noalpha.png"
+            convert -strip -alpha off "$f" \
+                "$tmp_directory/$(basename "$f").noalpha.png"
             suspicious=1
         fi
     done
