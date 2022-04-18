@@ -14,7 +14,7 @@ shell scripts for system/hardware management and general maintenance
 | backlight.sh         | change backlight brightness with status notification                          |
 | backup.sh            | rsync backup to remote location (ssh)                                         |
 | backup_usb.sh        | rsync backup to usb                                                           |
-| chameleon.sh         | pick color with chameleon to copy to clipboard and primary                    |
+| color_picker.sh      | pick color with a tool, copy hex to clipboard and preview with notify-send    |
 | cpu_policy.sh        | change cpu policies with cpufreqctl                                           |
 | delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
 | git_clone.sh         | clone all repositories of a user or organization                              |

@@ -1,17 +1,17 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/chameleon.sh
+# path:   /home/klassiker/.local/share/repos/shell/color_picker.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-04-07T11:07:47+0200
+# date:   2022-04-18T15:48:30+0200
 
 # speed up script by not using unicode
 LC_ALL=C
 LANG=C
 
-color=$(chameleon)
+color=$(xcolor)
 
-preview="$(mktemp -t chameleon_preview.XXXXXX.png)"
+preview="$(mktemp -t color_picker_preview.XXXXXX.png)"
 
 convert xc:"$color" -resize 32 "$preview"
 
@@ -20,7 +20,7 @@ convert xc:"$color" -resize 32 "$preview"
         | xsel -i -b \
     && notify-send \
         -i "$preview" \
-        "chameleon [$color]" \
-        "$color copied to clipboard"
+        "color picker" \
+        "[$color] copied to clipboard"
 
 rm -f "$preview"
