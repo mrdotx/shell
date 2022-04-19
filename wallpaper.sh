@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-03-16T08:07:40+0100
+# date:   2022-04-19T07:45:36+0200
 
 xresource="$HOME/.config/X11/Xresources"
 config="$HOME/.config/X11/modules/wallpaper"
@@ -11,19 +11,21 @@ config="$HOME/.config/X11/modules/wallpaper"
 script=$(basename "$0")
 help="$script [-h/--help] -- wrapper script to set wallpaper
   Usage:
-    $script [--random] <path/file>
+    $script [--color] [--random] <path/file>
 
   Settings:
     without given settings, load wallpaper from xresources
     [folder]   = set random picture from folder as wallpaper and save folder
                  path to xresources
     [file]     = set picture as wallpaper and save filename to xresources
+    [--color]  = set colored background by hex value (default: #000000)
     [--random] = set random picture based on saved <path/file> from xresources
 
   Examples:
     $script
     $script $HOME/Pictures/Wallpaper
     $script $HOME/Pictures/Wallpaper/Dark_Blue/pcb.jpg
+    $script --color #4185d7
     $script --random
 
   Config:
@@ -42,6 +44,14 @@ xresource() {
             xrdb -merge "$xresource"
             ;;
     esac
+}
+
+color_uri() {
+    uri="/tmp/wallpaper-color.png"
+
+    convert xc:"${1:-#000000}" -resize 1920x1080! "$uri"
+
+    printf "%s" "$uri"
 }
 
 random_pic() {
@@ -77,6 +87,9 @@ process_uri() {
 case "$1" in
     -h | --help)
         printf "%s\n" "$help"
+        ;;
+    --color)
+        $(xresource get_value tool) "$(color_uri "$2")" >/dev/null 2>&1
         ;;
     --random)
         $(xresource get_value tool) "$(random_uri)" >/dev/null 2>&1
