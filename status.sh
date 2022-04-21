@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-02-23T17:14:11+0100
+# date:   2022-04-21T10:46:27+0200
 
-# speed up script by not using unicode
+# speed up script by using posix
 LC_ALL=C
 LANG=C
 

@@ -1,11 +1,11 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/screenshot.sh
+# path:   /home/klassiker/.local/share/repos/shell/old/screenshot.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/screenshot
-# date:   2022-03-31T19:14:04+0200
+# date:   2022-04-21T10:45:47+0200
 
-# speed up script by not using unicode
+# speed up script by using posix
 LC_ALL=C
 LANG=C
 

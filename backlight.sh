@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/backlight.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/backlight
-# date:   2022-04-17T16:43:48+0200
+# date:   2022-04-21T10:46:39+0200
 
-# speed up script by not using unicode
+# speed up script by using posix
 LC_ALL=C
 LANG=C
 

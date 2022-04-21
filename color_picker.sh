@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/color_picker.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-04-19T17:50:13+0200
+# date:   2022-04-21T10:45:30+0200
 
-# speed up script by not using unicode
+# speed up script by using posix
 LC_ALL=C
 LANG=C
 
