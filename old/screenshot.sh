@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/screenshot.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/screenshot
-# date:   2022-04-21T10:45:47+0200
+# date:   2022-04-24T08:07:43+0200
 
-# speed up script by using posix
+# speed up script by using standard c
 LC_ALL=C
 LANG=C
 

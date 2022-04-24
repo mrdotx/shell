@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/alsa.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/dmenu
-# date:   2022-04-21T10:46:59+0200
+# date:   2022-04-24T08:03:46+0200
 
-# speed up script by using posix
+# speed up script by using standard c
 LC_ALL=C
 LANG=C
 
