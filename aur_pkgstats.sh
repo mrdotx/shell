@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-05-08T22:15:51+0200
+# date:   2022-05-09T19:43:40+0200
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
@@ -43,10 +43,12 @@ request() {
     && output=$(sed "/$file_header/d" "$stats_file")
 
 for pkg in $(get_pkgs); do
+    printf "%s " "$pkg"
     output=$(printf "%s\n%s" \
         "$output" \
         "$(request "$pkg")" \
     )
+    printf "=> finished\n"
 done
 
 printf "%s" "$file_header" > "$stats_file"
