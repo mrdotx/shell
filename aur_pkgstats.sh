@@ -3,33 +3,51 @@
 # path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-05-01T18:53:57+0200
+# date:   2022-05-08T22:15:51+0200
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
 pkgs_dir="$HOME/.local/share/repos/aur"
-stats_dir="_pkgstats"
-destination="$pkgs_dir/$stats_dir"
-extension="json"
-
-get_stats() {
-    mkdir -p "$destination"
-
-    data=$(curl -fsS "$url/$1")
-    startmonth=$(printf "%s" "$data" \
-        | awk -F '\"startMonth\":' '{print $2}' \
-        | cut -d',' -f1)
-
-    printf "%s" "$data" > "$destination/$1-$startmonth.$extension"
-    printf "%s-%s.%s\n" "$1" "$startmonth" "$extension"
-}
+stats_file="$pkgs_dir/pkgstats.csv"
+file_header="Name,Month,Count,Popularity,Samples"
 
 get_pkgs() {
     find "$pkgs_dir" -maxdepth 1 -type d -exec basename "{}" \; \
-        | sed 1d \
-        | grep -v "$stats_dir"
+        | sed 1d
 }
 
+extract_data() {
+    printf "%s" "$1" \
+        | awk -F "\"$2\":" '{print $2}' \
+        | cut -d ',' -f1 \
+        | tr -d "\""
+}
+
+request() {
+    data=$(curl -fsS "$url/$1")
+    name=$(extract_data "$data" "name")
+    samples=$(extract_data "$data" "samples")
+    count=$(extract_data "$data" "count")
+    popularity=$(extract_data "$data" "popularity")
+    month=$(extract_data "$data" "startMonth")
+
+    printf "%s,%s,%s,%s,%s\n" \
+        "$name" \
+        "$month" \
+        "$count" \
+        "$popularity" \
+        "$samples"
+}
+
+[ -e "$stats_file" ] \
+    && output=$(sed "/$file_header/d" "$stats_file")
+
 for pkg in $(get_pkgs); do
-    get_stats "$pkg"
+    output=$(printf "%s\n%s" \
+        "$output" \
+        "$(request "$pkg")" \
+    )
 done
+
+printf "%s" "$file_header" > "$stats_file"
+printf "\n%s" "$output" | sort -u >> "$stats_file"
