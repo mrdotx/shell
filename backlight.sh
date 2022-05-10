@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backlight.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-05-01T13:04:11+0200
+# date:   2022-05-10T15:13:28+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -80,18 +80,16 @@ case "$1" in
     -inc)
         brightness "$2"
         value=$((actual + factor))
-        if [ $value -ge "$max" ]; then
-            value=$max
-        fi
+        [ $value -ge "$max" ] \
+            && value=$max
         set_brightness "$value"
         notification "$max" "$value" "$2"
         ;;
     -dec)
         brightness "$2"
         value=$((actual - factor))
-        if [ $value -le 0 ]; then
-            value=0
-        fi
+        [ $value -le 0 ] \
+            && value=0
         set_brightness "$value"
         notification "$max" "$value" "$2"
         ;;
