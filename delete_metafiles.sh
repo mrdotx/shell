@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/delete_metafiles.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-06-13T21:15:50+0200
-
-output=$(mktemp -t delete_metafiles.XXXXXX)
+# date:   2022-05-30T12:37:30+0200
 
 [ ! "$(id -u)" = 0 ] \
     && printf "this script needs root privileges to run\n" \
     && exit 1
+
+output=$(mktemp -t delete_metafiles.XXXXXX)
 
 # files to delete
 find /home \( \
