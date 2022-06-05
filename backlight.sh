@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backlight.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-05-10T15:13:28+0200
+# date:   2022-06-05T18:02:36+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -44,9 +44,8 @@ notification() {
     brightness=$((brightness *= $3))
 
     notify-send \
-        -u low  \
         -t 2000 \
-        -i "dialog-information" \
+        -u low  \
         "$message_title $brightness" \
         -h string:x-canonical-private-synchronous:"$message_title" \
         -h int:value:"$brightness"
