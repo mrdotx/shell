@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backlight.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-06-05T18:02:36+0200
+# date:   2022-06-21T20:18:39+0200
 
 # speed up script by using standard c
 LC_ALL=C

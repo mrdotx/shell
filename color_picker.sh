@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/color_picker.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-04-24T08:04:08+0200
+# date:   2022-06-21T20:05:02+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -24,6 +24,7 @@ convert xc:"$color" -resize 32 "$preview"
         | xsel -i -b \
     && notify-send \
         -i "$preview" \
+        -u low \
         "color picker" \
         "[$color] copied to clipboard"
 
