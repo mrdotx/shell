@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/screenshot.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/screenshot
-# date:   2022-06-21T20:25:59+0200
+# date:   2022-06-22T10:18:24+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -48,7 +48,7 @@ case "$1" in
         ;;
     --selection)
         notify-send \
-            -u normal \
+            -u low \
             "maim" \
             "select an area or a window for the screenshot"
         $screenshot_command -so \

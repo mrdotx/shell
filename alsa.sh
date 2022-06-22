@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/alsa.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-06-21T20:16:43+0200
+# date:   2022-06-22T10:12:22+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -51,7 +51,7 @@ notification() {
 
     notify-send \
         -t 2000 \
-        -u normal \
+        -u low \
         "$message_title $volume_indicator" \
         -h string:x-canonical-private-synchronous:"$message_title" \
         -h int:value:"$volume"
