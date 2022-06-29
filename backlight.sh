@@ -3,13 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/backlight.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-06-21T20:18:39+0200
+# date:   2022-06-29T12:51:15+0200
 
 # speed up script by using standard c
 LC_ALL=C
 LANG=C
 
-# config
+# auth can be something like sudo -A, doas -- or nothing,
+# depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 message_title="Brightness"
 
