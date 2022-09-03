@@ -3,14 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-09-03T12:35:39+0200
+# date:   2022-09-03T16:08:33+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 
 # config (for testing use rsync option --dry-run)
-rsync_options="-aAXvh --delete --dry-run \
+rsync_options="-aAXvh --delete \
         --exclude='/dev/*' \
         --exclude='/lost+found' \
         --exclude='/mnt/*' \
