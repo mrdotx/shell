@@ -11,10 +11,9 @@ shell scripts for system/hardware management and general maintenance
 | alsa.sh              | change volume with status notification                                        |
 | alpha_restore.sh     | find png files with suspicious data in alpha channel                          |
 | aria2c.sh            | add download urls to aria2c                                                   |
-| aur_pkgstats.sh      | download package stats from the aur                                           | 
+| aur_pkgstats.sh      | download package stats from the aur                                           |
 | backlight.sh         | change backlight brightness with status notification                          |
-| backup.sh            | rsync backup to remote location (ssh)                                         |
-| backup_usb.sh        | rsync backup to usb                                                           |
+| backup.sh            | rsync backup to remote location (ssh) or to usb device (if connected)         |
 | color_picker.sh      | pick color with a tool, copy hex to clipboard and preview with notify-send    |
 | cpu_policy.sh        | change cpu policies with cpufreqctl                                           |
 | delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
