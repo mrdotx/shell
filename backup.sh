@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-09-03T18:04:25+0200
+# date:   2022-09-06T20:59:37+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -11,13 +11,13 @@ auth="${EXEC_AS_USER:-sudo}"
 
 # config (for testing use rsync option --dry-run)
 rsync_options="-aAXvh --delete \
-        --exclude='/dev/*' \
+        --exclude='/dev' \
         --exclude='/lost+found' \
-        --exclude='/mnt/*' \
-        --exclude='/proc/*' \
-        --exclude='/run/*' \
-        --exclude='/sys/*' \
-        --exclude='/tmp/*'"
+        --exclude='/mnt' \
+        --exclude='/proc' \
+        --exclude='/run' \
+        --exclude='/sys' \
+        --exclude='/tmp'"
 usb_device="/dev/disk/by-uuid/2bdffcfb-b365-4321-a64b-5ffce2f1c211"
 
 backup_ssh() {
@@ -26,26 +26,26 @@ backup_ssh() {
         m75q)
             remote_location="pi2:/home/alarm/backup/$1/"
             rsync_options="$rsync_options \
-                --exclude='/home/klassiker/.local/share/cloud/*' \
-                --exclude='/srv/*'"
+                --exclude='/home/klassiker/.local/share/cloud' \
+                --exclude='/srv'"
             ;;
         mi)
             remote_location="pi:/home/alarm/backup/$1/"
             rsync_options="$rsync_options \
-                --exclude='/home/klassiker/.local/share/cloud/*' \
-                --exclude='/srv/*'"
+                --exclude='/home/klassiker/.local/share/cloud' \
+                --exclude='/srv'"
             ;;
         pi)
             remote_location="pi2:/home/alarm/backup/$1/"
             rsync_options="$rsync_options \
-                --exclude='/home/alarm/backup/*' \
-                --exclude='/srv/http/download/*'"
+                --exclude='/home/alarm/backup' \
+                --exclude='/srv/http/download'"
             ;;
         pi2)
             remote_location="pi:/home/alarm/backup/$1/"
             rsync_options="$rsync_options \
-                --exclude='/home/alarm/backup/*' \
-                --exclude='/srv/http/download/*'"
+                --exclude='/home/alarm/backup' \
+                --exclude='/srv/http/download'"
             ;;
     esac
 
