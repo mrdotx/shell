@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-06-24T10:59:25+0200
+# date:   2022-09-23T12:39:15+0200
 
 # color variables
 magenta=$(tput setaf 5)
@@ -15,7 +15,6 @@ destination_config="$HOME/Backup/.config/"
 
 # home/folders
 source_object="
-#$HOME/.conky
 #$HOME/.jameica
 #$HOME/.newsboat
 #$HOME/.ssh
