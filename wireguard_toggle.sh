@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wireguard_toggle.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-11-07T10:27:05+0100
+# date:   2022-11-07T19:13:48+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -17,13 +17,15 @@ prefix="99-"
 script=$(basename "$0")
 help="$script [-h/--help] -- script to enable/disable wireguard interfaces
   Usage:
-    $script <interface>
+    $script [-s/--status] <interface>
 
   Settings:
-    <interface> = wireguard interface
+    [-s/--status] = shows the status of the specified interface/config
+    <interface>   = wireguard interface/config
 
   Examples:
     $script wg0
+    $script -s wg0
 
   Config:
     systemd_network  = \"$systemd_network\"
@@ -38,7 +40,7 @@ check_root() {
 
 check_config() {
     ! [ -e "$wireguard_config/$prefix$1.netdev" ] \
-        && printf "couldn't find config for interface '%s'\n" "$1" \
+        && printf "couldn't find config for %s\n" "$1" \
         && exit 1
 }
 
@@ -48,7 +50,7 @@ enable_interface() {
     ln -s "$wireguard_config/$prefix$1.network" \
         "$systemd_network/$prefix$1.network"
     systemctl restart systemd-networkd.service
-    printf "interface '%s' enabled\n" "$1"
+    printf "%s enabled\n" "$1"
 }
 
 disable_interface() {
@@ -56,12 +58,24 @@ disable_interface() {
     ip link del dev "$1"
     rm "$systemd_network/$prefix$1.netdev" \
         "$systemd_network/$prefix$1.network"
-    printf "interface '%s' disabled\n" "$1"
+    printf "%s disabled\n" "$1"
+}
+
+interface_status() {
+    if [ -h "$systemd_network/$prefix$1.netdev" ]; then
+        printf "%s is enabled\n" "$1"
+    else
+        printf "%s is disabled\n" "$1"
+    fi
 }
 
 case "$1" in
     -h | --help | "")
         printf "%s\n" "$help"
+        ;;
+    -s | --status)
+        check_config "$2"
+        interface_status "$2"
         ;;
     *)
         check_root
