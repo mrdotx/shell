@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-09-06T20:59:37+0200
+# date:   2022-11-13T09:01:04+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -27,13 +27,13 @@ backup_ssh() {
             remote_location="pi2:/home/alarm/backup/$1/"
             rsync_options="$rsync_options \
                 --exclude='/home/klassiker/.local/share/cloud' \
-                --exclude='/srv'"
+                --exclude='/home/klassiker/.local/vms'"
             ;;
         mi)
             remote_location="pi:/home/alarm/backup/$1/"
             rsync_options="$rsync_options \
                 --exclude='/home/klassiker/.local/share/cloud' \
-                --exclude='/srv'"
+                --exclude='/home/klassiker/.local/vms'"
             ;;
         pi)
             remote_location="pi2:/home/alarm/backup/$1/"
