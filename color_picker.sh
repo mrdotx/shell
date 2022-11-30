@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/color_picker.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-06-21T20:05:02+0200
+# date:   2022-11-30T12:04:45+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -20,7 +20,7 @@ preview="$(mktemp -t color_picker_preview.XXXXXX.png)"
 convert xc:"$color" -resize 32 "$preview"
 
 [ -n "$color" ] \
-    && printf "%s\n" "$color" \
+    && printf "%s" "$color" \
         | xsel -i -b \
     && notify-send \
         -i "$preview" \
