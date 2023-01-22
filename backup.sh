@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-01-05T18:56:16+0100
+# date:   2023-01-22T08:50:40+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -54,16 +54,10 @@ backup_from_ssh() {
 
     # set remote location and rsync options by hostname
     case "$1" in
-        pi)
+        m625q)
             remote="$1:/"
             options="$rsync_options \
-                --exclude='/home/alarm/backup' \
-                --rsync-path='$auth rsync'"
-            ;;
-        pi2)
-            remote="$1:/"
-            options="$rsync_options \
-                --exclude='/home/alarm/backup' \
+                --exclude='/srv/backup' \
                 --rsync-path='$auth rsync'"
             ;;
     esac
@@ -77,26 +71,16 @@ backup_to_ssh() {
     # set remote location and rsync options by hostname
     case "$local_hostname" in
         m75q)
-            remote="pi2:/home/alarm/backup/$local_hostname/"
+            remote="m625q:/srv/backup/$local_hostname/"
             options="$rsync_options \
                 --exclude='/home/klassiker/.local/share/cloud' \
                 --exclude='/home/klassiker/.local/vms'"
             ;;
         mi)
-            remote="pi:/home/alarm/backup/$local_hostname/"
+            remote="m625q:/srv/backup/$local_hostname/"
             options="$rsync_options \
                 --exclude='/home/klassiker/.local/share/cloud' \
                 --exclude='/home/klassiker/.local/vms'"
-            ;;
-        pi)
-            remote="pi2:/home/alarm/backup/$local_hostname/"
-            options="$rsync_options \
-                --exclude='/home/alarm/backup'"
-            ;;
-        pi2)
-            remote="pi:/home/alarm/backup/$local_hostname/"
-            options="$rsync_options \
-                --exclude='/home/alarm/backup'"
             ;;
     esac
 
@@ -109,8 +93,7 @@ for device in $usb_devices; do
     [ -h "$device" ] \
         && mount_usb "$device" \
         && backup_to_usb \
-        && backup_from_ssh "pi" \
-        && backup_from_ssh "pi2" \
+        && backup_from_ssh "m625q" \
         && unmount_usb \
         && exit 0
 done
