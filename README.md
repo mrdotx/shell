@@ -19,6 +19,7 @@ shell scripts for system/hardware management and general maintenance
 | delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
 | git_clone.sh         | clone all repositories of a user or organization                              |
 | git_multi.sh         | execute git command on multiple repositories                                  |
+| padd_update.sh       | script to update pi-hole padd                                                 |
 | status.sh            | simple script for system information in different formats                     |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
 | touchpad_toggle.sh   | disable/enable touchpad                                                       |
