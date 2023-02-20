@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-01-22T08:50:40+0100
+# date:   2023-02-20T10:09:36+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -73,13 +73,13 @@ backup_to_ssh() {
         m75q)
             remote="m625q:/srv/backup/$local_hostname/"
             options="$rsync_options \
-                --exclude='/home/klassiker/.local/share/cloud' \
+                --exclude='/home/klassiker/.local/cloud' \
                 --exclude='/home/klassiker/.local/vms'"
             ;;
         mi)
             remote="m625q:/srv/backup/$local_hostname/"
             options="$rsync_options \
-                --exclude='/home/klassiker/.local/share/cloud' \
+                --exclude='/home/klassiker/.local/cloud' \
                 --exclude='/home/klassiker/.local/vms'"
             ;;
     esac
