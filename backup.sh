@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-02-23T12:20:29+0100
+# date:   2023-02-23T16:56:58+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -14,6 +14,7 @@ rsync_options="-aAXvh --delete \
         --exclude='/home/klassiker/Downloads' \
         --exclude='/home/klassiker/Music' \
         --exclude='/home/klassiker/Public' \
+        --exclude='/home/klassiker/Templates' \
         --exclude='/dev' \
         --exclude='/lost+found' \
         --exclude='/mnt' \
@@ -60,7 +61,6 @@ backup_from_ssh() {
         m625q)
             remote="$1:/"
             options="$rsync_options \
-                --exclude='/srv/backup' \
                 --exclude='/srv/http/download' \
                 --rsync-path='$auth rsync'"
             ;;
@@ -69,30 +69,6 @@ backup_from_ssh() {
     printf "\n:: create folder and backup %s to %s\n" "$remote" "$local"
     $auth mkdir -p "$local"
     eval "$auth rsync $options $remote $local"
-}
-
-backup_to_ssh() {
-    remote="m625q:/srv/backup/$local_hostname/"
-
-    # set rsync options by hostname
-    case "$local_hostname" in
-        m75q)
-            options="$rsync_options \
-                --exclude='/home/klassiker/.local/cloud' \
-                --exclude='/home/klassiker/.local/vms'"
-            ;;
-        mi)
-            options="$rsync_options \
-                --exclude='/home/klassiker/.local/cloud' \
-                --exclude='/home/klassiker/.local/vms'"
-            ;;
-        *)
-            options="$rsync_options"
-            ;;
-    esac
-
-    printf "\n:: backup / to %s\n" "$remote"
-    eval "$auth rsync $options / $remote"
 }
 
 # main
@@ -105,4 +81,5 @@ for device in $usb_devices; do
         && exit 0
 done
 
-backup_to_ssh
+printf "please connect one of the following devices to backup to:%s" \
+    "$usb_devices"
