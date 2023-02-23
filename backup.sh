@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-02-23T11:21:08+0100
+# date:   2023-02-23T12:20:29+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -11,6 +11,7 @@ auth="${EXEC_AS_USER:-sudo}"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete \
+        --exclude='/home/klassiker/Downloads' \
         --exclude='/home/klassiker/Music' \
         --exclude='/home/klassiker/Public' \
         --exclude='/dev' \
@@ -60,6 +61,7 @@ backup_from_ssh() {
             remote="$1:/"
             options="$rsync_options \
                 --exclude='/srv/backup' \
+                --exclude='/srv/http/download' \
                 --rsync-path='$auth rsync'"
             ;;
     esac
