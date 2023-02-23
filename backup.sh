@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-02-22T15:56:17+0100
+# date:   2023-02-23T11:21:08+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -11,6 +11,8 @@ auth="${EXEC_AS_USER:-sudo}"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete \
+        --exclude='/home/klassiker/Music' \
+        --exclude='/home/klassiker/Public' \
         --exclude='/dev' \
         --exclude='/lost+found' \
         --exclude='/mnt' \
@@ -44,26 +46,9 @@ unmount_usb() {
 backup_to_usb() {
     remote="/mnt/$local_hostname/Backup/$local_hostname"
 
-    # set rsync options by hostname
-    case "$local_hostname" in
-        m75q)
-            options="$rsync_options \
-                --exclude='/home/klassiker/Music' \
-                --exclude='/home/klassiker/Public'"
-            ;;
-        mi)
-            options="$rsync_options \
-                --exclude='/home/klassiker/Music' \
-                --exclude='/home/klassiker/Public'"
-            ;;
-        *)
-            options="$rsync_options"
-            ;;
-    esac
-
     printf "\n:: create folder and backup / to %s\n" "$remote"
     $auth mkdir -p "$remote"
-    eval "$auth rsync $options / $remote"
+    eval "$auth rsync $rsync_options / $remote"
 }
 
 backup_from_ssh() {
@@ -91,15 +76,11 @@ backup_to_ssh() {
     case "$local_hostname" in
         m75q)
             options="$rsync_options \
-                --exclude='/home/klassiker/Music' \
-                --exclude='/home/klassiker/Public' \
                 --exclude='/home/klassiker/.local/cloud' \
                 --exclude='/home/klassiker/.local/vms'"
             ;;
         mi)
             options="$rsync_options \
-                --exclude='/home/klassiker/Music' \
-                --exclude='/home/klassiker/Public' \
                 --exclude='/home/klassiker/.local/cloud' \
                 --exclude='/home/klassiker/.local/vms'"
             ;;
