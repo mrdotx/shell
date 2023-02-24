@@ -3,10 +3,10 @@
 # path:   /home/klassiker/.local/share/repos/shell/aria2c.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-02-24T13:05:15+0100
+# date:   2023-02-24T13:19:57+0100
 
 # config
-links_file="$HOME/Downloads/downloads.txt"
+links_file="$HOME/Downloads/links.txt"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- wrapper script to download with aria2c
