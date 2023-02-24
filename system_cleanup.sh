@@ -3,15 +3,22 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-04-17T18:33:02+0200
+# date:   2023-02-24T19:30:20+0100
 
+# config
 iwd_history="$HOME/.local/share/iwctl/history"
-cmd_history="$HOME/.local/share/cmd_history" # zsh and bash history merged
+cmd_history="$HOME/.local/share/cmd_history" # combined zsh and bash history
 cache_directory="$HOME/.cache/"
 cache_days=365
-cache_files=$(find "$cache_directory" -type f -atime +$cache_days \
-    | wc -l \
-)
+
+# helper
+find_files() {
+    find "$cache_directory" \
+        -type f \
+        -mtime +"$cache_days" \
+        -not -path "*/paru/*" \
+        "$@"
+}
 
 history_clean() {
     printf "%s %s %s\n %s\n" \
@@ -28,6 +35,10 @@ history_clean() {
 }
 
 cache_clean() {
+    cache_files=$(find_files \
+        | wc -l \
+    )
+
     printf "\n%s\n %s %s %d %s\n" \
         ":: delete files from .cache folder" \
         "$cache_files" \
@@ -36,14 +47,13 @@ cache_clean() {
         "days..."
 
     if [ "$cache_files" -gt 0 ]; then
-        find "$cache_directory" -type f -atime +$cache_days
-
+        find_files
         key=""
         printf "\n\r delete files from .cache folder [y]es/[N]o: " \
             && read -r "key"
         case "$key" in
             y|Y|yes|Yes)
-                find "$cache_directory" -type f -atime +$cache_days -delete
+                find_files -delete
                 exit 0
                 ;;
             *)
@@ -55,6 +65,7 @@ cache_clean() {
     fi
 }
 
+# main
 history_clean "iwctl" "$iwd_history"
 printf "\n"
 history_clean "merged zsh and bash" "$cmd_history"
