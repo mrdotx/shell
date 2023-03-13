@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-02-26T17:29:14+0100
+# date:   2023-03-13T18:27:23+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -24,10 +24,7 @@ rsync_options="-aAXvh --delete \
         --exclude='/run' \
         --exclude='/sys' \
         --exclude='/tmp'"
-usb_devices="
-    /dev/disk/by-uuid/4ceb144a-db56-4211-96f6-147e1beab18a
-    /dev/disk/by-uuid/2bdffcfb-b365-4321-a64b-5ffce2f1c211
-" # 4ceb -> 3.5, 2bdf -> 2.5
+usb_partlabel="/dev/disk/by-partlabel/grave"
 local_hostname="$(hostname)"
 
 # helper functions
@@ -74,14 +71,12 @@ backup_from_ssh() {
 }
 
 # main
-for device in $usb_devices; do
-    [ -h "$device" ] \
-        && mount_usb "$device" \
-        && backup_to_usb \
-        && backup_from_ssh "m625q" \
-        && unmount_usb \
-        && exit 0
-done
+[ -h "$usb_partlabel" ] \
+    && mount_usb "$usb_partlabel" \
+    && backup_to_usb \
+    && backup_from_ssh "m625q" \
+    && unmount_usb \
+    && exit 0
 
-printf "please connect one of the following devices to backup to:%s" \
-    "$usb_devices"
+printf "please connect the following device to backup to: %s\n" \
+    "$usb_partlabel"
