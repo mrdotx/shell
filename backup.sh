@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-13T18:27:23+0100
+# date:   2023-03-15T20:35:02+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -24,7 +24,7 @@ rsync_options="-aAXvh --delete \
         --exclude='/run' \
         --exclude='/sys' \
         --exclude='/tmp'"
-usb_partlabel="/dev/disk/by-partlabel/grave"
+usb_partlabel="/dev/disk/by-partlabel/backup"
 local_hostname="$(hostname)"
 
 # helper functions
@@ -45,7 +45,7 @@ unmount_usb() {
 }
 
 backup_to_usb() {
-    remote="/mnt/$local_hostname/Backup/$local_hostname"
+    remote="/mnt/$local_hostname/hosts/$local_hostname"
 
     printf "\n:: create folder and backup / to %s\n" "$remote"
     $auth mkdir -p "$remote"
@@ -53,7 +53,7 @@ backup_to_usb() {
 }
 
 backup_from_ssh() {
-    local="/mnt/$local_hostname/Backup/$1"
+    local="/mnt/$local_hostname/hosts/$1"
 
     # set remote location and rsync options by hostname
     case "$1" in
