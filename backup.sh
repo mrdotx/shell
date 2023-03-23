@@ -3,20 +3,21 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-23T10:04:05+0100
+# date:   2023-03-23T12:42:15+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
+user_home="$HOME"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete \
-        --exclude='/home/klassiker/Desktop' \
-        --exclude='/home/klassiker/Downloads' \
-        --exclude='/home/klassiker/Music' \
-        --exclude='/home/klassiker/Public' \
-        --exclude='/home/klassiker/Templates' \
-        --exclude='/home/klassiker/Videos' \
+        --exclude='$user_home/Desktop' \
+        --exclude='$user_home/Downloads' \
+        --exclude='$user_home/Music' \
+        --exclude='$user_home/Public' \
+        --exclude='$user_home/Templates' \
+        --exclude='$user_home/Videos' \
         --exclude='/dev' \
         --exclude='/lost+found' \
         --exclude='/mnt' \
@@ -30,53 +31,53 @@ local_hostname="$(hostname)"
 
 # helper functions
 mount_usb() {
-    mount_point="/mnt/$local_hostname"
+    mnt="/mnt/$local_hostname"
 
-    printf ":: create and mount backup folder %s\n" "$mount_point"
-    $auth mkdir -p "$mount_point"
-    $auth mount "$1" "$mount_point"
+    printf ":: create and mount backup folder %s\n" "$mnt"
+    $auth mkdir -p "$mnt"
+    $auth mount "$1" "$mnt"
 }
 
 unmount_usb() {
-    mount_point="/mnt/$local_hostname"
+    mnt="/mnt/$local_hostname"
 
-    printf "\n:: unmount and delete folder %s\n" "$mount_point"
-    $auth umount "$mount_point"
-    $auth find "$mount_point" -empty -type d -delete
+    printf "\n:: unmount and delete backup folder %s\n" "$mnt"
+    $auth umount "$mnt"
+    $auth find "$mnt" -empty -type d -delete
 }
 
 backup_local() {
-    remote="/mnt/$local_hostname/hosts/$local_hostname"
+    dest="/mnt/$local_hostname/hosts/$local_hostname"
 
-    printf "\n:: create folder and backup / to %s\n" "$remote"
-    $auth mkdir -p "$remote"
-    eval "$auth rsync $rsync_options / $remote"
+    printf "\n:: create folder and backup / to %s\n" "$dest"
+    $auth mkdir -p "$dest"
+    eval "$auth rsync $rsync_options / $dest"
 }
 
 backup_remote() {
-    local="/mnt/$local_hostname/hosts/$1"
+    dest="/mnt/$local_hostname/hosts/$1"
 
     # set remote location and rsync options by hostname
     case "$1" in
         m625q)
-            remote="$1:/"
+            src="$1:/"
             options="$rsync_options \
                 --exclude='/srv/http/download' \
                 --rsync-path='$auth rsync'"
             ;;
         mi)
-            remote="$1:/"
+            src="$1:/"
             options="$rsync_options \
                 --rsync-path='$auth rsync'"
             ;;
     esac
 
-    printf "\n:: create folder and backup %s to %s\n" "$remote" "$local"
-    $auth mkdir -p "$local"
+    printf "\n:: create folder and backup %s to %s\n" "$src" "$dest"
+    $auth mkdir -p "$dest"
     ssh -q "$1" exit
     case $? in
         0)
-            eval "$auth rsync $options $remote $local"
+            eval "$auth rsync $options $src $dest"
             ;;
         *)
             printf "connect to %s failed, please check if ssh is enabled!\n" \
@@ -86,19 +87,19 @@ backup_remote() {
 }
 
 backup_keys_status() {
-    keys_folder="/mnt/$local_hostname/keys"
-    keys_status_file="$keys_folder/last_update"
+    dest="/mnt/$local_hostname/keys"
+    status_file="$dest/last_update"
 
-    mkdir -p "$keys_folder"
-    date '+%d.%m.%Y %H:%M:%S' > "$keys_status_file"
-    printf "###################\n\n" >> "$keys_status_file"
+    mkdir -p "$dest"
+    date '+%d.%m.%Y %H:%M:%S' > "$status_file"
+    printf "###################\n\n" >> "$status_file"
 }
 
 backup_keys_folder() {
-    printf "==> backup %s to %s\n\n" "$1" "$keys_folder"
-    rsync -aAXvh --delete  "$1" "$keys_folder"
+    printf "==> backup %s to %s\n\n" "$1" "$dest"
+    eval "rsync $rsync_options $1 $dest"
     printf "\n"
-} >> "$keys_status_file"
+} >> "$status_file"
 
 backup_keys_pgp() {
     printf "==> backup pgp to %s\n\n" "$1"
@@ -106,7 +107,7 @@ backup_keys_pgp() {
     gpg --armor --export > "$1"/pgp-public-keys.asc
     gpg --armor --export-secret-keys > "$1"/pgp-private-keys.asc
     gpg --export-ownertrust > "$1"/pgp-ownertrust.asc
-} >> "$keys_status_file"
+} >> "$status_file"
 
 # main
 [ -h "$backup_partlabel" ] \
@@ -120,18 +121,18 @@ backup_keys_pgp() {
 [ -h "$keys_partlabel" ] \
     && mount_usb "$keys_partlabel" \
     && backup_keys_status \
-    && backup_keys_folder "$HOME/.netrc" \
-    && backup_keys_folder "$HOME/.config/git" \
-    && backup_keys_folder "$HOME/.config/pam-gnupg" \
-    && backup_keys_folder "$HOME/.gnupg" \
-    && backup_keys_folder "$HOME/.ssh" \
-    && backup_keys_folder "$HOME/.local/cloud/webde/.keys" \
-    && backup_keys_folder "$HOME/.local/share/repos/password-store" \
+    && backup_keys_folder "$user_home/.netrc" \
+    && backup_keys_folder "$user_home/.config/git" \
+    && backup_keys_folder "$user_home/.config/pam-gnupg" \
+    && backup_keys_folder "$user_home/.gnupg" \
+    && backup_keys_folder "$user_home/.ssh" \
+    && backup_keys_folder "$user_home/.local/cloud/webde/.keys" \
+    && backup_keys_folder "$user_home/.local/share/repos/password-store" \
     && printf "  -> backup pgp [y]es/[N]o: " \
         && read -r backup_pgp \
     && case "$backup_pgp" in
         y|Y|yes|Yes)
-            backup_keys_pgp "$keys_folder/.pgp"
+            backup_keys_pgp "$dest/.pgp"
             ;;
     esac \
     && unmount_usb \
