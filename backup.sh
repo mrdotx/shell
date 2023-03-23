@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-20T20:18:17+0100
+# date:   2023-03-23T10:04:05+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -24,7 +24,8 @@ rsync_options="-aAXvh --delete \
         --exclude='/run' \
         --exclude='/sys' \
         --exclude='/tmp'"
-usb_partlabel="/dev/disk/by-partlabel/backup"
+backup_partlabel="/dev/disk/by-partlabel/backup"
+keys_partlabel="/dev/disk/by-partlabel/keys"
 local_hostname="$(hostname)"
 
 # helper functions
@@ -84,14 +85,58 @@ backup_remote() {
     esac
 }
 
+backup_keys_status() {
+    keys_folder="/mnt/$local_hostname/keys"
+    keys_status_file="$keys_folder/last_update"
+
+    mkdir -p "$keys_folder"
+    date '+%d.%m.%Y %H:%M:%S' > "$keys_status_file"
+    printf "###################\n\n" >> "$keys_status_file"
+}
+
+backup_keys_folder() {
+    printf "==> backup %s to %s\n\n" "$1" "$keys_folder"
+    rsync -aAXvh --delete  "$1" "$keys_folder"
+    printf "\n"
+} >> "$keys_status_file"
+
+backup_keys_pgp() {
+    printf "==> backup pgp to %s\n\n" "$1"
+    mkdir -p "$1"
+    gpg --armor --export > "$1"/pgp-public-keys.asc
+    gpg --armor --export-secret-keys > "$1"/pgp-private-keys.asc
+    gpg --export-ownertrust > "$1"/pgp-ownertrust.asc
+} >> "$keys_status_file"
+
 # main
-[ -h "$usb_partlabel" ] \
-    && mount_usb "$usb_partlabel" \
+[ -h "$backup_partlabel" ] \
+    && mount_usb "$backup_partlabel" \
     && backup_local \
     && backup_remote "m625q" \
     && backup_remote "mi" \
     && unmount_usb \
     && exit 0
 
-printf "please connect the following device to backup to: %s\n" \
-    "$usb_partlabel"
+[ -h "$keys_partlabel" ] \
+    && mount_usb "$keys_partlabel" \
+    && backup_keys_status \
+    && backup_keys_folder "$HOME/.netrc" \
+    && backup_keys_folder "$HOME/.config/git" \
+    && backup_keys_folder "$HOME/.config/pam-gnupg" \
+    && backup_keys_folder "$HOME/.gnupg" \
+    && backup_keys_folder "$HOME/.ssh" \
+    && backup_keys_folder "$HOME/.local/cloud/webde/.keys" \
+    && backup_keys_folder "$HOME/.local/share/repos/password-store" \
+    && printf "  -> backup pgp [y]es/[N]o: " \
+        && read -r backup_pgp \
+    && case "$backup_pgp" in
+        y|Y|yes|Yes)
+            backup_keys_pgp "$keys_folder/.pgp"
+            ;;
+    esac \
+    && unmount_usb \
+    && exit 0
+
+printf "please connect one of the following devices to backup to:\n%s\n%s\n" \
+    "$keys_partlabel" \
+    "$backup_partlabel"
