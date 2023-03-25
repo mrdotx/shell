@@ -3,12 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-05-09T19:43:40+0200
+# date:   2023-03-24T20:19:49+0100
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
 pkgs_dir="$HOME/.local/share/repos/aur"
-stats_file="$pkgs_dir/pkgstats.csv"
 file_header="Name,Month,Count,Popularity,Samples"
 
 get_pkgs() {
@@ -39,17 +38,18 @@ request() {
         "$samples"
 }
 
-[ -e "$stats_file" ] \
-    && output=$(sed "/$file_header/d" "$stats_file")
-
 for pkg in $(get_pkgs); do
+    [ -e "$pkgs_dir/$pkg.csv" ] \
+        && output=$(sed "/$file_header/d" "$pkgs_dir/$pkg.csv")
+
     printf "%s " "$pkg"
     output=$(printf "%s\n%s" \
         "$output" \
         "$(request "$pkg")" \
     )
     printf "=> finished\n"
-done
 
-printf "%s" "$file_header" > "$stats_file"
-printf "\n%s" "$output" | sort -u >> "$stats_file"
+    printf "%s\n" "$file_header" > "$pkgs_dir/$pkg.csv"
+    printf "%s" "$output" | sort -ur >> "$pkgs_dir/$pkg.csv"
+    unset output
+done
