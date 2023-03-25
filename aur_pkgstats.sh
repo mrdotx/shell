@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-25T12:41:41+0100
+# date:   2023-03-25T13:13:04+0100
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
-pkgs_dir="$HOME/.local/share/repos/aur"
+pkgs_dir="${1:-"$HOME/.local/share/repos/aur"}"
 file_header="Name,Month,Count,Popularity,Samples"
 
 get_pkgs() {
