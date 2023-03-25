@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-24T20:19:49+0100
+# date:   2023-03-25T12:41:41+0100
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
@@ -39,17 +39,21 @@ request() {
 }
 
 for pkg in $(get_pkgs); do
-    [ -e "$pkgs_dir/$pkg.csv" ] \
-        && output=$(sed "/$file_header/d" "$pkgs_dir/$pkg.csv")
-
     printf "%s " "$pkg"
-    output=$(printf "%s\n%s" \
-        "$output" \
-        "$(request "$pkg")" \
-    )
-    printf "=> finished\n"
+
+    [ -e "$pkgs_dir/$pkg.csv" ] \
+        && output=$(sed "/$file_header/d" "$pkgs_dir/$pkg.csv") \
+        && output=$(printf "%s\n%s" \
+            "$output" \
+            "$(request "$pkg")" \
+        )
+
+    [ -z "$output" ] \
+        && output="$(request "$pkg")"
 
     printf "%s\n" "$file_header" > "$pkgs_dir/$pkg.csv"
     printf "%s" "$output" | sort -ur >> "$pkgs_dir/$pkg.csv"
+
+    printf "=> finished\n"
     unset output
 done
