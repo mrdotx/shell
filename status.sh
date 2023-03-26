@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-07-12T11:00:49+0200
+# date:   2023-03-26T11:25:18+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -78,14 +78,24 @@ space() {
 }
 
 wlan() {
-    wlan="$(iwgetid -r)"
-    wlan_signal="$(iwconfig "$1" | grep -i Link | cut -c "24-25")"
-    wlan_signal="$(printf "%.0f\n" "$wlan_signal")"
+    iwctl_show=$(iwctl station "$1" show 2>/dev/null)
+    case $? in
+        0)
+            wlan="$(printf "%s" "$iwctl_show" | grep "Connected network" | awk '{print $3}')"
+            wlan_signal="$(printf "%s" "$iwctl_show" | grep "AverageRSSI" | awk '{print $2}')"
+            [ "$wlan_signal" -ge -50 ] && wlan_signal="-50"
+            wlan_signal="$((2 * (wlan_signal + 100)))"
+            ;;
+        *)
+            wlan="n/a"
+            wlan_signal="0"
+            ;;
+    esac
     printf "%s [%s%%]" "$wlan" "$wlan_signal"
 }
 
 ipv4() {
-    ip="$(ip -4 addr show "$1" | grep -oP "(?<=inet ).*(?=/)")"
+    ip="$(ip -4 addr show 2>/dev/null | grep -oP "(?<=inet ).*(?=/)" | sed -n "$1p")"
     printf "%s" "$ip"
 }
 
@@ -113,9 +123,9 @@ case "$1" in
         printf "ram: %s | " "$(ram)"
         printf "swap: %s | " "$(swap)"
         printf "/: %s | " "$(space "/")"
-        printf "/srv: %s | " "$(space "/srv")"
+        printf "m625q: %s | " "$(space "$HOME/Public")"
         printf "wlan: %s | " "$(wlan "wlan0")"
-        printf "ip: %s | " "$(ipv4 "wlan0")"
+        printf "ip: %s | " "$(ipv4 "2")"
         printf "up: %s | " "$(up)"
         printf "kernel: %s | " "$(kernel)"
         printf "name: %s | " "$(name)"
@@ -127,9 +137,9 @@ case "$1" in
         printf "ram:    %s\n" "$(ram)"
         printf "swap:   %s\n" "$(swap)"
         printf "/:      %s\n" "$(space "/")"
-        printf "/srv:   %s\n" "$(space "/srv")"
+        printf "m625q:  %s\n" "$(space "$HOME/Public")"
         printf "wlan:   %s\n" "$(wlan "wlan0")"
-        printf "ip:     %s\n" "$(ipv4 "wlan0")"
+        printf "ip:     %s\n" "$(ipv4 "2")"
         printf "uptime: %s\n" "$(up)"
         printf "kernel: %s\n" "$(kernel)"
         printf "\n--\n"
