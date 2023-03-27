@@ -5,6 +5,7 @@ old stuff and things that couldn't be assigned
 | name              | comment                                                   |
 | :---------------- | :-------------------------------------------------------- |
 | backup.sh         | backup for specific files                                 |
+| cpu_policy.sh     | change cpu policies with cpufreqctl                       |
 | efistub.sh        | create efi boot entries with efibootmgr                   |
 | hera.sh           | wakeup, poweroff, status of specific server               |
 | host_status.sh    | get status online/offline for host with ping              |
