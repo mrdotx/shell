@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # path:   /home/klassiker/.local/share/repos/shell/old/hera.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:57:16+0100
+# date:   2023-03-27T11:24:28+0200
 
 case "$1" in
 wakeup)
@@ -15,16 +15,20 @@ poweroff)
     ssh -t admin@hera "/sbin/poweroff"
     ;;
 status)
-    # call hoststatus script
-    status="$("$HOME"/repos/shell/snippets/host_status.sh hera)"
+    # call host status script
+    status="$("$HOME"/.local/share/repos/shell/old/host_status.sh hera)"
 
-    if [[ $status == *offline* ]]; then
-        printf "%s [sudo %s/repos/shell/snippets/hera.sh wakeup]      " "$status" "$HOME"
-    elif [[ $status == *online* ]]; then
-        printf "%s [sudo %s/repos/shell/snippets/hera.sh poweroff]    " "$status" "$HOME"
-    else
-        printf "unknown\n"
-    fi
+    case $status in
+        *offline*)
+            printf "%s [sudo hera.sh wakeup]\n" "$status"
+            ;;
+        *online*)
+            printf "%s [sudo hera.sh poweroff]\n" "$status"
+            ;;
+        *)
+            printf "unknown\n"
+            ;;
+    esac
     ;;
 *)
     # if no parameters are given, print which are avaiable.
