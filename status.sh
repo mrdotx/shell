@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-26T11:25:18+0200
+# date:   2023-03-28T18:50:50+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -78,7 +78,7 @@ space() {
 }
 
 wlan() {
-    iwctl_show=$(iwctl station "$1" show 2>/dev/null)
+    iwctl_show=$(pgrep -x iwd >/dev/null 2>&1 && iwctl station "$1" show 2>/dev/null)
     case $? in
         0)
             wlan="$(printf "%s" "$iwctl_show" | grep "Connected network" | awk '{print $3}')"
