@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-23T12:42:15+0100
+# date:   2023-03-29T08:49:36+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -135,6 +135,7 @@ backup_keys_pgp() {
             backup_keys_pgp "$dest/.pgp"
             ;;
     esac \
+    && $PAGER "$status_file" \
     && unmount_usb \
     && exit 0
 
