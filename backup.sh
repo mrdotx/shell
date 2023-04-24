@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-29T08:49:36+0200
+# date:   2023-04-24T10:19:51+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -87,7 +87,7 @@ backup_remote() {
 }
 
 backup_keys_status() {
-    dest="/mnt/$local_hostname/keys"
+    dest="/mnt/$local_hostname"
     status_file="$dest/last_update"
 
     mkdir -p "$dest"
@@ -95,7 +95,7 @@ backup_keys_status() {
     printf "###################\n\n" >> "$status_file"
 }
 
-backup_keys_folder() {
+backup_keys_data() {
     printf "==> backup %s to %s\n\n" "$1" "$dest"
     eval "rsync $rsync_options $1 $dest"
     printf "\n"
@@ -104,9 +104,9 @@ backup_keys_folder() {
 backup_keys_pgp() {
     printf "==> backup pgp to %s\n\n" "$1"
     mkdir -p "$1"
-    gpg --armor --export > "$1"/pgp-public-keys.asc
-    gpg --armor --export-secret-keys > "$1"/pgp-private-keys.asc
-    gpg --export-ownertrust > "$1"/pgp-ownertrust.asc
+    gpg --export --export-options backup --output "$1/public.gpg"
+    gpg --export-secret-keys --export-options backup --output "$1/private.gpg"
+    gpg --export-ownertrust > "$1/ownertrust.gpg"
 } >> "$status_file"
 
 # main
@@ -121,18 +121,19 @@ backup_keys_pgp() {
 [ -h "$keys_partlabel" ] \
     && mount_usb "$keys_partlabel" \
     && backup_keys_status \
-    && backup_keys_folder "$user_home/.netrc" \
-    && backup_keys_folder "$user_home/.config/git" \
-    && backup_keys_folder "$user_home/.config/pam-gnupg" \
-    && backup_keys_folder "$user_home/.gnupg" \
-    && backup_keys_folder "$user_home/.ssh" \
-    && backup_keys_folder "$user_home/.local/cloud/webde/.keys" \
-    && backup_keys_folder "$user_home/.local/share/repos/password-store" \
+    && backup_keys_data "$user_home/.netrc" \
+    && backup_keys_data "$user_home/.config/git" \
+    && backup_keys_data "$user_home/.config/pam-gnupg" \
+    && backup_keys_data "$user_home/.gnupg" \
+    && backup_keys_data "$user_home/.ssh" \
+    && backup_keys_data "$user_home/.local/cloud/webde/.keys" \
+    && backup_keys_data "$user_home/Documents/Software/gpg-backup.md" \
+    && backup_keys_data "$user_home/.local/share/repos/password-store" \
     && printf "  -> backup pgp [y]es/[N]o: " \
         && read -r backup_pgp \
     && case "$backup_pgp" in
         y|Y|yes|Yes)
-            backup_keys_pgp "$dest/.pgp"
+            backup_keys_pgp "$dest/pgp"
             ;;
     esac \
     && $PAGER "$status_file" \
