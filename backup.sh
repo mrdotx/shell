@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-04-24T10:19:51+0200
+# date:   2023-05-02T21:53:15+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -63,6 +63,7 @@ backup_remote() {
             src="$1:/"
             options="$rsync_options \
                 --exclude='/srv/http/download' \
+                --exclude='/srv/http/pacman' \
                 --rsync-path='$auth rsync'"
             ;;
         mi)
