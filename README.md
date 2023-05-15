@@ -20,6 +20,7 @@ shell scripts for system/hardware management and general maintenance
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | padd_update.sh       | script to update pi-hole padd                                                 |
 | status.sh            | simple script for system information in different formats                     |
+| sync_notes.sh        | sync notes to webserver                                                       |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
 | touchpad_toggle.sh   | disable/enable touchpad                                                       |
 | urxvtc.sh            | start urxvtd if not already running and open urxvtc                           |
