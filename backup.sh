@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-04T12:40:43+0200
+# date:   2023-05-17T10:23:38+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -131,11 +131,11 @@ backup_keys_pgp() {
     && backup_keys_data "$user_home/.local/share/repos/password-store" \
     && printf "  -> backup pgp [y]es/[N]o: " \
         && read -r backup_pgp \
-    && case "$backup_pgp" in
-        y|Y|yes|Yes)
-            backup_keys_pgp "$dest/pgp"
-            ;;
-    esac \
+        && case "$backup_pgp" in
+            y|Y|yes|Yes)
+                backup_keys_pgp "$dest/pgp"
+                ;;
+        esac \
     && $PAGER "$status_file" \
     && unmount_usb \
     && exit 0
