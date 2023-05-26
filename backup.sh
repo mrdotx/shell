@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-17T10:23:38+0200
+# date:   2023-05-25T11:28:18+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -91,8 +91,7 @@ backup_keys_status() {
     status_file="$dest/last_update"
 
     mkdir -p "$dest"
-    date '+%d.%m.%Y %H:%M:%S' > "$status_file"
-    printf "###################\n\n" >> "$status_file"
+    printf "## backup %s\n\n" "$(date -I)" > "$status_file"
 }
 
 backup_keys_data() {
