@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/host_status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-27T10:01:05+0200
+# date:   2023-05-28T21:45:50+0200
+
+# speed up script and avoid language problems by using standard c
+LC_ALL=C
+LANG=C
 
 # color variables
 red=$(tput setaf 1)

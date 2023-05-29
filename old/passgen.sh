@@ -3,8 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/passgen.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-12-21T10:05:11+0100
+# date:   2023-05-28T21:47:11+0200
 
+# speed up script and avoid language problems by using standard c
+LC_ALL=C
+LANG=C
+
+# config
 c=14
 i=1
 

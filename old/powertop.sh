@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/powertop.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:57:46+0100
+# date:   2023-05-28T21:47:45+0200
+
+# speed up script and avoid language problems by using standard c
+LC_ALL=C
+LANG=C
 
 # software settings in need of tuning
 # sets all tunable options to their good setting

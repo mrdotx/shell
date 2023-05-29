@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/backlight.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-06-29T12:51:15+0200
+# date:   2023-05-28T21:32:57+0200
 
-# speed up script by using standard c
+# speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
@@ -14,6 +14,7 @@ LANG=C
 auth="${EXEC_AS_USER:-sudo}"
 message_title="Brightness"
 
+# help
 script=$(basename "$0")
 help="$script [-h/--help] -- script to change backlight
   Usage:

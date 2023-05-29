@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/wireguard_toggle.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-11-07T19:13:48+0100
+# date:   2023-05-28T21:35:25+0200
 
-# speed up script by using standard c
+# speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
@@ -14,6 +14,7 @@ systemd_network="/etc/systemd/network"
 wireguard_config="$systemd_network/wireguard"
 prefix="99-"
 
+# help
 script=$(basename "$0")
 help="$script [-h/--help] -- script to enable/disable wireguard interfaces
   Usage:

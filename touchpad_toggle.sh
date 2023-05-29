@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/touchpad_toggle.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-04-24T08:04:42+0200
+# date:   2023-05-28T21:30:01+0200
 
-# speed up script by using standard c
+# speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 

@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/alsa.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-06-22T10:12:22+0200
+# date:   2023-05-28T21:32:32+0200
 
-# speed up script by using standard c
+# speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
@@ -15,6 +15,7 @@ config_file="asoundrc"
 analog_filter="analog"
 message_title="Volume"
 
+# help
 script=$(basename "$0")
 help="$script [-h/--help] -- script to change alsa audio output
   Usage:

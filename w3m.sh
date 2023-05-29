@@ -3,8 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/w3m.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-04-17T18:42:53+0200
+# date:   2023-05-28T21:35:01+0200
 
+# help
 script=$(basename "$0")
 help="$script [-h/--help] -- wrapper script to start w3m
   Usage:

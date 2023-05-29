@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/screenshot.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/screenshot
-# date:   2022-06-22T10:18:24+0200
+# date:   2023-05-28T21:41:25+0200
 
-# speed up script by using standard c
+# speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
@@ -15,6 +15,7 @@ screenshot_file="$screenshot_directory/screenshot-$(date +"%FT%T%z").png"
 screenshot_command="maim -Buq $screenshot_file"
 screenshot_preview="nsxiv $screenshot_file"
 
+# help
 script=$(basename "$0")
 help="$script [-h/--help] -- script to make screenshots with maim
   Usage:

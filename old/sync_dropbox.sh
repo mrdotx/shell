@@ -3,8 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/sync_dropbox.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:58:02+0100
+# date:   2023-05-28T22:01:01+0200
 
+# speed up script and avoid language problems by using standard c
+LC_ALL=C
+LANG=C
+
+# config
 dropbox_user=klassiker
 dropbox_status=$(sudo -u $dropbox_user dropbox-cli status)
 
@@ -16,7 +21,7 @@ fi
 count_done=1
 while true; do
     sudo -u $dropbox_user dropbox-cli status
-    if [ "$dropbox_status" = "Aktualisiert" ]; then
+    if [ "$dropbox_status" = "Updated" ]; then
         count_done=$(( count_done + 1 ))
         if [ $count_done -gt 10 ]; then
             sudo -u $dropbox_user dropbox-cli stop && sudo -u $dropbox_user dropbox-cli autostart n

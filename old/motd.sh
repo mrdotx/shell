@@ -3,8 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/motd.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-27T11:21:26+0200
+# date:   2023-05-28T21:43:51+0200
 
+# speed up script and avoid language problems by using standard c
+LC_ALL=C
+LANG=C
+
+# config
 me=$(whoami)
 
 # layout functions
@@ -127,7 +132,7 @@ space() {
 
 # cpu
 cpu() {
-    printf "CPU: %sMHz, TEMP: %sºC" \
+    printf "CPU: %sMHz, TEMP: %s'C" \
         "$(($(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq) / 1000))" \
         "$(cut -c "1-2" /sys/class/hwmon/hwmon0/temp1_input)"
 }

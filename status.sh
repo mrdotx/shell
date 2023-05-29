@@ -3,12 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-28T18:50:50+0200
+# date:   2023-05-28T21:33:22+0200
 
-# speed up script by using standard c
+# speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
+# help
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show system information
   Usage:

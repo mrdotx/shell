@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/padd_update.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/raspberrypi
-# date:   2023-01-24T12:15:19+0100
+# date:   2023-05-28T21:30:56+0200
 
-# speed up script by using standard c
+# speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 

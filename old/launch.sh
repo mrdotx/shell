@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/launch.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-01-15T13:57:31+0100
+# date:   2023-05-28T21:46:18+0200
+
+# speed up script and avoid language problems by using standard c
+LC_ALL=C
+LANG=C
 
 case "$1" in
     # desktop  1
