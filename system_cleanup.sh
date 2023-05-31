@@ -3,16 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-02-24T19:30:20+0100
-
-# config
-iwd_history="$HOME/.local/share/iwctl/history"
-cmd_history="$HOME/.local/share/cmd_history" # combined zsh and bash history
-cache_directory="$HOME/.cache/"
-cache_days=365
+# date:   2023-05-31T08:14:52+0200
 
 # helper
 find_files() {
+    cache_directory="$1"
+    cache_days="$2"
+    shift 2
+
     find "$cache_directory" \
         -type f \
         -mtime +"$cache_days" \
@@ -20,53 +18,80 @@ find_files() {
         "$@"
 }
 
-history_clean() {
-    printf "%s %s %s\n %s\n" \
-        ":: purge" \
-        "$1" \
-        "history" \
-        "remove white space from the end of the line..."
-    sed -i 's/ *$//' "$2"
+cleanup_file() {
+    ! [ -f "$1" ] \
+        && return 0
+
+    printf ":: cleanup file \"%s\"\n" \
+        "$1"
+    printf " remove white space from the end of the line...\n"
+    sed -i 's/ *$//' "$1"
+
     printf " remove duplicates...\n"
-    printf "%s\n" "$(tac "$2" \
+    printf "%s\n" "$(tac "$1" \
         | awk '! seen[$0]++' \
         | tac \
-    )" > "$2"
+    )" > "$1"
 }
 
-cache_clean() {
-    cache_files=$(find_files \
+delete_files() {
+    ! [ -d "$1" ] \
+        && return 0
+
+    cache_files=$(find_files "$1" "$2" \
         | wc -l \
     )
 
-    printf "\n%s\n %s %s %d %s\n" \
-        ":: delete files from .cache folder" \
+    printf "\n:: delete files from \"%s\"\n" \
+        "$1"
+    printf " %d files that haven't been accessed in %d days...\n" \
         "$cache_files" \
-        "files that haven't been accessed in" \
-        "$cache_days" \
-        "days..."
-
+        "$2"
     if [ "$cache_files" -gt 0 ]; then
-        find_files
-        key=""
-        printf "\n\r delete files from .cache folder [y]es/[N]o: " \
-            && read -r "key"
+        find_files "$1" "$2"
+        printf "\r delete files from \"%s\" [y]es/[N]o: " \
+            "$1" \
+                && read -r "key"
         case "$key" in
             y|Y|yes|Yes)
-                find_files -delete
-                exit 0
+                find_files "$1" "$2" -delete
                 ;;
             *)
-                exit 0
                 ;;
         esac
     else
-        exit 0
+        return 0
     fi
 }
 
+delete_cache() {
+    ! [ -d "$1" ] \
+        && return 0
+
+    auth="${EXEC_AS_USER:-sudo}"
+    header=":: delete files from \"{}\", keep the last $2 version(s)"
+
+    printf "\n"
+    $auth find "$1" -type d \
+        -exec printf "%s\n" "$header" \; \
+        -exec paccache -dvk "$2" -c {} \;
+
+    printf " delete files from \"%s\" [y]es/[N]o: " \
+        "$1" \
+        && read -r clear_cache \
+        && case "$clear_cache" in
+            y|Y|yes|Yes)
+                $auth find "$1" -type d \
+                    -exec printf "%s\n" "$header" \; \
+                    -exec paccache -rvk "$2" -c {} \;
+                ;;
+        esac
+}
+
 # main
-history_clean "iwctl" "$iwd_history"
+cleanup_file "$HOME/.local/share/iwctl/history"
 printf "\n"
-history_clean "merged zsh and bash" "$cmd_history"
-cache_clean
+cleanup_file "$HOME/.local/share/cmd_history"
+delete_files "$HOME/.cache" 365
+delete_files "/srv/pacman" 180
+delete_cache "/srv/pacman" 1
