@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-31T09:15:10+0200
+# date:   2023-05-31T09:39:32+0200
 
 # helper
 find_files() {
@@ -73,7 +73,8 @@ delete_cache() {
 
     dry_run=$($auth find "$1" -type d \
         -exec printf "%s\n" "$header" \; \
-        -exec paccache -dvk "$2" -c {} \;)
+        -exec paccache -dvk "$2" -c {} \; \
+    )
 
     printf "%s\n" "$dry_run" \
         | grep -q "Candidate packages:" \
