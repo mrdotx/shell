@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-31T08:33:40+0200
+# date:   2023-05-31T08:39:39+0200
 
 # helper
 find_files() {
@@ -92,5 +92,8 @@ delete_cache() {
 cleanup_file "$HOME/.local/share/iwctl/history"
 printf "\n"
 cleanup_file "$HOME/.local/share/cmd_history"
+
 delete_files "$HOME/.cache" 365
-delete_cache "/srv/pacman" 2
+
+delete_cache "/srv/pacman/core/os/x86_64" 2
+delete_cache "/srv/pacman/extra/os/x86_64" 2
