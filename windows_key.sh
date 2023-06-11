@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/windows_key.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-06-11T20:25:40+0200
+# date:   2023-06-11T20:29:51+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -24,4 +24,4 @@ check_root
         | tail -n1 \
     && exit 0
 
-printf "sorry, no windows product key found\n"
+printf "sorry, windows product key not found\n"
