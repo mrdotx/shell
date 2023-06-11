@@ -12,6 +12,7 @@ shell scripts for system/hardware management and general maintenance
 | alsa.sh              | change volume with status notification                                        |
 | aria2c.sh            | add download urls to aria2c                                                   |
 | aur_pkgstats.sh      | download package stats from the aur                                           |
+| aurbuild_update.sh   | aurutils sync packages and sync devel packages                                |
 | backlight.sh         | change backlight brightness with status notification                          |
 | backup.sh            | rsync backup to remote location (ssh) or to usb device (if connected)         |
 | color_picker.sh      | pick color with a tool, copy hex to clipboard and preview with notify-send    |
@@ -26,6 +27,7 @@ shell scripts for system/hardware management and general maintenance
 | urxvtc.sh            | start urxvtd if not already running and open urxvtc                           |
 | w3m.sh               | terminal wrapper for w3m with or without suckless tabbed                      |
 | wallpaper.sh         | set and load wallpaper (file/random file from directory) from xresources      |
+| windows_key.sh       | read windows product key from uefi                                            |
 | wireguard_toggle.sh  | enable/disable wireguard interface with predefined config in systemd-network  |
 
 related projects:
