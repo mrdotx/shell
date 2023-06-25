@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-06-06T16:27:34+0200
+# date:   2023-06-25T04:48:31+0200
 
 # helper
 find_files() {
@@ -51,7 +51,7 @@ delete_files() {
         find_files "$1" "$2"
         printf "\r delete files from \"%s\" [y]es/[N]o: " \
             "$1" \
-                && read -r "key"
+            && read -r "key"
         case "$key" in
             y|Y|yes|Yes)
                 find_files "$1" "$2" -delete
@@ -64,30 +64,31 @@ delete_files() {
     fi
 }
 
-delete_cache() {
+delete_pkgs() {
     ! [ -d "$1" ] \
         && return 0
 
     auth="${EXEC_AS_USER:-sudo}"
-    header=":: delete files from \"{}\", keep the last $2 version(s)"
 
     dry_run=$($auth find "$1" -type d \
-        -exec printf "%s\n" "$header" \; \
+        -exec printf ":: delete pkgs from \"{}\", except last %s versions\n" \
+            "$2" \; \
         -exec paccache -dvk "$2" -c {} \; \
     )
 
-    printf "%s\n" "$dry_run" \
+    printf "%s\n" \
+        "$dry_run" \
         | grep -q "Candidate packages:" \
         || return 0
 
-    printf "\n%s\n" "$dry_run"
-    printf " delete files from \"%s\" [y]es/[N]o: " \
+    printf "\n%s\n" \
+        "$dry_run"
+    printf " delete pkgs from \"%s\" [y]es/[N]o: " \
         "$1" \
-        && read -r clear_cache \
-        && case "$clear_cache" in
+        && read -r clear_pkgs \
+        && case "$clear_pkgs" in
             y|Y|yes|Yes)
                 $auth find "$1" -type d \
-                    -exec printf "%s\n" "$header" \; \
                     -exec paccache -rvk "$2" -c {} \;
                 ;;
         esac
@@ -98,6 +99,6 @@ cleanup_file "$HOME/.local/share/iwctl/history"
 printf "\n"
 cleanup_file "$HOME/.local/share/cmd_history"
 delete_files "$HOME/.cache" 365
-delete_cache "/srv/pacman/core/os/x86_64" 2
-delete_cache "/srv/pacman/extra/os/x86_64" 2
-delete_cache "/srv/aurutils/aurbuild" 2
+delete_pkgs "/srv/pacman/core/os/x86_64" 2
+delete_pkgs "/srv/pacman/extra/os/x86_64" 2
+delete_pkgs "/srv/aurutils/aurbuild" 2
