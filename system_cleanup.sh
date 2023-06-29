@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-06-25T04:48:31+0200
+# date:   2023-06-29T18:04:12+0200
 
 # helper
 find_files() {
@@ -42,26 +42,26 @@ delete_files() {
         | wc -l \
     )
 
-    printf "\n:: delete files from \"%s\"\n" \
-        "$1"
-    printf " %d files that haven't been accessed in %d days...\n" \
+    [ "$cache_files" -gt 0 ] \
+        || return 0
+
+    printf "\n:: delete %d files from \"%s\" not accessed in %d days...\n" \
         "$cache_files" \
+        "$1" \
         "$2"
-    if [ "$cache_files" -gt 0 ]; then
-        find_files "$1" "$2"
-        printf "\r delete files from \"%s\" [y]es/[N]o: " \
-            "$1" \
-            && read -r "key"
-        case "$key" in
-            y|Y|yes|Yes)
-                find_files "$1" "$2" -delete
-                ;;
-            *)
-                ;;
-        esac
-    else
-        return 0
-    fi
+
+    find_files "$1" "$2"
+
+    printf " delete files from \"%s\" [y]es/[N]o: " \
+        "$1" \
+        && read -r "key"
+    case "$key" in
+        y|Y|yes|Yes)
+            find_files "$1" "$2" -delete
+            ;;
+        *)
+            ;;
+    esac
 }
 
 delete_pkgs() {
@@ -71,7 +71,7 @@ delete_pkgs() {
     auth="${EXEC_AS_USER:-sudo}"
 
     dry_run=$($auth find "$1" -type d \
-        -exec printf ":: delete pkgs from \"{}\", except last %s versions\n" \
+        -exec printf "\n:: delete pkgs from \"{}\", except last %s versions\n" \
             "$2" \; \
         -exec paccache -dvk "$2" -c {} \; \
     )
