@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-06-29T18:04:12+0200
+# date:   2023-06-29T19:40:47+0200
 
 # helper
 find_files() {
@@ -71,7 +71,7 @@ delete_pkgs() {
     auth="${EXEC_AS_USER:-sudo}"
 
     dry_run=$($auth find "$1" -type d \
-        -exec printf "\n:: delete pkgs from \"{}\", except last %s versions\n" \
+        -exec printf ":: delete pkgs from \"{}\", except last %s versions\n" \
             "$2" \; \
         -exec paccache -dvk "$2" -c {} \; \
     )
