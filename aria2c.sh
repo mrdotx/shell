@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/aria2c.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T21:32:43+0200
+# date:   2023-07-01T18:08:19+0200
 
 # config
 links_file="$HOME/Downloads/links.txt"
@@ -43,10 +43,14 @@ aria2c_start() {
 }
 
 add_url() {
-    cleaned_list="$(grep -v " gid=" "$2")"
-    printf "%s\n%s\n" "$cleaned_list" "$1" \
-        | tr -d '[:blank:]' \
-        | sort -u > "$links_file"
+    [ -s "$links_file" ] \
+        && printf "%s\n%s\n" "$(grep -v " gid=" "$2")" "$1" \
+            | tr -d '[:blank:]' \
+            | sort -u > "$links_file" \
+        && return 0
+
+    printf "%s\n" "$1" \
+        | tr -d '[:blank:]' > "$links_file"
 }
 
 case "$1" in
