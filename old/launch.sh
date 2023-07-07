@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/launch.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T21:46:18+0200
+# date:   2023-07-04T22:26:59+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -23,7 +23,7 @@ case "$1" in
 
     # desktop  2
     web)
-        wmctrl -s 1 && firefox-developer-edition >/dev/null 2>&1 &
+        wmctrl -s 1 && firefox >/dev/null 2>&1 &
         ;;
     ftp)
         wmctrl -s 1 && filezilla >/dev/null 2>&1 &
