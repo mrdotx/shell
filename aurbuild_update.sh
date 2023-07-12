@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/aurbuild_update.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-07-12T07:38:48+0200
+# date:   2023-07-12T10:41:27+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -37,6 +37,11 @@ cd "$sync_dir"
 printf "%s\n" "$vcs" \
     | aur fetch --existing --discard --sync "auto" --results "$tmp/fetch" -
 
+# debug
+[ "$1" = "--debug" ] \
+    && printf "## debug fetch\n" \
+    && cat "$tmp/fetch"
+
 while IFS=: read -r mode rev_old rev path; do
     vcs_name=${path##*/}
 
@@ -56,6 +61,11 @@ while IFS=: read -r mode rev_old rev path; do
     esac
 done < "$tmp/fetch"
 
+# debug
+[ "$1" = "--debug" ] \
+    && [ -n "$targets" ] \
+    && printf "## debug targets\n%s\n" "$targets"
+
 # compare db version with target version to build
 [ -n "$targets" ] \
     && printf "%s\n" "$targets" \
@@ -64,6 +74,12 @@ done < "$tmp/fetch"
         | aur vercmp --quiet --path "$tmp/targets" > "$tmp/builds"
         # | cut -d'	' -f1 > "$tmp/builds"
         # | awk '{print $1}' > "$tmp/builds"
+
+# debug
+[ "$1" = "--debug" ] \
+    && [ -s "$tmp/builds" ] \
+    && printf "## debug builds\n" \
+    && cat "$tmp/builds"
 
 # rebuild the updateable packages
 [ -s "$tmp/builds" ] \
