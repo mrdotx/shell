@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-25T11:28:18+0200
+# date:   2023-07-25T18:34:24+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -12,8 +12,8 @@ user_home="$HOME"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete \
+        --exclude='$user_home/Cloud' \
         --exclude='$user_home/Desktop' \
-        --exclude='$user_home/Downloads' \
         --exclude='$user_home/Music' \
         --exclude='$user_home/Public' \
         --exclude='$user_home/Templates' \
