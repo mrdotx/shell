@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-07-25T18:57:15+0200
+# date:   2023-07-26T10:07:53+0200
 
 # helper
 find_files() {
@@ -15,7 +15,7 @@ find_files() {
         -type f \
         -mtime +"$cache_days" \
         -not -path "*/paru/*" \
-        -not -path "*/wallpaper/*" \
+        -not -name "wallpaper.jpg" \
         "$@"
 }
 
