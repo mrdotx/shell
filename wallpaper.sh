@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T21:35:14+0200
+# date:   2023-07-26T10:48:18+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -12,6 +12,7 @@ LANG=C
 # config
 xresource="$HOME/.config/X11/Xresources"
 config="$HOME/.config/X11/Xresources.d/wallpaper"
+cache="$HOME/.cache/wallpaper.jpg"
 
 # help
 script=$(basename "$0")
@@ -23,7 +24,7 @@ help="$script [-h/--help] -- wrapper script to set wallpaper
     without given settings, load wallpaper from xresources
     [folder]   = set random picture from folder as wallpaper and save folder
                  path to xresources
-    [file]     = set picture as wallpaper and save filename to xresources
+    [file]     = set picture as wallpaper and save file path to xresources
     [--color]  = set colored background by hex value (default: #000000)
     [--random] = set random picture based on saved <path/file> from xresources
 
@@ -52,17 +53,25 @@ xresource() {
     esac
 }
 
+random_pic() {
+    find "$1" -type f \
+        | shuf -n 1
+}
+
+check_uri() {
+    [ -s "$1" ] \
+        && printf "%s" "$1" \
+        && return
+
+    printf "%s" "$cache"
+}
+
 color_uri() {
     uri="/tmp/wallpaper-color.png"
 
     convert xc:"${1:-#000000}" -resize 1920x1080! "$uri"
 
     printf "%s" "$uri"
-}
-
-random_pic() {
-    find "$1" -type f \
-        | shuf -n 1
 }
 
 random_uri() {
@@ -72,22 +81,26 @@ random_uri() {
     else
         uri="$(random_pic "$(dirname "$uri")")"
     fi
-    printf "%s" "$uri"
+
+    check_uri "$uri"
 }
 
 process_uri() {
     if [ -d "$1" ]; then
         uri="$(random_pic "$1")"
         xresource set_value uri "$1"
+        cp -f "$uri" "$cache"
     elif [ -f "$1" ]; then
         uri="$1"
         xresource set_value uri "$1"
+        cp -f "$uri" "$cache"
     else
         uri="$(xresource get_value uri)"
         [ -d "$uri" ] \
             && uri="$(random_pic "$uri")"
     fi
-    printf "%s" "$uri"
+
+    check_uri "$uri"
 }
 
 case "$1" in
