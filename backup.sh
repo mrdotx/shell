@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-07-26T08:08:36+0200
+# date:   2023-07-28T09:15:52+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -123,10 +123,10 @@ backup_keys_pgp() {
     && backup_keys_data "$user_home/.netrc" \
     && backup_keys_data "$user_home/.config/git" \
     && backup_keys_data "$user_home/.config/pam-gnupg" \
+    && backup_keys_data "$user_home/.config/rclone" \
     && backup_keys_data "$user_home/.gnupg" \
     && backup_keys_data "$user_home/.ssh" \
     && backup_keys_data "$user_home/Cloud/webde/.keys" \
-    && backup_keys_data "$user_home/Documents/Software/gpg-backup.md" \
     && backup_keys_data "$user_home/.local/share/repos/password-store" \
     && printf "  -> backup pgp [y]es/[N]o: " \
         && read -r backup_pgp \
