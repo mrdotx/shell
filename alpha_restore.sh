@@ -3,12 +3,12 @@
 # path:   /home/klassiker/.local/share/repos/shell/alpha_restore.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T21:32:23+0200
+# date:   2023-08-02T19:25:13+0200
 
 # help
 script=$(basename "$0")
 help="$script [-h/--help] -- script to find png files with suspicious data
-                                    in alpha channel
+                                in alpha channel
   Usage:
     $script [png files]
 
