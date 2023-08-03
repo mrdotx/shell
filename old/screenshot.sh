@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/old/screenshot.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/screenshot
-# date:   2023-05-28T21:41:25+0200
+# github: https://github.com/mrdotx/shell
+# date:   2023-08-03T08:43:33+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
