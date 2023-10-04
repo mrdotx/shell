@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_nds.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-02T17:32:00+0200
+# date:   2023-10-03T17:58:14+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -30,19 +30,19 @@ find_roms_options="-type f \
 # helper functions
 rom_list() {
     for rom_folder in "$@"; do
-        roms="/mnt/$label/$rom_folder"
+        roms="$mnt/$rom_folder"
         [ -d "$roms" ] \
             && printf ":: create rom list for %s\n" "$rom_folder" \
             && eval "find $roms $find_roms_options" \
             | sed "s#^$roms/##g" \
             | sort > "$label/$rom_folder/list_$rom_folder"
     done
-
-    return 0
 }
 
 backup() {
     for label in "$@"; do
+        unset mnt
+
         # mount
         [ -h "/dev/disk/by-label/$label" ] \
             && mnt="/mnt/$label" \
@@ -63,13 +63,11 @@ backup() {
         [ -d "$mnt" ] \
             && printf ":: unmount and delete mount folder %s\n" "$mnt" \
             && $auth umount "$mnt" \
-            && $auth find "$mnt" -empty -type d -delete
-
-        unset mnt
+            && $auth find "$mnt" -empty -type d -delete \
+            && return 0
     done
-
-    return 0
 }
 
 # main
-backup DSONEI R4-SDHC R4I-SDHC
+backup DSONEI R4-SDHC R4I-SDHC \
+    && exit 0
