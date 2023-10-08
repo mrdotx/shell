@@ -14,7 +14,7 @@ shell scripts for system/hardware management and general maintenance
 | aur_pkgstats.sh      | download package stats from the aur                                           |
 | aurbuild_update.sh   | aurutils sync packages and sync devel packages                                |
 | backlight.sh         | change backlight brightness with status notification                          |
-| backup.sh            | system backup with rsync from local/remote location to specific usb device    |
+| backup_system.sh     | system backup with rsync from local/remote location to specific usb device    |
 | backup_keys.sh       | key backup with rsync to specific usb device                                  |
 | backup_nds.sh        | nds flashcard backup with rsync to current folder (roms backup as list)       |
 | color_picker.sh      | pick color with a tool, copy hex to clipboard and preview with notify-send    |
