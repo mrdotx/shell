@@ -3,12 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_nds.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-03T17:58:14+0200
+# date:   2023-10-08T16:24:31+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 auth_user="klassiker"
+labels="DSONEI R4-SDHC R4I-SDHC"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete \
@@ -40,7 +41,7 @@ rom_list() {
 }
 
 backup() {
-    for label in "$@"; do
+    for label in $labels; do
         unset mnt
 
         # mount
@@ -69,5 +70,10 @@ backup() {
 }
 
 # main
-backup DSONEI R4-SDHC R4I-SDHC \
+backup \
     && exit 0
+
+printf ":: please connect one of the following devices to backup from:\n"
+for label in $labels; do
+    printf "  -> %s\n" "$label"
+done

@@ -3,12 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_keys.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-04T08:50:23+0200
+# date:   2023-10-08T16:22:09+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 user_home="$HOME"
+labels="keys"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete"
@@ -29,7 +30,7 @@ backup_pgp() {
 }
 
 backup() {
-    for label in "$@"; do
+    for label in $labels; do
         unset mnt
 
         # mount
@@ -70,8 +71,10 @@ backup() {
 }
 
 # main
-backup keys \
+backup \
     && exit 0
 
-printf ":: please connect the following device to backup to:\n  -> %s\n" \
-    "$label"
+printf ":: please connect one of the following devices to backup to:\n"
+for label in $labels; do
+    printf "  -> %s\n" "$label"
+done

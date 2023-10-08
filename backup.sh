@@ -3,13 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-04T09:58:47+0200
+# date:   2023-10-08T16:22:50+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 user_home="$HOME"
 local_host="$(hostname)"
+labels="backup defect"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete \
@@ -71,7 +72,7 @@ backup_host() {
 
 # main
 backup() {
-    for label in "$@"; do
+    for label in $labels; do
         unset mnt
 
         # mount
@@ -97,8 +98,10 @@ backup() {
 }
 
 # main
-backup backup defect \
+backup \
     && exit 0
 
-printf ":: please connect the following device to backup to:\n  -> %s\n" \
-    "$label"
+printf ":: please connect one of the following devices to backup to:\n"
+for label in $labels; do
+    printf "  -> %s\n" "$label"
+done
