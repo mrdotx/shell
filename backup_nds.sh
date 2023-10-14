@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_nds.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-08T16:24:31+0200
+# date:   2023-10-14T09:09:54+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -19,7 +19,7 @@ rsync_options="-aAXvh --delete \
         --exclude='*/nds/' \
         --exclude='*/nes/' \
         --exclude='*/snes/'"
-rsync_saves_options="-aAXvh \
+rsync_saves_options="-aAXvh --delete\
         --include='*/' \
         --include='*.[Ss][Aa][Vv]' \
         --include='*.[Ss][Rr][Mm]' \
