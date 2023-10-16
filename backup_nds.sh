@@ -3,12 +3,12 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_nds.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-14T09:09:54+0200
+# date:   2023-10-16T08:38:55+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
-auth_user="klassiker"
+backup_path="${1:-.}"
 labels="DSONEI R4-SDHC R4I-SDHC"
 
 # config (rsync option --dry-run for testing)
@@ -33,10 +33,11 @@ rom_list() {
     for rom_folder in "$@"; do
         roms="$mnt/$rom_folder"
         [ -d "$roms" ] \
-            && printf ":: create rom list for %s\n" "$rom_folder" \
+            && printf ":: create rom list for %s\n" \
+                "$rom_folder" \
             && eval "find $roms $find_roms_options" \
             | sed "s#^$roms/##g" \
-            | sort > "$label/$rom_folder/list_$rom_folder"
+            | sort > "$backup_path/$label/$rom_folder/list_$rom_folder"
     done
 }
 
@@ -46,25 +47,30 @@ backup() {
 
         # mount
         [ -h "/dev/disk/by-label/$label" ] \
-            && mnt="/mnt/$label" \
-            && printf ":: create and mount backup folder %s\n" "$mnt" \
-            && $auth mkdir -p "$mnt" \
-            && $auth mount "/dev/disk/by-label/$label" "$mnt"
+            && mnt="/tmp/$label" \
+            && printf ":: create and mount backup folder %s\n" \
+                "$mnt" \
+            && mkdir -p "$mnt" \
+            && $auth mount \
+                -t vfat \
+                "/dev/disk/by-label/$label" \
+                "$mnt"
 
         # backup
         [ -d "$mnt" ] \
-            && printf ":: create folder and backup %s to %s\n" "$mnt" "$label" \
-            && eval "$auth rsync $rsync_options $mnt ." \
-            && eval "$auth rsync $rsync_saves_options $mnt ." \
-            && printf ":: set owner for %s to %s\n" "$label" "$auth_user" \
-            && $auth chown -R "$auth_user": "$label" \
+            && printf ":: create folder and backup %s to %s\n" \
+                "$mnt" \
+                "$backup_path/$label" \
+            && eval "rsync $rsync_options $mnt $backup_path" \
+            && eval "rsync $rsync_saves_options $mnt $backup_path" \
             && rom_list gb gba gbc nds nes snes \
 
         # unmount
         [ -d "$mnt" ] \
-            && printf ":: unmount and delete mount folder %s\n" "$mnt" \
+            && printf ":: unmount and delete mount folder %s\n" \
+                "$mnt" \
             && $auth umount "$mnt" \
-            && $auth find "$mnt" -empty -type d -delete \
+            && find "$mnt" -empty -type d -delete \
             && return 0
     done
 }
