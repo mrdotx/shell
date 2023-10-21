@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-21T12:40:23+0200
+# date:   2023-10-21T13:15:23+0200
 
 # config
 default="status"
@@ -56,12 +56,14 @@ command_constructor() {
     reset=$(tput sgr0)
 
     for folder in $1; do
-        footer="printf '  -> ${green}git $options $yellow$folder$reset\n'" \
+        repo=${folder##*/}
+        footer="printf '  -> completed: ${green}git $options $yellow$repo$reset\n'" \
             && printf "\"output=\$(cd $folder && git $options && %s)\"\n" \
                 "$footer"
     done
 }
 
-printf ":: git operations completed:\n"
+# shift
+printf ":: git operations:\n"
 command_constructor "$(git_folder)" \
      | xargs -P"$procs" -I{} sh -c "{} && printf \"%s\n\" \"\$output\""
