@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-21T13:15:23+0200
+# date:   2023-10-21T18:39:33+0200
 
 # config
 default="status"
@@ -24,25 +24,13 @@ help="$script [-h/--help] -- script to execute git command on multiple repositor
     $script \"fetch origin\" \"$HOME/.local/share/repos\"
     $script \"pull\" \"\$HOME/.local/share/repos\" \"/srv/http\""
 
-case $1 in
-    -h | --help)
-        printf "%s\n" "$help"
-        exit 0
-        ;;
-    */*)
-        options="$default"
-        ;;
-    *)
-        options="${1:-$default}"
-        [ $# -ge 1 ] \
-            && shift
-esac
-config="$(printf "%s" "${*:-$(pwd)}" \
-    | sed 's/ /\n/g' \
-)"
-
+# helper functions
 git_folder() {
-    for folder in $config; do
+    folders="$(printf "%s" "${*:-$(pwd)}" \
+        | sed 's/ /\n/g' \
+    )"
+
+    for folder in $folders; do
         find "$folder" -maxdepth 2 -type d -name ".git" \
             | sed 's/\/.git//' \
             | sort
@@ -63,7 +51,20 @@ command_constructor() {
     done
 }
 
-# shift
+case $1 in
+    -h | --help)
+        printf "%s\n" "$help"
+        exit 0
+        ;;
+    */*)
+        options="$default"
+        ;;
+    *)
+        options="${1:-$default}"
+        [ $# -ge 1 ] \
+            && shift
+esac
+
 printf ":: git operations:\n"
-command_constructor "$(git_folder)" \
+command_constructor "$(git_folder "$@")" \
      | xargs -P"$procs" -I{} sh -c "{} && printf \"%s\n\" \"\$output\""
