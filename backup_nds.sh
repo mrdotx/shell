@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_nds.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-11-15T10:37:01+0100
+# date:   2023-11-26T15:24:26+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -16,8 +16,12 @@ rsync_options="-aAXvh --delete \
         --exclude='*/gb/' \
         --exclude='*/gba/' \
         --exclude='*/gbc/' \
+        --exclude='*/gen/' \
+        --exclude='*/gg/' \
         --exclude='*/nds/' \
         --exclude='*/nes/' \
+        --exclude='*/ngp/' \
+        --exclude='*/sms/' \
         --exclude='*/snes/'"
 rsync_saves_options="-aAXvh --delete\
         --include='*/' \
@@ -47,6 +51,9 @@ backup() {
 
         # mount
         [ -h "/dev/disk/by-label/$label" ] \
+            && printf ":: check file system on %s\n" \
+                "$label" \
+            && $auth fsck.fat "/dev/disk/by-label/$label" \
             && mnt="/tmp/$label" \
             && printf ":: create and mount backup folder %s\n" \
                 "$mnt" \
@@ -63,7 +70,7 @@ backup() {
                 "$backup_path/$label" \
             && eval "rsync $rsync_options $mnt $backup_path" \
             && eval "rsync $rsync_saves_options $mnt $backup_path" \
-            && rom_list gb gba gbc nds nes snes \
+            && rom_list gb gba gbc gen gg nds nes ngp sms snes \
 
         # unmount
         [ -d "$mnt" ] \
