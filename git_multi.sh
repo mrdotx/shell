@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-21T18:39:33+0200
+# date:   2023-11-28T09:49:40+0100
 
 # config
 default="status"
@@ -44,7 +44,8 @@ command_constructor() {
     reset=$(tput sgr0)
 
     for folder in $1; do
-        repo=${folder##*/}
+        repo_folder="${folder%/*}"
+        repo="${repo_folder##*/}/${folder##*/}"
         footer="printf '  -> completed: ${green}git $options $yellow$repo$reset\n'" \
             && printf "\"output=\$(cd $folder && git $options && %s)\"\n" \
                 "$footer"
