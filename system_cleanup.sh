@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-07-26T10:07:53+0200
+# date:   2023-12-12T09:18:09+0100
 
 # helper
 find_files() {
@@ -55,12 +55,10 @@ delete_files() {
 
     printf " delete files from \"%s\" [y]es/[N]o: " \
         "$1" \
-        && read -r "key"
+        && read -r key
     case "$key" in
         y|Y|yes|Yes)
             find_files "$1" "$2" -delete
-            ;;
-        *)
             ;;
     esac
 }
