@@ -22,6 +22,7 @@ shell scripts for system/hardware management and general maintenance
 | git_clone.sh         | clone all repositories of a user or organization                              |
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | padd_update.sh       | script to update pi-hole padd                                                 |
+| ssh_exec.sh          | execute command with ssh if remote host not local host                        |
 | status.sh            | simple script for system information in different formats                     |
 | sync_notes.sh        | sync notes to webserver                                                       |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
