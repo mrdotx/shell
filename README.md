@@ -22,6 +22,9 @@ shell scripts for system/hardware management and general maintenance
 | git_clone.sh         | clone all repositories of a user or organization                              |
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | padd_update.sh       | script to update pi-hole padd                                                 |
+| speed_test.service   | systemd service for speed_test.sh                                             |
+| speed_test.sh        | output speedtest-cli results to structured csv file                           |
+| speed_test.timer     | systemd timer for speed_test.service                                          |
 | ssh_exec.sh          | execute command with ssh if remote host not local host                        |
 | status.sh            | simple script for system information in different formats                     |
 | sync_notes.sh        | sync notes to webserver                                                       |
