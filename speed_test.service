@@ -1,0 +1,14 @@
+# path:   /home/klassiker/.local/share/repos/shell/speed_test.service
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2023-12-16T09:02:14+0100
+
+[Unit]
+Description=speed test in user contaxt alarm
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/share/repos/shell/speed_test.sh
+
+[Install]
+WantedBy=multi-user.target
