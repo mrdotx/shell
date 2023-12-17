@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/speed_test.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-12-16T09:35:54+0100
+# date:   2023-12-16T13:18:11+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -19,9 +19,17 @@ get_value() {
         | cut -d ',' -f"$2"
 }
 
-speedtest_result=$(speedtest-cli --csv)
+# direct execution options
+case $* in
+    *"--list"*|*"--version"*)
+        speedtest-cli "$@"
+        exit 0
+        ;;
+esac
 
-# output
+# main
+speedtest_result=$(speedtest-cli --csv "$@")
+
 [ -s "$csv" ] \
     || printf "%s\n" "$header" > "$csv"
 
