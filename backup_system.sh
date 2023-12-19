@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_system.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-10-08T18:07:43+0200
+# date:   2023-12-18T18:01:35+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -54,20 +54,12 @@ backup_host() {
     printf "\n:: create folder and backup %s to %s\n" "$src" "$dest"
     $auth mkdir -p "$dest"
 
-    [ "$1" = "$local_host" ] \
+    ([ "$1" = "$local_host" ] || ssh -q "$1" exit) \
         && eval "$auth rsync $options $src $dest" \
-        && return 0
+        && return
 
-    ssh -q "$1" exit
-    case $? in
-        0)
-            eval "$auth rsync $options $src $dest"
-            ;;
-        *)
-            printf "connect to %s failed, please check if ssh is enabled!\n" \
-                "$1"
-            ;;
-    esac
+    printf "connect to %s failed, please check if ssh is enabled!\n" \
+        "$1"
 }
 
 # main
