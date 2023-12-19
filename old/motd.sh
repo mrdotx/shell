@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/motd.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T21:43:51+0200
+# date:   2023-12-18T18:06:40+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -139,15 +139,11 @@ cpu() {
 
 # alive
 alive() {
-    ping -c1 -W1 -q "$1" >/dev/null 2>&1
-    case $? in
-        0)
-            printf "online"
-            ;;
-        *)
-            printf "offline"
-            ;;
-    esac
+    ping -c1 -W1 -q "$1" >/dev/null 2>&1 \
+        && printf "online" \
+        && return
+
+    printf "offline"
 }
 
 # colors
