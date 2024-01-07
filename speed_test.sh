@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/speed_test.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-12-16T13:18:11+0100
+# date:   2024-01-06T10:47:07+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -39,7 +39,7 @@ printf "%s,%s,%s,%.2f,%.2f,%s,%s,%.2f,%s,%s,%s\n" \
     "$(get_value "$speedtest_result" 6)" \
     "$(printf "%s/1000000\n" "$(get_value "$speedtest_result" 7)" | bc -l)" \
     "$(printf "%s/1000000\n" "$(get_value "$speedtest_result" 8)" | bc -l)" \
-    "$(hostname)" \
+    "$(uname -n)" \
     "$(get_value "$speedtest_result" 10)" \
     "$(get_value "$speedtest_result" 5)" \
     "$(get_value "$speedtest_result" 3)" \

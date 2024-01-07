@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T21:33:22+0200
+# date:   2024-01-06T10:57:34+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -101,7 +101,7 @@ ipv4() {
 }
 
 name() {
-    name="$(whoami)@$(hostname)"
+    name="$(whoami)@$(uname -n)"
     printf "%s" "$name"
 }
 
@@ -133,7 +133,6 @@ case "$1" in
         printf "%s\n" "$(clock)"
         ;;
     *)
-        printf "\n"
         printf "cpu:    %s\n" "$(cpu)"
         printf "ram:    %s\n" "$(ram)"
         printf "swap:   %s\n" "$(swap)"
@@ -146,6 +145,5 @@ case "$1" in
         printf "\n--\n"
         printf "# %s\n" "$(name)"
         printf "# %s\n" "$(clock)"
-        printf "\n"
         ;;
 esac
