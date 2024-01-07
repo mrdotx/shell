@@ -18,6 +18,7 @@ shell scripts for system/hardware management and general maintenance
 | backup_nds.sh        | nds flashcard backup with rsync (roms backup as list)                         |
 | backup_system.sh     | system backup with rsync from local/remote location to specific usb device    |
 | color_picker.sh      | pick color with a tool, copy hex to clipboard and preview with notify-send    |
+| cyanrip.sh           | wrapper for cyanrip cd ripping tool                                           |
 | delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
 | git_clone.sh         | clone all repositories of a user or organization                              |
 | git_multi.sh         | execute git command on multiple repositories                                  |
