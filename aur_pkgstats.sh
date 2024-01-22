@@ -3,12 +3,12 @@
 # path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-03-25T13:13:04+0100
+# date:   2024-01-22T16:27:33+0100
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
 pkgs_dir="${1:-"$HOME/.local/share/repos/aur"}"
-file_header="Name,Month,Count,Popularity,Samples"
+file_header="Name	Month	Count	Popularity	Samples"
 
 get_pkgs() {
     find "$pkgs_dir" -maxdepth 1 -type d -exec basename "{}" \; \
@@ -30,7 +30,7 @@ request() {
     popularity=$(extract_data "$data" "popularity")
     month=$(extract_data "$data" "startMonth")
 
-    printf "%s,%s,%s,%s,%s\n" \
+    printf "%s	%s	%s	%s	%s\n" \
         "$name" \
         "$month" \
         "$count" \
