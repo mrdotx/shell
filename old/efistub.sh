@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/old/efistub.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2021-04-20T16:33:04+0200
+# date:   2024-02-23T16:53:14+0100
 
 # config
 loader_disk="/dev/nvme0n1"
@@ -33,16 +33,15 @@ loader_parameter() {
 pivot() {
     printf "%s\n" "$1" \
         | awk '{gsub(/^ +| +$/,"")} !/^($|#)/ {print $0}' \
-        | {
-            while IFS= read -r line; do
-                if [ -n "$entry" ]; then
-                    entry="$entry$2$(printf "%s" "$line")"
-                else
-                    entry="$(printf "%s" "$line")"
-                fi
-            done
-            printf "%s\n" "$entry"
-        }
+        | while IFS= read -r line; do
+            [ -n "$i" ] \
+                && printf "%s" "$2" "$line"
+            [ -z "$i" ] \
+                && printf "%s" "$line" \
+                && i=1
+        done
+    printf "\n"
+    unset i
 }
 
 # efibootmgr functions
@@ -68,6 +67,7 @@ delete_entries() {
             --quiet
     done
     printf "\n"
+    unset i
 }
 
 create_entry() {
