@@ -3,14 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/color_picker.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T21:31:14+0200
+# date:   2024-03-13T17:25:17+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
 color=$( \
-    # workaround (sleep -> https://github.com/i3/i3/issues/3298)
+    # WORKAROUND: xcolor doesn't start
     sleep .5 \
         && xcolor -P 128 \
 )
