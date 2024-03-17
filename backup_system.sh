@@ -3,14 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_system.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-01-06T10:46:06+0100
+# date:   2024-03-17T14:47:08+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 user_home="$HOME"
 local_host="$(uname -n)"
-labels="backup defect"
+labels="backup_d backup_f"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete \
