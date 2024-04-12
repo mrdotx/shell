@@ -2,11 +2,11 @@
 
 shell scripts for system/hardware management and general maintenance
 
-| folder name  | comment                    |
-| :----------- | :------------------------- |
-| old          | old stuff                  |
+| folder  | comment                                        |
+| :------ | :--------------------------------------------- |
+| archive | old stuff and things that couldn't be assigned |
 
-| name                 | comment                                                                       |
+| file                 | comment                                                                       |
 | :------------------- | :---------------------------------------------------------------------------- |
 | alpha_restore.sh     | find png files with suspicious data in alpha channel                          |
 | alsa.sh              | change volume with status notification                                        |
@@ -18,6 +18,7 @@ shell scripts for system/hardware management and general maintenance
 | backup_nds.sh        | nds flashcard backup with rsync (roms backup as list)                         |
 | backup_system.sh     | system backup with rsync from local/remote location to specific usb device    |
 | color_picker.sh      | pick color with a tool, copy hex to clipboard and preview with notify-send    |
+| compressor.sh        | script to compress/extract/list files and folders                             |
 | cyanrip.sh           | wrapper for cyanrip cd ripping tool                                           |
 | delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
 | git_clone.sh         | clone all repositories of a user or organization                              |
@@ -28,6 +29,7 @@ shell scripts for system/hardware management and general maintenance
 | speed_test.timer     | systemd timer for speed_test.service                                          |
 | ssh_exec.sh          | execute command with ssh if remote host not local host                        |
 | status.sh            | simple script for system information in different formats                     |
+| stopwatch.sh         | script to measure the time                                                    |
 | sync_notes.sh        | sync notes to webserver                                                       |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
 | touchpad_toggle.sh   | disable/enable touchpad                                                       |
