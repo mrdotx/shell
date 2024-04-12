@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/compressor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-11T20:21:44+0200
+# date:   2024-04-12T08:57:54+0200
 
 check() {
     tools="7z bzip2 ghostscript gzip lzip lzma lzop tar unzip xz zstd"
@@ -121,7 +121,7 @@ extract() {
                         *)
                             printf "7z x \"%s\" -o\"%s\"\n" \
                                 "$archive" "$folder"
-                            mkdir -p "$folder" \
+                            mkdir -p "$folder"
                             7z x "$archive" -o"$folder" >/dev/null 2>&1
                             ;;
                     esac
