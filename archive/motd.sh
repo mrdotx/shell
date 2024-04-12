@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# path:   /home/klassiker/.local/share/repos/shell/old/motd.sh
+# path:   /home/klassiker/.local/share/repos/shell/archive/motd.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-12-18T18:06:40+0100
+# date:   2024-04-11T22:22:27+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/old/backup.sh
+# path:   /home/klassiker/.local/share/repos/shell/archive/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2022-09-23T12:39:15+0200
+# date:   2024-04-11T22:21:59+0200
 
 # color variables
 magenta=$(tput setaf 5)

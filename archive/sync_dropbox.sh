@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/old/sync_dropbox.sh
+# path:   /home/klassiker/.local/share/repos/shell/archive/sync_dropbox.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T22:01:01+0200
+# date:   2024-04-11T22:22:48+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
