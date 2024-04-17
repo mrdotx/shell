@@ -1,0 +1,14 @@
+# path:   /home/klassiker/.local/share/repos/shell/aurbuild.timer
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2024-04-16T12:39:16+0200
+
+[Unit]
+Description=run aurbuild.service daily
+
+[Timer]
+OnCalendar=2:02:00
+AccuracySec=1m
+
+[Install]
+WantedBy=timers.target

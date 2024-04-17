@@ -1,0 +1,14 @@
+# path:   /home/klassiker/.local/share/repos/shell/aurbuild.service
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2024-04-16T12:42:46+0200
+
+[Unit]
+Description=updating repository aurbuild in user context
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/share/repos/shell/aurbuild.sh
+
+[Install]
+WantedBy=multi-user.target
