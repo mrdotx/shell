@@ -12,7 +12,9 @@ shell scripts for system/hardware management and general maintenance
 | alsa.sh              | change volume with status notification                                        |
 | aria2c.sh            | add download urls to aria2c                                                   |
 | aur_pkgstats.sh      | download package stats from the aur                                           |
-| aurbuild_update.sh   | aurutils sync packages and sync devel packages                                |
+| aurbuild.service     | systemd service for aurbuild.sh                                               |
+| aurbuild.sh          | aurutils sync packages and sync devel packages                                |
+| aurbuild.timer       | systemd timer for aurbuild.service                                            |
 | backlight.sh         | change backlight brightness with status notification                          |
 | backup_keys.sh       | key backup with rsync to specific usb device                                  |
 | backup_nds.sh        | nds flashcard backup with rsync (roms backup as list)                         |
