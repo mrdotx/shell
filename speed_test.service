@@ -1,10 +1,10 @@
 # path:   /home/klassiker/.local/share/repos/shell/speed_test.service
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-12-16T09:02:14+0100
+# date:   2024-04-16T12:32:23+0200
 
 [Unit]
-Description=speed test in user contaxt alarm
+Description=processing speed test in user context
 
 [Service]
 Type=oneshot
