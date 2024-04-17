@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/motd.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-11T22:22:27+0200
+# date:   2024-04-16T17:45:48+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -192,4 +192,4 @@ label7="$borderBar $(color $statsLabelColor "System:.......:") $(extend "$(cpu)"
 stats="$label1\n$label2\n$label3\n$label4\n$label5\n$label6\n$label7"
 
 # main
-echo -e "$header\n$borderTopLine\n$stats\n$borderBottomLine"
+printf "%b\n%b\n%b\n%b\n" "$header" "$borderTopLine" "$stats" "$borderBottomLine"
