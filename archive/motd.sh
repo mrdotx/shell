@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # path:   /home/klassiker/.local/share/repos/shell/archive/motd.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-16T17:45:48+0200
+# date:   2024-04-17T17:10:44+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -14,7 +14,7 @@ me=$(whoami)
 
 # layout functions
 color() {
-    printf "\e[%sm%s\e[0m" "$1" "$2"
+    printf "\033[%sm%s\033[0m" "$1" "$2"
 }
 
 extend() {
