@@ -3,13 +3,15 @@
 # path:   /home/klassiker/.local/share/repos/shell/speed_test.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-01-22T16:19:01+0100
+# date:   2024-04-19T08:11:03+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
 # config
+retries=5
+delay=10
 csv="$HOME/Public/speed_test.csv"
 header="Date	Time	Ping	Down	Up	Host	IP	Km	Server	ID	Sponsor"
 
@@ -23,12 +25,20 @@ get_value() {
 case $* in
     *"--list"*|*"--version"*)
         speedtest-cli "$@"
-        exit 0
+        exit
         ;;
 esac
 
 # main
-speedtest_result=$(speedtest-cli --csv "$@")
+while [ "${error:-1}" -gt 0 ] && [ $retries -gt 0 ]; do
+    speedtest_result=$(speedtest-cli --csv "$@")
+    error=$?
+    retries=$((retries-1))
+    [ $retries -gt 0 ] \
+        || exit $error
+    [ $error -gt 0 ] \
+        && sleep $delay
+done
 
 [ -s "$csv" ] \
     || printf "%s\n" "$header" > "$csv"
