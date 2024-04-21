@@ -1,13 +1,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/speed_test.timer
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-21T08:42:38+0200
+# date:   2024-04-21T21:52:20+0200
 
 [Unit]
-Description=run speed_test.service twice a day
+Description=run speed_test.service a few times a day
 
 [Timer]
-OnCalendar=10,22:37:00
+OnCalendar=8,20..23:37:00
 AccuracySec=1m
 
 [Install]
