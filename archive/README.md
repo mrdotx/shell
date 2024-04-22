@@ -17,3 +17,4 @@ old stuff and things that couldn't be assigned
 | screenshot.sh     | script to make screenshots with maim            |
 | service_toggle.sh | switch status of service active or inactive     |
 | sync_dropbox.sh   | single dropbox sync with dropbox-cli            |
+| wake_on_lan.sh    | script to send magic packet                     |
