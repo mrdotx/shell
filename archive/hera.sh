@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/hera.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-11T22:22:11+0200
+# date:   2024-04-22T08:33:34+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -12,7 +12,7 @@ LANG=C
 case "$1" in
 wakeup)
     # send magic paket to hera
-    wakeonlan 00:08:9b:c6:99:76
+    wake_on_lan.sh 00:08:9b:c6:99:76
     ;;
 poweroff)
     # send poweroff commands per ssh
