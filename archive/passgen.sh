@@ -3,35 +3,55 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/passgen.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-16T17:37:34+0200
+# date:   2024-04-22T19:20:17+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
 # config
-c=14
-i=1
+chars=16
+symbols='!@#'
+iterations=1
 
 while [ 1 -le "$#" ]; do
     case "$1" in
         -c)
-            c=$2
+            chars=$2
             shift 2
             ;;
         -i)
-            i=$2
+            iterations=$2
             shift 2
             ;;
         *)
             script=$(basename "$0")
-            printf "usage: %s [-c 14] [-i 5]\n" "$script"
+            printf "usage: %s [-c 24] [-i 5]\n" "$script"
             exit 1
             ;;
     esac
 done
 
-while [ 1 -le "$i" ]; do
-    printf "%s\n" "$(tr -dc A-Za-z0-9 < /dev/urandom | head -c"$c")"
-    i=$((i - 1))
+while [ 1 -le "$iterations" ]; do
+    while [ -z "$check" ]; do
+        check=1
+        password=$(printf "%s" \
+            "$(tr -dc "[:alnum:]$symbols" < /dev/urandom \
+                | head -c"$chars")" \
+        )
+
+        # check if at least 1 of each char type is available
+        for char in [$symbols] [0-9] [A-Z] [a-z]; do
+            printf "%s" "$password" \
+                | grep -q "$char" \
+                    || unset check
+
+            [ -z "$check" ] \
+                && break
+        done
+    done
+
+    printf "%s\n" "$password"
+    unset check
+    iterations=$((iterations - 1))
 done
