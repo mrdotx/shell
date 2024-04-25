@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/compressor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-12T08:57:54+0200
+# date:   2024-04-24T20:50:12+0200
 
 check() {
     tools="7z bzip2 ghostscript gzip lzip lzma lzop tar unzip xz zstd"
@@ -44,6 +44,7 @@ help="$script [-h/--help] -- script to extract/compress/list files and folders
                   prepress = very high-resolution
                   default  = useful across a wide variety of uses
                              (possible larger file size)
+                  all      = create for each quality setting a file
 
   Examples:
     $script file1.tar.gz file2.tar.bz2 file3.7z
@@ -167,23 +168,32 @@ extract() {
 compress_pdf() {
     case $1 in
         screen | ebook | printer | prepress | default)
-            quality="$1"
+            settings="$1"
+            shift
+            ;;
+        all)
+            settings="screen ebook printer prepress default"
             shift
             ;;
         *)
-            quality="default"
+            settings="default"
             ;;
     esac
 
     for document in "$@"; do
-        ghostscript \
-            -sDEVICE=pdfwrite \
-            -dPDFSETTINGS=/"$quality" \
-            -dPrinted=false \
-            -dNOPAUSE \
-            -dBATCH \
-            -sOutputFile="$(basename "$document" .pdf)-$quality.pdf" \
-            "$document"
+        for setting in $settings; do
+            output_file="$(basename "$document" .pdf)-$setting.pdf"
+            printf "==> %s\n" "$output_file"
+
+            ghostscript \
+                -sDEVICE=pdfwrite \
+                -dPDFSETTINGS=/"$setting" \
+                -dPrinted=false \
+                -dNOPAUSE \
+                -dBATCH \
+                -sOutputFile="$output_file" \
+                "$document"
+        done
     done
 }
 
