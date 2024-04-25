@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/aria2c.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-03-11T11:25:51+0100
+# date:   2024-04-25T12:06:03+0200
+
+# speed up script and avoid language problems by using standard c
+LC_ALL=C
+LANG=C
 
 # config
 links_file="$HOME/Public/downloads/links.txt"
