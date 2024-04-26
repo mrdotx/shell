@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-11-28T09:49:40+0100
+# date:   2024-04-25T09:55:20+0200
 
 # config
 default="status"
@@ -39,9 +39,9 @@ git_folder() {
 
 command_constructor() {
     # color variables
-    green=$(tput setaf 2)
-    yellow=$(tput setaf 3)
-    reset=$(tput sgr0)
+    green="\033[32m"
+    yellow="\033[33m"
+    reset="\033[0m"
 
     for folder in $1; do
         repo_folder="${folder%/*}"

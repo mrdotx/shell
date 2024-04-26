@@ -3,12 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-11T22:21:59+0200
+# date:   2024-04-25T10:07:03+0200
 
 # color variables
-magenta=$(tput setaf 5)
-cyan=$(tput setaf 6)
-reset=$(tput sgr0)
+magenta="\033[35m"
+cyan="\033[36m"
+blue="\033[94m"
+reset="\033[0m"
 
 destination_root="$HOME/Backup/"
 destination_config="$HOME/Backup/.config/"
@@ -50,27 +51,31 @@ source_object="$source_object
 "
 
 # backup
-printf "[%sbackup%s] folder & files\n" "${magenta}" "${reset}"
-for dir in $source_object; do
-    case "${dir}" in
+printf "[%bbackup%b] folder & files\n" "$magenta" "$reset"
+for folder in $source_object; do
+    case "$folder" in
     "$HOME"/.newsboat)
-        rsync -acqPh --delete --exclude="cache.db" "${dir}" "$destination_root"
+        rsync -acqPh --delete --exclude="cache.db" \
+            "$folder" "$destination_root"
         ;;
     "$HOME"/.weechat)
-        rsync -acqPh --delete --exclude="weechat.log" --exclude="logs" "${dir}" "$destination_root"
+        rsync -acqPh --delete --exclude="weechat.log" --exclude="logs" \
+            "$folder" "$destination_root"
         ;;
     "$HOME"/.config/*)
-        rsync -acqPh --delete "${dir}" "$destination_config"
+        rsync -acqPh --delete \
+            "$folder" "$destination_config"
         ;;
     "$HOME"/*)
-        rsync -acqPh --delete "${dir}" "$destination_root"
+        rsync -acqPh --delete \
+            "$folder" "$destination_root"
         ;;
     esac
-    printf "[%ssource_object%s] %s" "${cyan}" "${reset}" "${dir}"
+    printf "[%bsource_object%b] %s" "$cyan" "$reset" "$folder"
 done
 
 # backup size
-printf "[%sbackup%s] size" "%{blue}" "%{reset}"
+printf "[%bbackup%b] size" "$blue" "$reset"
 du -sh "$HOME/Backup/"
 notify-send \
     -u low \
