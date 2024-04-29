@@ -1,0 +1,14 @@
+# path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.service
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2024-04-29T09:19:16+0200
+
+[Unit]
+Description=updating pkgstats in user context
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/share/repos/shell/aur_pkgstats.sh cinfo rxvt-unicode-truecolor-wide-glyphs
+
+[Install]
+WantedBy=multi-user.target
