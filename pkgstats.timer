@@ -1,0 +1,14 @@
+# path:   /home/klassiker/.local/share/repos/shell/pkgstats.timer
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2024-04-29T10:40:27+0200
+
+[Unit]
+Description=run pkgstats.service monthly
+
+[Timer]
+OnCalendar=*-*-02 04:04:00
+AccuracySec=1m
+
+[Install]
+WantedBy=timers.target

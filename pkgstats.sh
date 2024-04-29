@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.sh
+# path:   /home/klassiker/.local/share/repos/shell/pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-29T10:34:25+0200
+# date:   2024-04-29T10:38:29+0200
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
