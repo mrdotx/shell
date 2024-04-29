@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-29T09:09:03+0200
+# date:   2024-04-29T10:34:25+0200
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
-out_dir="$HOME/Public"
+out_dir="$HOME/Public/pkgstats"
 
 extract_data() {
     printf "%s" "$1" \
