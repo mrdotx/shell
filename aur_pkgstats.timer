@@ -1,13 +1,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.timer
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-29T09:47:03+0200
+# date:   2024-04-29T09:50:41+0200
 
 [Unit]
-Description=run aur_pkgstats.service twice a monthly
+Description=run aur_pkgstats.service monthly
 
 [Timer]
-OnCalendar=*-*-02,14 14:14:00
+OnCalendar=*-*-02 14:14:00
 AccuracySec=1m
 
 [Install]
