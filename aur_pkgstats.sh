@@ -3,17 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/aur_pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-01-22T16:27:33+0100
+# date:   2024-04-29T09:09:03+0200
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
-pkgs_dir="${1:-"$HOME/.local/share/repos/aur"}"
-file_header="Name	Month	Count	Popularity	Samples"
-
-get_pkgs() {
-    find "$pkgs_dir" -maxdepth 1 -type d -exec basename "{}" \; \
-        | sed 1d
-}
+out_dir="$HOME/Public"
 
 extract_data() {
     printf "%s" "$1" \
@@ -38,11 +32,12 @@ request() {
         "$samples"
 }
 
-for pkg in $(get_pkgs); do
+for pkg in "$@"; do
+    file_header="Name	Month	Count	Popularity	Samples"
     printf "%s " "$pkg"
 
-    [ -e "$pkgs_dir/$pkg.csv" ] \
-        && output=$(sed "/$file_header/d" "$pkgs_dir/$pkg.csv") \
+    [ -e "$out_dir/$pkg.csv" ] \
+        && output=$(sed "/$file_header/d" "$out_dir/$pkg.csv") \
         && output=$(printf "%s\n%s" \
             "$output" \
             "$(request "$pkg")" \
@@ -51,8 +46,8 @@ for pkg in $(get_pkgs); do
     [ -z "$output" ] \
         && output="$(request "$pkg")"
 
-    printf "%s\n" "$file_header" > "$pkgs_dir/$pkg.csv"
-    printf "%s" "$output" | sort -ur >> "$pkgs_dir/$pkg.csv"
+    printf "%s\n" "$file_header" > "$out_dir/$pkg.csv"
+    printf "%s" "$output" | sort -ur >> "$out_dir/$pkg.csv"
 
     printf "=> finished\n"
     unset output
