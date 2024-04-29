@@ -11,7 +11,9 @@ shell scripts for system/hardware management and general maintenance
 | alpha_restore.sh     | find png files with suspicious data in alpha channel                          |
 | alsa.sh              | change volume with status notification                                        |
 | aria2c.sh            | add download urls to aria2c                                                   |
+| aur_pkgstats.service | systemd service for aur_pkgstats.sh                                           |
 | aur_pkgstats.sh      | download package stats from the aur                                           |
+| aur_pkgstats.timer   | systemd timer for aur_pkgstats.service                                        |
 | aurbuild.service     | systemd service for aurbuild.sh                                               |
 | aurbuild.sh          | aurutils sync packages and sync devel packages                                |
 | aurbuild.timer       | systemd timer for aurbuild.service                                            |
