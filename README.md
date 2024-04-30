@@ -25,7 +25,7 @@ shell scripts for system/hardware management and general maintenance
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | padd_update.sh       | script to update pi-hole padd                                                 |
 | pkgstats.sh          | download package stats from arch packages                                     |
-| speed_test.sh        | output speedtest-cli results to structured csv file                           |
+| speedtest.sh         | output speedtest-cli results to structured csv file                           |
 | ssh_exec.sh          | execute command with ssh if remote host not local host                        |
 | status.sh            | simple script for system information in different formats                     |
 | stopwatch.sh         | script to measure the time                                                    |
