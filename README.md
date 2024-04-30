@@ -5,15 +5,14 @@ shell scripts for system/hardware management and general maintenance
 | folder  | comment                                        |
 | :------ | :--------------------------------------------- |
 | archive | old stuff and things that couldn't be assigned |
+| systemd | systemd services and timer                     |
 
 | file                 | comment                                                                       |
 | :------------------- | :---------------------------------------------------------------------------- |
 | alpha_restore.sh     | find png files with suspicious data in alpha channel                          |
 | alsa.sh              | change volume with status notification                                        |
 | aria2c.sh            | add download urls to aria2c                                                   |
-| aurbuild.service     | systemd service for aurbuild.sh                                               |
 | aurbuild.sh          | aurutils sync packages and sync devel packages                                |
-| aurbuild.timer       | systemd timer for aurbuild.service                                            |
 | backlight.sh         | change backlight brightness with status notification                          |
 | backup_keys.sh       | key backup with rsync to specific usb device                                  |
 | backup_nds.sh        | nds flashcard backup with rsync (roms backup as list)                         |
@@ -25,12 +24,8 @@ shell scripts for system/hardware management and general maintenance
 | git_clone.sh         | clone all repositories of a user or organization                              |
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | padd_update.sh       | script to update pi-hole padd                                                 |
-| pkgstats.service     | systemd service for pkgstats.sh                                               |
 | pkgstats.sh          | download package stats from arch packages                                     |
-| pkgstats.timer       | systemd timer for pkgstats.service                                            |
-| speed_test.service   | systemd service for speed_test.sh                                             |
 | speed_test.sh        | output speedtest-cli results to structured csv file                           |
-| speed_test.timer     | systemd timer for speed_test.service                                          |
 | ssh_exec.sh          | execute command with ssh if remote host not local host                        |
 | status.sh            | simple script for system information in different formats                     |
 | stopwatch.sh         | script to measure the time                                                    |

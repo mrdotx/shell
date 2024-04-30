@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/speed_test.sh
+# path:   /home/klassiker/.local/share/repos/shell/speedtest.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-30T08:23:28+0200
+# date:   2024-04-30T08:24:23+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

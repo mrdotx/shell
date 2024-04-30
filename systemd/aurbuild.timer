@@ -1,7 +1,7 @@
-# path:   /home/klassiker/.local/share/repos/shell/aurbuild.timer
+# path:   /home/klassiker/.local/share/repos/shell/systemd/aurbuild.timer
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-16T12:39:16+0200
+# date:   2024-04-30T08:27:10+0200
 
 [Unit]
 Description=run aurbuild.service daily

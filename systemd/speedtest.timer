@@ -1,7 +1,7 @@
-# path:   /home/klassiker/.local/share/repos/shell/speed_test.timer
+# path:   /home/klassiker/.local/share/repos/shell/systemd/speedtest.timer
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-22T08:25:40+0200
+# date:   2024-04-30T08:27:24+0200
 
 [Unit]
 Description=run speed_test.service a few times a day

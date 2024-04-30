@@ -1,7 +1,7 @@
-# path:   /home/klassiker/.local/share/repos/shell/pkgstats.timer
+# path:   /home/klassiker/.local/share/repos/shell/systemd/pkgstats.timer
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-29T10:40:27+0200
+# date:   2024-04-30T08:27:17+0200
 
 [Unit]
 Description=run pkgstats.service monthly
