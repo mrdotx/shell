@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/speed_test.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-19T08:11:03+0200
+# date:   2024-04-30T08:23:28+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -12,7 +12,7 @@ LANG=C
 # config
 retries=5
 delay=10
-csv="$HOME/Public/speed_test.csv"
+csv="$HOME/Public/speedtest/speedtest.csv"
 header="Date	Time	Ping	Down	Up	Host	IP	Km	Server	ID	Sponsor"
 
 # helper
