@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-25T09:55:20+0200
+# date:   2024-04-30T10:28:35+0200
 
 # config
 default="status"
-procs=$(nproc)
+procs=$(nproc --all)
 
 # help
 script=$(basename "$0")
