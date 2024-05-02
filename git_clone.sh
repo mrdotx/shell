@@ -3,12 +3,12 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_clone.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-30T10:26:30+0200
+# date:   2024-05-01T09:11:15+0200
 
 # config
 cn="users"
 name="mrdotx"
-procs=$(nproc --all)
+procs=$(($(nproc --all) * 4))
 
 # help
 script=$(basename "$0")
