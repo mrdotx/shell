@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/passgen.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-22T19:20:17+0200
+# date:   2024-05-04T08:06:35+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -14,19 +14,21 @@ chars=16
 symbols='!@#'
 iterations=1
 
+# command options
 while [ 1 -le "$#" ]; do
     case "$1" in
-        -c)
+        -c | --chars)
             chars=$2
             shift 2
             ;;
-        -i)
+        -i | --iterations)
             iterations=$2
             shift 2
             ;;
         *)
             script=$(basename "$0")
-            printf "usage: %s [-c 24] [-i 5]\n" "$script"
+            printf "usage: %s [-c/--chars 24] [-i/--iterations 5]\n" \
+                "$script"
             exit 1
             ;;
     esac
