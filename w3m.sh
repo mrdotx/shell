@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/w3m.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T21:35:01+0200
+# date:   2024-05-04T11:45:10+0200
 
 # help
 script=$(basename "$0")
@@ -17,37 +17,35 @@ help="$script [-h/--help] -- wrapper script to start w3m
   Examples:
     $script
     $script suckless.org
-    $script --tabbed suckless.org"
+    $script --tabbed w3m.sourceforge.net suckless.org "
 
 case "$1" in
     -h | --help)
         printf "%s\n" "$help"
         ;;
     --tabbed)
+        shift
         xidfile="/tmp/w3m/tabbed-w3m.xid"
-
-        [ -n "$2" ] \
-            && uri="$2"
-
         mkdir -p "/tmp/w3m"
 
-        runtabbed() {
-            tabbed -cdn tabbed-w3m \
-                -r 2 "$TERMINAL" \
-                -w '' \
-                -e w3m "$uri" >"$xidfile" 2>/dev/null &
-        }
-
-        if [ ! -r "$xidfile" ]; then
-            runtabbed
-        else
-            xid=$(cat "$xidfile")
-            if xprop -id "$xid" >/dev/null 2>&1; then
-                "$TERMINAL" -w "$xid" -e w3m "$uri" >/dev/null 2>&1 &
-            else
-                runtabbed
-            fi
-        fi
+        for uri in "${@:-"$WWW_HOME"}"; do
+            xid=$(cat "$xidfile" 2>/dev/null)
+            case $? in
+                0)
+                    if xprop -id "$xid" >/dev/null 2>&1; then
+                        st -w "$xid" -e w3m "$uri" >/dev/null 2>&1 &
+                    else
+                        tabbed -cdn tabbed-w3m -r 2 \
+                            st -w '' -e w3m "$uri" >/dev/null 2>&1 &
+                    fi
+                    ;;
+                *)
+                    tabbed -cdn tabbed-w3m -r 2 \
+                        st -w '' -e w3m "$uri" >"$xidfile" 2>/dev/null &
+                    ;;
+            esac
+            sleep 1
+        done
         ;;
     *)
         if [ -z "$TMUX" ]; then
