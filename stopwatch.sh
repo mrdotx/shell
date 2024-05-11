@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/stopwatch.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-11T18:35:31+0200
+# date:   2024-05-09T12:25:16+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -18,77 +18,63 @@ help="$script [-h/--help] -- script to measure the time
     [-d] = disable header
 
   Keys:
-    Start/Stop: space
-    Quit:       q or esc
+    start/stop: space
+    quit:    q or esc
 
   Examples:
     $script
     $script -d"
 
-header=" Start/Stop: space
- Quit:       q or esc
- "
-
-time_stop=0
-time_now=0
-time_index=0
-status=2
-n=1
-
-set_time_now() {
-    time_now=$(date +%s%3N)
-}
-
-time_date() {
-    t="$1"
-    s=$(printf "%1d\n" "${t: 0 : -3}")
-    ms=${t: -3 : 3 }
-    printf "\r%s" "   $n) $(TZ=UTC date -d"@$s.$ms" +%H:%M:%S.%3N)"
-}
-
-run() {
-    time_stop=$((time_now - time_index))
-    time_date $time_stop
-}
-
-reset() {
-    set_time_now
-    time_index=$time_now
-}
+counter=1
+space=$(printf '\x20')
+escape=$(printf '\033')
 
 read_key() {
-    last=$1
-    read -rsN1 -t.1 key;
-    case "$status" in
-        1)
-            [ "$key" = $'\x20' ] \
+    read -rsN1 -t.05 key
+    case "$exit_status" in
+        1)  # start
+            [ "$key" = "$space" ] \
                 && printf "\n" \
-                && n=$((n + 1)) \
+                && counter=$((counter + 1)) \
                 && return 2
             ;;
-        2)
-            [ "$key" = $'\x20' ] \
+        2)  # stop
+            [ "$counter" -eq 1000 ] \
+                && counter=0
+            [ "$key" = "$space" ] \
                 && return 1
             ;;
     esac
-    return "$last";
+
+    return "$1"
 }
 
 stopwatch() {
-    while ! { [ "$key" = $'\e' ] || [ "$key" = "q" ]; }; do
-        set_time_now
-        case "$status" in
-            1)
-                run
+    time_index=0
+    exit_status=2
+
+    while ! { [ "$key" = "$escape" ] || [ "$key" = "q" ]; }; do
+        case "$exit_status" in
+            1)  # run
+                t=$(printf "%06d" "$(($(date +%s%3N) - time_index))")
+                printf "\r% 4d. %s" \
+                    "$counter" \
+                    "$(TZ=UTC date -d"@${t::(-3)}.${t:(-3)}" +%H:%M:%S.%3N)"
                 ;;
-            2)
-                reset
+            2)  # reset
+                time_index=$(date +%s%3N)
                 ;;
         esac
-        read_key $status
-        status=$?
-        sleep .1
+        read_key "$exit_status"
+        exit_status=$?
     done
+
+    # append line feed if escaped during the run
+    { [ "$key" = "$escape" ] || [ "$key" = "q" ]; } \
+        && [ $exit_status -eq 1 ] \
+        && printf '\n'
+
+    return 0
 }
 
 case "$1" in
@@ -96,12 +82,13 @@ case "$1" in
         printf "%s\n" "$help"
         ;;
     -d)
-        tput reset
+        printf "\033c"
         stopwatch
         ;;
     *)
-        tput reset
-        printf "%s\n" "$header"
+        printf "\033c%b%b\n" \
+            " start/stop: space\n" \
+            " quit:    q or esc\n"
         stopwatch
         ;;
 esac
