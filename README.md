@@ -21,8 +21,8 @@ shell scripts for system/hardware management and general maintenance
 | compressor.sh        | script to compress/extract/list files and folders                             |
 | cyanrip.sh           | wrapper for cyanrip cd ripping tool                                           |
 | delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
-| git_clone.sh         | clone all repositories of a user or organization                              |
 | git_multi.sh         | execute git command on multiple repositories                                  |
+| git_repos.sh         | perform oparations for all repositories of a user or organization             |
 | padd_update.sh       | script to update pi-hole padd                                                 |
 | pkgstats.sh          | download package stats from arch packages                                     |
 | speedtest.sh         | output speedtest-cli results to structured csv file                           |
