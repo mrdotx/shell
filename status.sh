@@ -3,11 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-01-06T10:57:34+0100
+# date:   2024-06-18T07:38:00+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
+
+# config
+cpu_temp_path="/sys/class/hwmon/hwmon1/temp1_input"
 
 # help
 script=$(basename "$0")
@@ -39,8 +42,8 @@ cpu() {
     cpu_usage="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum*1000}')"
     cpu_usage="$(printf "%.0f\n" "$((cpu_usage / ${cores:-1}))e-3")"
 
-    if test -d /sys/class/thermal/thermal_zone0/temp; then
-        cpu_temp="$(cut -c "1-2" /sys/class/thermal/thermal_zone0/temp)C"
+    if [ -f "$cpu_temp_path" ]; then
+        cpu_temp="$(cut -c "1-2" "$cpu_temp_path")C"
         printf "%s [%s%%]" "$cpu_temp" "$cpu_usage"
     else
         printf "%s%%" "$cpu_usage"
