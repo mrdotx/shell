@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/alpha_restore.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-08-02T19:25:13+0200
+# date:   2024-06-24T15:59:13+0200
 
 # help
 script=$(basename "$0")
@@ -26,13 +26,13 @@ else
 
     printf ":: suspicious files\n"
     for f in "$@"; do
-        convert "$f" -strip -alpha extract "$tmp_directory/alpha_extract.rgb"
+        magick "$f" -strip -alpha extract "$tmp_directory/alpha_extract.rgb"
         if ! (hexdump -ve '"%.2x"' "$tmp_directory/alpha_extract.rgb" \
                 | grep -q '^f*$' \
             ); then
             printf " %s\n" "$f"
             cp "$f" "$tmp_directory"
-            convert -strip -alpha off "$f" \
+            magick -strip -alpha off "$f" \
                 "$tmp_directory/$(basename "$f").noalpha.png"
             suspicious=1
         fi
