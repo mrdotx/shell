@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-07-26T10:48:18+0200
+# date:   2024-06-26T05:07:26+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -47,21 +47,29 @@ xresource() {
                 | cut -f2)"
             ;;
         set_value)
-            sed -i "/wallpaper.uri:/c\wallpaper.$2:  $3" "$config"
+            sed -i "/wallpaper.$2:/c\wallpaper.$2:  $3" "$config"
             xrdb -merge "$xresource"
             ;;
     esac
 }
 
-random_pic() {
+random_file() {
     find "$1" -type f \
         | shuf -n 1
 }
 
-check_uri() {
-    [ -s "$1" ] \
-        && printf "%s" "$1" \
+cache_uri() {
+    ! [ -s "$1" ] \
+        && printf "%s" "$cache" \
         && return
+
+    cmp --silent "$1" "$cache" \
+        || cp -f "$1" "$cache"
+
+    # orientation = 1 -> no rotation
+    orientation="$(identify -quiet -format '%[EXIF:Orientation]\n' "$cache")"
+    [ "${orientation:-1}" != 1 ] \
+        && magick "$cache" -auto-orient "$cache"
 
     printf "%s" "$cache"
 }
@@ -69,38 +77,35 @@ check_uri() {
 color_uri() {
     uri="/tmp/wallpaper-color.png"
 
-    convert xc:"${1:-#000000}" -resize 1920x1080! "$uri"
+    magick xc:"${1:-#000000}" -resize 1920x1080! "$uri"
 
     printf "%s" "$uri"
 }
 
 random_uri() {
     uri="$(xresource get_value uri)"
-    if [ -d "$uri" ]; then \
-        uri="$(random_pic "$uri")"
-    else
-        uri="$(random_pic "$(dirname "$uri")")"
-    fi
 
-    check_uri "$uri"
+    [ -d "$uri" ] \
+        && uri="$(random_file "$uri")" \
+        || uri="$(random_file "$(dirname "$uri")")"
+
+    cache_uri "$uri"
 }
 
 process_uri() {
     if [ -d "$1" ]; then
-        uri="$(random_pic "$1")"
+        uri="$(random_file "$1")"
         xresource set_value uri "$1"
-        cp -f "$uri" "$cache"
     elif [ -f "$1" ]; then
         uri="$1"
         xresource set_value uri "$1"
-        cp -f "$uri" "$cache"
     else
         uri="$(xresource get_value uri)"
         [ -d "$uri" ] \
-            && uri="$(random_pic "$uri")"
+            && uri="$(random_file "$uri")"
     fi
 
-    check_uri "$uri"
+    cache_uri "$uri"
 }
 
 case "$1" in
