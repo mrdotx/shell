@@ -3,17 +3,17 @@
 # path:   /home/klassiker/.local/share/repos/shell/compressor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-24T20:50:12+0200
+# date:   2024-07-03T07:58:12+0200
 
-check() {
-    tools="7z bzip2 ghostscript gzip lzip lzma lzop tar unzip xz zstd"
+commands() {
+    cmds="7z bzip2 gzip lzip lzma lzop tar unzip xz zstd"
 
     printf "\n"
-    for tool in $tools; do
-        if command -v "$tool" > /dev/null 2>&1; then
-            printf "      [ ] %s\n" "$tool"
+    for cmd in $cmds; do
+        if command -v "$cmd" > /dev/null 2>&1; then
+            printf "      [X] %s\n" "$cmd"
         else
-            printf "      [X] %s\n" "$tool"
+            printf "      [ ] %s\n" "$cmd"
         fi
     done
 }
@@ -21,7 +21,7 @@ check() {
 script=$(basename "$0")
 help="$script [-h/--help] -- script to extract/compress/list files and folders
   Usage:
-    $script [--add/--list/--pdf] <quality> <file>.<ext> [file1.ext] [file2.ext]
+    $script [--add/--list] <quality> <file>.<ext> [file1.ext] [file2.ext]
 
   Settings:
     [--add]   = compress files and folders to archive
@@ -36,24 +36,14 @@ help="$script [-h/--help] -- script to extract/compress/list files and folders
                   jar, lha, lz, lzh, lzma, lzo, msi, pkg, ppt, rar, rpm, swm,
                   tar, taz, tbz, tbz2, tgz, tlz, txz, tz2, tzo, tzst, udf, war,
                   wim, xar, xls, xpi, xz, z, zip, zst
-    [--pdf]   = compress pdf files
-    <quality> = pdf quality settings (default: default)
-                  screen   = low-resolution
-                  ebook    = medium-resolution
-                  printer  = high-resolution
-                  prepress = very high-resolution
-                  default  = useful across a wide variety of uses
-                             (possible larger file size)
-                  all      = create for each quality setting a file
 
   Examples:
     $script file1.tar.gz file2.tar.bz2 file3.7z
     $script --add archive.tar.gz file1.ext file2.ext file3.ext
     $script --list file1.tar.gz file2.tar.bz2 file3.7z
-    $script --pdf ebook document1.pdf document2.pdf document3.pdf
 
   Commands:
-    tools required for full functionality (X: missing commands): $(check)"
+    required for full functionality (X = available): $(commands)"
 
 compress() {
     archive="$1"
@@ -165,38 +155,6 @@ extract() {
     done
 }
 
-compress_pdf() {
-    case $1 in
-        screen | ebook | printer | prepress | default)
-            settings="$1"
-            shift
-            ;;
-        all)
-            settings="screen ebook printer prepress default"
-            shift
-            ;;
-        *)
-            settings="default"
-            ;;
-    esac
-
-    for document in "$@"; do
-        for setting in $settings; do
-            output_file="$(basename "$document" .pdf)-$setting.pdf"
-            printf "==> %s\n" "$output_file"
-
-            ghostscript \
-                -sDEVICE=pdfwrite \
-                -dPDFSETTINGS=/"$setting" \
-                -dPrinted=false \
-                -dNOPAUSE \
-                -dBATCH \
-                -sOutputFile="$output_file" \
-                "$document"
-        done
-    done
-}
-
 case "$1" in
     -h | --help | "")
         printf "%s\n" "$help"
@@ -208,10 +166,6 @@ case "$1" in
     --add)
         shift
         compress "$@"
-        ;;
-    --pdf)
-        shift
-        compress_pdf "$@"
         ;;
     *)
         extract "$@"
