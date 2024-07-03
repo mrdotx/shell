@@ -25,6 +25,7 @@ shell scripts for system/hardware management and general maintenance
 | git_repos.sh         | perform oparations for all repositories of a user or organization             |
 | notify_test.sh       | generate test messages with notify-send                                       |
 | padd_update.sh       | script to update pi-hole padd                                                 |
+| pdf.sh               | script to chain/unchain/compress/convert pdf/image files                      |
 | pkgstats.sh          | download package stats from arch packages                                     |
 | speedtest.sh         | output speedtest-cli results to structured csv file                           |
 | ssh_exec.sh          | execute command with ssh if remote host not local host                        |
