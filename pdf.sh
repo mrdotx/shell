@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/pdf.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-07-03T08:23:17+0200
+# date:   2024-07-03T09:07:53+0200
 
 commands() {
     cmds="ghostscript magick"
@@ -19,12 +19,11 @@ commands() {
 }
 
 script=$(basename "$0")
-help="$script [-h/--help] -- script to chain/unchain/compress/convert pdf/image files
+help="$script [-h/--help] -- script to compress/convert/chain/unchain pdf files
   Usage:
-    $script [--un/-chain] [--compress] [--convert] <quality> <file>.<ext> [file1.ext]
+    $script [--compress/--convert/--un/-chain] <quality> <file>.<ext> [file1.ext]
 
   Settings:
-    [--un/-chain] = chain and unchain pdf files
     [--compress]  = compress pdf files
     <quality>     = pdf quality settings (default: default)
                       default  = useful across a wide variety of uses ( 72ppi)
@@ -40,12 +39,13 @@ help="$script [-h/--help] -- script to chain/unchain/compress/convert pdf/image 
                       screen   = medium-resolution                    ( 96ppi)
                       ebook    = high-resolution                      (150ppi)
                       print    = very high-resolution                 (300ppi)
+    [--un/-chain] = chain and unchain pdf files
 
   Examples:
-    $script --chain document1.pdf document2.pdf document3.pdf
-    $script --unchain document1.pdf document2.pdf document3.pdf
     $script --compress ebook document1.pdf document2.pdf document3.pdf
     $script --convert screen image1.jpg image2.jpg image3.jpg
+    $script --chain document1.pdf document2.pdf document3.pdf
+    $script --unchain document1.pdf document2.pdf document3.pdf
 
   Commands:
     required for full functionality (X = available): $(commands)"
