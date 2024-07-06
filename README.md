@@ -21,6 +21,8 @@ shell scripts for system/hardware management and general maintenance
 | compressor.sh        | script to compress/extract/list files and folders                             |
 | cyanrip.sh           | wrapper for cyanrip cd ripping tool                                           |
 | delete_metafiles.sh  | delete hidden apple metadata files in home folder                             |
+| dynv6.example.conf   | example config for the dynv6.sh script                                        |
+| dynv6.sh             | script to update dyndns service dynv6 with multi-config file                  |
 | fritzbox.sh          | get data from the fritzbox: external ipv4/-v6 and current up-/download rates  |
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | git_repos.sh         | perform oparations for all repositories of a user or organization             |
