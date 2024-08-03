@@ -3,10 +3,10 @@
 # path:   /home/klassiker/.local/share/repos/shell/compressor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-07-03T07:58:12+0200
+# date:   2024-08-03T05:19:26+0200
 
 commands() {
-    cmds="7z bzip2 gzip lzip lzma lzop tar unzip xz zstd"
+    cmds="7z bzip2 gzip lzip lzma lzop tar xz zstd"
 
     printf "\n"
     for cmd in $cmds; do
@@ -86,7 +86,7 @@ extract() {
                     | *.tgz | *.tlz | *.txz | *.tz2 | *.tzo | *.tzst)
                     case "$list" in
                         1)
-                            tar tf "$archive"
+                            tar tvf "$archive"
                             ;;
                         *)
                             folder="${folder%%.tar}"
@@ -98,36 +98,23 @@ extract() {
                     esac
                     ;;
                 *.7z \
-                    | *.a | *.alz | *.arj | *.bz | *.bz2 | *.bzip2 | *.cab \
-                    | *.cb7 | *.cbr | *.cbt | *.cbz | *.chm | *.chw | *.cpio \
-                    | *.deb | *.dmg | *.doc | *.epub | *.exe | *.gz | *.gzip \
-                    | *.hxs | *.iso | *.jar | *.lha | *.lz | *.lzh | *.lzma \
-                    | *.lzo | *.msi | *.pkg | *.ppt | *.rar | *.rpm | *.swm \
-                    | *.udf | *.war | *.wim | *.xar | *.xls | *.xpi | *.xz \
-                    | *.z | *.zip | *.zst)
+                    | *.a | *.alz | *.apk | *.arj | *.bz | *.bz2 | *.bzip2 \
+                    | *.cab | *.cb7 | *.cbr | *.cbt | *.cbz | *.chm | *.chw \
+                    | *.cpio | *.deb | *.dmg | *.doc | *.epub | *.exe | *.gz \
+                    | *.gzip | *.hxs | *.iso | *.jar | *.lha | *.lz | *.lzh \
+                    | *.lzma | *.lzo | *.msi | *.pkg | *.ppt | *.rar | *.rpm \
+                    | *.swm | *.udf | *.war | *.wim | *.xar | *.xls | *.xpi \
+                    | *.xz | *.z | *.zip | *.zst)
                     case "$list" in
                         1)
-                            7z l -p "$archive"
+                            7z l -p "$archive" \
+                                | tail +2 # WORKAROUND: 7z first line empty
                             ;;
                         *)
                             printf "7z x \"%s\" -o\"%s\"\n" \
                                 "$archive" "$folder"
                             mkdir -p "$folder"
                             7z x "$archive" -o"$folder" >/dev/null 2>&1
-                            ;;
-                    esac
-                    ;;
-                *.apk)
-                    # WORKAROUND: 7z problems with bad header apks
-                    case "$list" in
-                        1)
-                            unzip -l -P '' "$archive"
-                            ;;
-                        *)
-                            printf "unzip \"%s\" -d \"%s\"\n" \
-                                "$archive" "$folder"
-                            mkdir -p "$folder"
-                            unzip "$archive" -d "$folder" >/dev/null 2>&1
                             ;;
                     esac
                     ;;
