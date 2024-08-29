@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/fritzbox.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-07-04T21:48:35+0200
+# date:   2024-08-29T05:57:45+0200
 
 get_fritzbox_data() {
 connection_state="
@@ -92,10 +92,11 @@ case "$1" in
         byte_receive_rate=$(get_value "NewByteReceiveRate" "$data")
         byte_send_rate=$(get_value "NewByteSendRate" "$data")
 
-        printf "↓%s ↑%s | ↓%s ↑%s\n" \
-            "$(convert_bytes "$byte_receive_rate")" \
-            "$(convert_bytes "$byte_send_rate")" \
-            "$(convert_bits "$byte_receive_rate")" \
-            "$(convert_bits "$byte_send_rate")"
+        printf "↑ %s %s\n↓ %s %s\n" \
+                "$(convert_bytes "$byte_send_rate")" \
+                "$(convert_bits "$byte_send_rate")" \
+                "$(convert_bytes "$byte_receive_rate")" \
+                "$(convert_bits "$byte_receive_rate")" \
+            | column --table --table-right 2,4 --output-separator " "
         ;;
 esac
