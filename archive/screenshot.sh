@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/screenshot.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-11T22:22:40+0200
+# date:   2024-08-29T05:56:58+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -13,7 +13,7 @@ LANG=C
 screenshot_directory="$HOME/Desktop"
 screenshot_file="$screenshot_directory/screenshot-$(date +"%FT%T%z").png"
 screenshot_command="maim -Buq $screenshot_file"
-screenshot_preview="nsxiv $screenshot_file"
+screenshot_preview="nsxiv --quiet --scale-mode w $screenshot_file"
 
 # help
 script=$(basename "$0")
