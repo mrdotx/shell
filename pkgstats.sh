@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-29T10:38:29+0200
+# date:   2024-08-30T06:22:16+0200
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
@@ -33,8 +33,11 @@ request() {
 }
 
 for pkg in "$@"; do
+    # if pkg is a fullpath use only basename
+    pkg=$(basename "$pkg")
+
     file_header="Name	Month	Count	Popularity	Samples"
-    printf "%s " "$pkg"
+    printf "%s" "$pkg"
 
     [ -e "$out_dir/$pkg.csv" ] \
         && output=$(sed "/$file_header/d" "$out_dir/$pkg.csv") \
@@ -49,6 +52,6 @@ for pkg in "$@"; do
     printf "%s\n" "$file_header" > "$out_dir/$pkg.csv"
     printf "%s" "$output" | sort -ur >> "$out_dir/$pkg.csv"
 
-    printf "=> finished\n"
+    printf " => finished\n"
     unset output
 done
