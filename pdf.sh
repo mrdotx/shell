@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/pdf.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-07-03T09:07:53+0200
+# date:   2024-08-30T10:01:50+0200
 
 commands() {
     cmds="ghostscript magick"
@@ -39,6 +39,7 @@ help="$script [-h/--help] -- script to compress/convert/chain/unchain pdf files
                       screen   = medium-resolution                    ( 96ppi)
                       ebook    = high-resolution                      (150ppi)
                       print    = very high-resolution                 (300ppi)
+                      all      = create for each quality setting a file
     [--un/-chain] = chain and unchain pdf files
 
   Examples:
@@ -67,32 +68,26 @@ unchain_pdf() {
 compress_pdf() {
     case $1 in
         screen | ebook | printer | prepress | default)
-            qualities="$1"
-            shift
-            ;;
-        all)
-            qualities="screen ebook printer prepress default"
+            quality="$1"
             shift
             ;;
         *)
-            qualities="default"
+            quality="default"
             ;;
     esac
 
     for document in "$@"; do
-        for quality in $qualities; do
-            output_file="$(basename "$document" .pdf)-$quality.pdf"
-            printf "==> %s\n" "$output_file"
+        output_file="$(basename "$document" .pdf)-$quality.pdf"
+        printf "==> %s\n" "$output_file"
 
-            ghostscript \
-                -sDEVICE=pdfwrite \
-                -dPDFSETTINGS=/"$quality" \
-                -dPrinted=false \
-                -dNOPAUSE \
-                -dBATCH \
-                -sOutputFile="$output_file" \
-                "$document"
-        done
+        ghostscript \
+            -sDEVICE=pdfwrite \
+            -dPDFSETTINGS=/"$quality" \
+            -dPrinted=false \
+            -dNOPAUSE \
+            -dBATCH \
+            -sOutputFile="$output_file" \
+            "$document"
     done
 }
 
@@ -147,11 +142,31 @@ case "$1" in
         ;;
     --compress)
         shift
-        compress_pdf "$@"
+        case "$1" in
+            all)
+                shift
+                for quality in screen ebook printer prepress default; do
+                    compress_pdf "$quality" "$@"
+                done
+                ;;
+            *)
+                compress_pdf "$@"
+                ;;
+        esac
         ;;
     --convert)
         shift
-        convert_image "$@"
+        case "$1" in
+            all)
+                shift
+                for quality in text screen ebook print; do
+                    convert_image "$quality" "$@"
+                done
+                ;;
+            *)
+                convert_image "$@"
+                ;;
+        esac
         ;;
     *)
         printf "%s\n" "$help"
