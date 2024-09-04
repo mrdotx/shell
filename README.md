@@ -9,7 +9,6 @@ shell scripts for system/hardware management and general maintenance
 
 | file                 | comment                                                                       |
 | :------------------- | :---------------------------------------------------------------------------- |
-| alpha_restore.sh     | find png files with suspicious data in alpha channel                          |
 | alsa.sh              | change volume with status notification                                        |
 | aria2c.sh            | add download urls to aria2c                                                   |
 | aurbuild.sh          | aurutils sync packages and sync devel packages                                |

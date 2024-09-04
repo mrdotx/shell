@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/alpha_restore.sh
+# path:   /home/klassiker/.local/share/repos/shell/archive/alpha_restore.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-07-03T08:26:45+0200
+# date:   2024-09-03T10:03:33+0200
 
 # help
 script=$(basename "$0")
