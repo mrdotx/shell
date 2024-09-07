@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/dynv6.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-07-05T16:09:34+0200
+# date:   2024-09-06T14:08:29+0200
 
 dynv6_config="$HOME/.local/share/repos/shell/dynv6.conf"
 dynv6_folder="$HOME/.cache/dynv6/"
@@ -25,24 +25,21 @@ get_interface_ipv6() {
 }
 
 push_dynv6() {
+    update_cmd="curl -fsS --connect-timeout 2.5 --max-time 5"
     url_ipv4="https://dynv6.com/api/update?zone=$1&token=$2&ipv4=$3"
     url_ipv6="https://dynv6.com/api/update?zone=$1&token=$2&ipv6=$4"
     ip_file="$dynv6_folder/$1"
 
     [ ! -e "$ip_file" ] \
-        && touch "$ip_file"
+        && printf "auto\nauto" > "$ip_file"
 
-    ipv4_old=$(head -n1 "$ip_file")
-    ipv6_old=$(tail -n1 "$ip_file")
-
-    if [ "$ipv4_old" != "$3" ] || [ "$ipv6_old" != "$4" ]; then \
-            [ "$ipv4_old" != "$3" ] \
-                && printf "%s ipv4 %s\n" "$1" "$(curl -fsS "$url_ipv4")"
-
-            [ "$ipv6_old" != "$4" ] \
-                && printf "%s ipv6 %s\n" "$1" "$(curl -fsS "$url_ipv6")"
-
-            printf "%s\n%s" "$3" "$4" > "$ip_file"
+    if [ "$(head -n1 "$ip_file")" != "$3" ]; then
+        printf "%s ipv4 %s\n" "$1" "$($update_cmd "$url_ipv4")" \
+            && sed -i "1c $3" "$ip_file"
+    fi
+    if [ "$(tail -n1 "$ip_file")" != "$4" ]; then
+        printf "%s ipv6 %s\n" "$1" "$($update_cmd "$url_ipv6")" \
+            && sed -i "2c $4" "$ip_file"
     fi
 }
 
