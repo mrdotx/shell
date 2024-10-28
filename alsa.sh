@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/alsa.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-05-28T21:32:32+0200
+# date:   2024-10-28T06:58:22+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -47,7 +47,7 @@ notification() {
     else
         volume=$((volume /= ${3:-1}))
         volume=$((volume *= ${3:-1}))
-        volume_indicator="$volume"
+        volume_indicator="$volume%"
     fi
 
     notify-send \
