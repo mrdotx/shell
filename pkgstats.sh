@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/pkgstats.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-08-30T06:22:16+0200
+# date:   2024-11-21T06:01:48+0100
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
@@ -24,7 +24,7 @@ request() {
     popularity=$(extract_data "$data" "popularity")
     month=$(extract_data "$data" "startMonth")
 
-    printf "%s	%s	%s	%s	%s\n" \
+    printf "%s	%d	%d	%.2f	%d\n" \
         "$name" \
         "$month" \
         "$count" \
