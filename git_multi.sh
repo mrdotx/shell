@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-05-01T09:09:36+0200
+# date:   2024-12-07T07:40:49+0100
 
 # config
 default="status"
@@ -68,4 +68,4 @@ esac
 
 printf ":: git operations:\n"
 command_constructor "$(git_folder "$@")" \
-     | xargs -P"$procs" -I{} sh -c "{} && printf \"%s\n\" \"\$output\""
+    | xargs -P"$procs" -I{} sh -c "{} && printf \"%s\n\" \"\$output\""
