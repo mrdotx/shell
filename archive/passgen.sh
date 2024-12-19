@@ -3,18 +3,36 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/passgen.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-05-04T08:06:35+0200
+# date:   2024-12-19T08:12:25+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
-# config
-chars=16
-symbols='!@#'
-iterations=1
+# helper functions
+check_password() {
+    # check if at least 1 of each char type is available
+    for char in [$2] [0-9] [A-Z] [a-z]; do
+        printf "%s" "$1" \
+            | grep -q "$char" \
+                || return 1
+    done
+}
 
-# command options
+generate_password() {
+    while true; do
+        password=$(printf "%s" \
+            "$(tr -dc "[:alnum:]$2" < /dev/urandom \
+                | head -c"$1")" \
+        )
+
+        check_password "$password" "$2" \
+            && printf "%s\n" "$password" \
+            && break
+    done
+}
+
+# options
 while [ 1 -le "$#" ]; do
     case "$1" in
         -c | --chars)
@@ -26,34 +44,15 @@ while [ 1 -le "$#" ]; do
             shift 2
             ;;
         *)
-            script=$(basename "$0")
             printf "usage: %s [-c/--chars 24] [-i/--iterations 5]\n" \
-                "$script"
+                "$(basename "$0")"
             exit 1
             ;;
     esac
 done
 
-while [ 1 -le "$iterations" ]; do
-    while [ -z "$check" ]; do
-        check=1
-        password=$(printf "%s" \
-            "$(tr -dc "[:alnum:]$symbols" < /dev/urandom \
-                | head -c"$chars")" \
-        )
-
-        # check if at least 1 of each char type is available
-        for char in [$symbols] [0-9] [A-Z] [a-z]; do
-            printf "%s" "$password" \
-                | grep -q "$char" \
-                    || unset check
-
-            [ -z "$check" ] \
-                && break
-        done
-    done
-
-    printf "%s\n" "$password"
-    unset check
+# main
+while [ "${iterations:-1}" -ge 1 ]; do
+    generate_password "${chars:-16}" "!@#"
     iterations=$((iterations - 1))
 done
