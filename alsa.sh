@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/alsa.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-10-28T06:58:22+0100
+# date:   2024-12-21T07:13:44+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -77,7 +77,7 @@ set_volume() {
     if [ "$#" -eq 2 ] \
         && [ "$2" -ge 0 ] > /dev/null 2>&1 \
         && [ "$2" -le 100 ] > /dev/null 2>&1; then
-            amixer -q set $device_mixer "$2%$1"
+            amixer -q set "$device_mixer" "$2%$1"
             notification "$device_mixer" "$device_mute" "$2"
     else
         printf "%s\n" "$help"
@@ -103,7 +103,7 @@ case "$1" in
         ;;
     -mute)
         get_analog
-        amixer -q set $device_mute toggle
+        amixer -q set "$device_mute" toggle
         notification "$device_mixer" "$device_mute"
         ;;
     *)
