@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-07-03T08:58:48+0200
+# date:   2025-01-10T08:34:44+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -75,7 +75,7 @@ cache_uri() {
 }
 
 color_uri() {
-    uri="/tmp/wallpaper-color.png"
+    uri="/tmp/wallpaper_color.png"
 
     magick xc:"${1:-#000000}" -resize 1920x1080! "$uri"
 
