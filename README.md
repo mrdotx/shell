@@ -29,7 +29,7 @@ shell scripts for system/hardware management and general maintenance
 | pdf.sh               | script to compress/convert/chain/unchain pdf files                            |
 | pkgstats.sh          | download package stats from arch packages                                     |
 | speedtest.sh         | output speedtest-cli results to structured csv file                           |
-| ssh_exec.sh          | execute command with ssh if remote host not local host                        |
+| ssh_exec.sh          | execute command with ssh if remote host is not local host                     |
 | status.sh            | simple script for system information in different formats                     |
 | stopwatch.sh         | script to measure the time                                                    |
 | sync_notes.sh        | sync notes to webserver                                                       |
