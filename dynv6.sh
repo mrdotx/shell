@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/dynv6.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-09-06T14:08:29+0200
+# date:   2025-02-10T06:23:20+0100
 
 dynv6_config="$HOME/.local/share/repos/shell/dynv6.conf"
 dynv6_folder="$HOME/.cache/dynv6/"
@@ -33,14 +33,15 @@ push_dynv6() {
     [ ! -e "$ip_file" ] \
         && printf "auto\nauto" > "$ip_file"
 
-    if [ "$(head -n1 "$ip_file")" != "$3" ]; then
-        printf "%s ipv4 %s\n" "$1" "$($update_cmd "$url_ipv4")" \
-            && sed -i "1c $3" "$ip_file"
-    fi
-    if [ "$(tail -n1 "$ip_file")" != "$4" ]; then
-        printf "%s ipv6 %s\n" "$1" "$($update_cmd "$url_ipv6")" \
-            && sed -i "2c $4" "$ip_file"
-    fi
+    [ "$(head -n1 "$ip_file")" != "$3" ] \
+        && printf "%s ipv4 %s\n" "$1" "$($update_cmd "$url_ipv4")" \
+        && sed -i "1c $3" "$ip_file"
+
+    [ "$(tail -n1 "$ip_file")" != "$4" ] \
+        && printf "%s ipv6 %s\n" "$1" "$($update_cmd "$url_ipv6")" \
+        && sed -i "2c $4" "$ip_file"
+
+    return 0
 }
 
 printf "%s\n" "$config_values" \
@@ -52,6 +53,7 @@ printf "%s\n" "$config_values" \
             && dynv6_ipv6=$(get_config_value "$line" 4) \
             && case "$dynv6_ipv4" in
                 fritzbox)
+                    # requires fritzbox.sh.sh (https://github.com/mrdotx/shell)
                     ipv4="$(fritzbox.sh --ipv4)"
                     ;;
                 *)
@@ -60,6 +62,7 @@ printf "%s\n" "$config_values" \
             esac \
             && case "$dynv6_ipv6" in
                 fritzbox)
+                    # requires fritzbox.sh.sh (https://github.com/mrdotx/shell)
                     ipv6="$(fritzbox.sh --ipv6)/$ipv6_netmask"
                     ;;
                 interface)
