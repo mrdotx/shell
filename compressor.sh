@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/compressor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-08-03T05:19:26+0200
+# date:   2025-02-17T07:18:06+0100
 
 commands() {
     cmds="7z bzip2 gzip lzip lzma lzop tar xz zstd"
@@ -32,10 +32,10 @@ help="$script [-h/--help] -- script to extract/compress/list files and folders
                   zip
                 decompression extensions:
                   7z, a, alz, apk, arj, bz, bz2, bzip2, cab, cb7, cbr, cbt, cbz,
-                  chm, chw, cpio, deb, dmg, doc, epub, exe, gz, gzip, hxs, iso,
-                  jar, lha, lz, lzh, lzma, lzo, msi, pkg, ppt, rar, rpm, swm,
-                  tar, taz, tbz, tbz2, tgz, tlz, txz, tz2, tzo, tzst, udf, war,
-                  wim, xar, xls, xpi, xz, z, zip, zst
+                  chm, chw, cpio, deb, dmg, doc, epub, exe, gz, gzip, hxs, img,
+                  iso, jar, lha, lz, lzh, lzma, lzo, msi, pkg, ppt, rar, rpm,
+                  swm, tar, taz, tbz, tbz2, tgz, tlz, txz, tz2, tzo, tzst, udf,
+                  war, wim, xar, xls, xpi, xz, z, zip, zst
 
   Examples:
     $script file1.tar.gz file2.tar.bz2 file3.7z
@@ -101,10 +101,10 @@ extract() {
                     | *.a | *.alz | *.apk | *.arj | *.bz | *.bz2 | *.bzip2 \
                     | *.cab | *.cb7 | *.cbr | *.cbt | *.cbz | *.chm | *.chw \
                     | *.cpio | *.deb | *.dmg | *.doc | *.epub | *.exe | *.gz \
-                    | *.gzip | *.hxs | *.iso | *.jar | *.lha | *.lz | *.lzh \
-                    | *.lzma | *.lzo | *.msi | *.pkg | *.ppt | *.rar | *.rpm \
-                    | *.swm | *.udf | *.war | *.wim | *.xar | *.xls | *.xpi \
-                    | *.xz | *.z | *.zip | *.zst)
+                    | *.gzip | *.hxs | *.img | *.iso | *.jar | *.lha | *.lz \
+                    | *.lzh | *.lzma | *.lzo | *.msi | *.pkg | *.ppt | *.rar \
+                    | *.rpm | *.swm | *.udf | *.war | *.wim | *.xar | *.xls \
+                    | *.xpi | *.xz | *.z | *.zip | *.zst)
                     case "$list" in
                         1)
                             7z l -p "$archive" \
