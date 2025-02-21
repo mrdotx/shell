@@ -1,14 +1,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/systemd/dynv6.timer
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-07-05T11:34:44+0200
+# date:   2025-02-21T12:40:43+0100
 
 [Unit]
 Description=run dynv6.service every quarter hour
 
 [Timer]
 OnCalendar=*:1/15
-AccuracySec=1m
 
 [Install]
 WantedBy=timers.target
