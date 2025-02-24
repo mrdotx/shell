@@ -3,11 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/dynv6.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-02-10T06:23:20+0100
+# date:   2025-02-24T07:10:05+0100
 
 dynv6_config="$HOME/.local/share/repos/shell/dynv6.conf"
 dynv6_folder="$HOME/.cache/dynv6/"
 ipv6_netmask=128
+# requires fritzbox.sh (https://github.com/mrdotx/shell)
+fritzbox_ipv4="$(fritzbox.sh --ipv4)"
+fritzbox_ipv6="$(fritzbox.sh --ipv6)"
 
 config_values=$(grep -v -E '^#|^;|^$' "$dynv6_config")
 
@@ -53,8 +56,7 @@ printf "%s\n" "$config_values" \
             && dynv6_ipv6=$(get_config_value "$line" 4) \
             && case "$dynv6_ipv4" in
                 fritzbox)
-                    # requires fritzbox.sh.sh (https://github.com/mrdotx/shell)
-                    ipv4="$(fritzbox.sh --ipv4)"
+                    ipv4="$fritzbox_ipv4"
                     ;;
                 *)
                     ipv4="$dynv6_ipv4"
@@ -62,8 +64,7 @@ printf "%s\n" "$config_values" \
             esac \
             && case "$dynv6_ipv6" in
                 fritzbox)
-                    # requires fritzbox.sh.sh (https://github.com/mrdotx/shell)
-                    ipv6="$(fritzbox.sh --ipv6)/$ipv6_netmask"
+                    ipv6="$fritzbox_ipv6/$ipv6_netmask"
                     ;;
                 interface)
                     ipv6="$(get_interface_ipv6)/$ipv6_netmask"
