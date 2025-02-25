@@ -19,6 +19,7 @@ shell scripts for system/hardware management and general maintenance
 | color_picker.sh      | pick color with a tool, copy hex to clipboard and preview with notify-send    |
 | compressor.sh        | script to compress/extract/list files and folders                             |
 | cyanrip.sh           | wrapper for cyanrip cd ripping tool                                           |
+| drive_speed.sh       | measure drive speed with dd in current folder                                 |
 | dynv6.example.conf   | example config for the dynv6.sh script                                        |
 | dynv6.sh             | script to update dyndns service dynv6 with multi-config file                  |
 | fritzbox.sh          | get data from the fritzbox: external ipv4/-v6 and current up-/download rates  |
