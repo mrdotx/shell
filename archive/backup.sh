@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/backup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-04-25T10:07:03+0200
+# date:   2025-02-26T06:20:27+0100
 
 # color variables
+reset="\033[0m"
 magenta="\033[35m"
 cyan="\033[36m"
 blue="\033[94m"
-reset="\033[0m"
 
 destination_root="$HOME/Backup/"
 destination_config="$HOME/Backup/.config/"
