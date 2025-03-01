@@ -3,11 +3,18 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-01-14T08:22:39+0100
+# date:   2025-03-01T07:04:39+0100
 
 # config
 default="status"
 procs=$(($(nproc --all) * 4))
+
+# color variables
+reset="\033[0m"
+bold="\033[1m"
+green="\033[32m"
+blue="\033[94m"
+cyan="\033[96m"
 
 # help
 script=$(basename "$0")
@@ -38,22 +45,13 @@ git_folder() {
 }
 
 command_constructor() {
-    # color variables
-    green="\033[32m"
-    yellow="\033[33m"
-    reset="\033[0m"
-
     for folder in $1; do
         repo_folder="${folder%/*}"
-        printf "\"printf '%%s  -> completed: %sgit %s %s%s%s\\\n'" \
-            "$green" \
-            "$options" \
-            "$yellow" \
-            "${repo_folder##*/}/${folder##*/}" \
-            "$reset"
-        printf " \"\$(cd %s && git %s)\"\"\n" \
-            "$folder" \
-            "$options"
+        printf "\"git -C %s %s" \
+            "$folder" "$options"
+        printf " && printf '%b%b==>%b completed: %bgit %s %b%s%b\\\n'\"\n" \
+            "$bold" "$green" "$reset" "$green" "$options" "$cyan" \
+            "${repo_folder##*/}/${folder##*/}" "$reset"
     done
 }
 
@@ -71,6 +69,7 @@ case $1 in
             && shift
 esac
 
-printf ":: git operations:\n"
+printf "%b%b::%b %bEXECUTE%b git operations:\n" \
+    "$bold" "$blue" "$reset" "$bold" "$reset"
 command_constructor "$(git_folder "$@")" \
     | xargs -P"$procs" -I{} sh -c '{}'
