@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/padd_update.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-08-03T08:42:57+0200
+# date:   2025-03-04T06:12:29+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -22,6 +22,3 @@ chmod 755 "$output"
 
 # replace shebang (\e[0K problem)
 replace "#!/usr/bin/env sh" "#!/usr/bin/env bash"
-
-# replace ftl database location
-replace "/run/pihole-FTL.port" "/run/pihole-ftl/pihole-FTL.port"
