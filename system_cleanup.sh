@@ -3,7 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2023-12-12T09:18:09+0100
+# date:   2025-03-06T05:51:51+0100
+
+# color variables
+reset="\033[0m"
+bold="\033[1m"
+blue="\033[94m"
+cyan="\033[96m"
 
 # helper
 find_files() {
@@ -23,12 +29,12 @@ cleanup_file() {
     ! [ -f "$1" ] \
         && return 0
 
-    printf ":: cleanup file \"%s\"\n" \
-        "$1"
-    printf " remove white space from the end of the line...\n"
+    printf "%b%b::%b %bCLEANUP%b file %b%s%b\n" \
+        "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$1" "$reset"
+    printf "remove white space from the end of the line...\n"
     sed -i 's/ *$//' "$1"
 
-    printf " remove duplicates...\n"
+    printf "remove duplicates...\n"
     printf "%s\n" "$(tac "$1" \
         | awk '! seen[$0]++' \
         | tac \
@@ -46,15 +52,14 @@ delete_files() {
     [ "$cache_files" -gt 0 ] \
         || return 0
 
-    printf "\n:: delete %d files from \"%s\" not accessed in %d days...\n" \
-        "$cache_files" \
-        "$1" \
+    printf "\n%b%b::%b %bDELETE%b %d files from %b%s%b not accessed in %d days...\n" \
+        "$bold" "$blue" "$reset" "$bold" "$reset" "$cache_files" "$cyan" "$1" "$reset" \
         "$2"
 
     find_files "$1" "$2"
 
-    printf " delete files from \"%s\" [y]es/[N]o: " \
-        "$1" \
+    printf "%b%b  ->%b %bDELETE%b files from %b%s%b [y]es/[N]o: " \
+        "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$1" "$reset" \
         && read -r key
     case "$key" in
         y|Y|yes|Yes)
@@ -70,8 +75,8 @@ delete_pkgs() {
     auth="${EXEC_AS_USER:-sudo}"
 
     dry_run=$($auth find "$1" -type d \
-        -exec printf ":: delete pkgs from \"{}\", except last %s versions\n" \
-            "$2" \; \
+        -exec printf "%b%b::%b %bDELETE%b pkgs from %b{}%b, except last %s versions\n" \
+            "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$reset" "$2" \; \
         -exec paccache -dvk "$2" -c {} \; \
     )
 
@@ -82,8 +87,8 @@ delete_pkgs() {
 
     printf "\n%s\n" \
         "$dry_run"
-    printf " delete pkgs from \"%s\" [y]es/[N]o: " \
-        "$1" \
+    printf "%b%b  ->%b %bDELETE%b pkgs from %b%s%b [y]es/[N]o: " \
+        "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$1" "$reset" \
         && read -r clear_pkgs \
         && case "$clear_pkgs" in
             y|Y|yes|Yes)
