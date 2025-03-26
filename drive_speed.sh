@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/drive_speed.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-02-25T06:16:06+0100
+# date:   2025-03-26T06:29:27+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -25,24 +25,27 @@ blue="\033[94m"
 cyan="\033[96m"
 
 # main
-printf "%b%b::%b %bWRITE%b file %b%s%b (%s * %s)\n" \
-    "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$file_path" "$reset" \
-    "$rw_bytes" "$input_blocks"
+printf "%b%b  ->%b drop caches [Y]es/[n]o: " \
+    "$bold" "$blue" "$reset" \
+    && read -r drop_cache
+
+printf "%b%b::%b %bwrite file (%s * %s)%b %b%s%b\n" \
+    "$bold" "$blue" "$reset" "$bold" "$rw_bytes" "$input_blocks" "$reset" \
+    "$cyan" "$file_path" "$reset"
 dd if=/dev/zero of="$file_path" \
     bs="$rw_bytes" count="$input_blocks" conv=fdatasync,notrunc status=progress
 
-printf "\n%b%b::%b %bDROP%b caches\n" \
-    "$bold" "$blue" "$reset" "$bold" "$reset"
-$auth sh -c "printf 3 > /proc/sys/vm/drop_caches"
+case "${drop_cache:-"y"}" in
+    y|Y|yes|Yes)
+        $auth sh -c "printf 3 > /proc/sys/vm/drop_caches"
+        ;;
+esac
 
-while [ "${i:=2}" -gt 0 ]; do
-    i=$((i - 1))
-    printf "%b%b::%b %bREAD%b file %b%s%b\n" \
-        "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$file_path" "$reset"
-    dd if="$file_path" of=/dev/null \
-        bs="$rw_bytes" count="$input_blocks" status=progress
-done
+printf "%b%b::%b %bread file%b %b%s%b\n" \
+    "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$file_path" "$reset"
+dd if="$file_path" of=/dev/null \
+    bs="$rw_bytes" count="$input_blocks" status=progress
 
-printf "\n%b%b::%b %bDELETE%b file %b%s%b\n" \
+printf "%b%b::%b %bdelete file%b %b%s%b\n" \
     "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$file_path" "$reset"
 rm "$file_path"
