@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-03-01T07:04:39+0100
+# date:   2025-03-27T06:03:34+0100
 
 # config
 default="status"
@@ -49,8 +49,8 @@ command_constructor() {
         repo_folder="${folder%/*}"
         printf "\"git -C %s %s" \
             "$folder" "$options"
-        printf " && printf '%b%b==>%b completed: %bgit %s %b%s%b\\\n'\"\n" \
-            "$bold" "$green" "$reset" "$green" "$options" "$cyan" \
+        printf " && printf '%b%b==>%b completed: %bgit%b %s %b%s%b\\\n'\"\n" \
+            "$bold" "$green" "$reset" "$green" "$reset" "$options" "$cyan" \
             "${repo_folder##*/}/${folder##*/}" "$reset"
     done
 }
@@ -69,7 +69,7 @@ case $1 in
             && shift
 esac
 
-printf "%b%b::%b %bEXECUTE%b git operations:\n" \
+printf "%b%b::%b %bexecute git operations:%b\n" \
     "$bold" "$blue" "$reset" "$bold" "$reset"
 command_constructor "$(git_folder "$@")" \
     | xargs -P"$procs" -I{} sh -c '{}'
