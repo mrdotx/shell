@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/drive_speed.sh
+# path:   /home/klassiker/.local/share/repos/shell/test_drive.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-03-26T06:29:27+0100
+# date:   2025-04-10T06:36:46+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

@@ -20,7 +20,6 @@ shell scripts for system/hardware management and general maintenance
 | color_picker.sh      | pick color with a tool, copy hex to clipboard and preview with notify-send    |
 | compressor.sh        | script to compress/extract/list files and folders                             |
 | cyanrip.sh           | wrapper for cyanrip cd ripping tool                                           |
-| drive_speed.sh       | measure drive speed with dd in current folder                                 |
 | dynv6.sh             | script to update dyndns service dynv6 with multi-config file                  |
 | fritzbox.sh          | get data from the fritzbox: external ipv4/-v6 and current up-/download rates  |
 | git_multi.sh         | execute git command on multiple repositories                                  |
@@ -35,6 +34,7 @@ shell scripts for system/hardware management and general maintenance
 | stopwatch.sh         | script to measure the time                                                    |
 | sync_notes.sh        | sync notes to webserver                                                       |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
+| test_drive.sh        | measure drive speed with dd in current folder                                 |
 | touchpad_toggle.sh   | disable/enable touchpad                                                       |
 | urxvtc.sh            | start urxvtd if not already running and open urxvtc                           |
 | w3m.sh               | terminal wrapper for w3m with or without suckless tabbed                      |
