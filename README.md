@@ -24,7 +24,6 @@ shell scripts for system/hardware management and general maintenance
 | fritzbox.sh          | get data from the fritzbox: external ipv4/-v6 and current up-/download rates  |
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | git_repos.sh         | perform oparations for all repositories of a user or organization             |
-| notify_test.sh       | generate test messages with notify-send                                       |
 | padd_update.sh       | script to update pi-hole padd                                                 |
 | pdf.sh               | script to compress/convert/chain/unchain pdf files                            |
 | pkgstats.sh          | download package stats from arch packages                                     |
@@ -35,6 +34,7 @@ shell scripts for system/hardware management and general maintenance
 | sync_notes.sh        | sync notes to webserver                                                       |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
 | test_drive.sh        | measure drive speed with dd in current folder                                 |
+| test_notification.sh | generates test messages for processing with notify-send                       |
 | touchpad_toggle.sh   | disable/enable touchpad                                                       |
 | urxvtc.sh            | start urxvtd if not already running and open urxvtc                           |
 | w3m.sh               | terminal wrapper for w3m with or without suckless tabbed                      |
