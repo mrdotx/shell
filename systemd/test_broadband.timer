@@ -1,0 +1,13 @@
+# path:   /home/klassiker/.local/share/repos/shell/systemd/test_broadband.timer
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/shell
+# date:   2025-04-15T06:21:52+0200
+
+[Unit]
+Description=run test_broadband.service a few times a day
+
+[Timer]
+OnCalendar=20..23:37:00
+
+[Install]
+WantedBy=timers.target

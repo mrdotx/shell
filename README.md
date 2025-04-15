@@ -27,12 +27,12 @@ shell scripts for system/hardware management and general maintenance
 | padd_update.sh       | script to update pi-hole padd                                                 |
 | pdf.sh               | script to compress/convert/chain/unchain pdf files                            |
 | pkgstats.sh          | download package stats from arch packages                                     |
-| speedtest.sh         | output speedtest-cli results to structured csv file                           |
 | ssh_exec.sh          | execute command with ssh if remote host is not local host                     |
 | status.sh            | simple script for system information in different formats                     |
 | stopwatch.sh         | script to measure the time                                                    |
 | sync_notes.sh        | sync notes to webserver                                                       |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
+| test_broadband.sh    | outputs speedtest-cli results to a structured csv file                        |
 | test_drive.sh        | measure drive speed with dd in current folder                                 |
 | test_notification.sh | generates test messages for processing with notify-send                       |
 | touchpad_toggle.sh   | disable/enable touchpad                                                       |
