@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-04-09T06:21:42+0200
+# date:   2025-04-21T06:12:22+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -35,7 +35,9 @@ find_files() {
 }
 
 cleanup_file() {
-    ! [ -f "$1" ] && printf "missing: %b%s%b\n" "$cyan" "$1" "$reset" && return
+    ! [ -f "$1" ] \
+        && printf "%b%s%b not found...\n" "$cyan" "$1" "$reset" \
+        && return
 
     printf "%b%b::%b %bcleanup file%b %b%s%b\n" \
         "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$1" "$reset"
@@ -50,7 +52,9 @@ cleanup_file() {
 }
 
 delete_files() {
-    ! [ -d "$1" ] && printf "missing: %b%s%b\n" "$cyan" "$1" "$reset" && return
+    ! [ -d "$1" ] \
+        && printf "%b%s%b not found...\n" "$cyan" "$1" "$reset" \
+        && return
 
     cache_files=$(find_files "$1" "$2" \
         | wc -l \
@@ -76,7 +80,9 @@ delete_files() {
 }
 
 delete_pkg_versions() {
-    ! [ -d "$1" ] && printf "missing: %b%s%b\n" "$cyan" "$1" "$reset" && return
+    ! [ -d "$1" ] \
+        && printf "%b%s%b not found...\n" "$cyan" "$1" "$reset" \
+        && return
 
     dry_run=$($auth find "$1" -type d \
         -exec printf "%b%b::%b %bdelete packages from%b %b{}%b%b, except the last %d versions%b\n" \
@@ -104,8 +110,12 @@ delete_pkg_versions() {
 }
 
 delete_unused_pkgs() {
-    ! [ -d "$1" ] && printf "missing: %b%s%b\n" "$cyan" "$1" "$reset" && return
-    ! [ -d "$2" ] && printf "missing: %b%s%b\n" "$cyan" "$2" "$reset" && return
+    ! [ -d "$1" ] \
+        && printf "%b%s%b not found...\n" "$cyan" "$1" "$reset" \
+        && return
+    ! [ -d "$2" ] \
+        && printf "%b%s%b not found...\n" "$cyan" "$2" "$reset" \
+        && return
 
     pkgs_cache="$1"
     pkgs_all="$2/client_pkgs"
@@ -164,19 +174,18 @@ cleanup_file "$HOME/.local/share/cmd_history"
 delete_files "$HOME/.cache" 365
 
 # packages
-case "$(uname -n)" in
-    "m625q")
-        for option in "$@"; do
-            case "$option" in
-                -u | --unused)
-                    delete_unused_pkgs "/srv/pacman" "$HOME/Public/pkgsused"
-                    ;;
-                -v | --versions)
-                    delete_pkg_versions "/srv/pacman/core/os/x86_64" 2
-                    delete_pkg_versions "/srv/pacman/extra/os/x86_64" 2
-                    delete_pkg_versions "/srv/aurutils/aurbuild" 2
-                    ;;
-            esac
-        done
-    ;;
-esac
+for option in "$@"; do
+    case "$option" in
+        -h | --help)
+            printf "usage: %s [-u/--unused] [-v/--versions]\n" "$(basename "$0")"
+            ;;
+        -u | --unused)
+            delete_unused_pkgs "/srv/pacman" "$HOME/Public/pkgsused"
+            ;;
+        -v | --versions)
+            delete_pkg_versions "/srv/pacman/core/os/x86_64" 2
+            delete_pkg_versions "/srv/pacman/extra/os/x86_64" 2
+            delete_pkg_versions "/srv/aurutils/aurbuild" 2
+            ;;
+    esac
+done
