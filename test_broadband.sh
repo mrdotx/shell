@@ -3,13 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/test_broadband.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-04-15T06:21:14+0200
+# date:   2025-04-23T06:00:59+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
 # config
+input_delimiter="#"
 retries=5
 delay=10
 csv="$HOME/Public/broadband/test.csv"
@@ -18,7 +19,7 @@ header="Date	Time	Ping	Down	Up	Host	IP	Km	Server	ID	Sponsor"
 # helper
 get_value() {
     printf "%s" "$1" \
-        | cut -d ',' -f"$2"
+        | cut -d "$input_delimiter" -f"$2"
 }
 
 # direct execution options
@@ -31,7 +32,7 @@ esac
 
 # main
 while [ "${error:-1}" -gt 0 ] && [ $retries -gt 0 ]; do
-    test_result=$(speedtest-cli --csv "$@")
+    test_result=$(speedtest-cli --csv --csv-delimiter "$input_delimiter" "$@")
     error=$?
     retries=$((retries-1))
     [ $retries -gt 0 ] \
