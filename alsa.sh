@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/alsa.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-12-21T07:13:44+0100
+# date:   2025-05-07T05:50:52+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -19,43 +19,40 @@ message_title="Volume"
 script=$(basename "$0")
 help="$script [-h/--help] -- script to change alsa audio output
   Usage:
-    $script [-inc/-dec/-abs/-mute] [percent]
+    $script [-i/--increase/-d/--decrease/-a/--absolute] [percent] [-n/--notify]
+    $script [-m/--mute/-u/--unmute/-t/--toggle] [-n/--notify]
 
   Settings:
-    [-inc]    = increase in percent (0-100)
-    [-dec]    = decrease in percent (0-100)
-    [-abs]    = absolute volume in percent (0-100)
-    [percent] = how much percent to increase/decrease the volume
-    [-mute]   = mute volume
+    [-i/--increase] = increase in percent (0-100)
+    [-d/--decrease] = decrease in percent (0-100)
+    [-a/--absolute] = absolute volume in percent (0-100)
+    [percent]       = percentage of increase/decrease/absolute volume
+    [-m/--mute]     = mute audio
+    [-u/--unmute]   = unmute audio
+    [-t/--toggle]   = toggle mute status
+    [-n/--notify]   = send status notification
 
   Examples:
-    $script -inc 5
-    $script -dec 5
-    $script -abs 36
-    $script -mute"
+    $script --increase 5
+    $script -d 5 -n
+    $script --absolute 36
+    $script -m
+    $script --unmute
+    $script --toggle --notify"
 
 notification() {
-    volume="$(amixer get "$1" \
-        | tail -1 \
-        | cut -d'[' -f2 \
-        | sed 's/%]*//' \
-    )"
+    case "$1" in
+        -n | --notify)
+            get_volume "$2"
 
-    if amixer get "$2" | tail -1 | grep "\[off\]" >/dev/null; then
-        volume=0 \
-        volume_indicator="MUTE"
-    else
-        volume=$((volume /= ${3:-1}))
-        volume=$((volume *= ${3:-1}))
-        volume_indicator="$volume%"
-    fi
-
-    notify-send \
-        -t 2000 \
-        -u low \
-        "$message_title $volume_indicator" \
-        -h string:x-canonical-private-synchronous:"$message_title" \
-        -h int:value:"$volume"
+            notify-send \
+                -t 2000 \
+                -u low \
+                "$message_title $volume_indicator" \
+                -h string:x-canonical-private-synchronous:"$message_title" \
+                -h int:value:"$volume"
+            ;;
+    esac
 }
 
 get_analog() {
@@ -63,48 +60,67 @@ get_analog() {
         | sed 's/^    //' \
     )
 
-    if ! aplay -l \
-        | grep -m1 -i -e "^$card.*$analog_filter" > /dev/null 2>&1; then
-        device_mixer="PCM"
-        device_mute="IEC958"
-    else
-        device_mixer="Master"
-        device_mute="Master"
-    fi
+    ! aplay -l \
+        | grep -m1 -i -e "^$card.*$analog_filter" > /dev/null 2>&1 \
+            && device_mixer="PCM" \
+            && device_mute="IEC958" \
+            && return
+
+    device_mixer="Master"
+    device_mute="Master"
+}
+
+get_volume() {
+    amixer get "$device_mute" | tail -1 | grep "\[off\]" >/dev/null \
+        && volume=0 \
+        && volume_indicator="MUTE" \
+        && return
+
+    volume="$(amixer get "$device_mixer" \
+        | tail -1 \
+        | cut -d'[' -f2 \
+        | sed 's/%]*//' \
+    )"
+    volume=$((volume /= ${1:-1}))
+    volume=$((volume *= ${1:-1}))
+    volume_indicator="$volume%"
 }
 
 set_volume() {
-    if [ "$#" -eq 2 ] \
-        && [ "$2" -ge 0 ] > /dev/null 2>&1 \
-        && [ "$2" -le 100 ] > /dev/null 2>&1; then
-            amixer -q set "$device_mixer" "$2%$1"
-            notification "$device_mixer" "$device_mute" "$2"
-    else
-        printf "%s\n" "$help"
-        exit 1
-    fi
+    [ "$2" -ge 0 ] > /dev/null 2>&1 \
+        && [ "$2" -le 100 ] > /dev/null 2>&1 \
+        && get_analog \
+        && amixer -q set "$device_mixer" "$2%$1" \
+        && notification "$3" "$2"
+}
+
+set_mute() {
+    get_analog \
+        && amixer -q set "$device_mute" "$1" \
+        && notification "$2"
 }
 
 case "$1" in
     -h | --help)
         printf "%s\n" "$help"
         ;;
-    -inc)
-        get_analog
-        set_volume "+" "$2"
+    -i | --increase)
+        set_volume "+" "$2" "$3"
         ;;
-    -dec)
-        get_analog
-        set_volume "-" "$2"
+    -d | --decrease)
+        set_volume "-" "$2" "$3"
         ;;
-    -abs)
-        get_analog
-        set_volume "" "$2"
+    -a | --absolute)
+        set_volume "" "$2" "$3"
         ;;
-    -mute)
-        get_analog
-        amixer -q set "$device_mute" toggle
-        notification "$device_mixer" "$device_mute"
+    -m | --mute)
+        set_mute "mute" "$2"
+        ;;
+    -u | --unmute)
+        set_mute "unmute" "$2"
+        ;;
+    -t | --toggle)
+        set_mute "toggle" "$2"
         ;;
     *)
         printf "%s\n" "$help"
