@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backlight.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-10-28T06:58:26+0100
+# date:   2025-05-08T05:49:03+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -18,16 +18,18 @@ message_title="Brightness"
 script=$(basename "$0")
 help="$script [-h/--help] -- script to change backlight
   Usage:
-    $script [-inc/-dec] [percent]
+    $script [-i/--increase/-d/--decrease] [percent] [-n/--notify]
 
   Settings:
-    [-inc]    = increase in percent (0-100)
-    [-dec]    = decrease in percent (0-100)
-    [percent] = how much percent to increase/decrease the brightness
+    [-i/--increase] = increase in percent (0-100)
+    [-d/--decrease] = decrease in percent (0-100)
+    [percent]       = how much percent to increase/decrease the brightness
+    [-n/--notify]   = send status notification
 
   Examples:
-    $script -inc 5
-    $script -dec 5"
+    $script --increase 5
+    $script -d 5 -n
+    $script --decrease 5 --notify"
 
 backlight_dir=$( \
     find /sys/class/backlight -type l \
@@ -35,64 +37,65 @@ backlight_dir=$( \
 )
 
 notification() {
-    if [ "$1" -ge 100 ]; then
-        brightness=$(($1 / 100))
-        brightness=$(($2 / brightness))
-    else
-        brightness=$((100 / $1))
-        brightness=$(($2 * brightness))
-    fi
-    brightness=$((brightness /= $3))
-    brightness=$((brightness *= $3))
+    case "$1" in
+        -n | --notify)
+            get_brightness "$2"
 
-    notify-send \
-        -t 2000 \
-        -u low  \
-        "$message_title $brightness%" \
-        -h string:x-canonical-private-synchronous:"$message_title" \
-        -h int:value:"$brightness"
+            notify-send \
+                -t 2000 \
+                -u low  \
+                "$message_title $brightness%" \
+                -h string:x-canonical-private-synchronous:"$message_title" \
+                -h int:value:"$brightness"
+            ;;
+    esac
 }
 
-brightness() {
-    if [ "$1" -ge 0 ] \
-        && [ "$1" -le 100 ]; then
-            max=$(cat "$backlight_dir/max_brightness")
-            actual=$(cat "$backlight_dir/actual_brightness")
+get_brightness_values() {
+    [ "$1" -ge 0 ] \
+        && [ "$1" -le 100 ] \
+        && max=$(cat "$backlight_dir/max_brightness") \
+        && actual=$(cat "$backlight_dir/actual_brightness") \
+        && percent=$((100 / $1)) \
+        && factor=$((max / percent)) \
+        && [ "$factor" -eq 0 ] \
+            && factor=1
+}
 
-            percent=$((100 / $1))
-            factor=$((max / percent))
-
-            [ $factor -eq 0 ] \
-                && factor=1
+get_brightness() {
+    if [ "$max" -ge 100 ]; then
+        brightness=$((max / 100))
+        brightness=$((value / brightness))
     else
-        printf "%s\n" "$help"
-        exit 1
+        brightness=$((100 / max))
+        brightness=$((value * brightness))
     fi
+    brightness=$((brightness /= $1))
+    brightness=$((brightness *= $1))
 }
 
 set_brightness() {
-    $auth sh -c "printf \"%s\" \"$1\" > \"$backlight_dir/brightness\""
+    $auth sh -c "printf \"%s\" \"$1\" > \"$backlight_dir/brightness\"" \
+        && notification "$3" "$2"
 }
 
 case "$1" in
     -h | --help)
         printf "%s\n" "$help"
         ;;
-    -inc)
-        brightness "$2"
+    -i | --increase)
+        get_brightness_values "$2"
         value=$((actual + factor))
         [ $value -ge "$max" ] \
             && value=$max
-        set_brightness "$value"
-        notification "$max" "$value" "$2"
+        set_brightness "$value" "$2" "$3"
         ;;
-    -dec)
-        brightness "$2"
+    -d | --decrease)
+        get_brightness_values "$2"
         value=$((actual - factor))
         [ $value -le 0 ] \
             && value=0
-        set_brightness "$value"
-        notification "$max" "$value" "$2"
+        set_brightness "$value" "$2" "$3"
         ;;
     *)
         printf "%s\n" "$help"
