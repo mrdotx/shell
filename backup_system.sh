@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_system.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-03-17T14:47:08+0100
+# date:   2025-05-31T05:48:22+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -44,7 +44,7 @@ backup_host() {
                 --exclude='/srv/http/download' \
                 --rsync-path='$auth rsync'"
             ;;
-        mi)
+        t14)
             src="$1:/"
             options="$rsync_options \
                 --rsync-path='$auth rsync'"
@@ -78,7 +78,7 @@ backup() {
         [ -d "$mnt" ] \
             && backup_host "$local_host" \
             && backup_host "m625q" \
-            && backup_host "mi"
+            && backup_host "t14"
 
         # unmount
         [ -d "$mnt" ] \
