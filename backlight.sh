@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backlight.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-05-08T05:49:03+0200
+# date:   2025-06-22T03:56:12+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -31,47 +31,31 @@ help="$script [-h/--help] -- script to change backlight
     $script -d 5 -n
     $script --decrease 5 --notify"
 
-backlight_dir=$( \
-    find /sys/class/backlight -type l \
-        | head -n1 \
-)
+backlight_dir=$(find /sys/class/backlight -type l | head -n1)
+backlight_max=$(cat "$backlight_dir/max_brightness")
+backlight_current=$(cat "$backlight_dir/brightness")
 
 notification() {
     case "$1" in
         -n | --notify)
-            get_brightness "$2"
+            percentage=$((value * 100 / backlight_max))
+            percentage=$((percentage /= $2))
+            percentage=$((percentage *= $2))
 
             notify-send \
                 -t 2000 \
                 -u low  \
-                "$message_title $brightness%" \
+                "$message_title $percentage%" \
                 -h string:x-canonical-private-synchronous:"$message_title" \
-                -h int:value:"$brightness"
+                -h int:value:"$percentage"
             ;;
     esac
 }
 
-get_brightness_values() {
-    [ "$1" -ge 0 ] \
-        && [ "$1" -le 100 ] \
-        && max=$(cat "$backlight_dir/max_brightness") \
-        && actual=$(cat "$backlight_dir/actual_brightness") \
-        && percent=$((100 / $1)) \
-        && factor=$((max / percent)) \
-        && [ "$factor" -eq 0 ] \
-            && factor=1
-}
-
-get_brightness() {
-    if [ "$max" -ge 100 ]; then
-        brightness=$((max / 100))
-        brightness=$((value / brightness))
-    else
-        brightness=$((100 / max))
-        brightness=$((value * brightness))
-    fi
-    brightness=$((brightness /= $1))
-    brightness=$((brightness *= $1))
+get_factor() {
+    [ "$1" -ge 0 ] && [ "$1" -le 100 ] \
+        && factor=$((backlight_max / (100 / $1))) \
+        && [ "$factor" -eq 0 ] && factor=1
 }
 
 set_brightness() {
@@ -84,15 +68,15 @@ case "$1" in
         printf "%s\n" "$help"
         ;;
     -i | --increase)
-        get_brightness_values "$2"
-        value=$((actual + factor))
-        [ $value -ge "$max" ] \
-            && value=$max
+        get_factor "$2"
+        value=$((backlight_current + factor))
+        [ $value -ge "$backlight_max" ] \
+            && value=$backlight_max
         set_brightness "$value" "$2" "$3"
         ;;
     -d | --decrease)
-        get_brightness_values "$2"
-        value=$((actual - factor))
+        get_factor "$2"
+        value=$((backlight_current - factor))
         [ $value -le 0 ] \
             && value=0
         set_brightness "$value" "$2" "$3"
