@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/fritzbox.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-07-11T05:46:18+0200
+# date:   2025-07-14T05:05:21+0200
 
 # config
 url="http://10.10.10.10:49000"
@@ -31,7 +31,7 @@ calc() {
     printf "%s\n" "$*" | bc -l
 }
 
-conv() {
+convert_unit() {
     [ -z "$1" ] && printf "? %s" "$3" && exit 1
 
     [ "$1" -le "$2" ] && printf "0 %s" "$3" && exit
@@ -39,22 +39,48 @@ conv() {
     printf "%.1f %s" "$(calc "$1 / $4")" "$5"
 }
 
-bit_perc() {
-    [ -z "$1" ] && printf "?.?%%" && exit 1
-
-    printf "%.1f%%" "$(calc "$1 / ($2 * 131072 / 100)")"
-}
-
-bit_sec() {
-    conv "$1" 128 "Kbit/s" 131072 "Mbit/s"
-}
-
-byte_sec() {
-    conv "$1" 1000 "KB/s" 1000000 "MB/s"
-}
-
 byte_total() {
-    conv "$1" 1000000 "MB" 1000000000 "GB"
+    convert_unit "$1" 1000000 "MB" 1000000000 "GB"
+}
+
+byte_seconds() {
+    convert_unit "$1" 1000 "KB/s" 1000000 "MB/s"
+}
+
+bit_seconds() {
+    convert_unit "$1" 128 "Kbit/s" 131072 "Mbit/s"
+}
+
+bit_percent() {
+    [ -z "$1" ] && printf "?.?" && exit 1
+
+    printf "%.1f" "$(calc "$1 / ($2 * 131072 / 100)")"
+}
+
+bar_percent() {
+    percent=$( \
+        [ "$1" = "?.?" ] && printf "0" && return
+        printf "%.0f" "$1"
+    )
+
+    max=20
+
+    bar_draw() {
+        quantity="$1"
+        while [ "$quantity" -gt 0 ]; do
+            printf "%b%s" "$2" "■"
+            quantity=$((quantity - 1))
+        done
+    }
+
+    [ "$percent" -gt 100 ] && percent=100
+    [ "$percent" -lt 0 ] && percent=0
+    positive=$((percent * max / 100))
+    negative=$((max - positive))
+
+    bar_draw "$positive" "$2"
+    bar_draw "$negative" "$3"
+    printf "%b" "$reset"
 }
 
 # main
@@ -81,14 +107,15 @@ case "$1" in
         rate_down=$(xml_value "NewByteReceiveRate" "$data")
         rate_up=$(xml_value "NewByteSendRate" "$data")
 
-        printf "↓%s ↑%s" \
-            "$(bit_sec "$rate_down")" \
-            "$(bit_sec "$rate_up")"
+        printf "↓%s ↑%s\n" \
+            "$(bit_seconds "$rate_down")" \
+            "$(bit_seconds "$rate_up")"
         ;;
     -i | --info)
         # color variables
         reset="\033[0m"
         bold="\033[1m"
+        black="\033[30m"
         red="\033[31m"
         green="\033[32m"
 
@@ -96,26 +123,31 @@ case "$1" in
                 "GetAddonInfos"
         )
 
-        rate_down=$(xml_value "NewByteReceiveRate" "$data")
         rate_up=$(xml_value "NewByteSendRate" "$data")
-        total_down=$(xml_value "NewX_AVM_DE_TotalBytesReceived64" "$data")
+        rate_down=$(xml_value "NewByteReceiveRate" "$data")
         total_up=$(xml_value "NewX_AVM_DE_TotalBytesSent64" "$data")
+        total_down=$(xml_value "NewX_AVM_DE_TotalBytesReceived64" "$data")
+        percent_up="$(bit_percent "$rate_up" "$max_up")"
+        percent_down="$(bit_percent "$rate_down" "$max_down")"
 
-        printf "%s %s %b%b↑%b %s %s\n%s %s %b%b↓%b %s %s" \
-                "$(bit_sec "$rate_up")" \
-                "$(bit_perc "$rate_up" "$max_up")" \
+        printf "%s %s%% %s %b%b↑%b %s %s\n%s %s%% %s %b%b↓%b %s %s\n" \
+                "$(bit_seconds "$rate_up")" \
+                "$percent_up" \
+                "$(bar_percent "$percent_up" "$bold$red" "$bold$black")" \
                 "$bold" "$red" "$reset" \
                 "$(byte_total "$total_up")" \
-                "$(byte_sec "$rate_up")" \
-                "$(bit_sec "$rate_down")" \
-                "$(bit_perc "$rate_down" "$max_down")" \
+                "$(byte_seconds "$rate_up")" \
+                "$(bit_seconds "$rate_down")" \
+                "$percent_down" \
+                "$(bar_percent "$percent_down" "$bold$green" "$bold$black")" \
                 "$bold" "$green" "$reset" \
                 "$(byte_total "$total_down")" \
-                "$(byte_sec "$rate_down")" \
+                "$(byte_seconds "$rate_down")" \
             | column --table --table-noheadings --output-separator " " \
                 --table-column right,width=6 \
                 --table-column right \
                 --table-column right,width=6 \
+                --table-column right \
                 --table-column right \
                 --table-column right,width=3 \
                 --table-column right \
