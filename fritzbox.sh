@@ -3,19 +3,28 @@
 # path:   /home/klassiker/.local/share/repos/shell/fritzbox.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-07-14T05:05:21+0200
+# date:   2025-07-15T05:16:25+0200
 
 # config
-url="http://10.10.10.10:49000"
+default_ip="10.10.10.10"
 max_down=150
 max_up=30
 
 # helper
+soap_upnp() {
+    # alternative authentication: --user "user:password" instead of --netrc
+    curl -fs "https://$1:49443/upnp/control/$2" \
+        --anyauth --netrc \
+        -H 'Content-Type: text/xml"' \
+        -H "SoapAction:urn:dslforum-org:service:$3:1#$4" \
+        -d "<?xml?><s:Envelope xmlns:s=''><s:Body><u:$4/></s:Body></s:Envelope>"
+}
+
 soap_igdupnp() {
-    curl -fs "$url/igdupnp/control/$1" \
+    curl -fs "http://$1:49000/igdupnp/control/$2" \
         -H 'Content-Type:text/xml' \
-        -H "SoapAction:urn:schemas-upnp-org:service:$2:1#$3" \
-        -d "<?xml?><s:Envelope xmlns:s=''><s:Body><u:$3/></s:Body></s:Envelope>"
+        -H "SoapAction:urn:schemas-upnp-org:service:$3:1#$4" \
+        -d "<?xml?><s:Envelope xmlns:s=''><s:Body><u:$4/></s:Body></s:Envelope>"
 }
 
 xml_value() {
@@ -86,22 +95,22 @@ bar_percent() {
 # main
 case "$1" in
     -4 | --ipv4)
-        data=$(soap_igdupnp "WANIPConn1" "WANIPConnection" \
-                "GetExternalIPAddress" \
+        data=$(soap_igdupnp "${2:-$default_ip}" \
+            "WANIPConn1" "WANIPConnection" "GetExternalIPAddress" \
         )
 
         xml_value "NewExternalIPAddress" "$data"
         ;;
     -6 | --ipv6)
-        data=$(soap_igdupnp "WANIPConn1" "WANIPConnection" \
-                "X_AVM_DE_GetExternalIPv6Address" \
+        data=$(soap_igdupnp "${2:-$default_ip}" \
+            "WANIPConn1" "WANIPConnection" "X_AVM_DE_GetExternalIPv6Address" \
         )
 
         xml_value "NewExternalIPv6Address" "$data"
         ;;
     -b | --bar)
-        data=$(soap_igdupnp "WANCommonIFC1" "WANCommonInterfaceConfig" \
-                "GetAddonInfos"
+        data=$(soap_igdupnp "${2:-$default_ip}" \
+            "WANCommonIFC1" "WANCommonInterfaceConfig" "GetAddonInfos"
         )
 
         rate_down=$(xml_value "NewByteReceiveRate" "$data")
@@ -119,8 +128,8 @@ case "$1" in
         red="\033[31m"
         green="\033[32m"
 
-        data=$(soap_igdupnp "WANCommonIFC1" "WANCommonInterfaceConfig" \
-                "GetAddonInfos"
+        data=$(soap_igdupnp "${2:-$default_ip}" \
+            "WANCommonIFC1" "WANCommonInterfaceConfig" "GetAddonInfos"
         )
 
         rate_up=$(xml_value "NewByteSendRate" "$data")
@@ -154,7 +163,15 @@ case "$1" in
                 --table-column right,width=4 \
                 --table-column right
         ;;
+    -r | --reboot)
+        # the ip is always required to prevent an accidental reboot
+        soap_upnp "$2" "deviceconfig" "DeviceConfig" "Reboot"
+        ;;
+    -t | --termination)
+        soap_igdupnp "${2:-$default_ip}" \
+            "WANIPConn1" "WANIPConnection" "ForceTermination"
+        ;;
     *)
-        watch --color --no-title --interval 1 "$0" --info
+        watch --color --no-title --interval 5 "$0" --info "${1:-$default_ip}"
         ;;
 esac
