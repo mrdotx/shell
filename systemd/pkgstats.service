@@ -1,14 +1,14 @@
 # path:   /home/klassiker/.local/share/repos/shell/systemd/pkgstats.service
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-05-02T08:22:06+0200
+# date:   2025-07-20T04:53:47+0200
 
 [Unit]
 Description=updating pkgstats in user context
 
 [Service]
 Type=oneshot
-ExecStart=%h/.local/share/repos/shell/pkgstats.sh cinfo rxvt-unicode-truecolor-wide-glyphs
+ExecStart=%h/.local/share/repos/shell/pkgstats.sh cinfo rustymeter rxvt-unicode-truecolor-wide-glyphs
 Restart=on-failure
 RestartSec=24h
 
