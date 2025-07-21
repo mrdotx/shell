@@ -3,12 +3,19 @@
 # path:   /home/klassiker/.local/share/repos/shell/fritzbox.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-07-15T05:16:25+0200
+# date:   2025-07-21T05:41:54+0200
 
 # config
 default_ip="10.10.10.10"
 max_down=150
 max_up=30
+
+# color variables
+reset="\033[0m"
+bold="\033[1m"
+black="\033[30m"
+red="\033[31m"
+green="\033[32m"
 
 # helper
 soap_upnp() {
@@ -66,30 +73,33 @@ bit_percent() {
     printf "%.1f" "$(calc "$1 / ($2 * 131072 / 100)")"
 }
 
+bar_draw() {
+    quantity="$1"
+    printf "%b" "$2"
+    while [ "$quantity" -gt 0 ]; do
+        printf "%b" "$3"
+        quantity=$((quantity - 1))
+    done
+    printf "%b" "$reset"
+}
+
 bar_percent() {
     percent=$( \
         [ "$1" = "?.?" ] && printf "0" && return
         printf "%.0f" "$1"
     )
 
-    max=20
-
-    bar_draw() {
-        quantity="$1"
-        while [ "$quantity" -gt 0 ]; do
-            printf "%b%s" "$2" "■"
-            quantity=$((quantity - 1))
-        done
-    }
+    width=20
 
     [ "$percent" -gt 100 ] && percent=100
     [ "$percent" -lt 0 ] && percent=0
-    positive=$((percent * max / 100))
-    negative=$((max - positive))
+    fill=$((percent * width / 100))
+    indicator=1
+    empty=$((width - fill))
 
-    bar_draw "$positive" "$2"
-    bar_draw "$negative" "$3"
-    printf "%b" "$reset"
+    bar_draw "$((fill - indicator))" "$2" "$3"
+    [ $fill -gt 0 ] && bar_draw "$indicator" "$4" "$5"
+    bar_draw "$empty" "$6" "$7"
 }
 
 # main
@@ -121,13 +131,6 @@ case "$1" in
             "$(bit_seconds "$rate_up")"
         ;;
     -i | --info)
-        # color variables
-        reset="\033[0m"
-        bold="\033[1m"
-        black="\033[30m"
-        red="\033[31m"
-        green="\033[32m"
-
         data=$(soap_igdupnp "${2:-$default_ip}" \
             "WANCommonIFC1" "WANCommonInterfaceConfig" "GetAddonInfos"
         )
@@ -136,38 +139,35 @@ case "$1" in
         rate_down=$(xml_value "NewByteReceiveRate" "$data")
         total_up=$(xml_value "NewX_AVM_DE_TotalBytesSent64" "$data")
         total_down=$(xml_value "NewX_AVM_DE_TotalBytesReceived64" "$data")
-        percent_up="$(bit_percent "$rate_up" "$max_up")"
-        percent_down="$(bit_percent "$rate_down" "$max_down")"
 
-        printf "%s %s%% %s %b%b↑%b %s %s\n%s %s%% %s %b%b↓%b %s %s\n" \
-                "$(bit_seconds "$rate_up")" \
-                "$percent_up" \
-                "$(bar_percent "$percent_up" "$bold$red" "$bold$black")" \
-                "$bold" "$red" "$reset" \
-                "$(byte_total "$total_up")" \
+        printf "%s %s %b %s %s\n%s %s %b %s %s\n" \
                 "$(byte_seconds "$rate_up")" \
-                "$(bit_seconds "$rate_down")" \
-                "$percent_down" \
-                "$(bar_percent "$percent_down" "$bold$green" "$bold$black")" \
-                "$bold" "$green" "$reset" \
-                "$(byte_total "$total_down")" \
+                "$(byte_total "$total_up")" \
+                "$bold$red↑$reset" \
+                "$(bar_percent "$(bit_percent "$rate_up" "$max_up")" \
+                    "$bold$red" "■" "$bold$red" "■" "$bold$black" "■")" \
+                "$(bit_seconds "$rate_up")" \
                 "$(byte_seconds "$rate_down")" \
+                "$(byte_total "$total_down")" \
+                "$bold$green↓$reset" \
+                "$(bar_percent "$(bit_percent "$rate_down" "$max_down")" \
+                    "$bold$green" "■" "$bold$green" "■" "$bold$black" "■")" \
+                "$(bit_seconds "$rate_down")" \
             | column --table --table-noheadings --output-separator " " \
-                --table-column right,width=6 \
-                --table-column right \
-                --table-column right,width=6 \
-                --table-column right \
+                --table-column right,width=5 \
                 --table-column right \
                 --table-column right,width=3 \
                 --table-column right \
-                --table-column right,width=4 \
+                --table-column right \
+                --table-column right \
+                --table-column right,width=5 \
                 --table-column right
         ;;
     -r | --reboot)
         # the ip is always required to prevent an accidental reboot
         soap_upnp "$2" "deviceconfig" "DeviceConfig" "Reboot"
         ;;
-    -t | --termination)
+    -t | --terminate)
         soap_igdupnp "${2:-$default_ip}" \
             "WANIPConn1" "WANIPConnection" "ForceTermination"
         ;;
