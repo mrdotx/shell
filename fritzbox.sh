@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/fritzbox.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-07-21T05:41:54+0200
+# date:   2025-07-28T04:59:59+0200
 
 # config
 default_ip="10.10.10.10"
@@ -45,6 +45,35 @@ xml_value() {
 
 calc() {
     printf "%s\n" "$*" | bc -l
+}
+
+convert_uptime() {
+    [ -z "$1" ] && printf "?" && exit 1
+
+    day="$(($1 / 60 / 60 / 24))"
+    hour="$(($1 / 60 / 60 % 24))"
+    min="$(($1 / 60 % 60))"
+    sec="$(($1 % 60))"
+
+    if [ $day -eq 0 ] && [ $hour -eq 0 ] && [ $min -eq 0 ]; then
+        printf "%d second" "$sec"
+        [ $sec -gt 1 ] && printf "s"
+    else
+        if [ $day -gt 0 ]; then
+            printf "%d day" "$day"
+            [ $day -gt 1 ] && printf "s"
+            { [ $hour -gt 0 ] || [ $min -gt 0 ]; } && printf ", "
+        fi
+        if [ $hour -gt 0 ]; then
+            printf "%d hour" "$hour"
+            [ $hour -gt 1 ] && printf "s"
+            [ $min -gt 0 ] && printf ", "
+        fi
+        if [ $min -gt 0 ]; then
+            printf "%d minute" "$min"
+            [ $min -gt 1 ] && printf "s"
+        fi
+    fi
 }
 
 convert_unit() {
@@ -170,6 +199,22 @@ case "$1" in
     -t | --terminate)
         soap_igdupnp "${2:-$default_ip}" \
             "WANIPConn1" "WANIPConnection" "ForceTermination"
+        ;;
+    -u | --uptime)
+        data=$(soap_upnp "${2:-$default_ip}" \
+            "deviceinfo" "DeviceInfo" "GetInfo")
+
+        printf "uptime: %s\n" \
+            "$(convert_uptime "$(xml_value "NewUpTime" "$data")")"
+        ;;
+    -x | --xml)
+        # get soap description files (libxml2 required)
+        for xml in \
+            igddesc.xml igdicfgSCPD.xml igdconnSCPD.xml \
+            tr64desc.xml deviceinfoSCPD.xml deviceconfigSCPD.xml; do
+                xmllint "http://${2:-$default_ip}:49000/$xml" \
+                    --format --output "$xml"
+        done
         ;;
     *)
         watch --color --no-title --interval 5 "$0" --info "${1:-$default_ip}"
