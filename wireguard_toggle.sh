@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wireguard_toggle.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-07-23T04:49:37+0200
+# date:   2025-08-02T06:00:29+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -24,8 +24,8 @@ help="$script [-h/--help] -- script to enable/disable wireguard interfaces
     <config>      = wireguard config without extensions (netdev/network)
 
   Examples:
-    $script 99-m75q_vpn
-    $script -s 99-m75q_vpn
+    $script 90-vpn_m75q
+    $script -s 90-vpn_m75q
 
   Config:
     systemd_network  = \"$systemd_network\"
