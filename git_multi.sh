@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2025-03-27T06:03:34+0100
+# date:   2025-08-03T06:17:06+0200
 
 # config
 default="status"
@@ -47,7 +47,7 @@ git_folder() {
 command_constructor() {
     for folder in $1; do
         repo_folder="${folder%/*}"
-        printf "\"git -C %s %s" \
+        printf "\"git -P -C %s %s" \
             "$folder" "$options"
         printf " && printf '%b%b==>%b completed: %bgit%b %s %b%s%b\\\n'\"\n" \
             "$bold" "$green" "$reset" "$green" "$reset" "$options" "$cyan" \
