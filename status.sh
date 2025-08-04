@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/shell
-# date:   2024-06-18T07:38:00+0200
+# date:   2025-08-04T05:55:47+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -16,14 +16,15 @@ cpu_temp_path="/sys/class/hwmon/hwmon1/temp1_input"
 script=$(basename "$0")
 help="$script [-h/--help] -- script to show system information
   Usage:
-    $script [-l]
+    $script [-b/--bar]
 
   Settings:
-    [-l] = system information in line
+    [-b/--bar] = system information in a single line
 
   Examples:
     $script
-    $script -l"
+    $script --bar
+    $script -b"
 
 kb_mb() {
     printf "%.0fM\n" "$(($1 * 1000 / 1024))e-3"
@@ -122,7 +123,7 @@ case "$1" in
     -h | --help)
         printf "%s\n" "$help"
         ;;
-    -l)
+    -b | --bar)
         printf "cpu: %s | " "$(cpu)"
         printf "ram: %s | " "$(ram)"
         printf "swap: %s | " "$(swap)"
