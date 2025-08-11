@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/test_notification.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/dotfiles
-# date:   2025-04-14T06:48:15+0200
+# url:    https://github.com/mrdotx/dotfiles
+# date:   2025-08-11T04:51:12+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

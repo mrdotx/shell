@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/backup_system.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-05-31T05:48:22+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:49:57+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements

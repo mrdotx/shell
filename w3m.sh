@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/w3m.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-05-04T11:45:10+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:51:25+0200
 
 # help
 script=$(basename "$0")

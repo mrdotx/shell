@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/padd_update.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-03-04T06:12:29+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:50:32+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

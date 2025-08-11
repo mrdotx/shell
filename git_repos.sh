@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/git_repos.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-07-03T08:58:10+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:50:26+0200
 
 # config
 name="mrdotx"

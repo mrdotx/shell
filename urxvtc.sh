@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/urxvtc.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2023-12-18T16:28:52+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:51:20+0200
 
 case "$1" in
     --kill)

@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/color_picker.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-06-24T15:59:22+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:50:01+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

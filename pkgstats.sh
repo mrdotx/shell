@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/pkgstats.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-11-21T06:01:48+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:50:39+0200
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"

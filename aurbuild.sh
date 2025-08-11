@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/aurbuild_update.sh
+# path:   /home/klassiker/.local/share/repos/shell/aurbuild.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2023-07-31T09:11:25+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:49:37+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

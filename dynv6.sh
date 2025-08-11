@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/dynv6.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-03-14T06:43:27+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:50:13+0200
 
 dynv6_config="$HOME/.local/share/repos/shell/config/dynv6.conf"
 dynv6_folder="$HOME/.cache/dynv6/"

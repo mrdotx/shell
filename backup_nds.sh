@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/backup_nds.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2023-11-26T15:24:26+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:49:50+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements

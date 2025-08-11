@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-01-10T08:34:44+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:51:34+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/aria2c.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-04-25T12:06:03+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:49:33+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

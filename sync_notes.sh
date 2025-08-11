@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/sync_notes.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-03-29T06:02:34+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:50:53+0200
 
 source_folder="$HOME/Documents/Notes/html/"
 destination_folder="/srv/http/wiki"

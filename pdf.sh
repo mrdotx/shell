@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/pdf.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-08-30T10:01:50+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:50:36+0200
 
 commands() {
     cmds="ghostscript magick"

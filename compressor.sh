@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/compressor.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-02-17T07:18:06+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:50:05+0200
 
 commands() {
     cmds="7z bzip2 gzip lzip lzma lzop tar xz zstd"

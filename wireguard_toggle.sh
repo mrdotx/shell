@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/wireguard_toggle.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-08-02T06:00:29+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:51:42+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
