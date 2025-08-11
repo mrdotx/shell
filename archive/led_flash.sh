@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/archive/led_flash.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-05-04T08:06:10+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:53:34+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

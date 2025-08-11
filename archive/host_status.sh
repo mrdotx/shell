@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/archive/host_status.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-02-26T06:19:42+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:53:25+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

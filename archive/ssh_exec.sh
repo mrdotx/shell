@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/ssh_exec.sh
+# path:   /home/klassiker/.local/share/repos/shell/archive/ssh_exec.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-01-06T10:48:02+0100
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:54:04+0200
 
 remote_host="$1"
 shift

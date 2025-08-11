@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/archive/alpha_restore.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-03-31T06:55:29+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:53:05+0200
 
 # color variables
 reset="\033[0m"

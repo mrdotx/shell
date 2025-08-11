@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/archive/hera.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-04-22T08:33:34+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:53:21+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/archive/memtest86.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-04-11T22:22:22+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:53:38+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C

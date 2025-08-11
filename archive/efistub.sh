@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/archive/efistub.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-04-11T22:22:07+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:53:17+0200
 
 # config
 loader_disk="/dev/nvme0n1"

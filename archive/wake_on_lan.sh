@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/shell/archive/wake_on_lan.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-04-22T08:30:18+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:54:12+0200
 
 check() {
     tools="nc"
