@@ -1,7 +1,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/systemd/test_broadband.service
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-04-23T05:57:50+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:52:34+0200
 
 [Unit]
 Description=processing broadband test in user context

@@ -1,7 +1,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/systemd/dynv6.service
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2024-07-05T12:11:35+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:52:20+0200
 
 [Unit]
 Description=updating dynv6 hostnames in user context

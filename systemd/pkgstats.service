@@ -1,7 +1,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/systemd/pkgstats.service
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/shell
-# date:   2025-07-20T04:53:47+0200
+# url:    https://github.com/mrdotx/shell
+# date:   2025-08-11T04:52:27+0200
 
 [Unit]
 Description=updating pkgstats in user context
