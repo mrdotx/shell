@@ -3,7 +3,10 @@
 # path:   /home/klassiker/.local/share/repos/shell/w3m.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:51:25+0200
+# date:   2025-08-25T05:50:42+0200
+
+# WORKAROUND: change directory to set the download folder
+cd "$HOME/Downloads" || exit
 
 # help
 script=$(basename "$0")
