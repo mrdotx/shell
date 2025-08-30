@@ -29,7 +29,6 @@ shell scripts for system/hardware management and general maintenance
 | pkgstats.sh          | download package stats from arch packages                                     |
 | status.sh            | simple script for system information in different formats                     |
 | stopwatch.sh         | script to measure the time                                                    |
-| sync_notes.sh        | sync notes to webserver                                                       |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history |
 | test_broadband.sh    | outputs speedtest-cli results to a structured csv file                        |
 | test_drive.sh        | measure drive speed with dd in current folder                                 |
