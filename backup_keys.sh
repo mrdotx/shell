@@ -3,12 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_keys.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:49:46+0200
+# date:   2025-09-28T05:29:45+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
-user_home="$HOME"
 labels="keys"
 
 # config (rsync option --dry-run for testing)
@@ -44,14 +43,14 @@ backup() {
         [ -d "$mnt" ] \
             && status_file="$mnt/last_update" \
             && printf "## backup %s\n\n" "$(date -I)" > "$status_file" \
-            && backup_data "$user_home/.netrc" >> "$status_file" \
-            && backup_data "$user_home/.config/git" >> "$status_file" \
-            && backup_data "$user_home/.config/pam-gnupg" >> "$status_file" \
-            && backup_data "$user_home/.config/rclone" >> "$status_file" \
-            && backup_data "$user_home/.gnupg" >> "$status_file" \
-            && backup_data "$user_home/.ssh" >> "$status_file" \
-            && backup_data "$user_home/Cloud/webde/.keys" >> "$status_file" \
-            && backup_data "$user_home/.local/share/repos/password-store" >> "$status_file" \
+            && backup_data "$HOME/.netrc" >> "$status_file" \
+            && backup_data "$HOME/.config/git" >> "$status_file" \
+            && backup_data "$HOME/.config/pam-gnupg" >> "$status_file" \
+            && backup_data "$HOME/.config/rclone" >> "$status_file" \
+            && backup_data "$HOME/.gnupg" >> "$status_file" \
+            && backup_data "$HOME/.ssh" >> "$status_file" \
+            && backup_data "$HOME/Cloud/webde/.keys" >> "$status_file" \
+            && backup_data "$HOME/.local/share/repos/password-store" >> "$status_file" \
             && printf "  -> backup pgp [y]es/[N]o: " \
                 && read -r pgp_backup \
                 && case "$pgp_backup" in
