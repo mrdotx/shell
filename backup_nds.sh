@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_nds.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:49:50+0200
+# date:   2025-10-03T05:21:33+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 backup_path="${1:-.}"
-labels="DSONEI R4-SDHC R4I-GOLD R4I-SDHC"
+labels="DSONEI R4-SDHC R4I-GOLD R4I-SDHC ACE3DS-P"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete \
