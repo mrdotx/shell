@@ -24,6 +24,7 @@ shell scripts for system/hardware management and general maintenance
 | fritzbox.sh          | get data from the fritzbox: external ipv4/-v6 and current up-/download rates  |
 | git_multi.sh         | execute git command on multiple repositories                                  |
 | git_repos.sh         | perform oparations for all repositories of a user or organization             |
+| i_filename.sh        | add a three-digit increment to a file name                                    |
 | padd_update.sh       | script to update pi-hole padd                                                 |
 | pdf.sh               | script to compress/convert/chain/unchain pdf files                            |
 | pkgstats.sh          | download package stats from arch packages                                     |
