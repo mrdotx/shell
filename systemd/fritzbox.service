@@ -1,0 +1,15 @@
+# path:   /home/klassiker/.local/share/repos/shell/systemd/fritzbox.service
+# author: klassiker [mrdotx]
+# url:    https://github.com/mrdotx/shell
+# date:   2025-10-22T06:08:16+0200
+
+[Unit]
+Description=fritzbox maintenance
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/share/repos/shell/fritzbox.sh --reboot 10.10.10.10
+ExecStart=%h/.local/share/repos/shell/fritzbox.sh --reboot 10.10.10.9
+
+[Install]
+WantedBy=multi-user.target
