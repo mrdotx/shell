@@ -1,16 +1,17 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/touchpad_toggle.sh
+# path:   /home/klassiker/.local/share/repos/shell/pointer_toggle.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:51:16+0200
+# date:   2025-11-04T05:22:26+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
 # config
-message_title="Touchpad"
+notify_title="Toggle Pointer"
+xinput_device="$1"
 
 # helper
 notification() {
@@ -19,14 +20,15 @@ notification() {
             notify-send \
                 -t 2000 \
                 -u low \
-                "$message_title $2" \
-                -h string:x-canonical-private-synchronous:"$message_title"
+                "$notify_title" \
+                "$xinput_device $2" \
+                -h string:x-canonical-private-synchronous:"$xinput_device"
             ;;
     esac
 }
 
 device="$(xinput list \
-    | sed -nre '/[tT]ouch[pP]ad/s/.*id=([0-9]*).*/\1/p' \
+    | sed -nre "/$xinput_device/s/.*id=([0-9]*).*/\1/p" \
     | head -n1 \
 )"
 
@@ -39,13 +41,13 @@ status="$(xinput list-props "$device" \
 case "$status" in
     1)
         xinput disable "$device"
-        notification "$1" "DISABLED"
+        notification "$2" "DISABLED"
         ;;
     0)
         xinput enable "$device"
-        notification "$1" "ENABLED"
+        notification "$2" "ENABLED"
         ;;
     *)
-        notification "$1" "NOT FOUND"
+        notification "$2" "NOT FOUND"
         ;;
 esac
