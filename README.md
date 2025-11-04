@@ -28,6 +28,7 @@ shell scripts for system/hardware management and general maintenance
 | padd_update.sh       | script to update pi-hole padd                                                   |
 | pdf.sh               | script to compress/convert/chain/unchain pdf files                              |
 | pkgstats.sh          | download package stats from arch packages                                       |
+| pointer_toggle.sh    | disable/enable pointer devices like touchpad or trackpoint                      |
 | status.sh            | simple script for system information in different formats                       |
 | stopwatch.sh         | script to measure the time                                                      |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history   |
@@ -35,7 +36,6 @@ shell scripts for system/hardware management and general maintenance
 | test_drive.sh        | measure drive speed with dd in current folder                                   |
 | test_march.sh        | checks the available cpu flags and compares them with the required -march flags |
 | test_notification.sh | generates test messages for processing with notify-send                         |
-| touchpad_toggle.sh   | disable/enable touchpad                                                         |
 | urxvtc.sh            | start urxvtd if not already running and open urxvtc                             |
 | w3m.sh               | terminal wrapper for w3m with or without suckless tabbed                        |
 | wallpaper.sh         | set and load wallpaper (file/random file from directory) from xresources        |
