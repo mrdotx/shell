@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_nds.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-10-03T05:21:33+0200
+# date:   2025-11-08T06:03:38+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 backup_path="${1:-.}"
-labels="DSONEI R4-SDHC R4I-GOLD R4I-SDHC ACE3DS-P"
+labels="R4_1 WOOD_1 YSMENU_1 YSMENU_2 YSMENU_3"
 
 # config (rsync option --dry-run for testing)
 rsync_options="-aAXvh --delete \
@@ -41,7 +41,7 @@ rom_list() {
                 "$rom_folder" \
             && eval "find $roms $find_roms_options" \
             | sed "s#^$roms/##g" \
-            | sort > "$backup_path/$label/$rom_folder/list_$rom_folder"
+            | sort -V > "$backup_path/$label/$rom_folder/list_$rom_folder"
     done
 }
 
