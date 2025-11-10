@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_system.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-09-25T05:08:57+0200
+# date:   2025-11-10T06:08:11+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -15,6 +15,7 @@ labels="backup_d backup_f"
 rsync_options="-aAXvh --delete \
         --exclude='$HOME/Cloud' \
         --exclude='$HOME/Desktop' \
+        --exclude='$HOME/Downloads' \
         --exclude='$HOME/Music' \
         --exclude='$HOME/Public' \
         --exclude='$HOME/Templates' \
@@ -37,16 +38,9 @@ backup_host() {
             src="/"
             options="$rsync_options"
             ;;
-        m625q)
+        *)
             src="$1:/"
-            options="$rsync_options \
-                --exclude='/srv/http/download' \
-                --rsync-path='$auth rsync'"
-            ;;
-        t14)
-            src="$1:/"
-            options="$rsync_options \
-                --rsync-path='$auth rsync'"
+            options="$rsync_options --rsync-path='$auth rsync'"
             ;;
     esac
 
@@ -57,8 +51,7 @@ backup_host() {
         && eval "$auth rsync $options $src $dest" \
         && return
 
-    printf "connect to %s failed, please check if ssh is enabled!\n" \
-        "$1"
+    printf "connect to %s failed, please check if ssh is enabled!\n" "$1"
 }
 
 # main
@@ -75,7 +68,7 @@ backup() {
 
         # backup
         [ -d "$mnt" ] \
-            && backup_host "$local_host" \
+            && backup_host "m75q" \
             && backup_host "m625q" \
             && backup_host "t14"
 
@@ -89,8 +82,7 @@ backup() {
 }
 
 # main
-backup \
-    && exit 0
+backup && exit 0
 
 printf ":: please connect one of the following devices to backup to:\n"
 for label in $labels; do
