@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:57+0200
+# date:   2025-11-16T06:15:09+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -135,7 +135,7 @@ delete_unused_pkgs() {
 
     printf "%b%b==>%b create %b%s%b\n" \
         "$bold" "$green" "$reset" "$cyan" "$pkgs_installed" "$reset"
-    cat "$pkgs_all"/pkgs_all_*.txt \
+    cat "$pkgs_all"/pkgs_all*.txt \
         | sort -u > "$pkgs_installed"
 
     printf "%b%b==>%b delete exceptions from %b%s%b\n" \
