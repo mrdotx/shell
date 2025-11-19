@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/fritzbox.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:17+0200
+# date:   2025-11-19T05:21:34+0100
 
 # config
 default_ip="10.10.10.10"
@@ -169,27 +169,27 @@ case "$1" in
         total_up=$(xml_value "NewX_AVM_DE_TotalBytesSent64" "$data")
         total_down=$(xml_value "NewX_AVM_DE_TotalBytesReceived64" "$data")
 
-        printf "%s %s %b %s %s\n%s %s %b %s %s\n" \
-                "$(byte_seconds "$rate_up")" \
-                "$(byte_total "$total_up")" \
+        printf "%s %b %s %s %s\n%s %b %s %s %s\n" \
+                "$(bit_seconds "$rate_up")" \
                 "$bold$red↑$reset" \
                 "$(bar_percent "$(bit_percent "$rate_up" "$max_up")" \
                     "$bold$red" "■" "$bold$red" "■" "$bold$black" "■")" \
-                "$(bit_seconds "$rate_up")" \
-                "$(byte_seconds "$rate_down")" \
-                "$(byte_total "$total_down")" \
+                "$(byte_seconds "$rate_up")" \
+                "$(byte_total "$total_up")" \
+                "$(bit_seconds "$rate_down")" \
                 "$bold$green↓$reset" \
                 "$(bar_percent "$(bit_percent "$rate_down" "$max_down")" \
                     "$bold$green" "■" "$bold$green" "■" "$bold$black" "■")" \
-                "$(bit_seconds "$rate_down")" \
+                "$(byte_seconds "$rate_down")" \
+                "$(byte_total "$total_down")" \
             | column --table --table-noheadings --output-separator " " \
-                --table-column right,width=5 \
+                --table-column right,width=6 \
+                --table-column right \
+                --table-column right \
+                --table-column right \
+                --table-column right,width=4\
                 --table-column right \
                 --table-column right,width=3 \
-                --table-column right \
-                --table-column right \
-                --table-column right \
-                --table-column right,width=5 \
                 --table-column right
         ;;
     -r | --reboot)
