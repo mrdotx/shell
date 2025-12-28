@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/pointer_toggle.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-11-04T05:22:26+0100
+# date:   2025-12-28T05:29:35+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -12,6 +12,10 @@ LANG=C
 # config
 notify_title="Toggle Pointer"
 xinput_device="$1"
+
+[ -z "$1" ] \
+    && xinput list | grep -E '\[(master|slave|floating).*(pointer|master|slave)' \
+    && exit
 
 # helper
 notification() {
