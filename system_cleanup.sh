@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-11-16T06:15:09+0100
+# date:   2026-01-19T05:12:21+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -186,6 +186,7 @@ for option in "$@"; do
             delete_pkg_versions "/srv/pacman/core/os/x86_64" 2
             delete_pkg_versions "/srv/pacman/extra/os/x86_64" 2
             delete_pkg_versions "/srv/aurutils/aurbuild" 2
+            delete_pkg_versions "/srv/aurutils/custombuild" 2
             ;;
     esac
 done
