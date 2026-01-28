@@ -1,16 +1,16 @@
 # path:   /home/klassiker/.local/share/repos/shell/systemd/aurbuild.service
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-01-21T06:04:32+0100
+# date:   2026-01-28T05:52:16+0100
 
 [Unit]
 Description=updating repository aurbuild in user context
 
 [Service]
 Type=oneshot
+StandardOutput=truncate:/srv/aurutils/aurbuild/aurbuild.log
+StandardError=truncate:/srv/aurutils/aurbuild/aurbuild_error.log
 ExecStart=%h/.local/share/repos/shell/aurbuild.sh
-StandardOutput=truncate:/srv/aurutils/aurbuild.log
-StandardError=truncate:/srv/aurutils/aurbuild_error.log
 
 [Install]
 WantedBy=multi-user.target
