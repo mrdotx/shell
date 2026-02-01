@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/aurbuild.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-09-26T04:36:47+0200
+# date:   2026-02-01T05:15:13+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -48,12 +48,11 @@ create_build_list() {
             | aur vercmp --quiet --path="$tmp_dir/targets" > "$3"
 }
 
-rebuild_pks() {
+build_pks() {
     [ -s "$1" ] \
-        && aur build --syncdeps --rmdeps --noconfirm --nosync \
-            --arg-file "$1" \
-        && exit
-    printf "%s: all packages up-to-date\n" "$sync_name"
+        && aur build --syncdeps --rmdeps --noconfirm --nosync --arg-file "$1" \
+        && return
+    printf >&2 "%s: all packages are up to date\n" "$sync_name"
 }
 
 # main
@@ -62,9 +61,9 @@ aur sync --upgrades --rmdeps --noconfirm --noview --nosync
 
 # sync devel packages
 cd "/srv/aurutils/sync" || exit
-sync_name="sync_devel"
+sync_name="build"
 create_tmp_env "/tmp/aurutils-$(id -u)"
 local_db=$(aur repo --list)
 create_fetch_list "$local_db" "$tmp_dir/fetch"
 create_build_list "$tmp_dir/fetch" "$local_db" "$tmp_dir/builds"
-rebuild_pks "$tmp_dir/builds"
+build_pks "$tmp_dir/builds"
