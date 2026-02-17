@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-01-19T05:12:21+0100
+# date:   2026-02-17T05:57:30+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -13,12 +13,13 @@ LANG=C
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 
-# color variables
-reset="\033[0m"
-bold="\033[1m"
-green="\033[32m"
-blue="\033[94m"
-cyan="\033[96m"
+# color variables for interactive shell
+tty -s \
+    && reset="\033[0m" \
+    && bold="\033[1m" \
+    && green="\033[32m" \
+    && blue="\033[94m" \
+    && cyan="\033[96m"
 
 # helper
 find_files() {

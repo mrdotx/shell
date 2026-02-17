@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/test_drive.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:51:07+0200
+# date:   2026-02-17T05:57:36+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -18,11 +18,12 @@ rw_bytes=1M
 input_blocks=1024
 file_path="${1:-"$(pwd)"}/$(tr -cd 'a-f0-9' < /dev/urandom | head -c 16)"
 
-# color variables
-reset="\033[0m"
-bold="\033[1m"
-blue="\033[94m"
-cyan="\033[96m"
+# color variables for interactive shell
+tty -s \
+    && reset="\033[0m" \
+    && bold="\033[1m" \
+    && blue="\033[94m" \
+    && cyan="\033[96m"
 
 # main
 printf "%b%b  ->%b drop caches [Y]es/[n]o: " \

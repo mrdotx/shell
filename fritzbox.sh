@@ -3,19 +3,20 @@
 # path:   /home/klassiker/.local/share/repos/shell/fritzbox.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-11-19T05:21:34+0100
+# date:   2026-02-17T05:57:18+0100
 
 # config
 default_ip="10.10.10.10"
 max_down=150
 max_up=30
 
-# color variables
-reset="\033[0m"
-bold="\033[1m"
-black="\033[30m"
-red="\033[31m"
-green="\033[32m"
+# color variables for interactive shell
+tty -s \
+    && reset="\033[0m" \
+    && bold="\033[1m" \
+    && black="\033[30m" \
+    && red="\033[31m" \
+    && green="\033[32m"
 
 # helper
 soap_upnp() {

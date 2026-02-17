@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/backup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:53:09+0200
+# date:   2026-02-17T05:56:56+0100
 
 destination_root="$HOME/Backup/"
 destination_config="$HOME/Backup/.config/"
@@ -44,11 +44,12 @@ source_object="$source_object
 #$HOME/.config/libinput-gestures.conf
 "
 
-# color variables
-reset="\033[0m"
-magenta="\033[35m"
-cyan="\033[36m"
-blue="\033[94m"
+# color variables for interactive shell
+tty -s \
+    && reset="\033[0m" \
+    && magenta="\033[35m" \
+    && cyan="\033[36m" \
+    && blue="\033[94m"
 
 # backup
 printf "[%bbackup%b] folder & files\n" "$magenta" "$reset"
