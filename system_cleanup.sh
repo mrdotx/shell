@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-02-17T05:57:30+0100
+# date:   2026-02-25T06:10:30+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -169,17 +169,71 @@ delete_unused_pkgs() {
     esac
 }
 
-# files
+kodi_files() {
+    ! [ -d "$1" ] \
+        && printf "%b%s%b not found...\n" "$cyan" "$1" "$reset" \
+        && return
+
+    # process files to delete
+    cache_dirs=$( \
+        find "$1" -type d \
+            -name "cache" -or \
+            -name "temp" -or \
+            -name "Thumbnails" -or \
+            -name "packages"
+    )
+
+    cache_files=$( \
+        for line in $cache_dirs; do
+            find "$line" -type f \
+                ! -name "kodi*.log"
+        done
+    )
+
+    [ -n "$cache_files" ] \
+        || return 0
+
+    # delete files from cache
+    printf "%b%b::%b %bdelete files from%b %b%s%b\n" \
+        "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$1" "$reset"
+
+    printf "%s\n" "$cache_files"
+
+    printf "%b%b  ->%b delete files from %b%s%b [y]es/[N]o: " \
+        "$bold" "$blue" "$reset" "$cyan" "$1" "$reset" \
+        && read -r clean \
+        && case "$clean" in
+            y|Y|yes|Yes)
+                for line in $cache_files; do
+                    rm -f -v "$line"
+                done
+                ;;
+        esac
+}
+
+# first in, first out options
+for option in "$@"; do
+    case "$option" in
+        -h | --help)
+            printf "usage: %s [-k/--kodi] [-u/--unused] [-v/--versions]\n" \
+                "$(basename "$0")"
+            exit
+            ;;
+        -k | --kodi)
+            kodi_files "$HOME/.local/share/kodi"
+            exit
+            ;;
+    esac
+done
+
+# general processes
 cleanup_file "$HOME/.local/share/iwctl/history"
 cleanup_file "$HOME/.local/share/cmd_history"
 delete_files "$HOME/.cache" 365
 
-# packages
+# packages options
 for option in "$@"; do
     case "$option" in
-        -h | --help)
-            printf "usage: %s [-u/--unused] [-v/--versions]\n" "$(basename "$0")"
-            ;;
         -u | --unused)
             delete_unused_pkgs "/srv/pacman" "$HOME/Public/pkgsused"
             ;;
