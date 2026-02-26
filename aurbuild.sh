@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/aurbuild.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-02-15T06:20:56+0100
+# date:   2026-02-26T06:41:00+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -69,7 +69,7 @@ cd "/srv/aurutils/sync" || exit
 sync_name="build"
 create_tmp_env "/tmp/aurutils-$(id -u)"
 local_db=$(aur repo --list)
-pkg_filter="\-git$|\-cvs$|\-svn$|\-bzr$|\-darcs$|\-always$|\-hg$|\-fossil$"
+pkg_filter="\-git$|\-svn$|\-hg$|\-bzr$|\-fossil$|\-cvs$"
 printf >&2 "%b%b==>%b %bUsing [%s] package filter%b\n" \
         "$bold" "$green" "$reset" "$bold" "$pkg_filter" "$reset"
 create_pkg_list "$local_db" "$pkg_filter" "$tmp_dir/pkgs"
