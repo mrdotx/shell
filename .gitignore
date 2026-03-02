@@ -1,6 +1,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/.gitignore
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:51:57+0200
+# date:   2026-03-02T06:13:41+0100
 
 /config/dynv6.conf
+padd.sh
