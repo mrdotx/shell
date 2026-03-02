@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/padd_update.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:32+0200
+# date:   2026-03-02T06:13:34+0100
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
-output="$HOME/.local/share/bin/padd.sh"
+output="$HOME/.local/share/repos/shell/padd.sh"
 url="https://raw.githubusercontent.com/pi-hole/PADD/master/padd.sh"
 
 replace() {
