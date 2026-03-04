@@ -36,6 +36,7 @@ shell scripts for system/hardware management and general maintenance
 | test_drive.sh        | measure drive speed with dd in current folder                                   |
 | test_march.sh        | checks the available cpu flags and compares them with the required -march flags |
 | test_notification.sh | generates test messages for processing with notify-send                         |
+| tmux.sh              | wrapper to open applications in tmux windows                                    |
 | urxvtc.sh            | start urxvtd if not already running and open urxvtc                             |
 | w3m.sh               | terminal wrapper for w3m with or without suckless tabbed                        |
 | wallpaper.sh         | set and load wallpaper (file/random file from directory) from xresources        |
