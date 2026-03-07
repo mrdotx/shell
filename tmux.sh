@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/tmux.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-04T05:12:11+0100
+# date:   2026-03-07T05:50:51+0100
 
 session="$(uname -n)"
 attach="tmux attach -d -t $session"
@@ -63,8 +63,7 @@ tmux_open() {
 
 tmux_kill_window() {
     [ -n "$1" ] \
-        && [ -n "$window" ] \
-        && [ ! "$window" -eq "$1" ] \
+        && [ "$(tmux list-windows -t "$session" | wc -l)" -gt 1 ] \
         && tmux killw -t "$session:$1"
 }
 
