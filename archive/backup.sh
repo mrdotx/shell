@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/backup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-02-17T05:56:56+0100
+# date:   2026-03-31T05:36:30+0200
 
 destination_root="$HOME/Backup/"
 destination_config="$HOME/Backup/.config/"
@@ -44,7 +44,7 @@ source_object="$source_object
 #$HOME/.config/libinput-gestures.conf
 "
 
-# color variables for interactive shell
+# color variables for the interactive shell
 tty -s \
     && reset="\033[0m" \
     && magenta="\033[35m" \

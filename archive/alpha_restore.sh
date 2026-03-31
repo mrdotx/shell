@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/alpha_restore.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-02-17T05:57:02+0100
+# date:   2026-03-31T05:36:24+0200
 
-# color variables for interactive shell
+# color variables for the interactive shell
 tty -s \
     && reset="\033[0m" \
     && bold="\033[1m" \

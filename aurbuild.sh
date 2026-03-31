@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/shell/aurbuild.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-02-26T06:41:00+0100
+# date:   2026-03-31T05:36:49+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
 LANG=C
 
-# color variables for interactive shell
+# color variables for the interactive shell
 tty -s \
     && reset="\033[0m" \
     && bold="\033[1m" \

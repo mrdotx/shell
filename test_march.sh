@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/test_march.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-02-17T05:57:42+0100
+# date:   2026-03-31T05:37:24+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -12,7 +12,7 @@ LANG=C
 # config
 cpu_flags=$(grep "^flags\s*:" "/proc/cpuinfo" | head -n1 | cut -d ':' -f2)
 
-# color variables for interactive shell
+# color variables for the interactive shell
 tty -s \
     && reset="\033[0m" \
     && bold="\033[1m" \
