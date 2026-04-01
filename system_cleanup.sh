@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-31T05:37:13+0200
+# date:   2026-04-01T05:49:34+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -215,7 +215,7 @@ kodi_files "$HOME/.local/share/kodi"
 
 delete_pkg_versions "/srv/pacman/core/os/x86_64" 2
 delete_pkg_versions "/srv/pacman/extra/os/x86_64" 2
-delete_pkg_versions "/srv/aurutils/aurbuild" 2
-delete_pkg_versions "/srv/aurutils/custombuild" 2
+delete_pkg_versions "/srv/aurbuild" 2
+delete_pkg_versions "/srv/custombuild" 2
 
 delete_unused_pkgs "/srv/pacman" "$HOME/Public/pkgsused"
