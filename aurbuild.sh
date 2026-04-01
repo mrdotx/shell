@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/aurbuild.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-31T05:36:49+0200
+# date:   2026-04-01T05:49:26+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -65,7 +65,7 @@ build_pkgs() {
 aur sync --upgrades --rmdeps --noconfirm --noview --nosync
 
 # sync devel packages
-cd "/srv/aurutils/sync" || exit
+cd "$HOME/.config/aurutils/sync" || exit
 sync_name="build"
 create_tmp_env "/tmp/aurutils-$(id -u)"
 local_db=$(aur repo --list)
