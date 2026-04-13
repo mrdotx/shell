@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-04-03T04:36:26+0200
+# date:   2026-04-13T05:30:57+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -17,7 +17,6 @@ auth="${EXEC_AS_USER:-sudo}"
 tty -s \
     && reset="\033[0m" \
     && bold="\033[1m" \
-    && green="\033[32m" \
     && blue="\033[94m" \
     && cyan="\033[96m"
 
@@ -55,6 +54,7 @@ delete_files() {
     ! [ -d "$1" ] \
         && return
 
+    # process files to be deleted
     cache_files=$(find_files "$1" "$2" \
         | wc -l \
     )
@@ -68,6 +68,7 @@ delete_files() {
 
     find_files "$1" "$2"
 
+    # delete files from cache
     printf "%b%b  ->%b delete files from %b%s%b [y]es/[N]o: " \
         "$bold" "$blue" "$reset" "$cyan" "$1" "$reset" \
         && read -r key
@@ -82,7 +83,7 @@ kodi_files() {
     ! [ -d "$1" ] \
         && return
 
-    # process files to delete
+    # process files to be deleted
     cache_dirs=$( \
         find "$1" -type d \
             -name "cache" -or \
@@ -123,6 +124,7 @@ delete_pkg_versions() {
     ! [ -d "$1" ] \
         && return
 
+    # process packages to be deleted
     dry_run=$($auth find "$1" -type d \
         -exec printf "%b%b::%b %bdelete packages from%b %b{}%b%b, except the last %d versions%b\n" \
             "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$reset" \
@@ -135,6 +137,7 @@ delete_pkg_versions() {
         | grep -q "Candidate packages:" \
         || return 0
 
+    # delete packages from cache
     printf "%s\n" "$dry_run"
     printf "%b%b  ->%b delete packages from %b%s%b [y]es/[N]o: " \
         "$bold" "$blue" "$reset" "$cyan" "$1" "$reset" \
@@ -154,6 +157,7 @@ delete_unused_pkgs() {
     ! [ -d "$2" ] \
         && return
 
+    # process packages to be deleted
     pkgs_cache="$1"
     pkgs_all="$2/client_pkgs"
     pkgs_to_delete="$2/pkgs_to_delete.txt"
@@ -163,27 +167,19 @@ delete_unused_pkgs() {
     printf "%b%b::%b %bdelete unused packages from%b %b%s%b\n" \
         "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$pkgs_cache" "$reset"
 
-    # process packages to delete
-    printf "%b%b==>%b create %b%s%b\n" \
-        "$bold" "$green" "$reset" "$cyan" "$pkgs_to_delete" "$reset"
+    printf "processing the packages...\n"
     find "$pkgs_cache" -type f -print0 \
         | xargs -0 basename -a 2>/dev/null \
         | sort -u > "$pkgs_to_delete"
 
-    printf "%b%b==>%b create %b%s%b\n" \
-        "$bold" "$green" "$reset" "$cyan" "$pkgs_installed" "$reset"
     cat "$pkgs_all"/pkgs_all*.txt \
         | sort -u > "$pkgs_installed"
 
-    printf "%b%b==>%b delete exceptions from %b%s%b\n" \
-        "$bold" "$green" "$reset" "$cyan" "$pkgs_to_delete" "$reset"
     sort -u -r "$pkgs_exceptions" \
         | while IFS= read -r line; do
             sed -i "/^$line\-/d" "$pkgs_to_delete"
         done
 
-    printf "%b%b==>%b delete installed packages from %b%s%b\n" \
-        "$bold" "$green" "$reset" "$cyan" "$pkgs_to_delete" "$reset"
     sort -u -r "$pkgs_installed" \
         | while IFS= read -r line; do
             sed -i "/^$line\-[A-Z0-9]/d" "$pkgs_to_delete"
