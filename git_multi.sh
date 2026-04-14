@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-31T05:37:00+0200
+# date:   2026-04-14T05:08:18+0200
 
 # config
 default="status"
@@ -14,7 +14,6 @@ tty -s \
     && reset="\033[0m" \
     && bold="\033[1m" \
     && green="\033[32m" \
-    && blue="\033[94m" \
     && cyan="\033[96m"
 
 # help
@@ -39,7 +38,7 @@ git_folder() {
     )"
 
     for folder in $folders; do
-        find "$folder" -maxdepth 2 -type d -name ".git" \
+        find "$folder" -type d -name ".git" \
             | sed 's/\/.git//' \
             | sort
     done
@@ -47,12 +46,11 @@ git_folder() {
 
 command_constructor() {
     for folder in $1; do
-        repo_folder="${folder%/*}"
         printf "\"git -P -C %s %s" \
             "$folder" "$options"
         printf " && printf '%b%b==>%b completed: %bgit%b %s %b%s%b\\\n'\"\n" \
             "$bold" "$green" "$reset" "$green" "$reset" "$options" "$cyan" \
-            "${repo_folder##*/}/${folder##*/}" "$reset"
+            "$folder" "$reset"
     done
 }
 
@@ -70,7 +68,5 @@ case $1 in
             && shift
 esac
 
-printf "%b%b::%b %bexecute git operations:%b\n" \
-    "$bold" "$blue" "$reset" "$bold" "$reset"
 command_constructor "$(git_folder "$@")" \
     | xargs -P"$procs" -I{} sh -c '{}'
