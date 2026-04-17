@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-04-13T05:30:57+0200
+# date:   2026-04-17T05:50:31+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -62,7 +62,7 @@ delete_files() {
     [ "$cache_files" -gt 0 ] \
         || return 0
 
-    printf "%b%b::%b %bdelete %d files from%b %b%s%b %bnot accessed in %d days...%b\n" \
+    printf "%b%b::%b %bdelete %d files from%b %b%s%b %bnot accessed in %d days%b\n" \
         "$bold" "$blue" "$reset" "$bold" "$cache_files" "$reset" \
         "$cyan" "$1" "$reset" "$bold" "$2" "$reset"
 
@@ -114,7 +114,7 @@ kodi_files() {
         && case "$clean" in
             y|Y|yes|Yes)
                 for line in $cache_files; do
-                    rm -f -v "$line"
+                    rm -f "$line"
                 done
                 ;;
         esac
@@ -167,7 +167,7 @@ delete_unused_pkgs() {
     printf "%b%b::%b %bdelete unused packages from%b %b%s%b\n" \
         "$bold" "$blue" "$reset" "$bold" "$reset" "$cyan" "$pkgs_cache" "$reset"
 
-    printf "processing the packages...\n"
+    printf "processing unused packages...\n"
     find "$pkgs_cache" -type f -print0 \
         | xargs -0 basename -a 2>/dev/null \
         | sort -u > "$pkgs_to_delete"
@@ -212,6 +212,6 @@ kodi_files "$HOME/.local/share/kodi"
 delete_pkg_versions "/srv/pkgs/archlinux/core/os/x86_64" 2
 delete_pkg_versions "/srv/pkgs/archlinux/extra/os/x86_64" 2
 delete_pkg_versions "/srv/pkgs/aurbuild" 2
-delete_pkg_versions "/srv/pkgs/custombuild" 2
+delete_pkg_versions "/srv/pkgs/custom" 2
 
 delete_unused_pkgs "/srv/pkgs/archlinux" "$HOME/Public/pkgsused"
