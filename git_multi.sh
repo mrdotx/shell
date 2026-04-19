@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-04-14T05:08:18+0200
+# date:   2026-04-19T05:25:50+0200
 
 # config
 default="status"
@@ -24,7 +24,8 @@ help="$script [-h/--help] -- script to execute git command on multiple repositor
 
   Settings:
     [git option] = option like fetch origin or pull (default=$default)
-    [path]       = path to folder with n repositories
+    [path]       = path to directory with n repositories
+                   (if this is a .git directory, the parent directory is used)
 
   Examples:
     $script
@@ -32,25 +33,25 @@ help="$script [-h/--help] -- script to execute git command on multiple repositor
     $script \"pull\" \"\$HOME/.local/share/repos\" \"/srv/http\""
 
 # helper functions
-git_folder() {
-    folders="$(printf "%s" "${*:-$(pwd)}" \
+git_directory() {
+    directories="$(printf "%s" "${*:-$(pwd)}" \
         | sed 's/ /\n/g' \
     )"
 
-    for folder in $folders; do
-        find "$folder" -type d -name ".git" \
-            | sed 's/\/.git//' \
+    for directory in $directories; do
+        find "$directory" -type d -name ".git" \
+            | sed -e 's/\/.git//' -e 's/^.git$/./' \
             | sort
     done
 }
 
 command_constructor() {
-    for folder in $1; do
+    for directory in $1; do
         printf "\"git -P -C %s %s" \
-            "$folder" "$options"
+            "$directory" "$options"
         printf " && printf '%b%b==>%b completed: %bgit%b %s %b%s%b\\\n'\"\n" \
             "$bold" "$green" "$reset" "$green" "$reset" "$options" "$cyan" \
-            "$folder" "$reset"
+            "$directory" "$reset"
     done
 }
 
@@ -68,5 +69,5 @@ case $1 in
             && shift
 esac
 
-command_constructor "$(git_folder "$@")" \
+command_constructor "$(git_directory "$@")" \
     | xargs -P"$procs" -I{} sh -c '{}'
