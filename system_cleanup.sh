@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-04-17T05:50:31+0200
+# date:   2026-04-27T05:28:59+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -145,7 +145,7 @@ delete_pkg_versions() {
         && case "$clear_pkgs" in
             y|Y|yes|Yes)
                 $auth find "$1" -type d \
-                    -exec paccache -rvk "$2" -c {} \; \
+                    -exec paccache -rqk "$2" -c {} \; \
                     | sed '/^$/d'
                 ;;
         esac
