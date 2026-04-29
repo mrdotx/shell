@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_system.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-11-10T06:08:11+0100
+# date:   2026-04-29T05:14:38+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -44,7 +44,7 @@ backup_host() {
             ;;
     esac
 
-    printf "\n:: create folder and backup %s to %s\n" "$src" "$dest"
+    printf "\n:: create directory and backup %s to %s\n" "$src" "$dest"
     $auth mkdir -p "$dest"
 
     ([ "$1" = "$local_host" ] || ssh -q "$1" exit) \
@@ -62,7 +62,7 @@ backup() {
         # mount
         [ -h "/dev/disk/by-label/$label" ] \
             && mnt="/mnt/$label" \
-            && printf ":: create and mount backup folder %s\n" "$mnt" \
+            && printf ":: create and mount backup directory %s\n" "$mnt" \
             && $auth mkdir -p "$mnt" \
             && $auth mount "/dev/disk/by-label/$label" "$mnt"
 
@@ -74,7 +74,7 @@ backup() {
 
         # unmount
         [ -d "$mnt" ] \
-            && printf "\n:: unmount and delete backup folder %s\n" "$mnt" \
+            && printf "\n:: unmount and delete backup directory %s\n" "$mnt" \
             && $auth umount "$mnt" \
             && $auth find "$mnt" -empty -type d -delete \
             && return 0

@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_keys.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-09-28T05:29:45+0200
+# date:   2026-04-29T05:13:42+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -35,7 +35,7 @@ backup() {
         # mount
         [ -h "/dev/disk/by-label/$label" ] \
             && mnt="/mnt/$label" \
-            && printf ":: create and mount backup folder %s\n" "$mnt" \
+            && printf ":: create and mount backup directory %s\n" "$mnt" \
             && $auth mkdir -p "$mnt" \
             && $auth mount "/dev/disk/by-label/$label" "$mnt"
 
@@ -62,7 +62,7 @@ backup() {
 
         # unmount
         [ -d "$mnt" ] \
-            && printf ":: unmount and delete backup folder %s\n" "$mnt" \
+            && printf ":: unmount and delete backup directory %s\n" "$mnt" \
             && $auth umount "$mnt" \
             && $auth find "$mnt" -empty -type d -delete \
             && return 0

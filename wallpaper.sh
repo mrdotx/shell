@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/wallpaper.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:51:34+0200
+# date:   2026-04-29T05:16:10+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -22,11 +22,11 @@ help="$script [-h/--help] -- wrapper script to set wallpaper
 
   Settings:
     without given settings, load wallpaper from xresources
-    [folder]   = set random picture from folder as wallpaper and save folder
-                 path to xresources
-    [file]     = set picture as wallpaper and save file path to xresources
-    [--color]  = set colored background by hex value (default: #000000)
-    [--random] = set random picture based on saved <path/file> from xresources
+    [directory] = set random picture from directory as wallpaper and save the
+                  path to xresources
+    [file]      = set picture as wallpaper and save file path to xresources
+    [--color]   = set colored background by hex value (default: #000000)
+    [--random]  = set random picture based on saved <path/file> from xresources
 
   Examples:
     $script
