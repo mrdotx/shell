@@ -2,11 +2,11 @@
 
 shell scripts for system/hardware management and general maintenance
 
-| folder  | comment                                        |
-| :------ | :--------------------------------------------- |
-| archive | old stuff and things that couldn't be assigned |
-| config  | configuration files and examples               |
-| systemd | systemd services and timer                     |
+| directory | comment                                        |
+| :-------- | :--------------------------------------------- |
+| archive   | old stuff and things that couldn't be assigned |
+| config    | configuration files and examples               |
+| systemd   | systemd services and timer                     |
 
 | file                 | comment                                                                         |
 | :------------------- | :------------------------------------------------------------------------------ |
@@ -18,7 +18,7 @@ shell scripts for system/hardware management and general maintenance
 | backup_nds.sh        | nds flashcard backup with rsync (roms backup as list)                           |
 | backup_system.sh     | system backup with rsync from local/remote location to specific usb device      |
 | color_picker.sh      | pick color with a tool, copy hex to clipboard and preview with notify-send      |
-| compressor.sh        | script to compress/extract/list files and folders                               |
+| compressor.sh        | script to compress/extract/list files and directories                           |
 | cyanrip.sh           | wrapper for cyanrip cd ripping tool                                             |
 | dynv6.sh             | script to update dyndns service dynv6 with multi-config file                    |
 | fritzbox.sh          | get data from the fritzbox: external ipv4/-v6 and current up-/download rates    |
@@ -33,7 +33,7 @@ shell scripts for system/hardware management and general maintenance
 | stopwatch.sh         | script to measure the time                                                      |
 | system_cleanup.sh    | purge cache and remove duplicated entries from python-, bash- and zsh-history   |
 | test_broadband.sh    | outputs speedtest-cli results to a structured csv file                          |
-| test_drive.sh        | measure drive speed with dd in current folder                                   |
+| test_drive.sh        | measure drive speed with dd in current directory                                |
 | test_march.sh        | checks the available cpu flags and compares them with the required -march flags |
 | test_notification.sh | generates test messages for processing with notify-send                         |
 | tmux.sh              | wrapper to open applications in tmux windows                                    |
