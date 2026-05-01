@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/compressor.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:05+0200
+# date:   2026-05-01T05:02:42+0200
 
 commands() {
     cmds="7z bzip2 gzip lzip lzma lzop tar xz zstd"
@@ -19,13 +19,13 @@ commands() {
 }
 
 script=$(basename "$0")
-help="$script [-h/--help] -- script to extract/compress/list files and folders
+help="$script [-h/--help] -- script to extract/compress/list files and directories
   Usage:
     $script [--add/--list] <quality> <file>.<ext> [file1.ext] [file2.ext]
 
   Settings:
-    [--add]   = compress files and folders to archive
-    [--list]  = list archive files and folders
+    [--add]   = compress files and directories to archive
+    [--list]  = list archive files and directories
     <ext>     = compression extensions:
                   7z, tar, tar.bz2, tar.gz, tar.lz, tar.lzma, tar.lzo, tar.xz,
                   tar.z, tar.zst, taz, tbz, tbz2, tgz, tlz, txz, tz2, tzo, tzst,
@@ -78,7 +78,7 @@ extract() {
         if [ -f "$archive" ]; then
             base="$(printf "%s" "${archive##*/}" \
                     | tr '[:upper:]' '[:lower:]')"
-            folder="${base%.*}"
+            directory="${base%.*}"
             case "$base" in
                 *.tar \
                     | *.tar.bz2 | *.tar.gz | *.tar.lz | *.tar.lzma | *.tar.lzo \
@@ -89,11 +89,11 @@ extract() {
                             tar tvf "$archive"
                             ;;
                         *)
-                            folder="${folder%%.tar}"
+                            directory="${directory%%.tar}"
                             printf "tar xvf \"%s\" -C \"%s\"\n" \
-                                "$archive" "$folder"
-                            mkdir -p "$folder"
-                            tar xvf "$archive" -C "$folder" >/dev/null 2>&1
+                                "$archive" "$directory"
+                            mkdir -p "$directory"
+                            tar xvf "$archive" -C "$directory" >/dev/null 2>&1
                             ;;
                     esac
                     ;;
@@ -112,9 +112,9 @@ extract() {
                             ;;
                         *)
                             printf "7z x \"%s\" -o\"%s\"\n" \
-                                "$archive" "$folder"
-                            mkdir -p "$folder"
-                            7z x "$archive" -o"$folder" >/dev/null 2>&1
+                                "$archive" "$directory"
+                            mkdir -p "$directory"
+                            7z x "$archive" -o"$directory" >/dev/null 2>&1
                             ;;
                     esac
                     ;;
