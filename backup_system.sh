@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_system.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-04-29T05:14:38+0200
+# date:   2026-05-03T05:12:48+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -18,6 +18,7 @@ rsync_options="-aAXvh --delete \
         --exclude='$HOME/Downloads' \
         --exclude='$HOME/Music' \
         --exclude='$HOME/Public' \
+        --exclude='$HOME/Share' \
         --exclude='$HOME/Templates' \
         --exclude='$HOME/Videos' \
         --exclude='/dev' \
