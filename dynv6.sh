@@ -3,10 +3,10 @@
 # path:   /home/klassiker/.local/share/repos/shell/dynv6.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:13+0200
+# date:   2026-05-08T05:11:34+0200
 
 dynv6_config="$HOME/.local/share/repos/shell/config/dynv6.conf"
-dynv6_folder="$HOME/.cache/dynv6/"
+dynv6_dir="$HOME/.cache/dynv6/"
 ipv6_netmask=128
 # requires fritzbox.sh (https://github.com/mrdotx/shell)
 fritzbox_ipv4="$(fritzbox.sh --ipv4)"
@@ -31,7 +31,7 @@ push_dynv6() {
     update_cmd="curl -fsS --connect-timeout 2.5 --max-time 5"
     url_ipv4="https://dynv6.com/api/update?zone=$1&token=$2&ipv4=$3"
     url_ipv6="https://dynv6.com/api/update?zone=$1&token=$2&ipv6=$4"
-    ip_file="$dynv6_folder/$1"
+    ip_file="$dynv6_dir/$1"
 
     [ ! -e "$ip_file" ] \
         && printf "auto\nauto" > "$ip_file"
