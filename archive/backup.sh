@@ -3,12 +3,12 @@
 # path:   /home/klassiker/.local/share/repos/shell/archive/backup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-31T05:36:30+0200
+# date:   2026-05-09T05:37:01+0200
 
 destination_root="$HOME/Backup/"
 destination_config="$HOME/Backup/.config/"
 
-# home/folders
+# home/directories
 source_object="
 #$HOME/.jameica
 #$HOME/.newsboat
@@ -25,7 +25,7 @@ source_object="$source_object
 #$HOME/.tmux.conf
 #$HOME/.vimrc
 "
-# home/.config/folders
+# home/.config/directories
 source_object="$source_object
 #$HOME/.config/cmus
 #$HOME/.config/filezilla
@@ -52,27 +52,27 @@ tty -s \
     && blue="\033[94m"
 
 # backup
-printf "[%bbackup%b] folder & files\n" "$magenta" "$reset"
-for folder in $source_object; do
-    case "$folder" in
+printf "[%bbackup%b] directories & files\n" "$magenta" "$reset"
+for directory in $source_object; do
+    case "$directory" in
     "$HOME"/.newsboat)
         rsync -acqPh --delete --exclude="cache.db" \
-            "$folder" "$destination_root"
+            "$directory" "$destination_root"
         ;;
     "$HOME"/.weechat)
         rsync -acqPh --delete --exclude="weechat.log" --exclude="logs" \
-            "$folder" "$destination_root"
+            "$directory" "$destination_root"
         ;;
     "$HOME"/.config/*)
         rsync -acqPh --delete \
-            "$folder" "$destination_config"
+            "$directory" "$destination_config"
         ;;
     "$HOME"/*)
         rsync -acqPh --delete \
-            "$folder" "$destination_root"
+            "$directory" "$destination_root"
         ;;
     esac
-    printf "[%bsource_object%b] %s" "$cyan" "$reset" "$folder"
+    printf "[%bsource_object%b] %s" "$cyan" "$reset" "$directory"
 done
 
 # backup size
