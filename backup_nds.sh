@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/backup_nds.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-11-08T06:03:38+0100
+# date:   2026-05-10T05:21:21+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -34,14 +34,14 @@ find_roms_options="-type f \
 
 # helper functions
 rom_list() {
-    for rom_folder in "$@"; do
-        roms="$mnt/$rom_folder"
+    for rom_dir in "$@"; do
+        roms="$mnt/$rom_dir"
         [ -d "$roms" ] \
             && printf ":: create rom list for %s\n" \
-                "$rom_folder" \
+                "$rom_dir" \
             && eval "find $roms $find_roms_options" \
             | sed "s#^$roms/##g" \
-            | sort -V > "$backup_path/$label/$rom_folder/list_$rom_folder"
+            | sort -V > "$backup_path/$label/$rom_dir/list_$rom_dir"
     done
 }
 
@@ -55,7 +55,7 @@ backup() {
                 "$label" \
             && $auth fsck.fat "/dev/disk/by-label/$label" \
             && mnt="/tmp/$label" \
-            && printf ":: create and mount backup folder %s\n" \
+            && printf ":: create and mount backup directory %s\n" \
                 "$mnt" \
             && mkdir -p "$mnt" \
             && $auth mount \
@@ -65,7 +65,7 @@ backup() {
 
         # backup
         [ -d "$mnt" ] \
-            && printf ":: create folder and backup %s to %s\n" \
+            && printf ":: create directory and backup %s to %s\n" \
                 "$mnt" \
                 "$backup_path/$label" \
             && eval "rsync $rsync_options $mnt $backup_path" \
@@ -74,7 +74,7 @@ backup() {
 
         # unmount
         [ -d "$mnt" ] \
-            && printf ":: unmount and delete mount folder %s\n" \
+            && printf ":: unmount and delete mount directory %s\n" \
                 "$mnt" \
             && $auth umount "$mnt" \
             && find "$mnt" -empty -type d -delete \
