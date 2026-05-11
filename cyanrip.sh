@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/cyanrip.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:09+0200
+# date:   2026-05-11T05:14:04+0200
 
 case "$1" in
     -V|-h|-f|-I)
@@ -12,13 +12,13 @@ case "$1" in
         ;;
     --sampler)
         shift
-        folder="{album} [{format}]"
+        directory="{album} [{format}]"
         track="{album} - {if #totaldiscs# > #1#|disc|-}{track} - {artist} - {title}" \
         log="{album}{if #totaldiscs# > #1# - CD|disc|}"
         cue="{album}{if #totaldiscs# > #1# - CD|disc|}"
         ;;
     *)
-        folder="{album_artist} - {album} [{format}]"
+        directory="{album_artist} - {album} [{format}]"
         track="{album_artist} - {album} - {if #totaldiscs# > #1#|disc|-}{track} - {title}"
         log="{album_artist} - {album}{if #totaldiscs# > #1# - CD|disc|}"
         cue="{album_artist} - {album}{if #totaldiscs# > #1# - CD|disc|}"
@@ -32,7 +32,7 @@ cyanrip \
     -b 192 \
     "$@" \
     -T simple \
-    -D "$folder" \
+    -D "$directory" \
     -F "$track" \
     -L "$log" \
     -M "$cue" \
