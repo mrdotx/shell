@@ -3,10 +3,10 @@
 # path:   /home/klassiker/.local/share/repos/shell/dynv6.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-08T05:11:34+0200
+# date:   2026-05-16T04:52:18+0200
 
 dynv6_config="$HOME/.local/share/repos/shell/config/dynv6.conf"
-dynv6_dir="$HOME/.cache/dynv6/"
+dynv6_cache="/tmp/dynv6-$(id -u)/"
 ipv6_netmask=128
 # requires fritzbox.sh (https://github.com/mrdotx/shell)
 fritzbox_ipv4="$(fritzbox.sh --ipv4)"
@@ -14,6 +14,7 @@ fritzbox_ipv6="$(fritzbox.sh --ipv6)"
 
 config_values=$(grep -v -E '^#|^;|^$' "$dynv6_config")
 
+# helper
 get_config_value() {
     printf "%s" "$1" \
         | cut -d ";" -f"$2" \
@@ -31,7 +32,7 @@ push_dynv6() {
     update_cmd="curl -fsS --connect-timeout 2.5 --max-time 5"
     url_ipv4="https://dynv6.com/api/update?zone=$1&token=$2&ipv4=$3"
     url_ipv6="https://dynv6.com/api/update?zone=$1&token=$2&ipv6=$4"
-    ip_file="$dynv6_dir/$1"
+    ip_file="$dynv6_cache/$1"
 
     [ ! -e "$ip_file" ] \
         && printf "auto\nauto" > "$ip_file"
@@ -46,6 +47,9 @@ push_dynv6() {
 
     return 0
 }
+
+# main
+! [ -d "$dynv6_cache" ] && mkdir "$dynv6_cache"
 
 printf "%s\n" "$config_values" \
     | while IFS= read -r line; do
