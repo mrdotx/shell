@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/test_broadband.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:51:03+0200
+# date:   2026-05-18T05:29:12+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -20,6 +20,11 @@ header="Date	Time	Ping	Down	Up	Host	IP	Km	Server	ID	Sponsor"
 get_value() {
     printf "%s" "$1" \
         | cut -d "$input_delimiter" -f"$2"
+}
+
+round() {
+    # WORKAROUND: printf "%.0f" not completely converted in the dash shell
+    awk "BEGIN {printf \"%.$1f\", $2}"
 }
 
 # direct execution options
@@ -44,15 +49,15 @@ done
 [ -s "$csv" ] \
     || printf "%s\n" "$header" > "$csv"
 
-printf "%s	%s	%s	%.2f	%.2f	%s	%s	%.2f	%s	%s	%s\n" \
+printf "%s	%s	%s	%s	%s	%s	%s	%s	%s	%s	%s\n" \
     "$(date -d "$(get_value "$test_result" 4)" +"%d.%m.%Y")" \
     "$(date -d "$(get_value "$test_result" 4)" +"%H:%M:%S")" \
     "$(get_value "$test_result" 6)" \
-    "$(printf "%s/1000000\n" "$(get_value "$test_result" 7)" | bc -l)" \
-    "$(printf "%s/1000000\n" "$(get_value "$test_result" 8)" | bc -l)" \
+    "$(round 2 "$(printf "%s/1000000\n" "$(get_value "$test_result" 7)" | bc -l)")" \
+    "$(round 2 "$(printf "%s/1000000\n" "$(get_value "$test_result" 8)" | bc -l)")" \
     "$(uname -n)" \
     "$(get_value "$test_result" 10)" \
-    "$(get_value "$test_result" 5)" \
+    "$(round 2 "$(get_value "$test_result" 5)")" \
     "$(get_value "$test_result" 3)" \
     "$(get_value "$test_result" 1)" \
     "$(get_value "$test_result" 2)" >> "$csv"

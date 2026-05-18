@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/fritzbox.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-31T05:36:54+0200
+# date:   2026-05-18T05:28:24+0200
 
 # config
 default_ip="10.10.10.10"
@@ -48,6 +48,11 @@ calc() {
     printf "%s\n" "$*" | bc -l
 }
 
+round() {
+    # WORKAROUND: printf "%.0f" not completely converted in the dash shell
+    awk "BEGIN {printf \"%.$1f\", $2}"
+}
+
 convert_uptime() {
     [ -z "$1" ] && printf "?" && exit 1
 
@@ -81,8 +86,8 @@ convert_unit() {
     [ -z "$1" ] && printf "? %s" "$3" && exit 1
 
     [ "$1" -le "$2" ] && printf "0 %s" "$3" && exit
-    [ "$1" -le "$4" ] && printf "%.0f %s" "$(calc "$1 / $2")" "$3" && exit
-    printf "%.1f %s" "$(calc "$1 / $4")" "$5"
+    [ "$1" -le "$4" ] && round 0 "$(calc "$1 / $2")" && printf " %s" "$3" && exit
+    round 1 "$(calc "$1 / $4")" && printf " %s" "$5"
 }
 
 byte_total() {
@@ -100,7 +105,7 @@ bit_seconds() {
 bit_percent() {
     [ -z "$1" ] && printf "?.?" && exit 1
 
-    printf "%.1f" "$(calc "$1 / ($2 * 131072 / 100)")"
+    round 1 "$(calc "$1 / ($2 * 131072 / 100)")"
 }
 
 bar_draw() {
@@ -116,7 +121,7 @@ bar_draw() {
 bar_percent() {
     percent=$( \
         [ "$1" = "?.?" ] && printf "0" && return
-        printf "%.0f" "$1"
+        round 0 "$1"
     )
 
     width=20

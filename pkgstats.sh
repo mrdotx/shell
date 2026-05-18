@@ -3,11 +3,16 @@
 # path:   /home/klassiker/.local/share/repos/shell/pkgstats.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:39+0200
+# date:   2026-05-18T05:28:52+0200
 
 # config
 url="https://pkgstats.archlinux.de/api/packages"
 out_dir="$HOME/Public/pkgstats"
+
+round() {
+    # WORKAROUND: printf "%.0f" not completely converted in the dash shell
+    awk "BEGIN {printf \"%.$1f\", $2}"
+}
 
 extract_data() {
     printf "%s" "$1" \
@@ -24,11 +29,11 @@ request() {
     popularity=$(extract_data "$data" "popularity")
     month=$(extract_data "$data" "startMonth")
 
-    printf "%s	%d	%d	%.2f	%d\n" \
+    printf "%s	%d	%d	%s	%d\n" \
         "$name" \
         "$month" \
         "$count" \
-        "$popularity" \
+        "$(round 2 "$popularity")" \
         "$samples"
 }
 
