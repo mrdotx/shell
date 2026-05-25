@@ -42,6 +42,7 @@ shell scripts for system/hardware management and general maintenance
 | wallpaper.sh         | set and load wallpaper (file/random file from directory) from xresources        |
 | windows_key.sh       | read windows product key from uefi                                              |
 | wireguard_toggle.sh  | enable/disable wireguard interface with predefined config in systemd-network    |
+| wttr.sh              | terminal wrapper for weather information from wttr.in                           |
 
 related projects:
 
