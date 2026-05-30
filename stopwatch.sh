@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # path:   /home/klassiker/.local/share/repos/shell/stopwatch.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:49+0200
+# date:   2026-05-30T04:35:13+0200
 
 # speed up script by using standard c
 LC_ALL=C

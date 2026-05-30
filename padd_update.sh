@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/shell/padd_update.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-02T06:13:34+0100
+# date:   2026-05-30T04:34:55+0200
 
 # speed up script and avoid language problems by using standard c
 LC_ALL=C
@@ -21,4 +21,4 @@ curl -o "$output" "$url"
 chmod 755 "$output"
 
 # replace shebang (\e[0K problem)
-replace "#!/usr/bin/env sh" "#!/usr/bin/env bash"
+replace "#!/usr/bin/env sh" "#!/bin/bash"
