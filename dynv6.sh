@@ -1,11 +1,11 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/dynv6.sh
+# path:   /home/klassiker/Projects/repos/shell/dynv6.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-16T04:52:18+0200
+# date:   2026-07-16T04:53:32+0200
 
-dynv6_config="$HOME/.local/share/repos/shell/config/dynv6.conf"
+dynv6_config="$HOME/Projects/repos/shell/config/dynv6.conf"
 dynv6_cache="/tmp/dynv6-$(id -u)/"
 ipv6_netmask=128
 # requires fritzbox.sh (https://github.com/mrdotx/shell)

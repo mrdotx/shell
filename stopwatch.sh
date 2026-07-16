@@ -1,13 +1,12 @@
 #!/bin/bash
 
-# path:   /home/klassiker/.local/share/repos/shell/stopwatch.sh
+# path:   /home/klassiker/Projects/repos/shell/stopwatch.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-30T04:35:13+0200
+# date:   2026-07-16T04:54:16+0200
 
-# speed up script by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to measure the time

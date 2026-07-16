@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/system_cleanup.sh
+# path:   /home/klassiker/Projects/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-04-27T05:28:59+0200
+# date:   2026-07-16T04:54:20+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements

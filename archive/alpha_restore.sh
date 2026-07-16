@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/archive/alpha_restore.sh
+# path:   /home/klassiker/Projects/repos/shell/archive/alpha_restore.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-31T05:36:24+0200
+# date:   2026-07-16T04:50:33+0200
 
 # color variables for the interactive shell
 tty -s \

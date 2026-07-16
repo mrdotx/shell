@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/test_broadband.sh
+# path:   /home/klassiker/Projects/repos/shell/test_broadband.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-18T05:29:12+0200
+# date:   2026-07-16T04:54:24+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 # config
 input_delimiter="#"

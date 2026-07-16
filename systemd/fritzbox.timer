@@ -1,7 +1,7 @@
-# path:   /home/klassiker/.local/share/repos/shell/systemd/fritzbox.timer
+# path:   /home/klassiker/Projects/repos/shell/systemd/fritzbox.timer
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-10-22T06:08:25+0200
+# date:   2026-07-16T04:52:33+0200
 
 [Unit]
 Description=run fritzbox.service twice a month

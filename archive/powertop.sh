@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/archive/powertop.sh
+# path:   /home/klassiker/Projects/repos/shell/archive/powertop.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:53:51+0200
+# date:   2026-07-16T04:51:22+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 # software settings in need of tuning
 # sets all tunable options to their good setting

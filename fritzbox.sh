@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/fritzbox.sh
+# path:   /home/klassiker/Projects/repos/shell/fritzbox.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-18T05:28:24+0200
+# date:   2026-07-16T04:53:37+0200
 
 # config
 default_ip="10.10.10.10"

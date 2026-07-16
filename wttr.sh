@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/wttr.sh
+# path:   /home/klassiker/Projects/repos/shell/wttr.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-25T05:00:39+0200
+# date:   2026-07-16T04:55:01+0200
 
 location_cache() {
     grep -q -s '[^[:space:]]' "$1" \

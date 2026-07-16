@@ -1,7 +1,7 @@
-# path:   /home/klassiker/.local/share/repos/shell/systemd/test_broadband.timer
+# path:   /home/klassiker/Projects/repos/shell/systemd/test_broadband.timer
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:52:37+0200
+# date:   2026-07-16T04:52:46+0200
 
 [Unit]
 Description=run test_broadband.service a few times a day

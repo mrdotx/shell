@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/w3m.sh
+# path:   /home/klassiker/Projects/repos/shell/w3m.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-04-29T05:15:35+0200
+# date:   2026-07-16T04:54:47+0200
 
 # WORKAROUND: change directory to set the download directory
 cd "$HOME/Downloads" || exit

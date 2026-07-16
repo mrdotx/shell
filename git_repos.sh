@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/git_repos.sh
+# path:   /home/klassiker/Projects/repos/shell/git_repos.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:26+0200
+# date:   2026-07-16T04:53:44+0200
 
 # config
 name="mrdotx"
@@ -14,7 +14,7 @@ script=$(basename "$0")
 help="$script [-h/--help] -- script to perform operations for all repositories
                             of a user or organization
   Usage:
-    $script [-c/--clone/-i/--infos/-j/--json] [name] [cn]
+    $script [-c/--clone|-i/--infos|-j/--json] [name] [cn]
 
   Settings:
     [-c/--clone] = clone all repositories of a user or organization

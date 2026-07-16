@@ -1,15 +1,14 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/padd_update.sh
+# path:   /home/klassiker/Projects/repos/shell/padd_update.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-30T04:34:55+0200
+# date:   2026-07-16T04:53:55+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
-output="$HOME/.local/share/repos/shell/padd.sh"
+output="$HOME/Projects/repos/shell/padd.sh"
 url="https://raw.githubusercontent.com/pi-hole/PADD/master/padd.sh"
 
 replace() {

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/git_multi.sh
+# path:   /home/klassiker/Projects/repos/shell/git_multi.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-04-19T05:25:50+0200
+# date:   2026-07-16T04:53:40+0200
 
 # config
 default="status"
@@ -29,8 +29,8 @@ help="$script [-h/--help] -- script to execute git command on multiple repositor
 
   Examples:
     $script
-    $script \"fetch origin\" \"$HOME/.local/share/repos\"
-    $script \"pull\" \"\$HOME/.local/share/repos\" \"/srv/http\""
+    $script \"fetch origin\" \"$HOME/Projects/repos\"
+    $script \"pull\" \"\$HOME/Projects/repos\" \"/srv/http\""
 
 # helper functions
 git_directory() {

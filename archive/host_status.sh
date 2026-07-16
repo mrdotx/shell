@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/archive/host_status.sh
+# path:   /home/klassiker/Projects/repos/shell/archive/host_status.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-31T05:36:35+0200
+# date:   2026-07-16T04:50:55+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 # color variables for the interactive shell
 tty -s \

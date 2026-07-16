@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/i_filename.sh
+# path:   /home/klassiker/Projects/repos/shell/i_filename.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-10-07T05:19:55+0200
+# date:   2026-07-16T04:53:48+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 # config
 name="${1:-"filename-"}"

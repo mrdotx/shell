@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/cyanrip.sh
+# path:   /home/klassiker/Projects/repos/shell/cyanrip.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-11T05:14:04+0200
+# date:   2026-07-16T04:53:29+0200
 
 case "$1" in
     -V|-h|-f|-I)

@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/test_march.sh
+# path:   /home/klassiker/Projects/repos/shell/test_march.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-31T05:37:24+0200
+# date:   2026-07-16T04:54:31+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 # config
 cpu_flags=$(grep "^flags\s*:" "/proc/cpuinfo" | head -n1 | cut -d ':' -f2)

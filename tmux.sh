@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/tmux.sh
+# path:   /home/klassiker/Projects/repos/shell/tmux.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-03-07T05:50:51+0100
+# date:   2026-07-16T04:54:39+0200
 
 session="$(uname -n)"
 attach="tmux attach -d -t $session"

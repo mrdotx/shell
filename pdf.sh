@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/pdf.sh
+# path:   /home/klassiker/Projects/repos/shell/pdf.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:50:36+0200
+# date:   2026-07-16T04:54:00+0200
 
 commands() {
     cmds="ghostscript magick"
@@ -21,7 +21,7 @@ commands() {
 script=$(basename "$0")
 help="$script [-h/--help] -- script to compress/convert/chain/unchain pdf files
   Usage:
-    $script [--compress/--convert/--un/-chain] <quality> <file>.<ext> [file1.ext]
+    $script [--compress|--convert|--un/-chain] <quality> <file>.<ext> [file1.ext]
 
   Settings:
     [--compress]  = compress pdf files

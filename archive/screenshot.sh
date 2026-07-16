@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/archive/screenshot.sh
+# path:   /home/klassiker/Projects/repos/shell/archive/screenshot.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:53:56+0200
+# date:   2026-07-16T04:51:27+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 # config
 screenshot_directory="$HOME/Desktop"
@@ -19,7 +18,7 @@ screenshot_preview="nsxiv --quiet --scale-mode w $screenshot_file"
 script=$(basename "$0")
 help="$script [-h/--help] -- script to make screenshots with maim
   Usage:
-    $script [--desktop/--window/--selection] [seconds]
+    $script [--desktop|--window|--selection] [seconds]
 
   Settings:
     [--desktop]   = full screen screenshot
@@ -44,7 +43,7 @@ case "$1" in
             && $screenshot_preview &
         ;;
     --window)
-        $screenshot_command -i "$(xdotool getactivewindow)" \
+        $screenshot_command -i "$(xdotool getwindowfocus)" \
             && $screenshot_preview &
         ;;
     --selection)

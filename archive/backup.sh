@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/archive/backup.sh
+# path:   /home/klassiker/Projects/repos/shell/archive/backup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-09T05:37:01+0200
+# date:   2026-07-16T04:50:37+0200
 
 destination_root="$HOME/Backup/"
 destination_config="$HOME/Backup/.config/"

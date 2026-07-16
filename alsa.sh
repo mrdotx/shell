@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/alsa.sh
+# path:   /home/klassiker/Projects/repos/shell/alsa.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:49:29+0200
+# date:   2026-07-16T04:52:55+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 # config
 config_path="$HOME/.config/alsa"
@@ -19,8 +18,8 @@ message_title="Volume"
 script=$(basename "$0")
 help="$script [-h/--help] -- script to change alsa audio output
   Usage:
-    $script [-i/--increase/-d/--decrease/-a/--absolute] [percent] [-n/--notify]
-    $script [-m/--mute/-u/--unmute/-t/--toggle] [-n/--notify]
+    $script [-i/--increase|-d/--decrease|-a/--absolute] [percent] [-n/--notify]
+    $script [-m/--mute|-u/--unmute|-t/--toggle] [-n/--notify]
 
   Settings:
     [-i/--increase] = increase in percent (0-100)

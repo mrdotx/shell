@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/compressor.sh
+# path:   /home/klassiker/Projects/repos/shell/compressor.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-05-01T05:02:42+0200
+# date:   2026-07-16T04:53:25+0200
 
 commands() {
     cmds="7z bzip2 gzip lzip lzma lzop tar xz zstd"
@@ -21,7 +21,7 @@ commands() {
 script=$(basename "$0")
 help="$script [-h/--help] -- script to extract/compress/list files and directories
   Usage:
-    $script [--add/--list] <quality> <file>.<ext> [file1.ext] [file2.ext]
+    $script [--add|--list] <quality> <file>.<ext> [file1.ext] [file2.ext]
 
   Settings:
     [--add]   = compress files and directories to archive

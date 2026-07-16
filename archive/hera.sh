@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/shell/archive/hera.sh
+# path:   /home/klassiker/Projects/repos/shell/archive/hera.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2025-08-11T04:53:21+0200
+# date:   2026-07-16T04:50:51+0200
 
-# speed up script and avoid language problems by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 case "$1" in
 wakeup)
@@ -20,7 +19,7 @@ poweroff)
     ;;
 status)
     # call host status script
-    status="$("$HOME"/.local/share/repos/shell/old/host_status.sh hera)"
+    status="$("$HOME"/Projects/repos/shell/archive/host_status.sh hera)"
 
     case $status in
         *offline*)
@@ -36,7 +35,7 @@ status)
     ;;
 *)
     # if no parameters are given, print which are avaiable.
-    printf "Usage: %s {wakeup|poweroff|status}" "$0"
+    printf "Usage: %s [wakeup|poweroff|status]" "$0"
     exit 1
     ;;
 esac
