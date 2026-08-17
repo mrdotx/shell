@@ -3,7 +3,7 @@
 # path:   /home/klassiker/Projects/repos/shell/wttr.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-07-16T04:55:01+0200
+# date:   2026-08-17T03:48:04+0200
 
 location_cache() {
     grep -q -s '[^[:space:]]' "$1" \
@@ -25,4 +25,3 @@ case $1 in
         curl -fsS "v2d.wttr.in/$city?AF"
         ;;
 esac
-
