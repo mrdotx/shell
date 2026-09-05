@@ -3,7 +3,7 @@
 # path:   /home/klassiker/Projects/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-07-16T04:54:12+0200
+# date:   2026-09-05T05:18:59+0200
 
 # use standard C locale to avoid locale-specific issues and improve performance
 export LC_ALL=C LANG=C
@@ -114,7 +114,7 @@ up() {
 }
 
 clock() {
-    clock="$(date '+%a, %e %B %G, %k:%M')"
+    clock="$(date '+%d.%m.%Y %H:%M:%S')"
     printf "%s" "$clock"
 }
 
@@ -123,16 +123,16 @@ case "$1" in
         printf "%s\n" "$help"
         ;;
     -b | --bar)
-        printf "cpu: %s | " "$(cpu)"
-        printf "ram: %s | " "$(ram)"
-        printf "swap: %s | " "$(swap)"
-        printf "/: %s | " "$(space "/")"
-        printf "m625q: %s | " "$(space "$HOME/Public")"
-        printf "wlan: %s | " "$(wlan "wlan0")"
-        printf "ip: %s | " "$(ipv4 "2")"
-        printf "up: %s | " "$(up)"
-        printf "kernel: %s | " "$(kernel)"
-        printf "name: %s | " "$(name)"
+        printf "%s | " "$(name)"
+        printf "cpu %s | " "$(cpu)"
+        printf "ram %s | " "$(ram)"
+        printf "swap %s | " "$(swap)"
+        printf "/ %s | " "$(space "/")"
+        printf "m625q %s | " "$(space "$HOME/Public")"
+        printf "wlan %s | " "$(wlan "wlan0")"
+        #printf "ip %s | " "$(ipv4 "2")"
+        #printf "up %s | " "$(up)"
+        #printf "kernel %s | " "$(kernel)"
         printf "%s\n" "$(clock)"
         ;;
     *)
