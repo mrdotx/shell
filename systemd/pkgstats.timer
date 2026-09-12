@@ -1,13 +1,13 @@
 # path:   /home/klassiker/Projects/repos/shell/systemd/pkgstats.timer
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-09-09T10:36:14+0200
+# date:   2026-09-12T09:41:21+0200
 
 [Unit]
 Description=run pkgstats.service monthly
 
 [Timer]
-OnCalendar=*-*-02 01:48:00
+OnCalendar=*-*-02 01:47:00
 Persistent=true
 
 [Install]
