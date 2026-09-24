@@ -3,7 +3,7 @@
 # path:   /home/klassiker/Projects/repos/shell/system_cleanup.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-07-16T04:54:20+0200
+# date:   2026-09-24T05:41:24+0200
 
 # use standard C locale to avoid locale-specific issues and improve performance
 export LC_ALL=C LANG=C
@@ -193,7 +193,7 @@ delete_unused_pkgs() {
 
     case "$delete_cache" in
         y|Y|yes|Yes)
-            while IFS= read -r line ;do
+            while IFS= read -r line; do
                 $auth find "$pkgs_cache" -name "$line" -delete
             done < "$pkgs_to_delete"
             ;;
