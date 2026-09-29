@@ -3,7 +3,7 @@
 # path:   /home/klassiker/Projects/repos/shell/status.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/shell
-# date:   2026-09-05T05:18:59+0200
+# date:   2026-09-29T05:54:54+0200
 
 # use standard C locale to avoid locale-specific issues and improve performance
 export LC_ALL=C LANG=C
@@ -25,12 +25,15 @@ help="$script [-h/--help] -- script to show system information
     $script --bar
     $script -b"
 
-kb_mb() {
-    printf "%.0fM\n" "$(($1 * 1000 / 1024))e-3"
-}
-
-kb_gb() {
-    printf "%.2fG\n" "$(($1 * 1000 / 1024 / 1024))e-3"
+kb_convert() {
+    case $1 in
+        MiB)
+            printf "%.0f" "$(($2 * 1000 / 1024))e-3"
+            ;;
+        GiB)
+            printf "%.2f" "$(($2 * 1000 / 1024 / 1024))e-3"
+            ;;
+    esac
 }
 
 kernel() {
@@ -43,8 +46,9 @@ cpu() {
     cpu_usage="$(printf "%.0f\n" "$((cpu_usage / ${cores:-1}))e-3")"
 
     if [ -f "$cpu_temp_path" ]; then
-        cpu_temp="$(cut -c "1-2" "$cpu_temp_path")C"
-        printf "%s [%s%%]" "$cpu_temp" "$cpu_usage"
+        cpu_temp="$(cat "$cpu_temp_path")"
+        cpu_temp="$(printf "%.1f" "$((cpu_temp))e-3")"
+        printf "%s'C [%s%%]" "$cpu_temp" "$cpu_usage"
     else
         printf "%s%%" "$cpu_usage"
     fi
@@ -55,30 +59,27 @@ ram() {
     ram_together="$(free | awk 'NR==2 { printf "%s",$5; }')"
     ram="$(free | awk 'NR==2 { printf "%s",$3; }')"
     ram="$(printf "%.0f\n" "$((ram + ram_together))")"
-    ram_usage="$(printf "%.0f\n" "$((ram / ram_total / 100))")"
-    if [ "$ram" -le 1048576 ]; then
-        printf "%s/%s [%s%%]" "$(kb_mb "$ram")" "$(kb_gb "$ram_total")" "$ram_usage"
-    else
-        printf "%s/%s [%s%%]" "$(kb_gb "$ram")" "$(kb_gb "$ram_total")" "$ram_usage"
-    fi
+    ram_usage="$(printf "%.0f\n" "$((ram * 1000 * 100 / ram_total))e-3")"
+    printf "%s/%s GiB [%s%%]" \
+        "$(kb_convert "GiB" "$ram")" \
+        "$(kb_convert "GiB" "$ram_total")" \
+        "$ram_usage"
 }
 
 swap() {
     swap_total="$(free | awk 'NR==3 { printf "%s",$2; }')"
     swap="$(free | awk 'NR==3 { printf "%s",$3; }')"
-    swap_usage="$(printf "%.0f\n" "$((swap / swap_total / 100))")"
-    if [ "$swap" -le 1048576 ]; then
-        printf "%s/%s [%s%%]" "$(kb_mb "$swap")" "$(kb_gb "$swap_total")" "$swap_usage"
-    else
-        printf "%s/%s [%s%%]" "$(kb_gb "$swap")" "$(kb_gb "$swap_total")" "$swap_usage"
-    fi
+    swap_usage="$(printf "%.0f\n" "$((swap * 1000 * 100 / swap_total))e-3")"
+        printf "%s/%s GiB [%s%%]" \
+            "$(kb_convert "GiB" "$swap")" \
+            "$(kb_convert "GiB" "$swap_total")" \
+            "$swap_usage"
 }
 
 space() {
-    space_total="$(df "$1" | awk 'NR==2 { printf "%s",$2; }')"
     space="$(df "$1" | awk 'NR==2 { printf "%s",$3; }')"
     space_usage="$(df "$1" | awk 'NR==2 { printf "%s",$5; }')"
-    printf "%s/%s [%s]" "$(kb_gb "$space")" "$(kb_gb "$space_total")" "$space_usage"
+    printf "%s GiB [%s]" "$(kb_convert "GiB" "$space")" "$space_usage"
 }
 
 wlan() {
@@ -109,7 +110,7 @@ name() {
 }
 
 up() {
-    up="$(uptime -p | sed 's/s//g; s/,//g; s/up //g; s/ week/w/g; s/ day/d/g; s/ hour/h/g; s/ minute/m/g')"
+    up="$(uptime -p | sed 's/up //g')"
     printf "%s" "$up"
 }
 
@@ -123,12 +124,12 @@ case "$1" in
         printf "%s\n" "$help"
         ;;
     -b | --bar)
-        printf "%s | " "$(name)"
+        #printf "%s | " "$(name)"
         printf "cpu %s | " "$(cpu)"
         printf "ram %s | " "$(ram)"
         printf "swap %s | " "$(swap)"
         printf "/ %s | " "$(space "/")"
-        printf "m625q %s | " "$(space "$HOME/Public")"
+        #printf "m625q %s | " "$(space "$HOME/Public")"
         printf "wlan %s | " "$(wlan "wlan0")"
         #printf "ip %s | " "$(ipv4 "2")"
         #printf "up %s | " "$(up)"
